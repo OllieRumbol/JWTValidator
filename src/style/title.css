@@ -1,0 +1,21 @@
+.noWhiteSpace{
+    margin: 0 !important;
+    padding: 0 !important;
+}
+
+.imageSizing {
+    height: 50%
+}
+
+.stuff{
+    position: relative;
+    display: inline-block;
+}
+
+.text{
+    position: absolute;
+    color: white;
+    top: 8px;
+    left: 50%;
+    transform: translateX(-50%);
+}

@@ -7,8 +7,9 @@ import 'whatwg-fetch'
 import React from 'react'
 import ReactDOM from 'react-dom'
 import './style/index.css';
+import App from './components/App';
 
 ReactDOM.render(
-    <h1>Hello React!</h1>,
+    <App />,
     document.getElementById('app-root'),
 )
