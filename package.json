@@ -2,11 +2,15 @@
   "name": "jwtvalidator",
   "version": "1.0.0",
   "description": "",
-  "main": "index.js",
+  "main": "dist/index.tsx",
   "scripts": {
-    "start": "webpack serve --port 3000",
-    "build": "NODE_ENV=production webpack",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "webpack-dev-server --mode development",
+    "transpile": "babel src -d dist --copy-files",
+    "prepublishOnly": "npm run transpile",
+    "build": "webpack --mode production",
+    "deploy": "gh-pages -d examples/dist",
+    "publish-demo": "npm run build && npm run deploy"
   },
   "repository": {
     "type": "git",
@@ -17,30 +21,37 @@
   "bugs": {
     "url": "https://github.com/OllieRumbol/JWTValidator/issues"
   },
-  "homepage": "https://github.com/OllieRumbol/JWTValidator#readme",
+  "homepage": "https://ollierumbol.github.io/JWTValidator",
+  "peerDependencies": {
+    "react": "^16.3.0",
+    "react-dom": "^16.3.0"
+  },
   "devDependencies": {
-    "@types/react": "^18.0.20",
+    "@babel/preset-typescript": "^7.18.6",
+    "@types/react": "^18.0.21",
     "@types/react-dom": "^18.0.6",
+    "babel-cli": "^6.26.0",
+    "babel-core": "^6.26.3",
+    "babel-loader": "^8.2.5",
+    "babel-preset-env": "^1.7.0",
+    "babel-preset-react": "^6.24.1",
     "css-loader": "^6.7.1",
-    "file-loader": "^6.2.0",
+    "gh-pages": "^4.0.0",
     "html-webpack-plugin": "^5.5.0",
-    "mini-css-extract-plugin": "^2.6.1",
-    "ts-loader": "^9.3.1",
-    "typescript": "^4.8.3",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
+    "style-loader": "^3.3.1",
+    "ts-loader": "^9.4.1",
     "webpack": "^5.74.0",
     "webpack-cli": "^4.10.0",
-    "webpack-dev-server": "^4.11.0"
+    "webpack-dev-server": "^4.11.1"
   },
   "dependencies": {
     "@emotion/react": "^11.10.4",
     "@emotion/styled": "^11.10.4",
-    "@mui/icons-material": "^5.10.3",
-    "@mui/material": "^5.10.5",
-    "core-js": "^3.25.1",
-    "raf": "^3.4.1",
-    "react": "^18.2.0",
-    "react-dom": "^18.2.0",
+    "@mui/material": "^5.10.7",
+    "@types/react-router-dom": "^5.3.3",
     "react-router-dom": "^6.4.1",
-    "whatwg-fetch": "^3.6.2"
+    "typescript": "^4.8.4"
   }
 }
