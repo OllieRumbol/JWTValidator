@@ -1,5 +1,5 @@
 import * as React from "react";
-import { BrowserRouter, Route, Routes, Link } from "react-router-dom";
+import { HashRouter as Router, Route, Routes, Link } from "react-router-dom";
 import HomePage from "./home/HomePage";
 import DocumentationPage from "./documentation/DocumentationPage";
 import VersionsPage from "./versions/VersionsPage";
@@ -22,7 +22,7 @@ const darkTheme = createTheme({
 
 const App = () => {
   return (
-    <BrowserRouter>
+    <Router>
       <ThemeProvider theme={darkTheme}>
         <Box sx={{ flexGrow: 1 }}>
           <AppBar position="static">
@@ -51,7 +51,7 @@ const App = () => {
         <Route path="/versions" element={<VersionsPage />} />
         <Route path="/documentation" element={<DocumentationPage />} />
       </Routes>
-    </BrowserRouter>
+    </Router>
   );
 };
 
