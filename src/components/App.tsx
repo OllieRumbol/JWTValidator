@@ -35,10 +35,10 @@ const App = () => {
               >
                 JWT Validator
               </Typography>
-              <Link to="versions">
+              <Link to="/versions">
                 <Button>Versions</Button>
               </Link>
-              <Link to="documentation">
+              <Link to="/documentation">
                 <Button>Documentation</Button>
               </Link>
             </Toolbar>
