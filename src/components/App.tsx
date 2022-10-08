@@ -6,10 +6,10 @@ import VersionsPage from "./versions/VersionsPage";
 import AppBar from "@mui/material/AppBar";
 import Box from "@mui/material/Box";
 import Toolbar from "@mui/material/Toolbar";
-import Typography from "@mui/material/Typography";
+import Grid from "@mui/material/Grid";
 import Button from "@mui/material/Button";
 import { ThemeProvider, createTheme } from "@mui/material/styles";
-import '../style/app.css';
+import "../style/app.css";
 
 const darkTheme = createTheme({
   palette: {
@@ -26,22 +26,24 @@ const App = () => {
       <ThemeProvider theme={darkTheme}>
         <Box sx={{ flexGrow: 1 }}>
           <AppBar position="static">
-            <Toolbar>
-              <Typography
-                variant="h5"
-                component="div"
-                align="center"
-                sx={{ flexGrow: 1 }}
-              >
-                JWT Validator
-              </Typography>
-              <Link to="/versions">
-                <Button>Versions</Button>
-              </Link>
-              <Link to="/documentation">
-                <Button>Documentation</Button>
-              </Link>
-            </Toolbar>
+            <Grid
+              container
+              direction="row"
+              justifyContent="flex-end"
+              alignItems="center"
+            >
+              <Toolbar>
+                <Link to="/">
+                  <Button>Home</Button>
+                </Link>
+                <Link to="/versions">
+                  <Button>Versions</Button>
+                </Link>
+                <Link to="/documentation">
+                  <Button>Documentation</Button>
+                </Link>
+              </Toolbar>
+            </Grid>
           </AppBar>
         </Box>
       </ThemeProvider>
