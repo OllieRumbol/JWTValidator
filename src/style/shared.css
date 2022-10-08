@@ -1,0 +1,27 @@
+.article {
+    height: 100%;
+    background-position: center;
+    background-size: cover;
+    display: grid;
+    place-items: center;
+    padding: 9%;
+}
+
+.header {
+    font-size: 100px;
+    color: white;
+    text-align: center;
+}
+
+.noWhiteSpace{
+    margin: 0 !important;
+    padding: 0 !important;
+}
+
+.bold{
+    font-weight: bold;
+}
+
+.shadow{
+    text-shadow: 2px 2px black
+}
