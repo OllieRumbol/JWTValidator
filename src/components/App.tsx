@@ -46,13 +46,19 @@ const App = () => {
             </Grid>
           </AppBar>
         </Box>
-      </ThemeProvider>
 
-      <Routes>
-        <Route path="/" element={<HomePage />} />
-        <Route path="/versions" element={<VersionsPage />} />
-        <Route path="/documentation" element={<DocumentationPage />} />
-      </Routes>
+        <Routes>
+          <Route path="/" element={<HomePage />} />
+          <Route path="/versions" element={<VersionsPage />} />
+          <Route path="/documentation" element={<DocumentationPage />} />
+        </Routes>
+
+        <Box sx={{ flexGrow: 1 }}>
+          <AppBar position="static">
+            <Toolbar></Toolbar>
+          </AppBar>
+        </Box>
+      </ThemeProvider>
     </Router>
   );
 };
