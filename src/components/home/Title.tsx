@@ -1,6 +1,5 @@
 import React from "react";
 import Typography from "@mui/material/Typography";
-import CodeBackgroundImage from "../assets/codeBackground.jpg";
 import "../../style/title.css";
 
 const Title = () => {
