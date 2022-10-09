@@ -13,7 +13,7 @@ const DocumentationPage = () => {
         Documentation
       </Typography>
       <Typography className="header" variant="h4" gutterBottom>
-        A complete guide to the inner works of the library
+        A complete guide to the inner workings of the library
       </Typography>
       </div>
     </Container>
