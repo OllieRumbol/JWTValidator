@@ -6,9 +6,9 @@ import Box from "@mui/material/Box";
 import { Theme } from "@mui/material/styles";
 import { SxProps } from "@mui/system";
 
-import ConstructionIcon from '@mui/icons-material/Construction';
-import CodeIcon from '@mui/icons-material/Code';
-import MenuBookIcon from '@mui/icons-material/MenuBook';
+import ConstructionIcon from "@mui/icons-material/Construction";
+import CodeIcon from "@mui/icons-material/Code";
+import MenuBookIcon from "@mui/icons-material/MenuBook";
 
 const item: SxProps<Theme> = {
   display: "flex",
@@ -40,17 +40,6 @@ const HowItWorks = () => {
           alignItems: "center",
         }}
       >
-        <Box
-          component="img"
-          src="/static/themes/onepirate/productCurvyLines.png"
-          alt="curvy lines"
-          sx={{
-            pointerEvents: "none",
-            position: "absolute",
-            top: -180,
-            opacity: 0.7,
-          }}
-        />
         <Typography variant="h2" component="h2" sx={{ mb: 3 }}>
           How it works
         </Typography>
@@ -62,7 +51,7 @@ const HowItWorks = () => {
                 <Typography variant="h4" align="center">
                   Builder
                 </Typography>
-                <ConstructionIcon style={{height: "5em", width: "5em"}}/>
+                <ConstructionIcon style={{ height: "5em", width: "5em" }} />
                 <Typography variant="h5" align="center">
                   A fluent, strict and nested builder to construct what
                   properties of a JWT need validating
@@ -75,10 +64,10 @@ const HowItWorks = () => {
                 <Typography variant="h4" align="center">
                   Try Get Method
                 </Typography>
-                <CodeIcon style={{height: "5em", width: "5em"}}/>
+                <CodeIcon style={{ height: "5em", width: "5em" }} />
                 <Typography variant="h5" align="center">
-                  The key method that returns whether the JWT is valid or not
-                  as well as a dictionary of claims
+                  The key method that returns whether the JWT is valid or not as
+                  well as a dictionary of claims
                 </Typography>
               </Box>
             </Grid>
@@ -88,7 +77,7 @@ const HowItWorks = () => {
                 <Typography variant="h4" align="center">
                   Dictionary Extensions
                 </Typography>
-                <MenuBookIcon style={{height: "5em", width: "5em"}} />
+                <MenuBookIcon style={{ height: "5em", width: "5em" }} />
                 <Typography variant="h5" align="center">
                   There are a variety of extension methods to deal with the
                   dictionary outputted once valation is complete
