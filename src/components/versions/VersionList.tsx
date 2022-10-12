@@ -1,9 +1,8 @@
 import React from "react";
-
 import Container from "@mui/material/Container";
-import Typography from "@mui/material/Typography";
 import Grid from "@mui/material/Grid";
 import Box from "@mui/material/Box";
+import Versions from "./Versions";
 import { Theme } from "@mui/material/styles";
 import { SxProps } from "@mui/system";
 import "../../style/shared.css";
@@ -17,6 +16,7 @@ const item: SxProps<Theme> = {
 };
 
 const VersionList = () => {
+
   return (
     <Box
       component="section"
@@ -32,21 +32,17 @@ const VersionList = () => {
           alignItems: "center",
         }}
       >
-        <div>
-          <Grid container spacing={5}>
-            <Grid item xs={12} md={12}>
-              <Box sx={item}>
-                <VersionCard />
-              </Box>
-            </Grid>
-            <Grid item xs={12} md={4}>
-              <Box sx={item}></Box>
-            </Grid>
-            <Grid item xs={12} md={4}>
-              <Box sx={item}></Box>
-            </Grid>
-          </Grid>
-        </div>
+        <Grid container spacing={5}>
+          {Versions.map((version, index) => {
+            return (
+              <Grid item xs={12} md={12} lg={12}>
+                <Box sx={item}>
+                  <VersionCard version={version} />
+                </Box>
+              </Grid>
+            );
+          })}
+        </Grid>
       </Container>
     </Box>
   );

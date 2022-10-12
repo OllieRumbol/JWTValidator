@@ -12,7 +12,7 @@ const Title = () => {
       JWT Validator
     </Typography>
     <Typography className="header" variant="h4" gutterBottom>
-      Simplify the validation and handling of a JWTs in C#
+      Simplify the validation and handling of JWTs in C#
     </Typography>
   </div>
   )
