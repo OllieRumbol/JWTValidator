@@ -20,7 +20,7 @@ const VersionList = () => {
   return (
     <Box
       component="section"
-      sx={{ display: "flex", bgcolor: "secondary.light", overflow: "hidden" }}
+      sx={{ display: "flex", bgcolor: "#FFFFFF", overflow: "hidden" }}
     >
       <Container
         sx={{
