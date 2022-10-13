@@ -42,6 +42,12 @@ const App = () => {
                 <Link to="/documentation">
                   <Button>Documentation</Button>
                 </Link>
+                <Button href="https://www.nuget.org/packages/JWTValidator">
+                  NuGut
+                </Button>
+                <Button href="https://github.com/OllieRumbol/JWTValidator">
+                  GitHub Repo
+                </Button>
               </Toolbar>
             </Grid>
           </AppBar>
