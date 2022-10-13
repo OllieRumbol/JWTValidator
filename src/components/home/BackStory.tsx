@@ -8,7 +8,7 @@ const BackStory = () => {
   return (
     <Box
       component="section"
-      sx={{ display: "flex", bgcolor: "#FFFFFF", overflow: "hidden" }}
+      sx={{ display: "flex", bgcolor: "#DDDDDD", overflow: "hidden" }}
     >
       <Container
         sx={{
