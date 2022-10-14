@@ -1,5 +1,5 @@
 import React from "react";
-import Container from "@mui/material/Container";
+import Panel from "../shared/Panel";
 import Typography from "@mui/material/Typography";
 import Grid from "@mui/material/Grid";
 import Box from "@mui/material/Box";
@@ -26,68 +26,54 @@ const number = {
 
 const HowItWorks = () => {
   return (
-    <Box
-      component="section"
-      sx={{ display: "flex", bgcolor: "#DDDDDD", overflow: "hidden" }}
-    >
-      <Container
-        sx={{
-          mt: 10,
-          mb: 15,
-          position: "relative",
-          display: "flex",
-          flexDirection: "column",
-          alignItems: "center",
-        }}
-      >
-        <Typography variant="h2" component="h2" sx={{ mb: 3 }}>
-          How it works
-        </Typography>
-        <div>
-          <Grid container spacing={5}>
-            <Grid item xs={12} md={4}>
-              <Box sx={item}>
-                <Box sx={number}>1</Box>
-                <Typography variant="h4" align="center">
-                  Builder
-                </Typography>
-                <ConstructionIcon style={{ height: "5em", width: "5em" }} />
-                <Typography variant="h5" align="center">
-                  A fluent, strict and nested builder to construct what
-                  properties of a JWT need validating
-                </Typography>
-              </Box>
-            </Grid>
-            <Grid item xs={12} md={4}>
-              <Box sx={item}>
-                <Box sx={number}>2</Box>
-                <Typography variant="h4" align="center">
-                  Try Get Method
-                </Typography>
-                <CodeIcon style={{ height: "5em", width: "5em" }} />
-                <Typography variant="h5" align="center">
-                  The key method that returns whether the JWT is valid or not as
-                  well as a dictionary of claims
-                </Typography>
-              </Box>
-            </Grid>
-            <Grid item xs={12} md={4}>
-              <Box sx={item}>
-                <Box sx={number}>3</Box>
-                <Typography variant="h4" align="center">
-                  Dictionary Extensions
-                </Typography>
-                <MenuBookIcon style={{ height: "5em", width: "5em" }} />
-                <Typography variant="h5" align="center">
-                  There are a variety of extension methods to deal with the
-                  dictionary outputted once valation is complete
-                </Typography>
-              </Box>
-            </Grid>
+    <Panel colour="#DDDDDD">
+      <Typography variant="h2" component="h2" sx={{ mb: 3 }}>
+        How it works
+      </Typography>
+      <div>
+        <Grid container spacing={5}>
+          <Grid item xs={12} md={4}>
+            <Box sx={item}>
+              <Box sx={number}>1</Box>
+              <Typography variant="h4" align="center">
+                Builder
+              </Typography>
+              <ConstructionIcon style={{ height: "5em", width: "5em" }} />
+              <Typography variant="h5" align="center">
+                A fluent, strict and nested builder to construct what properties
+                of a JWT need validating
+              </Typography>
+            </Box>
           </Grid>
-        </div>
-      </Container>
-    </Box>
+          <Grid item xs={12} md={4}>
+            <Box sx={item}>
+              <Box sx={number}>2</Box>
+              <Typography variant="h4" align="center">
+                Try Get Method
+              </Typography>
+              <CodeIcon style={{ height: "5em", width: "5em" }} />
+              <Typography variant="h5" align="center">
+                The key method that returns whether the JWT is valid or not as
+                well as a dictionary of claims
+              </Typography>
+            </Box>
+          </Grid>
+          <Grid item xs={12} md={4}>
+            <Box sx={item}>
+              <Box sx={number}>3</Box>
+              <Typography variant="h4" align="center">
+                Dictionary Extensions
+              </Typography>
+              <MenuBookIcon style={{ height: "5em", width: "5em" }} />
+              <Typography variant="h5" align="center">
+                There are a variety of extension methods to deal with the
+                dictionary outputted once valation is complete
+              </Typography>
+            </Box>
+          </Grid>
+        </Grid>
+      </div>
+    </Panel>
   );
 };
 
