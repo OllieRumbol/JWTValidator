@@ -14,12 +14,12 @@ const Panel = (props: Props) => {
   return (
     <Box
       component="section"
-      sx={{ display: "flex", bgcolor: colour , overflow: "hidden" }}
+      sx={{ display: "flex", bgcolor: colour, overflow: "hidden" }}
     >
       <Container
         sx={{
           mt: 10,
-          mb: 15,
+          mb: 10,
           position: "relative",
           display: "flex",
           flexDirection: "column",

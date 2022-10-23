@@ -49,7 +49,7 @@ const HowItWorks = () => {
             <Box sx={item}>
               <Box sx={number}>2</Box>
               <Typography variant="h4" align="center">
-                Try Get Method
+                Validator
               </Typography>
               <CodeIcon style={{ height: "5em", width: "5em" }} />
               <Typography variant="h5" align="center">
