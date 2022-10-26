@@ -2,7 +2,7 @@ import React from "react";
 import Panel from "../shared/Panel";
 import Typography from "@mui/material/Typography";
 import SyntaxHighlighter from "react-syntax-highlighter";
-import { darcula } from "react-syntax-highlighter/dist/esm/styles/hljs";
+import { vs2015 } from "react-syntax-highlighter/dist/esm/styles/hljs";
 import "../../style/shared.css";
 
 const CodeSnippet = () => {
@@ -14,26 +14,24 @@ const CodeSnippet = () => {
       <Typography>
         <SyntaxHighlighter
           language="csharp"
-          style={darcula}
+          style={vs2015}
           showLineNumbers={true}
           wrapLines={true}
         >
-          {`
-                String JWT = "eyJhbGciOi.....";
+          {`string JWT = "eyJhbGciOi.....";
 
-                JWTValidatorOptions jWTValidatorOptions = JWTValidatorOptionsBuilder
-                .Create()
-                .WithSigningKeyFromSecret("serguhvalhoier.....")
-                .WithExpiryDate()
-                .Build();
+JWTValidatorOptions jWTValidatorOptions = JWTValidatorOptionsBuilder
+  .Create()
+  .WithSigningKeyFromSecret("serguhvalhoier.....")
+  .WithExpiryDate()
+  .Build();
 
-                if (new JWTValidator().TryValidateJWT(JWT, jWTValidatorOptions, out Dictionary<String, List<String>> result) == false)
-                {
-                    Console.WriteLine("Invalid JWT");
-                }
+if (new JWTValidator().TryValidateJWT(JWT, jWTValidatorOptions, out Dictionary<string, List<string>> result) == false)
+{
+  Console.WriteLine("Invalid JWT");
+}
 
-                Boolean hasMemberRole = result.DictionaryContainsKeyAndValue("role", "MEMBER");
-            `}
+bool hasMemberRole = result.DictionaryContainsKeyAndValue("role", "MEMBER");`}
         </SyntaxHighlighter>
       </Typography>
     </Panel>

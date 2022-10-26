@@ -3,7 +3,7 @@ import "../../../style/shared.css";
 import Panel from "../../shared/Panel";
 import Typography from "@mui/material/Typography";
 import SyntaxHighlighter from "react-syntax-highlighter";
-import { darcula } from "react-syntax-highlighter/dist/esm/styles/hljs";
+import { vs2015 } from "react-syntax-highlighter/dist/esm/styles/hljs";
 import Grid from "@mui/material/Grid";
 
 const BuilderDocumentsCodeExample = () => {
@@ -20,14 +20,14 @@ const BuilderDocumentsCodeExample = () => {
           <Typography style={{ width: "100%" }}>
             <SyntaxHighlighter
               language="csharp"
-              style={darcula}
+              style={vs2015}
               showLineNumbers={true}
             >
               {`JWTValidatorOptions jWTValidatorOptions = JWTValidatorOptionsBuilder
-          .Create()
-          .WithSigningKeyFromSecret("serguhvalhoier.....")
-          .WithExpiryDate()
-          .Build();`}
+  .Create()
+  .WithSigningKeyFromSecret("serguhvalhoier.....")
+  .WithExpiryDate()
+  .Build();`}
             </SyntaxHighlighter>
           </Typography>
         </Grid>
@@ -38,16 +38,16 @@ const BuilderDocumentsCodeExample = () => {
           <Typography style={{ width: "100%" }}>
             <SyntaxHighlighter
               language="csharp"
-              style={darcula}
+              style={vs2015}
               showLineNumbers={true}
             >
               {`JWTValidatorOptions jWTValidatorOptions = JWTValidatorOptionsBuilder
-          .Create()
-          .WithSigningKeyFromOpenIdUrl("https://<host_name>:<port_number>/oidc/endpoint/<provider_name>/.well-known/openid-configuration")
-          .WithIssuer("exampleIssuer")
-          .WithAudience("exampleAudience")
-          .WithExpiryDate()
-          .Build();`}
+  .Create()
+  .WithSigningKeyFromOpenIdUrl("https://<host_name>:<port_number>/oidc/endpoint/<provider_name>/.well-known/openid-configuration")
+  .WithIssuer("exampleIssuer")
+  .WithAudience("exampleAudience")
+  .WithExpiryDate()
+  .Build();`}
             </SyntaxHighlighter>
           </Typography>
         </Grid>

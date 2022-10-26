@@ -2,7 +2,7 @@ import React from "react";
 import Typography from "@mui/material/Typography";
 import Panel from "../../shared/Panel";
 import SyntaxHighlighter from "react-syntax-highlighter";
-import { darcula } from "react-syntax-highlighter/dist/esm/styles/hljs";
+import { vs2015 } from "react-syntax-highlighter/dist/esm/styles/hljs";
 
 const DictionaryExtensionCodeSample = () => {
   return (
@@ -13,23 +13,50 @@ const DictionaryExtensionCodeSample = () => {
       <Typography style={{ width: "100%" }}>
         <SyntaxHighlighter
           language="csharp"
-          style={darcula}
+          style={vs2015}
           showLineNumbers={true}
         >
-          {`Dictionary<String, List<String>> result ...
-
-Boolean hasMemberRole = result.ContainsKeyAndValue("role", "MEMBER");`}
+          {`Dictionary<string, List<string>> result ...
+          
+Console.WriteLine(result.Print());`}
         </SyntaxHighlighter>
       </Typography>
       <Typography style={{ width: "100%" }}>
         <SyntaxHighlighter
           language="csharp"
-          style={darcula}
+          style={vs2015}
           showLineNumbers={true}
         >
-          {`Dictionary<String, List<String>> result ...
+          {`Dictionary<string, List<string>> result ...
 
-Boolean hasMemberRole = result.ContainsValueInList("MEMBER");`}
+bool hasMemberRole = result.ContainsKeyAndValue("role", "MEMBER");`}
+        </SyntaxHighlighter>
+      </Typography>
+      <Typography style={{ width: "100%" }}>
+        <SyntaxHighlighter
+          language="csharp"
+          style={vs2015}
+          showLineNumbers={true}
+        >
+          {`Dictionary<string, List<string>> result ...
+
+bool hasMemberRole = result.ContainsValueInList("MEMBER");`}
+        </SyntaxHighlighter>
+      </Typography>
+      <Typography style={{ width: "100%" }}>
+        <SyntaxHighlighter
+          language="csharp"
+          style={vs2015}
+          showLineNumbers={true}
+        >
+          {`Dictionary<string, List<string>> dictionary = ...
+
+if (dictionary.IsEmpty())
+{
+  ...
+}
+
+...`}
         </SyntaxHighlighter>
       </Typography>
     </Panel>

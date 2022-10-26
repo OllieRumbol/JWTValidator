@@ -2,7 +2,7 @@ import React from "react";
 import Typography from "@mui/material/Typography";
 import Panel from "../../shared/Panel";
 import SyntaxHighlighter from "react-syntax-highlighter";
-import { darcula } from "react-syntax-highlighter/dist/esm/styles/hljs";
+import { vs2015 } from "react-syntax-highlighter/dist/esm/styles/hljs";
 
 const ValidatorCodeSamples = () => {
   return (
@@ -13,13 +13,13 @@ const ValidatorCodeSamples = () => {
       <Typography style={{ width: "100%" }}>
         <SyntaxHighlighter
           language="csharp"
-          style={darcula}
+          style={vs2015}
           showLineNumbers={true}
         >
-          {`String JWT = "....";
+          {`string JWT = "....";
 JWTValidatorOptions jWTValidatorOptions = ...
 
-if (new JWTValidator().TryValidateJWT(JWT, jWTValidatorOptions, out Dictionary<String, List<String>> result) == false)
+if (new JWTValidator().TryValidateJWT(JWT, jWTValidatorOptions, out Dictionary<string, List<string>> result) == false)
 {
     Console.WriteLine("Invalid JWT");
     return;
@@ -29,13 +29,13 @@ if (new JWTValidator().TryValidateJWT(JWT, jWTValidatorOptions, out Dictionary<S
       <Typography style={{ width: "100%" }}>
         <SyntaxHighlighter
           language="csharp"
-          style={darcula}
+          style={vs2015}
           showLineNumbers={true}
         >
-{`String JWT = "....";
+{`string JWT = "....";
 JWTValidatorOptions jWTValidatorOptions = ...
 
-Dictionary<String, List<String>> result = new JWTValidator().ValidateJWT(JWT, jWTValidatorOptions);
+Dictionary<string, List<string>> result = new JWTValidator().ValidateJWT(JWT, jWTValidatorOptions);
 `}
         </SyntaxHighlighter>
       </Typography>
