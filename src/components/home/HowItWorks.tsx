@@ -17,13 +17,6 @@ const item: SxProps<Theme> = {
   px: 3,
 };
 
-const number = {
-  fontSize: 24,
-  fontFamily: "default",
-  color: "secondary.main",
-  fontWeight: "medium",
-};
-
 const HowItWorks = () => {
   return (
     <Panel colour="#DDDDDD">
@@ -34,7 +27,6 @@ const HowItWorks = () => {
         <Grid container spacing={5}>
           <Grid item xs={12} md={4}>
             <Box sx={item}>
-              <Box sx={number}>1</Box>
               <Typography variant="h4" align="center">
                 Builder
               </Typography>
@@ -47,7 +39,6 @@ const HowItWorks = () => {
           </Grid>
           <Grid item xs={12} md={4}>
             <Box sx={item}>
-              <Box sx={number}>2</Box>
               <Typography variant="h4" align="center">
                 Validator
               </Typography>
@@ -60,7 +51,6 @@ const HowItWorks = () => {
           </Grid>
           <Grid item xs={12} md={4}>
             <Box sx={item}>
-              <Box sx={number}>3</Box>
               <Typography variant="h4" align="center">
                 Dictionary Extensions
               </Typography>
