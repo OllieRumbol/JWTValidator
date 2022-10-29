@@ -64,20 +64,28 @@ const versions = [
     ],
   },
   {
-    title: "1.0.3 - Planning",
+    title: "1.0.3 - In Development",
     status: "in progress",
     description:
-      "The project now has proper restrictions in terms of what needs validating in the JWT. I know what to refine the methods used to actually validate JWT and handle exceptions better.",
+      "The project now has proper restrictions in terms of what properties can be validated in a JWT. The main goal of version 1.0.3 is to identify if and when a JWT has expired. This is important as this should trigger a refresh process.",
     tasks: [
       {
-        name: "N/A",
+        name: "Add methods that return a DateTime value of when the jwt expires",
+        isComplete: false,
+      },
+      {
+        name: "Add parameter validation across project ",
+        isComplete: false,
+      },
+      {
+        name: "Refactor/ clean up",
         isComplete: false,
       }
     ],
   },
   {
-    title: "1.0.4 - Future",
-    status: "to do",
+    title: "1.0.4 - Planning",
+    status: "in progress",
     description:
       "Not yet planned",
     tasks: [
