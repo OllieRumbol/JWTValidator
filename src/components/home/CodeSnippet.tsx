@@ -20,7 +20,7 @@ const CodeSnippet = () => {
         >
           {`string JWT = "eyJhbGciOi.....";
 
-JWTValidatorOptions jWTValidatorOptions = JWTValidatorOptionsBuilder
+JWTValidatorOptions jWTValidatorOptions = JWTValidatorOptionsBuilderCreator
   .Create()
   .WithSigningKeyFromSecret("serguhvalhoier.....")
   .WithExpiryDate()

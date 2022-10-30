@@ -23,7 +23,7 @@ const BuilderDocumentsCodeExample = () => {
               style={vs2015}
               showLineNumbers={true}
             >
-              {`JWTValidatorOptions jWTValidatorOptions = JWTValidatorOptionsBuilder
+              {`JWTValidatorOptions jWTValidatorOptions = JWTValidatorOptionsBuilderCreator
   .Create()
   .WithSigningKeyFromSecret("serguhvalhoier.....")
   .WithExpiryDate()
@@ -41,7 +41,7 @@ const BuilderDocumentsCodeExample = () => {
               style={vs2015}
               showLineNumbers={true}
             >
-              {`JWTValidatorOptions jWTValidatorOptions = JWTValidatorOptionsBuilder
+              {`JWTValidatorOptions jWTValidatorOptions = JWTValidatorOptionsBuilderCreator
   .Create()
   .WithSigningKeyFromOpenIdUrl("https://<host_name>:<port_number>/oidc/endpoint/<provider_name>/.well-known/openid-configuration")
   .WithIssuer("exampleIssuer")

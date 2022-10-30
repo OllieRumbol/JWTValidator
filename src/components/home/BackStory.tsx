@@ -21,7 +21,7 @@ const BackStory = () => {
           <li>ClaimsPrincipal</li>
         </ul>
         My library abstracts away from these complexities and allows a simple
-        flow to validate any part of JWT as well as extracting its claims. It
+        flow to validate any part of a JWT as well as extracting its claims. It
         was important for the JWT validator library to be able to handle any JWT
         which is why it allows both symmetric key encryption and asymmetric key
         encryption.
