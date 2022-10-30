@@ -21,15 +21,16 @@ const BuilderDocumentsMethods = () => {
       <Typography variant="h2" component="h2" sx={{ mb: 3 }}>
         Methods
       </Typography>
-      <Grid container spacing={3}>
-        {BuilderMethods.map((bm, index) => {
+      <Grid container spacing={5}>
+        {BuilderMethods.map((methodDetails, index) => {
           return (
-            <Grid item xs={6}>
+            <Grid item xs={12}>
               <DocumentationCard
-                title={bm.title}
-                summary={bm.summary}
-                parameters={bm.parameters}
-                returns={bm.returns}
+                title={methodDetails.title}
+                summary={methodDetails.summary}
+                syntax={methodDetails.syntax}
+                parameters={methodDetails.parameters}
+                returns={methodDetails.returns}
               />
             </Grid>
           );
