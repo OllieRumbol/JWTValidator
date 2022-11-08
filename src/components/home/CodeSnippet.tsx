@@ -31,7 +31,9 @@ if (new JWTValidator().TryValidateJWT(JWT, jWTValidatorOptions, out Dictionary<s
   Console.WriteLine("Invalid JWT");
 }
 
-bool hasMemberRole = result.DictionaryContainsKeyAndValue("role", "MEMBER");`}
+bool hasMemberRole = result.DictionaryContainsKeyAndValue("role", "MEMBER");
+
+DateTime expiryDate = new JWTExpiryChecker().WhenDoesJWTExpire(jwt, "serguhvalhoier.....");`}
         </SyntaxHighlighter>
       </Typography>
     </Panel>
