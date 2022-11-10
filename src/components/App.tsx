@@ -18,6 +18,7 @@ import MenuItem from "@mui/material/MenuItem";
 import BuilderDocuments from "./documentation/builder/BuilderDocuments";
 import DictionaryExtensionsPage from "./documentation/dictionaryExtensions/DictionaryExtensionsPage";
 import ValidatorPage from "./documentation/validator/ValidatorPage";
+import ExpiryCheckerPage from "./documentation/expiryChecker/ExpiryCheckerPage";
 
 const darkTheme = createTheme({
   palette: {
@@ -110,6 +111,11 @@ const App = () => {
                                 <Button>Validator</Button>
                               </MenuItem>
                             </Link>
+                            <Link to="/documentation/expiry">
+                              <MenuItem onClick={handleClose}>
+                                <Button>Expiry Checker</Button>
+                              </MenuItem>
+                            </Link>
                             <Link to="/documentation/dictionary">
                               <MenuItem onClick={handleClose}>
                                 <Button>Dictionary Extensions</Button>
@@ -137,6 +143,7 @@ const App = () => {
           <Route path="/versions" element={<VersionsPage />} />
           <Route path="/documentation/builder" element={<BuilderDocuments />} />
           <Route path="/documentation/validator" element={<ValidatorPage />} />
+          <Route path="/documentation/expiry" element={<ExpiryCheckerPage />} />
           <Route path="/documentation/dictionary" element={<DictionaryExtensionsPage />} />
         </Routes>
 
