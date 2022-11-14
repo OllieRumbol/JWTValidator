@@ -7,8 +7,8 @@ import { Theme } from "@mui/material/styles";
 import { SxProps } from "@mui/system";
 
 import ConstructionIcon from "@mui/icons-material/Construction";
-import CodeIcon from "@mui/icons-material/Code";
-import MenuBookIcon from "@mui/icons-material/MenuBook";
+import VerifiedIcon from "@mui/icons-material/Verified";
+import ExtensionIcon from "@mui/icons-material/Extension";
 
 const item: SxProps<Theme> = {
   display: "flex",
@@ -27,10 +27,12 @@ const HowItWorks = () => {
         <Grid container spacing={5}>
           <Grid item xs={12} md={4}>
             <Box sx={item}>
+              <ConstructionIcon style={{ height: "5em", width: "5em" }} />
+              <br />
               <Typography variant="h4" align="center">
                 Builder
               </Typography>
-              <ConstructionIcon style={{ height: "5em", width: "5em" }} />
+              <br />
               <Typography variant="h5" align="center">
                 A fluent, strict and nested builder to construct what properties
                 of a JWT need validating
@@ -39,25 +41,30 @@ const HowItWorks = () => {
           </Grid>
           <Grid item xs={12} md={4}>
             <Box sx={item}>
+              <VerifiedIcon style={{ height: "5em", width: "5em" }} />
+              <br />
               <Typography variant="h4" align="center">
                 Validator
               </Typography>
-              <CodeIcon style={{ height: "5em", width: "5em" }} />
+              <br />
               <Typography variant="h5" align="center">
-                The key method that returns whether the JWT is valid or not as
-                well as a dictionary of claims
+                The key methods that returns whether the JWT is valid or not as
+                well as a dictionary of claims. Other services are also
+                available for validating the expiry date
               </Typography>
             </Box>
           </Grid>
           <Grid item xs={12} md={4}>
             <Box sx={item}>
+              <ExtensionIcon style={{ height: "5em", width: "5em" }} />
+              <br />
               <Typography variant="h4" align="center">
-                Dictionary Extensions
+                Extensions
               </Typography>
-              <MenuBookIcon style={{ height: "5em", width: "5em" }} />
+              <br />
               <Typography variant="h5" align="center">
-                There are a variety of extension methods to deal with the
-                dictionary outputted once valation is complete
+                There are a variety of extension methods available to deal with
+                the dictionary outputted once validation is complete
               </Typography>
             </Box>
           </Grid>

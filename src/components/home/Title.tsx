@@ -1,13 +1,12 @@
 import React from "react";
 import Typography from "@mui/material/Typography";
 import "../../style/title.css";
+import codeBackground from "../../assets/codeBackground.jpg";
 
 const Title = () => {
-  const image =
-    "https://images.unsplash.com/photo-1542831371-29b0f74f9713?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8";
 
   return (
-    <div className="article" style={{ backgroundImage: `url(${image})` }}>
+    <div className="article" style={{ backgroundImage: `url(${codeBackground})` }}>
       <Typography className="header bold shadow" variant="h1" gutterBottom>
         JWT Validator
       </Typography>
