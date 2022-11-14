@@ -20,11 +20,21 @@ const BackStory = () => {
           <li>JwtSecurityTokenHandler</li>
           <li>ClaimsPrincipal</li>
         </ul>
+      </Typography>
+      <Typography align="center" variant="h5" component="h5">
         My library abstracts away from these complexities and allows a simple
         flow to validate any part of a JWT as well as extracting its claims. It
         was important for the JWT validator library to be able to handle any JWT
         which is why it allows both symmetric key encryption and asymmetric key
         encryption.
+      </Typography>
+      <br />
+      <Typography align="center" variant="h5" component="h5">
+        Developers and code quality is at the heart of this project. Code is
+        continuously reviewed to make sure it meets the styling standards. Try
+        get versions of key methods exist to meet the programming styles of
+        different developers. This library is fully unit tested with new tests
+        being added as new features are developed
       </Typography>
     </Panel>
   );

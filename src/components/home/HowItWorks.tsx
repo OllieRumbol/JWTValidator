@@ -7,8 +7,8 @@ import { Theme } from "@mui/material/styles";
 import { SxProps } from "@mui/system";
 
 import ConstructionIcon from "@mui/icons-material/Construction";
-import VerifiedIcon from '@mui/icons-material/Verified';
-import ExtensionIcon from '@mui/icons-material/Extension';
+import VerifiedIcon from "@mui/icons-material/Verified";
+import ExtensionIcon from "@mui/icons-material/Extension";
 
 const item: SxProps<Theme> = {
   display: "flex",
@@ -48,8 +48,9 @@ const HowItWorks = () => {
               </Typography>
               <br />
               <Typography variant="h5" align="center">
-                The key method that returns whether the JWT is valid or not as
-                well as a dictionary of claims
+                The key methods that returns whether the JWT is valid or not as
+                well as a dictionary of claims. Other services are also
+                available for validating the expiry date
               </Typography>
             </Box>
           </Grid>
@@ -62,8 +63,8 @@ const HowItWorks = () => {
               </Typography>
               <br />
               <Typography variant="h5" align="center">
-                There are a variety of extension methods to deal with the
-                dictionary outputted once valation is complete
+                There are a variety of extension methods available to deal with
+                the dictionary outputted once validation is complete
               </Typography>
             </Box>
           </Grid>
