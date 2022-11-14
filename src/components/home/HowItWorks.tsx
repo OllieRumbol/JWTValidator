@@ -27,10 +27,12 @@ const HowItWorks = () => {
         <Grid container spacing={5}>
           <Grid item xs={12} md={4}>
             <Box sx={item}>
+              <ConstructionIcon style={{ height: "5em", width: "5em" }} />
+              <br />
               <Typography variant="h4" align="center">
                 Builder
               </Typography>
-              <ConstructionIcon style={{ height: "5em", width: "5em" }} />
+              <br />
               <Typography variant="h5" align="center">
                 A fluent, strict and nested builder to construct what properties
                 of a JWT need validating
@@ -39,10 +41,12 @@ const HowItWorks = () => {
           </Grid>
           <Grid item xs={12} md={4}>
             <Box sx={item}>
+              <CodeIcon style={{ height: "5em", width: "5em" }} />
+              <br />
               <Typography variant="h4" align="center">
                 Validator
               </Typography>
-              <CodeIcon style={{ height: "5em", width: "5em" }} />
+              <br />
               <Typography variant="h5" align="center">
                 The key method that returns whether the JWT is valid or not as
                 well as a dictionary of claims
@@ -51,10 +55,12 @@ const HowItWorks = () => {
           </Grid>
           <Grid item xs={12} md={4}>
             <Box sx={item}>
-              <Typography variant="h4" align="center">
-                Dictionary Extensions
-              </Typography>
               <MenuBookIcon style={{ height: "5em", width: "5em" }} />
+              <br />
+              <Typography variant="h4" align="center">
+                Extensions
+              </Typography>
+              <br />
               <Typography variant="h5" align="center">
                 There are a variety of extension methods to deal with the
                 dictionary outputted once valation is complete

@@ -18,17 +18,17 @@ const CodeSnippet = () => {
           showLineNumbers={true}
           wrapLines={true}
         >
-          {`string JWT = "eyJhbGciOi.....";
+          {`string jwt = "eyJhbGciOi.....";
 
-JWTValidatorOptions jWTValidatorOptions = JWTValidatorOptionsBuilderCreator
+JWTValidatorOptions jwtValidatorOptions = JWTValidatorOptionsBuilderCreator
   .Create()
   .WithSigningKeyFromSecret("serguhvalhoier.....")
   .WithExpiryDate()
   .Build();
 
-if (new JWTValidator().TryValidateJWT(JWT, jWTValidatorOptions, out Dictionary<string, List<string>> result) == false)
+if (new JWTValidator().TryValidateJWT(jwt, jwtValidatorOptions, out Dictionary<string, List<string>> result) == false)
 {
-  Console.WriteLine("Invalid JWT");
+  Console.WriteLine("Invalid jwt");
 }
 
 bool hasMemberRole = result.DictionaryContainsKeyAndValue("role", "MEMBER");
