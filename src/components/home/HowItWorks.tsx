@@ -7,8 +7,8 @@ import { Theme } from "@mui/material/styles";
 import { SxProps } from "@mui/system";
 
 import ConstructionIcon from "@mui/icons-material/Construction";
-import CodeIcon from "@mui/icons-material/Code";
-import MenuBookIcon from "@mui/icons-material/MenuBook";
+import VerifiedIcon from '@mui/icons-material/Verified';
+import ExtensionIcon from '@mui/icons-material/Extension';
 
 const item: SxProps<Theme> = {
   display: "flex",
@@ -41,7 +41,7 @@ const HowItWorks = () => {
           </Grid>
           <Grid item xs={12} md={4}>
             <Box sx={item}>
-              <CodeIcon style={{ height: "5em", width: "5em" }} />
+              <VerifiedIcon style={{ height: "5em", width: "5em" }} />
               <br />
               <Typography variant="h4" align="center">
                 Validator
@@ -55,7 +55,7 @@ const HowItWorks = () => {
           </Grid>
           <Grid item xs={12} md={4}>
             <Box sx={item}>
-              <MenuBookIcon style={{ height: "5em", width: "5em" }} />
+              <ExtensionIcon style={{ height: "5em", width: "5em" }} />
               <br />
               <Typography variant="h4" align="center">
                 Extensions
