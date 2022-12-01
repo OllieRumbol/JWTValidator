@@ -7,6 +7,7 @@ import Container from "@mui/material/Container";
 import "../../style/homePage.css";
 import "../../style/shared.css";
 import CodeSnippet from "./CodeSnippet";
+import NewRelease from "./NewRelease";
 
 const HomePage = () => {
 
@@ -15,6 +16,7 @@ const HomePage = () => {
       <Tite />
       <HowItWorks />
       <CodeSnippet />
+      <NewRelease />
       <BackStory />
       <Licensing />
     </Container>

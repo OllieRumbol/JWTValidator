@@ -39,7 +39,7 @@ const VersionCard = (props: VersionCardProps) => {
           <Typography gutterBottom variant="h4">
             Description of version
           </Typography>
-          <Typography variant="body1">{description}</Typography>
+          <Typography gutterBottom variant="body1">{description}</Typography>
           <Typography gutterBottom variant="h4">
             Features
           </Typography>

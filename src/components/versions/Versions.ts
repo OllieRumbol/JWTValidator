@@ -31,7 +31,7 @@ const versions = [
     title: "1.0.1 - Live",
     status: "done",
     description:
-      "After the deployment of my first version of the JWT Validator library to the NuGet store, some the external dependences were not building correctly. Getting the project to be installed correctly on any device is the goal of this version.",
+      "After the deployment of my first version of the JWT Validator library to the NuGet store, some of the external dependences were not building correctly. Getting the project to be installed correctly on any device is the goal of this version.",
     tasks: [
       {
         name: "Combined models project into service project",
