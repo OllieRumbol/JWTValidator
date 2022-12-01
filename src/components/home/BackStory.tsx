@@ -5,7 +5,7 @@ import "../../style/shared.css";
 
 const BackStory = () => {
   return (
-    <Panel colour="#DDDDDD">
+    <Panel colour="#FFFFFF">
       <Typography align="center" variant="h2" component="h2" gutterBottom>
         Back Story
       </Typography>

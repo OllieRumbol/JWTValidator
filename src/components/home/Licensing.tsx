@@ -5,7 +5,7 @@ import "../../style/shared.css";
 
 const Licensing = () => {
   return (
-    <Panel colour="#FFFFFF">
+    <Panel colour="#DDDDDD">
       <Typography align="center" variant="h2" component="h2" gutterBottom>
         Licensing
       </Typography>
