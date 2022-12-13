@@ -7,7 +7,7 @@ import { vs2015 } from "react-syntax-highlighter/dist/esm/styles/hljs";
 const ValidatorCodeSamples = () => {
   return (
     <Panel colour="#FFFFFF">
-      <Typography variant="h2" component="h2" sx={{ mb: 3 }}>
+      <Typography align="center" variant="h2" component="h2" sx={{ mb: 3 }}>
         Code Samples
       </Typography>
       <Typography style={{ width: "100%" }}>

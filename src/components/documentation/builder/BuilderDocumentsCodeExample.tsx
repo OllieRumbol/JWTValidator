@@ -9,7 +9,7 @@ import Grid from "@mui/material/Grid";
 const BuilderDocumentsCodeExample = () => {
   return (
     <Panel colour="#FFFFFF">
-      <Typography variant="h2" component="h2" sx={{ mb: 3 }}>
+      <Typography align="center" variant="h2" component="h2" sx={{ mb: 3 }}>
         Code example
       </Typography>
       <Grid container spacing={5}>

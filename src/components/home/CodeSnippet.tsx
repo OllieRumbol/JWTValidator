@@ -11,7 +11,7 @@ const CodeSnippet = () => {
       <Typography align="center" variant="h2" component="h2" gutterBottom>
         Code Example
       </Typography>
-      <Typography>
+      <Typography style={{ width: "100%" }}>
         <SyntaxHighlighter
           language="csharp"
           style={vs2015}

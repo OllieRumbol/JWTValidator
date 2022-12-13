@@ -6,7 +6,7 @@ import Typography from "@mui/material/Typography";
 const BuilderDocumentsTechnicalDetails = () => {
   return (
     <Panel colour="#DDDDDD">
-      <Typography variant="h2" component="h2" sx={{ mb: 3 }}>
+      <Typography align="center" variant="h2" component="h2" sx={{ mb: 3 }}>
         Technical Details
       </Typography>
       <Typography align="center" variant="h5" component="h5">

@@ -8,7 +8,7 @@ import Grid from "@mui/material/Grid";
 const ExpiryCheckerMethods = () => {
   return (
     <Panel colour="#DDDDDD">
-      <Typography variant="h2" component="h2" sx={{ mb: 3 }}>
+      <Typography align="center" variant="h2" component="h2" sx={{ mb: 3 }}>
         Methods
       </Typography>
       <Grid container spacing={5}>
