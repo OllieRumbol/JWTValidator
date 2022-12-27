@@ -1,0 +1,11 @@
+{
+  "short_name": "JWTValidator",
+  "name": "Validate JWTs in C#",
+  "icons": [
+    {
+      "src": "favicon.ico",
+      "sizes": "64x64 32x32 24x24 16x16",
+      "type": "image/x-icon"
+    }
+  ]
+}
