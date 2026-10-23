@@ -1,0 +1,69 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Approved design: Interaction states</title>
+<!-- Approved design mockup. Fonts load from Google Fonts here only; the site hosts its own. -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&amp;family=IBM+Plex+Sans:wght@400;500;600;700&amp;display=swap" rel="stylesheet">
+<style>
+body{margin:0}
+</style>
+</head>
+<body>
+<div style="width: 1280px; height: 960px; box-sizing: border-box; padding: 56px 72px; background: #FFFFFF; color: #1B1A22; font-family: 'IBM Plex Sans', system-ui, sans-serif; font-size: 16px; line-height: 1.5; display: flex; flex-direction: column; gap: 0">
+  <h1 style="margin: 0 0 6px; font-size: 32px; letter-spacing: -0.02em">Interaction states</h1>
+  <p style="margin: 0 0 32px; color: #55526A">How the shared parts look when the reader hovers, focuses with the keyboard, copies or switches tabs.</p>
+
+  <div style="display: grid; grid-template-columns: 220px 1fr; gap: 0; border-top: 1px solid #E3E0EC">
+
+    <div style="padding: 24px 0; border-bottom: 1px solid #E3E0EC"><p style="margin: 0; font-weight: 700">Copy button</p><p style="margin: 4px 0 0; font-size: 14px; color: #55526A">The result is also announced to screen readers.</p></div>
+    <div style="padding: 24px 0 24px 32px; border-bottom: 1px solid #E3E0EC; display: flex; flex-wrap: wrap; gap: 28px; align-items: flex-start">
+      <div><p style="margin: 0 0 8px; font-size: 13px; color: #55526A">Default</p><button type="button" style="font: inherit; font-size: 15px; font-weight: 600; color: #6B24B2; background: #F0E7FB; border: 0; border-radius: 6px; padding: 8px 14px; min-height: 40px">Copy</button></div>
+      <div><p style="margin: 0 0 8px; font-size: 13px; color: #55526A">Hover</p><button type="button" style="font: inherit; font-size: 15px; font-weight: 600; color: #5A1F8F; background: #E4D6F7; border: 0; border-radius: 6px; padding: 8px 14px; min-height: 40px">Copy</button></div>
+      <div><p style="margin: 0 0 8px; font-size: 13px; color: #55526A">Copied, for 2 seconds</p><button type="button" style="font: inherit; font-size: 15px; font-weight: 600; color: #1F6B36; background: #E3F3E8; border: 0; border-radius: 6px; padding: 8px 14px; min-height: 40px; display: inline-flex; align-items: center; gap: 6px"><svg aria-hidden="true" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"></path></svg>Copied</button></div>
+      <div><p style="margin: 0 0 8px; font-size: 13px; color: #55526A">Failed</p><button type="button" style="font: inherit; font-size: 15px; font-weight: 600; color: #A8174D; background: #FDEEF3; border: 0; border-radius: 6px; padding: 8px 14px; min-height: 40px">Copy failed</button><p style="margin: 6px 0 0; font-size: 13px; color: #55526A; max-width: 220px">Select the code by hand instead.</p></div>
+    </div>
+
+    <div style="padding: 24px 0; border-bottom: 1px solid #E3E0EC"><p style="margin: 0; font-weight: 700">Keyboard focus</p><p style="margin: 4px 0 0; font-size: 14px; color: #55526A">A 2 px #6B24B2 outline, 2 px away, on every focusable part. Keyboard only.</p></div>
+    <div style="padding: 24px 0 24px 32px; border-bottom: 1px solid #E3E0EC; display: flex; flex-wrap: wrap; gap: 32px; align-items: center">
+      <a href="#" style="background: #6B24B2; color: #FFFFFF; text-decoration: none; font-weight: 600; padding: 12px 24px; border-radius: 8px; outline: 2px solid #6B24B2; outline-offset: 2px">Get started</a>
+      <a href="#" style="color: #7A2DBE; font-weight: 600; outline: 2px solid #6B24B2; outline-offset: 2px; border-radius: 2px">Validation options</a>
+      <button type="button" aria-label="Open menu" style="width: 44px; height: 44px; display: grid; place-items: center; background: #FFFFFF; border: 1px solid #E3E0EC; border-radius: 8px; color: #1B1A22; outline: 2px solid #6B24B2; outline-offset: 2px"><svg aria-hidden="true" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M4 7h16M4 12h16M4 17h16"></path></svg></button>
+      <a href="#" style="display: block; padding: 6px 12px; border-radius: 6px; color: #2C2A36; text-decoration: none; outline: 2px solid #6B24B2; outline-offset: 2px; min-width: 200px">Expiry checker</a>
+    </div>
+
+    <div style="padding: 24px 0; border-bottom: 1px solid #E3E0EC"><p style="margin: 0; font-weight: 700">Links</p><p style="margin: 4px 0 0; font-size: 14px; color: #55526A">Links to other sites carry an arrow, and say so to screen readers.</p></div>
+    <div style="padding: 24px 0 24px 32px; border-bottom: 1px solid #E3E0EC; display: flex; flex-wrap: wrap; gap: 36px; align-items: flex-start">
+      <div><p style="margin: 0 0 8px; font-size: 13px; color: #55526A">In text</p><a href="#" style="color: #7A2DBE; text-underline-offset: 3px">Read the migration guide</a></div>
+      <div><p style="margin: 0 0 8px; font-size: 13px; color: #55526A">Hover</p><a href="#" style="color: #5A1F8F; text-decoration-thickness: 2px; text-underline-offset: 3px">Read the migration guide</a></div>
+      <div><p style="margin: 0 0 8px; font-size: 13px; color: #55526A">To another site</p><a href="#" style="color: #7A2DBE; font-weight: 600; text-underline-offset: 3px">NuGet package<svg aria-hidden="true" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" style="margin-left: 4px; vertical-align: -1px"><path d="M7 17 17 7M8 7h9v9"></path></svg></a><p style="margin: 6px 0 0; font-size: 13px; color: #55526A">Screen readers hear: "NuGet package, leaves this site"</p></div>
+      <div><p style="margin: 0 0 8px; font-size: 13px; color: #55526A">Header, hover</p><a href="#" style="color: #1B1A22; text-decoration: none; padding: 10px 14px; border-radius: 8px; background: #F3F1F8; font-weight: 500">Versions</a></div>
+    </div>
+
+    <div style="padding: 24px 0; border-bottom: 1px solid #E3E0EC"><p style="margin: 0; font-weight: 700">Section links</p><p style="margin: 4px 0 0; font-size: 14px; color: #55526A">The "#" link to a section shows on hover and on keyboard focus only.</p></div>
+    <div style="padding: 24px 0 24px 32px; border-bottom: 1px solid #E3E0EC; display: flex; flex-wrap: wrap; gap: 56px; align-items: flex-start">
+      <div><p style="margin: 0 0 8px; font-size: 13px; color: #55526A">Default</p><h2 style="margin: 0; font-size: 26px; letter-spacing: -0.01em">Add checks and build</h2></div>
+      <div><p style="margin: 0 0 8px; font-size: 13px; color: #55526A">Hover or focus</p><h2 style="margin: 0; font-size: 26px; letter-spacing: -0.01em">Add checks and build <a href="#" aria-label="Link to this section: Add checks and build" style="font-size: 20px; color: #7A2DBE; text-decoration: none">#</a></h2></div>
+      <div><p style="margin: 0 0 8px; font-size: 13px; color: #55526A">After a click</p><p style="margin: 0; display: inline-flex; align-items: center; gap: 8px; font-size: 14px; font-weight: 600; color: #1F6B36; background: #E3F3E8; border-radius: 6px; padding: 6px 10px"><svg aria-hidden="true" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"></path></svg>Link copied</p></div>
+    </div>
+
+    <div style="padding: 24px 0; border-bottom: 1px solid #E3E0EC"><p style="margin: 0; font-weight: 700">Tabs</p><p style="margin: 4px 0 0; font-size: 14px; color: #55526A">Arrow keys move between tabs.</p></div>
+    <div style="padding: 24px 0 24px 32px; border-bottom: 1px solid #E3E0EC; display: flex; flex-wrap: wrap; gap: 40px; align-items: flex-end">
+      <div><p style="margin: 0 0 8px; font-size: 13px; color: #55526A">Selected</p><button type="button" role="tab" aria-selected="true" style="font: inherit; font-size: 15px; font-weight: 600; color: #5A1F8F; background: #FFFFFF; border: 1px solid #E3E0EC; border-bottom: 2px solid #6B24B2; border-radius: 8px 8px 0 0; padding: 10px 16px">OpenID Connect</button></div>
+      <div><p style="margin: 0 0 8px; font-size: 13px; color: #55526A">Not selected</p><button type="button" role="tab" aria-selected="false" style="font: inherit; font-size: 15px; font-weight: 500; color: #55526A; background: transparent; border: 1px solid transparent; border-radius: 8px 8px 0 0; padding: 10px 16px">Secret</button></div>
+      <div><p style="margin: 0 0 8px; font-size: 13px; color: #55526A">Hover</p><button type="button" role="tab" aria-selected="false" style="font: inherit; font-size: 15px; font-weight: 500; color: #1B1A22; background: #F3F1F8; border: 1px solid transparent; border-radius: 8px 8px 0 0; padding: 10px 16px">Secret</button></div>
+      <div><p style="margin: 0 0 8px; font-size: 13px; color: #55526A">Keyboard focus</p><button type="button" role="tab" aria-selected="false" style="font: inherit; font-size: 15px; font-weight: 500; color: #55526A; background: transparent; border: 1px solid transparent; border-radius: 8px 8px 0 0; padding: 10px 16px; outline: 2px solid #6B24B2; outline-offset: 2px">Secret</button></div>
+    </div>
+
+    <div style="padding: 24px 0"><p style="margin: 0; font-weight: 700">Docs list</p></div>
+    <div style="padding: 24px 0 24px 32px; display: flex; flex-wrap: wrap; gap: 40px; align-items: flex-start">
+      <div style="width: 220px"><p style="margin: 0 0 8px; font-size: 13px; color: #55526A">Default</p><a href="#" style="display: block; padding: 6px 12px; border-radius: 6px; color: #2C2A36; text-decoration: none">Validator</a></div>
+      <div style="width: 220px"><p style="margin: 0 0 8px; font-size: 13px; color: #55526A">Hover</p><a href="#" style="display: block; padding: 6px 12px; border-radius: 6px; color: #1B1A22; background: #F3F1F8; text-decoration: none">Validator</a></div>
+      <div style="width: 220px"><p style="margin: 0 0 8px; font-size: 13px; color: #55526A">Current page</p><a href="#" aria-current="page" style="display: block; padding: 6px 12px; border-radius: 6px; color: #5A1F8F; background: #F0E7FB; text-decoration: none; font-weight: 600; box-shadow: inset 3px 0 0 #9447D6">Validation options</a></div>
+    </div>
+  </div>
+</div>
+</body>
+</html>

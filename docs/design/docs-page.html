@@ -29,8 +29,8 @@ a{color:#7A2DBE}a:hover{color:#5A1F8F}
       <nav aria-label="Main" style="display: flex; flex-wrap: wrap; gap: 4px; font-weight: 500">
         <a href="#" aria-current="page" style="color: #5A1F8F; text-decoration: none; padding: 10px 14px; border-radius: 8px; background: #F0E7FB; font-weight: 600">Docs</a>
         <a href="#" style="color: #1B1A22; text-decoration: none; padding: 10px 14px; border-radius: 8px">Versions</a>
-        <a href="#" style="color: #1B1A22; text-decoration: none; padding: 10px 14px; border-radius: 8px">NuGet</a>
-        <a href="#" style="color: #1B1A22; text-decoration: none; padding: 10px 14px; border-radius: 8px">GitHub</a>
+        <a href="#" style="color: #1B1A22; text-decoration: none; padding: 10px 14px; border-radius: 8px">NuGet<svg aria-hidden="true" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" style="margin-left: 4px; vertical-align: -1px"><path d="M7 17 17 7M8 7h9v9"></path></svg></a>
+        <a href="#" style="color: #1B1A22; text-decoration: none; padding: 10px 14px; border-radius: 8px">GitHub<svg aria-hidden="true" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" style="margin-left: 4px; vertical-align: -1px"><path d="M7 17 17 7M8 7h9v9"></path></svg></a>
       </nav>
     </div>
   </header>
@@ -66,7 +66,7 @@ a{color:#7A2DBE}a:hover{color:#5A1F8F}
           <h1 style="margin: 0 0 12px; font-size: 42px; line-height: 1.15; letter-spacing: -0.02em">Validation options</h1>
           <p style="margin: 0 0 32px; font-size: 19px; color: #55526A">Build a JWTValidatorOptions object. It says where the signing keys come from, and which parts of the token to check.</p>
 
-          <h2 style="margin: 0 0 10px; font-size: 26px; letter-spacing: -0.01em">Choose a signing key <a href="#" aria-label="Link to this section" style="font-size: 18px; color: #6E6A82; text-decoration: none">#</a></h2>
+          <h2 style="margin: 0 0 10px; font-size: 26px; letter-spacing: -0.01em">Choose a signing key</h2>
           <p style="margin: 0 0 12px">Start with <code style="font-family: 'IBM Plex Mono', monospace; font-size: 15px; background: #F3F1F8; padding: 1px 6px; border-radius: 4px">Create()</code>, then choose one source for the key:</p>
           <ul style="margin: 0 0 22px; padding-left: 22px">
             <li><code style="font-family: 'IBM Plex Mono', monospace; font-size: 15px; background: #F3F1F8; padding: 1px 6px; border-radius: 4px">WithSigningKeyFromSecret(secret)</code> for a token signed with a secret.</li>
@@ -96,7 +96,7 @@ a{color:#7A2DBE}a:hover{color:#5A1F8F}
             </table>
           </div>
 
-          <h2 style="margin: 0 0 10px; font-size: 26px; letter-spacing: -0.01em">Add checks and build <a href="#" aria-label="Link to this section" style="font-size: 18px; color: #6E6A82; text-decoration: none">#</a></h2>
+          <h2 style="margin: 0 0 10px; font-size: 26px; letter-spacing: -0.01em">Add checks and build</h2>
           <p style="margin: 0 0 18px">Add only the checks you need. <code style="font-family: 'IBM Plex Mono', monospace; font-size: 15px; background: #F3F1F8; padding: 1px 6px; border-radius: 4px">WithExpiryDate()</code> allows a clock skew of 5 minutes.</p>
           <figure style="margin: 0 0 36px; border: 1px solid #E3E0EC; border-radius: 10px; overflow: hidden">
             <figcaption style="display: flex; justify-content: space-between; align-items: center; padding: 6px 6px 6px 16px; border-bottom: 1px solid #E3E0EC; background: #F7F6FB; font-family: 'IBM Plex Mono', monospace; font-size: 14px; color: #55526A">
@@ -112,7 +112,26 @@ a{color:#7A2DBE}a:hover{color:#5A1F8F}
     .<span class="m">Build</span>();</code></pre>
           </figure>
 
-          <h2 style="margin: 0 0 14px; font-size: 26px; letter-spacing: -0.01em">Reference <a href="#" aria-label="Link to this section" style="font-size: 18px; color: #6E6A82; text-decoration: none">#</a></h2>
+          <h2 style="margin: 0 0 14px; font-size: 26px; letter-spacing: -0.01em">Reference</h2>
+          <div style="overflow-x: auto; margin: 0 0 24px; border: 1px solid #E3E0EC; border-radius: 10px">
+            <table style="width: 100%; border-collapse: collapse; font-size: 16px">
+              <thead>
+                <tr style="text-align: left; background: #F7F6FB">
+                  <th scope="col" style="padding: 10px 16px">Method</th>
+                  <th scope="col" style="padding: 10px 16px">What it does</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr style="border-top: 1px solid #E3E0EC"><td style="padding: 9px 16px; white-space: nowrap"><a href="#" style="font-family: 'IBM Plex Mono', monospace; font-size: 15px">Create</a></td><td style="padding: 9px 16px; color: #3B3848">Starts the builder.</td></tr>
+                <tr style="border-top: 1px solid #E3E0EC"><td style="padding: 9px 16px; white-space: nowrap"><a href="#" style="font-family: 'IBM Plex Mono', monospace; font-size: 15px">WithSigningKeyFromSecret</a></td><td style="padding: 9px 16px; color: #3B3848">Checks the signature with a secret.</td></tr>
+                <tr style="border-top: 1px solid #E3E0EC"><td style="padding: 9px 16px; white-space: nowrap"><a href="#" style="font-family: 'IBM Plex Mono', monospace; font-size: 15px">WithSigningKeyFromOpenIdUrl</a></td><td style="padding: 9px 16px; color: #3B3848">Checks the signature with the provider's published keys.</td></tr>
+                <tr style="border-top: 1px solid #E3E0EC"><td style="padding: 9px 16px; white-space: nowrap"><a href="#" style="font-family: 'IBM Plex Mono', monospace; font-size: 15px">WithIssuer</a></td><td style="padding: 9px 16px; color: #3B3848">Checks who issued the token.</td></tr>
+                <tr style="border-top: 1px solid #E3E0EC"><td style="padding: 9px 16px; white-space: nowrap"><a href="#" style="font-family: 'IBM Plex Mono', monospace; font-size: 15px">WithAudience</a></td><td style="padding: 9px 16px; color: #3B3848">Checks who the token is for.</td></tr>
+                <tr style="border-top: 1px solid #E3E0EC"><td style="padding: 9px 16px; white-space: nowrap"><a href="#" style="font-family: 'IBM Plex Mono', monospace; font-size: 15px">WithExpiryDate</a></td><td style="padding: 9px 16px; color: #3B3848">Checks that the token has not expired and is already valid.</td></tr>
+                <tr style="border-top: 1px solid #E3E0EC"><td style="padding: 9px 16px; white-space: nowrap"><a href="#" style="font-family: 'IBM Plex Mono', monospace; font-size: 15px">Build</a></td><td style="padding: 9px 16px; color: #3B3848">Returns the finished options.</td></tr>
+              </tbody>
+            </table>
+          </div>
           <section aria-labelledby="combo-ref" style="border: 1px solid #E3E0EC; border-radius: 12px; padding: 20px 22px; margin: 0 0 44px">
             <h3 id="combo-ref" style="margin: 0 0 6px; font-family: 'IBM Plex Mono', monospace; font-size: 18px; color: #7A2DBE">WithSigningKeyFromSecret</h3>
             <p style="margin: 0 0 14px">Uses a secret to check the signature of an HMAC-signed token.</p>
@@ -154,10 +173,10 @@ a{color:#7A2DBE}a:hover{color:#5A1F8F}
         <p style="margin: 0; color: #55526A">JWT Validator 2.0.0 · MIT licence</p>
       </div>
       <nav aria-label="Footer" style="display: flex; flex-wrap: wrap; gap: 8px 28px; font-weight: 600">
-        <a href="#">Library on GitHub</a>
-        <a href="#">NuGet package</a>
-        <a href="#">Site repository</a>
-        <a href="#">Licence</a>
+        <a href="#">Library on GitHub<svg aria-hidden="true" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" style="margin-left: 4px; vertical-align: -1px"><path d="M7 17 17 7M8 7h9v9"></path></svg></a>
+        <a href="#">NuGet package<svg aria-hidden="true" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" style="margin-left: 4px; vertical-align: -1px"><path d="M7 17 17 7M8 7h9v9"></path></svg></a>
+        <a href="#">Site repository<svg aria-hidden="true" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" style="margin-left: 4px; vertical-align: -1px"><path d="M7 17 17 7M8 7h9v9"></path></svg></a>
+        <a href="#">Licence<svg aria-hidden="true" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" style="margin-left: 4px; vertical-align: -1px"><path d="M7 17 17 7M8 7h9v9"></path></svg></a>
       </nav>
     </div>
   </footer>
