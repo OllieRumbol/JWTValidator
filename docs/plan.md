@@ -244,7 +244,20 @@ A significant decision gets an ADR. These two get one each, because they have lo
 
 ### 3.6 Visual design
 
-The maintainer approved the "Combined" design on 2026-10-23: Calm docs' light layout with the Token direction's logo and colours. The mockups are on the design canvas at https://claude.ai/artifact/HAYiod2CQbwdKc6UmHeVXB, row 4 (Home, docs page, phone, logo and package icon). The canvas is private to the maintainer.
+The maintainer approved the "Combined" design on 2026-10-23: Calm docs' light layout with the Token direction's logo and colours.
+
+The approved design is stored in `docs/design/`. It is the reference for the build:
+
+| File | Shows |
+| --- | --- |
+| `home.png`, `home.html` | Home at 1280 px |
+| `docs-page.png`, `docs-page.html` | A docs page ("Validation options") at 1280 px |
+| `phone.png`, `phone.html` | Home and the open menu at 390 px |
+| `logo.png`, `logo.html` | The logo on light and dark, and the package icon at 128, 64 and 32 px |
+
+Each PNG is a screenshot of the HTML file next to it. The HTML files open in any browser and can be edited. They load their fonts from Google Fonts; the site itself hosts its fonts (section 3.5). When the design changes, update the HTML and take the screenshot again, in the same pull request as the change to this section.
+
+The mockups were made on a design canvas at https://claude.ai/artifact/HAYiod2CQbwdKc6UmHeVXB, row 4. The canvas is private to the maintainer and is a place to explore ideas. `docs/design/` is the record of what was approved. After release 2, the theme and components in code are the source of truth for the design.
 
 The theme holds these values. No component uses a colour that is not in the theme (React rules, "Styling").
 

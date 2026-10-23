@@ -1,0 +1,166 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Approved design: Docs page</title>
+<!-- Approved design mockup. Fonts load from Google Fonts here only; the site hosts its own. -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&amp;family=IBM+Plex+Sans:wght@400;500;600;700&amp;display=swap" rel="stylesheet">
+<style>
+body{margin:0;background:#FFFFFF}
+a{color:#7A2DBE}a:hover{color:#5A1F8F}
+.k{color:#7A2DBE}.t{color:#0A7398}.s{color:#A0461A}.c{color:#5E6573}.m{color:#6B4E00}
+</style>
+</head>
+<body>
+<div style="background: #FFFFFF; color: #1B1A22; font-family: 'IBM Plex Sans', system-ui, sans-serif; font-size: 17px; line-height: 1.65; min-height: 100%">
+
+  <header style="border-bottom: 1px solid #E3E0EC">
+    <div style="max-width: 1400px; margin: 0 auto; padding: 14px 32px; display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 16px">
+      <a href="#" style="display: flex; align-items: center; gap: 12px; text-decoration: none; color: #1B1A22">
+        <span aria-hidden="true" style="display: flex; gap: 4px">
+          <span style="width: 10px; height: 24px; border-radius: 3px; background: #E5427A"></span>
+          <span style="width: 10px; height: 24px; border-radius: 3px; background: #9447D6"></span>
+          <span style="width: 10px; height: 24px; border-radius: 3px; background: #1C9CC9"></span>
+        </span>
+        <span style="font-weight: 700; font-size: 20px; letter-spacing: -0.01em">JWT Validator</span>
+      </a>
+      <nav aria-label="Main" style="display: flex; flex-wrap: wrap; gap: 4px; font-weight: 500">
+        <a href="#" aria-current="page" style="color: #5A1F8F; text-decoration: none; padding: 10px 14px; border-radius: 8px; background: #F0E7FB; font-weight: 600">Docs</a>
+        <a href="#" style="color: #1B1A22; text-decoration: none; padding: 10px 14px; border-radius: 8px">Versions</a>
+        <a href="#" style="color: #1B1A22; text-decoration: none; padding: 10px 14px; border-radius: 8px">NuGet</a>
+        <a href="#" style="color: #1B1A22; text-decoration: none; padding: 10px 14px; border-radius: 8px">GitHub</a>
+      </nav>
+    </div>
+  </header>
+
+  <div style="max-width: 1400px; margin: 0 auto; display: flex; flex-wrap: wrap">
+
+    <nav aria-label="Documentation" style="flex: 1 1 240px; max-width: 280px; padding: 36px 24px 36px 32px; border-right: 1px solid #E3E0EC; background: #FBFAFD; font-size: 15px">
+      <p style="margin: 0 0 6px; font-family: 'IBM Plex Mono', monospace; font-size: 13px; font-weight: 600; color: #55526A; letter-spacing: 0.04em">GET STARTED</p>
+      <ul style="list-style: none; margin: 0 0 24px; padding: 0">
+        <li><a href="#" style="display: block; padding: 6px 12px; border-radius: 6px; color: #2C2A36; text-decoration: none">Getting started</a></li>
+        <li><a href="#" style="display: block; padding: 6px 12px; border-radius: 6px; color: #2C2A36; text-decoration: none">Migrating from 1.x</a></li>
+      </ul>
+      <p style="margin: 0 0 6px; font-family: 'IBM Plex Mono', monospace; font-size: 13px; font-weight: 600; color: #55526A; letter-spacing: 0.04em">GUIDES</p>
+      <ul style="list-style: none; margin: 0 0 24px; padding: 0">
+        <li><a href="#" aria-current="page" style="display: block; padding: 6px 12px; border-radius: 6px; color: #5A1F8F; background: #F0E7FB; text-decoration: none; font-weight: 600; box-shadow: inset 3px 0 0 #9447D6">Validation options</a></li>
+        <li><a href="#" style="display: block; padding: 6px 12px; border-radius: 6px; color: #2C2A36; text-decoration: none">Validator</a></li>
+        <li><a href="#" style="display: block; padding: 6px 12px; border-radius: 6px; color: #2C2A36; text-decoration: none">Claims</a></li>
+        <li><a href="#" style="display: block; padding: 6px 12px; border-radius: 6px; color: #2C2A36; text-decoration: none">Expiry checker</a></li>
+        <li><a href="#" style="display: block; padding: 6px 12px; border-radius: 6px; color: #2C2A36; text-decoration: none">Dictionary extensions</a></li>
+      </ul>
+      <p style="margin: 0 0 6px; font-family: 'IBM Plex Mono', monospace; font-size: 13px; font-weight: 600; color: #55526A; letter-spacing: 0.04em">MORE</p>
+      <ul style="list-style: none; margin: 0; padding: 0">
+        <li><a href="#" style="display: block; padding: 6px 12px; border-radius: 6px; color: #2C2A36; text-decoration: none">Dependency injection</a></li>
+        <li><a href="#" style="display: block; padding: 6px 12px; border-radius: 6px; color: #2C2A36; text-decoration: none">Debugging</a></li>
+        <li><a href="#" style="display: block; padding: 6px 12px; border-radius: 6px; color: #2C2A36; text-decoration: none">Known limitations</a></li>
+      </ul>
+    </nav>
+
+    <main style="flex: 999 1 560px; min-width: 0; padding: 36px 48px 72px">
+      <div style="display: flex; flex-wrap: wrap; gap: 48px">
+        <article style="flex: 999 1 520px; min-width: 0; max-width: 760px">
+          <nav aria-label="Breadcrumb" style="font-size: 15px; color: #55526A; margin-bottom: 10px"><a href="#" style="color: #55526A">Docs</a> / <a href="#" style="color: #55526A">Guides</a> / Validation options</nav>
+          <h1 style="margin: 0 0 12px; font-size: 42px; line-height: 1.15; letter-spacing: -0.02em">Validation options</h1>
+          <p style="margin: 0 0 32px; font-size: 19px; color: #55526A">Build a JWTValidatorOptions object. It says where the signing keys come from, and which parts of the token to check.</p>
+
+          <h2 style="margin: 0 0 10px; font-size: 26px; letter-spacing: -0.01em">Choose a signing key <a href="#" aria-label="Link to this section" style="font-size: 18px; color: #6E6A82; text-decoration: none">#</a></h2>
+          <p style="margin: 0 0 12px">Start with <code style="font-family: 'IBM Plex Mono', monospace; font-size: 15px; background: #F3F1F8; padding: 1px 6px; border-radius: 4px">Create()</code>, then choose one source for the key:</p>
+          <ul style="margin: 0 0 22px; padding-left: 22px">
+            <li><code style="font-family: 'IBM Plex Mono', monospace; font-size: 15px; background: #F3F1F8; padding: 1px 6px; border-radius: 4px">WithSigningKeyFromSecret(secret)</code> for a token signed with a secret.</li>
+            <li><code style="font-family: 'IBM Plex Mono', monospace; font-size: 15px; background: #F3F1F8; padding: 1px 6px; border-radius: 4px">WithSigningKeyFromOpenIdUrl(url)</code> for a token from an OpenID Connect provider.</li>
+          </ul>
+
+          <div role="note" style="background: #FDEEF3; border: 1px solid #F3C3D4; border-radius: 10px; padding: 16px 20px; margin: 0 0 28px">
+            <p style="margin: 0 0 4px; font-family: 'IBM Plex Mono', monospace; font-size: 13px; font-weight: 600; color: #A8174D">CHANGED IN 2.0.0</p>
+            <p style="margin: 0">A secret shorter than the minimum for the token's algorithm no longer validates. <a href="#">Read the migration guide</a>.</p>
+          </div>
+
+          <h3 style="margin: 0 0 8px; font-size: 20px">Minimum secret length</h3>
+          <p style="margin: 0 0 14px">The length is counted in UTF-8 bytes.</p>
+          <div style="overflow-x: auto; margin: 0 0 36px; border: 1px solid #E3E0EC; border-radius: 10px">
+            <table style="width: 100%; border-collapse: collapse; font-size: 16px">
+              <thead>
+                <tr style="text-align: left; background: #F7F6FB">
+                  <th scope="col" style="padding: 10px 16px">Algorithm</th>
+                  <th scope="col" style="padding: 10px 16px">Minimum secret length</th>
+                </tr>
+              </thead>
+              <tbody style="font-family: 'IBM Plex Mono', monospace">
+                <tr style="border-top: 1px solid #E3E0EC"><td style="padding: 10px 16px">HS256</td><td style="padding: 10px 16px">32 bytes</td></tr>
+                <tr style="border-top: 1px solid #E3E0EC"><td style="padding: 10px 16px">HS384</td><td style="padding: 10px 16px">48 bytes</td></tr>
+                <tr style="border-top: 1px solid #E3E0EC"><td style="padding: 10px 16px">HS512</td><td style="padding: 10px 16px">64 bytes</td></tr>
+              </tbody>
+            </table>
+          </div>
+
+          <h2 style="margin: 0 0 10px; font-size: 26px; letter-spacing: -0.01em">Add checks and build <a href="#" aria-label="Link to this section" style="font-size: 18px; color: #6E6A82; text-decoration: none">#</a></h2>
+          <p style="margin: 0 0 18px">Add only the checks you need. <code style="font-family: 'IBM Plex Mono', monospace; font-size: 15px; background: #F3F1F8; padding: 1px 6px; border-radius: 4px">WithExpiryDate()</code> allows a clock skew of 5 minutes.</p>
+          <figure style="margin: 0 0 36px; border: 1px solid #E3E0EC; border-radius: 10px; overflow: hidden">
+            <figcaption style="display: flex; justify-content: space-between; align-items: center; padding: 6px 6px 6px 16px; border-bottom: 1px solid #E3E0EC; background: #F7F6FB; font-family: 'IBM Plex Mono', monospace; font-size: 14px; color: #55526A">
+              An ID token from Google
+              <button type="button" style="font: inherit; font-family: 'IBM Plex Sans', sans-serif; font-size: 15px; font-weight: 600; color: #6B24B2; background: #F0E7FB; border: 0; border-radius: 6px; padding: 8px 14px; min-height: 40px; cursor: pointer">Copy</button>
+            </figcaption>
+            <pre style="margin: 0; padding: 18px 20px; overflow-x: auto; font-family: 'IBM Plex Mono', monospace; font-size: 15px; line-height: 1.7; background: #FCFBFE"><code><span class="t">JWTValidatorOptions</span> options = <span class="t">JWTValidatorOptionsBuilderCreator</span>
+    .<span class="m">Create</span>()
+    .<span class="m">WithSigningKeyFromOpenIdUrl</span>(<span class="s">"https://accounts.google.com/.well-known/openid-configuration"</span>)
+    .<span class="m">WithIssuer</span>(<span class="s">"https://accounts.google.com"</span>)
+    .<span class="m">WithAudience</span>(<span class="s">"your-client-id.apps.googleusercontent.com"</span>)
+    .<span class="m">WithExpiryDate</span>()
+    .<span class="m">Build</span>();</code></pre>
+          </figure>
+
+          <h2 style="margin: 0 0 14px; font-size: 26px; letter-spacing: -0.01em">Reference <a href="#" aria-label="Link to this section" style="font-size: 18px; color: #6E6A82; text-decoration: none">#</a></h2>
+          <section aria-labelledby="combo-ref" style="border: 1px solid #E3E0EC; border-radius: 12px; padding: 20px 22px; margin: 0 0 44px">
+            <h3 id="combo-ref" style="margin: 0 0 6px; font-family: 'IBM Plex Mono', monospace; font-size: 18px; color: #7A2DBE">WithSigningKeyFromSecret</h3>
+            <p style="margin: 0 0 14px">Uses a secret to check the signature of an HMAC-signed token.</p>
+            <pre style="margin: 0 0 16px; padding: 12px 16px; background: #F7F6FB; border-radius: 8px; overflow-x: auto; font-family: 'IBM Plex Mono', monospace; font-size: 14px"><code><span class="k">public</span> <span class="t">IJWTValidatorOptionsBuilderFinisher</span> <span class="m">WithSigningKeyFromSecret</span>(<span class="t">String</span> secret)</code></pre>
+            <dl style="margin: 0; display: grid; grid-template-columns: max-content 1fr; gap: 8px 24px; font-size: 16px">
+              <dt style="color: #55526A; font-weight: 600">Parameters</dt><dd style="margin: 0"><code style="font-family: 'IBM Plex Mono', monospace">secret</code>: the shared secret. It must not be empty.</dd>
+              <dt style="color: #55526A; font-weight: 600">Returns</dt><dd style="margin: 0">The builder, ready for checks or <code style="font-family: 'IBM Plex Mono', monospace">Build()</code>.</dd>
+              <dt style="color: #55526A; font-weight: 600">Fails when</dt><dd style="margin: 0">The secret is shorter than the minimum. Validation then fails, not the builder.</dd>
+            </dl>
+          </section>
+
+          <nav aria-label="Previous and next" style="display: flex; flex-wrap: wrap; gap: 16px; justify-content: space-between">
+            <a href="#" style="text-decoration: none; flex: 1 1 220px; padding: 14px 18px; border: 1px solid #E3E0EC; border-radius: 10px"><span style="display: block; font-size: 14px; color: #55526A">Previous</span><span style="font-weight: 600">Migrating from 1.x</span></a>
+            <a href="#" style="text-decoration: none; flex: 1 1 220px; padding: 14px 18px; border: 1px solid #E3E0EC; border-radius: 10px; text-align: right"><span style="display: block; font-size: 14px; color: #55526A">Next</span><span style="font-weight: 600">Validator</span></a>
+          </nav>
+        </article>
+
+        <nav aria-label="On this page" style="flex: 1 1 180px; max-width: 220px; font-size: 14px">
+          <p style="margin: 0 0 8px; font-weight: 600">On this page</p>
+          <ul style="list-style: none; margin: 0; padding: 0 0 0 12px; border-left: 2px solid #E3E0EC; display: flex; flex-direction: column; gap: 6px">
+            <li><a href="#" style="color: #7A2DBE; text-decoration: none; font-weight: 600">Choose a signing key</a></li>
+            <li style="padding-left: 12px"><a href="#" style="color: #55526A; text-decoration: none">Minimum secret length</a></li>
+            <li><a href="#" style="color: #55526A; text-decoration: none">Add checks and build</a></li>
+            <li><a href="#" style="color: #55526A; text-decoration: none">Reference</a></li>
+          </ul>
+        </nav>
+      </div>
+    </main>
+  </div>
+
+  <footer style="background: #F7F6FB; border-top: 1px solid #E3E0EC">
+    <div style="max-width: 1400px; margin: 0 auto; padding: 28px 32px; display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; gap: 24px; font-size: 15px">
+      <div style="display: flex; align-items: center; gap: 12px">
+        <span aria-hidden="true" style="display: flex; gap: 3px">
+          <span style="width: 7px; height: 16px; border-radius: 2px; background: #E5427A"></span>
+          <span style="width: 7px; height: 16px; border-radius: 2px; background: #9447D6"></span>
+          <span style="width: 7px; height: 16px; border-radius: 2px; background: #1C9CC9"></span>
+        </span>
+        <p style="margin: 0; color: #55526A">JWT Validator 2.0.0 · MIT licence</p>
+      </div>
+      <nav aria-label="Footer" style="display: flex; flex-wrap: wrap; gap: 8px 28px; font-weight: 600">
+        <a href="#">Library on GitHub</a>
+        <a href="#">NuGet package</a>
+        <a href="#">Site repository</a>
+        <a href="#">Licence</a>
+      </nav>
+    </div>
+  </footer>
+</div>
+</body>
+</html>

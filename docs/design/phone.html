@@ -1,0 +1,99 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Approved design: Phone</title>
+<!-- Approved design mockup. Fonts load from Google Fonts here only; the site hosts its own. -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&amp;family=IBM+Plex+Sans:wght@400;500;600;700&amp;display=swap" rel="stylesheet">
+<style>
+body{margin:0}
+a{color:#7A2DBE}a:hover{color:#5A1F8F}
+</style>
+</head>
+<body>
+<div style="width: 860px; height: 900px; box-sizing: border-box; background: #DDE2E8; display: flex; gap: 80px; font-family: 'IBM Plex Sans', system-ui, sans-serif">
+
+  <div style="width: 390px; display: flex; flex-direction: column; gap: 12px">
+    <p style="margin: 0; height: 32px; font-size: 16px; font-weight: 600; color: #1F2630">Home</p>
+    <div style="width: 390px; height: 844px; box-sizing: border-box; border-radius: 40px; border: 1px solid #C5CCD6; overflow: hidden; background: #FFFFFF; color: #1B1A22; font-size: 16px; line-height: 1.6">
+      <header style="display: flex; align-items: center; justify-content: space-between; padding: 12px 16px; border-bottom: 1px solid #E3E0EC">
+        <a href="#" style="display: flex; align-items: center; gap: 10px; text-decoration: none; color: #1B1A22">
+          <span aria-hidden="true" style="display: flex; gap: 3px">
+            <span style="width: 8px; height: 20px; border-radius: 2px; background: #E5427A"></span>
+            <span style="width: 8px; height: 20px; border-radius: 2px; background: #9447D6"></span>
+            <span style="width: 8px; height: 20px; border-radius: 2px; background: #1C9CC9"></span>
+          </span>
+          <span style="font-weight: 700; font-size: 18px">JWT Validator</span>
+        </a>
+        <button type="button" aria-label="Open menu" aria-expanded="false" style="width: 44px; height: 44px; display: grid; place-items: center; background: #FFFFFF; border: 1px solid #E3E0EC; border-radius: 8px; color: #1B1A22; cursor: pointer">
+          <svg aria-hidden="true" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M4 7h16M4 12h16M4 17h16"></path></svg>
+        </button>
+      </header>
+      <div style="background: #F7F6FB; padding: 30px 16px 24px; border-bottom: 1px solid #E3E0EC">
+        <p style="margin: 0 0 12px; display: inline-block; font-size: 13px; font-weight: 600; color: #5A1F8F; background: #F0E7FB; border-radius: 999px; padding: 3px 12px">Version 2.0.0 · .NET 10</p>
+        <h1 style="margin: 0 0 12px; font-size: 33px; line-height: 1.1; letter-spacing: -0.02em">Validate a JWT in C#, in a few readable lines.</h1>
+        <p style="margin: 0 0 20px; color: #55526A">Check the signature, issuer, audience and expiry, and get the claims back as a dictionary.</p>
+        <div style="display: flex; flex-direction: column; gap: 10px; margin-bottom: 16px">
+          <a href="#" style="background: #6B24B2; color: #FFFFFF; text-decoration: none; font-weight: 600; padding: 12px 20px; border-radius: 8px; text-align: center">Get started</a>
+          <a href="#" style="background: #FFFFFF; color: #6B24B2; text-decoration: none; font-weight: 600; padding: 12px 20px; border-radius: 8px; border: 1px solid #CDB4EE; text-align: center">Migrating from 1.x</a>
+        </div>
+        <div style="display: flex; align-items: center; gap: 10px; background: #FFFFFF; border: 1px solid #E3E0EC; border-radius: 8px; padding: 6px 6px 6px 14px">
+          <code style="font-family: 'IBM Plex Mono', monospace; font-size: 13px; flex: 1 1 auto; min-width: 0; overflow-x: auto; white-space: nowrap">dotnet add package JWTValidator</code>
+          <button type="button" style="font: inherit; font-size: 15px; font-weight: 600; color: #6B24B2; background: #F0E7FB; border: 0; border-radius: 6px; padding: 8px 12px; min-height: 44px; cursor: pointer">Copy</button>
+        </div>
+      </div>
+      <div style="padding: 20px 16px">
+        <div style="background: #FFFFFF; border: 1px solid #E3E0EC; border-radius: 12px; padding: 14px 16px; font-family: 'IBM Plex Mono', monospace; font-size: 13px; line-height: 1.7; word-break: break-all; font-weight: 500">
+          <span style="color: #C21E5A">eyJhbGciOiJIUzI1NiJ9</span><span style="color: #55526A">.</span><span style="color: #7A2DBE">eyJyb2xlIjoibWVtYmVyIiwiZXhwIjoxNzkzNDUxNjAwfQ</span><span style="color: #55526A">.</span><span style="color: #0A7398">Zm9uY3Rpb25hbGx5LWEtc2lnbmF0dXJl</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div style="width: 390px; display: flex; flex-direction: column; gap: 12px">
+    <p style="margin: 0; height: 32px; font-size: 16px; font-weight: 600; color: #1F2630">Menu open, on a docs page</p>
+    <div style="width: 390px; height: 844px; box-sizing: border-box; border-radius: 40px; border: 1px solid #C5CCD6; overflow: hidden; background: #FFFFFF; color: #1B1A22; font-size: 16px; line-height: 1.5">
+      <header style="display: flex; align-items: center; justify-content: space-between; padding: 12px 16px; border-bottom: 1px solid #E3E0EC">
+        <a href="#" style="display: flex; align-items: center; gap: 10px; text-decoration: none; color: #1B1A22">
+          <span aria-hidden="true" style="display: flex; gap: 3px">
+            <span style="width: 8px; height: 20px; border-radius: 2px; background: #E5427A"></span>
+            <span style="width: 8px; height: 20px; border-radius: 2px; background: #9447D6"></span>
+            <span style="width: 8px; height: 20px; border-radius: 2px; background: #1C9CC9"></span>
+          </span>
+          <span style="font-weight: 700; font-size: 18px">JWT Validator</span>
+        </a>
+        <button type="button" aria-label="Close menu" aria-expanded="true" style="width: 44px; height: 44px; display: grid; place-items: center; background: #F0E7FB; border: 1px solid #CDB4EE; border-radius: 8px; color: #5A1F8F; cursor: pointer">
+          <svg aria-hidden="true" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M6 6l12 12M18 6 6 18"></path></svg>
+        </button>
+      </header>
+      <nav aria-label="Menu" style="padding: 10px 16px 24px">
+        <ul style="list-style: none; margin: 0; padding: 0">
+          <li><a href="#" style="display: block; padding: 11px 12px; color: #1B1A22; text-decoration: none; font-weight: 600; border-bottom: 1px solid #EEECF4">Home</a></li>
+          <li style="border-bottom: 1px solid #EEECF4; padding-bottom: 8px">
+            <p style="margin: 0; padding: 11px 12px 4px; font-weight: 600">Docs</p>
+            <p style="margin: 6px 12px 2px; font-family: 'IBM Plex Mono', monospace; font-size: 12px; font-weight: 600; color: #55526A; letter-spacing: 0.04em">GET STARTED</p>
+            <a href="#" style="display: block; padding: 6px 12px 6px 20px; color: #2C2A36; text-decoration: none">Getting started</a>
+            <a href="#" style="display: block; padding: 6px 12px 6px 20px; color: #2C2A36; text-decoration: none">Migrating from 1.x</a>
+            <p style="margin: 8px 12px 2px; font-family: 'IBM Plex Mono', monospace; font-size: 12px; font-weight: 600; color: #55526A; letter-spacing: 0.04em">GUIDES</p>
+            <a href="#" aria-current="page" style="display: block; padding: 6px 12px 6px 20px; color: #5A1F8F; background: #F0E7FB; border-radius: 6px; text-decoration: none; font-weight: 600; box-shadow: inset 3px 0 0 #9447D6">Validation options</a>
+            <a href="#" style="display: block; padding: 6px 12px 6px 20px; color: #2C2A36; text-decoration: none">Validator</a>
+            <a href="#" style="display: block; padding: 6px 12px 6px 20px; color: #2C2A36; text-decoration: none">Claims</a>
+            <a href="#" style="display: block; padding: 6px 12px 6px 20px; color: #2C2A36; text-decoration: none">Expiry checker</a>
+            <a href="#" style="display: block; padding: 6px 12px 6px 20px; color: #2C2A36; text-decoration: none">Dictionary extensions</a>
+            <p style="margin: 8px 12px 2px; font-family: 'IBM Plex Mono', monospace; font-size: 12px; font-weight: 600; color: #55526A; letter-spacing: 0.04em">MORE</p>
+            <a href="#" style="display: block; padding: 6px 12px 6px 20px; color: #2C2A36; text-decoration: none">Dependency injection</a>
+            <a href="#" style="display: block; padding: 6px 12px 6px 20px; color: #2C2A36; text-decoration: none">Debugging</a>
+            <a href="#" style="display: block; padding: 6px 12px 6px 20px; color: #2C2A36; text-decoration: none">Known limitations</a>
+          </li>
+          <li><a href="#" style="display: block; padding: 11px 12px; color: #1B1A22; text-decoration: none; font-weight: 600; border-bottom: 1px solid #EEECF4">Versions</a></li>
+          <li><a href="#" style="display: block; padding: 11px 12px; color: #1B1A22; text-decoration: none; font-weight: 600; border-bottom: 1px solid #EEECF4">NuGet package</a></li>
+          <li><a href="#" style="display: block; padding: 11px 12px; color: #1B1A22; text-decoration: none; font-weight: 600">GitHub</a></li>
+        </ul>
+      </nav>
+    </div>
+  </div>
+</div>
+</body>
+</html>
