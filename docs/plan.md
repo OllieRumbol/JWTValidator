@@ -251,14 +251,18 @@ The approved design is stored in `docs/design/`. It is the reference for the bui
 | File | Shows |
 | --- | --- |
 | `home.png`, `home.html` | Home at 1280 px |
-| `docs-page.png`, `docs-page.html` | A docs page ("Validation options") at 1280 px |
+| `docs-page.png`, `docs-page.html` | A docs page ("Validation options") at 1280 px, with the method table before the reference blocks |
+| `migration-guide.png`, `migration-guide.html` | The migration guide at 1280 px: a summary table, then one section per change with "Affects you if" and before-and-after code |
 | `versions.png`, `versions.html` | The Versions page at 1280 px, as it looks in release 3 |
+| `not-found.png`, `not-found.html` | "Page not found" at 1280 px |
 | `phone.png`, `phone.html` | Home and the open menu at 390 px |
+| `docs-phone.png`, `docs-phone.html` | A docs page at 390 px: "On this page" as a collapsible box at the top, a table, and code that scrolls sideways |
+| `states.png`, `states.html` | Interaction states: the Copy button, keyboard focus, links, section links, tabs and the docs list |
 | `logo.png`, `logo.html` | The logo on light and dark, and the package icon at 128, 64 and 32 px |
 
 Each PNG is a screenshot of the HTML file next to it. The HTML files open in any browser and can be edited. They load their fonts from Google Fonts; the site itself hosts its fonts (section 3.5). When the design changes, update the HTML and take the screenshot again, in the same pull request as the change to this section.
 
-The mockups were made on a design canvas at https://claude.ai/artifact/HAYiod2CQbwdKc6UmHeVXB, row 4. The canvas is private to the maintainer and is a place to explore ideas. `docs/design/` is the record of what was approved. After release 2, the theme and components in code are the source of truth for the design.
+The mockups were made on a design canvas at https://claude.ai/artifact/HAYiod2CQbwdKc6UmHeVXB, rows 4 and 5. The canvas is private to the maintainer and is a place to explore ideas. `docs/design/` is the record of what was approved. After release 2, the theme and components in code are the source of truth for the design.
 
 The theme holds these values. No component uses a colour that is not in the theme (React rules, "Styling").
 
@@ -275,6 +279,12 @@ The theme holds these values. No component uses a colour that is not in the them
 | Accent text | `#C21E5A`, `#7A2DBE`, `#0A7398` | The coloured token parts and step numbers. Each is at least 4.5:1 on white. |
 | Changed note | Background `#FDEEF3`, border `#F3C3D4`, label `#A8174D` | "Changed in 2.0.0" |
 | Code | Background `#FCFBFE`. Keywords `#7A2DBE`, types `#0A7398`, strings `#A0461A`, methods `#6B4E00`, comments `#5E6573` | Every colour at least 4.5:1 on the code background |
+| Hover | Tint `#F3F1F8` behind header and docs list links. Copy button `#E4D6F7` with text `#5A1F8F`. | Pointer hover |
+| Focus ring | 2 px solid `#6B24B2` outline, 2 px offset, on `:focus-visible` | Keyboard focus on every focusable part (WCAG 2.2, 2.4.7). 8.3:1 against white. |
+| Success | Background `#E3F3E8`, text `#1F6B36` | "Copied" and "Link copied". 5.7:1. |
+| Failure | The changed note colours | "Copy failed" |
+| External links | A 14 px arrow after the text, and "leaves this site" for screen readers | Links to nuget.org and GitHub, which open in the same tab (spec 6.1.2, item 7) |
+| Section links | The "#" link after a heading shows on hover and on keyboard focus only | Spec 6.1.1, item 6 |
 | Fonts | IBM Plex Sans (400, 500, 600, 700), IBM Plex Mono (400, 500, 600) | Text and code |
 | Breakpoints | MUI defaults. Below `md` (900 px) the header links become the menu button and the docs sidebar moves into the menu. Below `lg` (1200 px) "On this page" moves to the top of the article. | Spec sections 6.1.2 and 6.1.4 |
 

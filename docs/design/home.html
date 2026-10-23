@@ -29,8 +29,8 @@ a{color:#7A2DBE}a:hover{color:#5A1F8F}
       <nav aria-label="Main" style="display: flex; flex-wrap: wrap; gap: 4px; font-weight: 500">
         <a href="#" style="color: #1B1A22; text-decoration: none; padding: 10px 14px; border-radius: 8px">Docs</a>
         <a href="#" style="color: #1B1A22; text-decoration: none; padding: 10px 14px; border-radius: 8px">Versions</a>
-        <a href="#" style="color: #1B1A22; text-decoration: none; padding: 10px 14px; border-radius: 8px">NuGet</a>
-        <a href="#" style="color: #1B1A22; text-decoration: none; padding: 10px 14px; border-radius: 8px">GitHub</a>
+        <a href="#" style="color: #1B1A22; text-decoration: none; padding: 10px 14px; border-radius: 8px">NuGet<svg aria-hidden="true" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" style="margin-left: 4px; vertical-align: -1px"><path d="M7 17 17 7M8 7h9v9"></path></svg></a>
+        <a href="#" style="color: #1B1A22; text-decoration: none; padding: 10px 14px; border-radius: 8px">GitHub<svg aria-hidden="true" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" style="margin-left: 4px; vertical-align: -1px"><path d="M7 17 17 7M8 7h9v9"></path></svg></a>
       </nav>
     </div>
   </header>
@@ -95,7 +95,7 @@ a{color:#7A2DBE}a:hover{color:#5A1F8F}
             <div><h3 style="margin: 0 0 4px; font-size: 20px">Expiry checker</h3><p style="margin: 0 0 6px; color: #55526A">Says when the token expires, in UTC, and whether it has expired.</p><a href="#" style="font-weight: 600">Expiry checker</a></div>
           </div>
           <div style="display: flex; gap: 18px">
-            <span aria-hidden="true" style="flex: 0 0 44px; height: 44px; border-radius: 10px; background: #EEEDF2; color: #3B3848; display: grid; place-items: center; font-family: 'IBM Plex Mono', monospace; font-weight: 600; font-size: 15px">04</span>
+            <span aria-hidden="true" style="flex: 0 0 44px; height: 44px; border-radius: 10px; background: #FDEEF3; color: #C21E5A; display: grid; place-items: center; font-family: 'IBM Plex Mono', monospace; font-weight: 600; font-size: 15px">04</span>
             <div><h3 style="margin: 0 0 4px; font-size: 20px">Dictionary extensions</h3><p style="margin: 0 0 6px; color: #55526A">Find a claim or a value in the result, or print it while you debug.</p><a href="#" style="font-weight: 600">Dictionary extensions</a></div>
           </div>
         </div>
@@ -104,30 +104,32 @@ a{color:#7A2DBE}a:hover{color:#5A1F8F}
 
     <section style="border-top: 1px solid #E3E0EC">
       <div style="max-width: 1160px; margin: 0 auto; padding: 72px 32px">
-        <h2 style="margin: 0 0 8px; font-size: 32px; letter-spacing: -0.02em">Validate a token signed with a secret</h2>
-        <p style="margin: 0 0 26px; color: #55526A">A complete console app. HS256 needs a secret of at least 32 bytes.</p>
+        <h2 style="margin: 0 0 8px; font-size: 32px; letter-spacing: -0.02em">Validate a token in a console app</h2>
+        <p style="margin: 0 0 26px; color: #55526A">Choose where the signing keys come from. Most apps validate an ID token from an OpenID Connect sign-in.</p>
         <figure style="margin: 0; border: 1px solid #E3E0EC; border-radius: 12px; overflow: hidden">
-          <figcaption style="display: flex; justify-content: space-between; align-items: center; padding: 6px 6px 6px 18px; border-bottom: 1px solid #E3E0EC; background: #F7F6FB; font-family: 'IBM Plex Mono', monospace; font-size: 14px; color: #55526A">
-            Program.cs
-            <button type="button" style="font: inherit; font-family: 'IBM Plex Sans', sans-serif; font-size: 15px; font-weight: 600; color: #6B24B2; background: #F0E7FB; border: 0; border-radius: 6px; padding: 8px 14px; min-height: 40px; cursor: pointer">Copy</button>
+          <figcaption style="display: flex; flex-wrap: wrap; justify-content: space-between; align-items: flex-end; gap: 8px; padding: 6px 6px 0 10px; border-bottom: 1px solid #E3E0EC; background: #F7F6FB">
+            <div role="tablist" aria-label="Signing key source" style="display: flex; gap: 4px">
+              <button type="button" role="tab" aria-selected="true" style="font: inherit; font-size: 15px; font-weight: 600; color: #5A1F8F; background: #FFFFFF; border: 1px solid #E3E0EC; border-bottom: 2px solid #6B24B2; border-radius: 8px 8px 0 0; padding: 10px 16px 9px; margin-bottom: -1px; cursor: pointer">OpenID Connect</button>
+              <button type="button" role="tab" aria-selected="false" style="font: inherit; font-size: 15px; font-weight: 500; color: #55526A; background: transparent; border: 1px solid transparent; border-radius: 8px 8px 0 0; padding: 10px 16px; cursor: pointer">Secret</button>
+            </div>
+            <button type="button" style="font: inherit; font-size: 15px; font-weight: 600; color: #6B24B2; background: #F0E7FB; border: 0; border-radius: 6px; padding: 8px 14px; min-height: 40px; margin-bottom: 6px; cursor: pointer">Copy</button>
           </figcaption>
-          <pre style="margin: 0; padding: 20px 22px; overflow-x: auto; font-family: 'IBM Plex Mono', monospace; font-size: 15px; line-height: 1.7; background: #FCFBFE"><code><span class="k">using</span> JWTValidatorService.Builder;
-<span class="k">using</span> JWTValidatorService.Extensions;
+          <pre role="tabpanel" style="margin: 0; padding: 20px 22px; overflow-x: auto; font-family: 'IBM Plex Mono', monospace; font-size: 15px; line-height: 1.7; background: #FCFBFE"><code><span class="k">using</span> JWTValidatorService.Builder;
 <span class="k">using</span> JWTValidatorService.Validator;
 
-<span class="t">String</span> jwt = Console.<span class="m">ReadLine</span>() ?? <span class="s">""</span>;
-<span class="c">// Read the secret from configuration in a real application.</span>
-<span class="t">String</span> secret = <span class="s">"a-secret-of-at-least-32-bytes-for-hs256"</span>;
+<span class="t">String</span> idToken = Console.<span class="m">ReadLine</span>() ?? <span class="s">""</span>;
 
 <span class="t">JWTValidatorOptions</span> options = <span class="t">JWTValidatorOptionsBuilderCreator</span>
     .<span class="m">Create</span>()
-    .<span class="m">WithSigningKeyFromSecret</span>(secret)
+    .<span class="m">WithSigningKeyFromOpenIdUrl</span>(<span class="s">"https://accounts.google.com/.well-known/openid-configuration"</span>)
+    .<span class="m">WithIssuer</span>(<span class="s">"https://accounts.google.com"</span>)
+    .<span class="m">WithAudience</span>(<span class="s">"your-client-id.apps.googleusercontent.com"</span>)
     .<span class="m">WithExpiryDate</span>()
     .<span class="m">Build</span>();
 
-<span class="k">if</span> (<span class="k">new</span> <span class="t">JWTValidator</span>().<span class="m">TryValidateJWT</span>(jwt, options, <span class="k">out</span> <span class="t">Dictionary</span>&lt;<span class="t">String</span>, <span class="t">List</span>&lt;<span class="t">String</span>&gt;&gt; claims))
+<span class="k">if</span> (<span class="k">new</span> <span class="t">JWTValidator</span>().<span class="m">TryValidateJWT</span>(idToken, options, <span class="k">out</span> <span class="t">Dictionary</span>&lt;<span class="t">String</span>, <span class="t">List</span>&lt;<span class="t">String</span>&gt;&gt; claims))
 {
-    <span class="t">Boolean</span> isMember = claims.<span class="m">ContainsKeyAndValue</span>(<span class="s">"role"</span>, <span class="s">"member"</span>);
+    Console.<span class="m">WriteLine</span>(<span class="s">$"Signed in as {claims["sub"][0]}"</span>);
 }</code></pre>
         </figure>
       </div>
@@ -163,10 +165,20 @@ a{color:#7A2DBE}a:hover{color:#5A1F8F}
     </section>
 
     <section>
-      <div style="max-width: 760px; margin: 0 auto; padding: 80px 32px">
-        <h2 style="margin: 0 0 16px; font-size: 30px; letter-spacing: -0.02em">Why I built this</h2>
-        <p style="margin: 0 0 14px; color: #3B3848">Over the years I have seen many developers trip up on the last step of an OAuth sign-in: validating the ID token. TokenValidationParameters, JwtSecurityTokenHandler and ClaimsPrincipal are powerful, but there is a lot to get right.</p>
-        <p style="margin: 0; color: #3B3848">I built JWT Validator so that step takes a few readable lines, whether the token is signed with a secret or by an OpenID Connect provider.</p>
+      <div style="max-width: 1160px; margin: 0 auto; padding: 80px 32px; display: flex; flex-wrap: wrap; gap: 40px 64px; align-items: flex-start">
+        <div style="flex: 0 0 260px; box-sizing: border-box; border: 1px solid #E3E0EC; border-radius: 16px; padding: 28px; background: #F7F6FB">
+          <div aria-hidden="true" style="width: 64px; height: 64px; border-radius: 50%; background: #FFFFFF; border: 1px solid #E3E0EC; display: grid; place-items: center; margin-bottom: 16px">
+            <span style="display: flex; gap: 3px"><span style="width: 8px; height: 24px; border-radius: 2px; background: #E5427A"></span><span style="width: 8px; height: 24px; border-radius: 2px; background: #9447D6"></span><span style="width: 8px; height: 24px; border-radius: 2px; background: #1C9CC9"></span></span>
+          </div>
+          <p style="margin: 0; font-weight: 700; font-size: 19px">Ollie Rumbol</p>
+          <p style="margin: 0 0 14px; color: #55526A">Author and maintainer</p>
+          <a href="#" style="font-weight: 600">GitHub profile<svg aria-hidden="true" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" style="margin-left: 4px; vertical-align: -1px"><path d="M7 17 17 7M8 7h9v9"></path></svg></a>
+        </div>
+        <div style="flex: 1 1 520px; min-width: 0; max-width: 680px">
+          <h2 style="margin: 0 0 16px; font-size: 30px; letter-spacing: -0.02em">Why I built this</h2>
+          <p style="margin: 0 0 14px; color: #3B3848">Over the years I have seen many developers trip up on the last step of an OAuth sign-in: validating the ID token. TokenValidationParameters, JwtSecurityTokenHandler and ClaimsPrincipal are powerful, but there is a lot to get right.</p>
+          <p style="margin: 0; color: #3B3848">I built JWT Validator so that step takes a few readable lines, whether the token is signed with a secret or by an OpenID Connect provider.</p>
+        </div>
       </div>
     </section>
   </main>
@@ -182,10 +194,10 @@ a{color:#7A2DBE}a:hover{color:#5A1F8F}
         <p style="margin: 0; color: #55526A">JWT Validator 2.0.0 · MIT licence</p>
       </div>
       <nav aria-label="Footer" style="display: flex; flex-wrap: wrap; gap: 8px 28px; font-weight: 600">
-        <a href="#">Library on GitHub</a>
-        <a href="#">NuGet package</a>
-        <a href="#">Site repository</a>
-        <a href="#">Licence</a>
+        <a href="#">Library on GitHub<svg aria-hidden="true" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" style="margin-left: 4px; vertical-align: -1px"><path d="M7 17 17 7M8 7h9v9"></path></svg></a>
+        <a href="#">NuGet package<svg aria-hidden="true" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" style="margin-left: 4px; vertical-align: -1px"><path d="M7 17 17 7M8 7h9v9"></path></svg></a>
+        <a href="#">Site repository<svg aria-hidden="true" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" style="margin-left: 4px; vertical-align: -1px"><path d="M7 17 17 7M8 7h9v9"></path></svg></a>
+        <a href="#">Licence<svg aria-hidden="true" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" style="margin-left: 4px; vertical-align: -1px"><path d="M7 17 17 7M8 7h9v9"></path></svg></a>
       </nav>
     </div>
   </footer>

@@ -1,0 +1,196 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Approved design: Migration guide</title>
+<!-- Approved design mockup. Fonts load from Google Fonts here only; the site hosts its own. -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&amp;family=IBM+Plex+Sans:wght@400;500;600;700&amp;display=swap" rel="stylesheet">
+<style>
+body{margin:0;background:#FFFFFF}
+a{color:#7A2DBE}a:hover{color:#5A1F8F}
+.k{color:#7A2DBE}.t{color:#0A7398}.s{color:#A0461A}.c{color:#5E6573}.m{color:#6B4E00}
+</style>
+</head>
+<body>
+<div style="background: #FFFFFF; color: #1B1A22; font-family: 'IBM Plex Sans', system-ui, sans-serif; font-size: 17px; line-height: 1.65; min-height: 100%">
+
+  <header style="border-bottom: 1px solid #E3E0EC">
+    <div style="max-width: 1400px; margin: 0 auto; padding: 14px 32px; display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 16px">
+      <a href="#" style="display: flex; align-items: center; gap: 12px; text-decoration: none; color: #1B1A22">
+        <span aria-hidden="true" style="display: flex; gap: 4px">
+          <span style="width: 10px; height: 24px; border-radius: 3px; background: #E5427A"></span>
+          <span style="width: 10px; height: 24px; border-radius: 3px; background: #9447D6"></span>
+          <span style="width: 10px; height: 24px; border-radius: 3px; background: #1C9CC9"></span>
+        </span>
+        <span style="font-weight: 700; font-size: 20px; letter-spacing: -0.01em">JWT Validator</span>
+      </a>
+      <nav aria-label="Main" style="display: flex; flex-wrap: wrap; gap: 4px; font-weight: 500">
+        <a href="#" aria-current="page" style="color: #5A1F8F; text-decoration: none; padding: 10px 14px; border-radius: 8px; background: #F0E7FB; font-weight: 600">Docs</a>
+        <a href="#" style="color: #1B1A22; text-decoration: none; padding: 10px 14px; border-radius: 8px">Versions</a>
+        <a href="#" style="color: #1B1A22; text-decoration: none; padding: 10px 14px; border-radius: 8px">NuGet<svg aria-hidden="true" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" style="margin-left: 4px; vertical-align: -1px"><path d="M7 17 17 7M8 7h9v9"></path></svg></a>
+        <a href="#" style="color: #1B1A22; text-decoration: none; padding: 10px 14px; border-radius: 8px">GitHub<svg aria-hidden="true" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" style="margin-left: 4px; vertical-align: -1px"><path d="M7 17 17 7M8 7h9v9"></path></svg></a>
+      </nav>
+    </div>
+  </header>
+
+  <div style="max-width: 1400px; margin: 0 auto; display: flex; flex-wrap: wrap">
+
+    <nav aria-label="Documentation" style="flex: 1 1 240px; max-width: 280px; padding: 36px 24px 36px 32px; border-right: 1px solid #E3E0EC; background: #FBFAFD; font-size: 15px">
+      <p style="margin: 0 0 6px; font-family: 'IBM Plex Mono', monospace; font-size: 13px; font-weight: 600; color: #55526A; letter-spacing: 0.04em">GET STARTED</p>
+      <ul style="list-style: none; margin: 0 0 24px; padding: 0">
+        <li><a href="#" style="display: block; padding: 6px 12px; border-radius: 6px; color: #2C2A36; text-decoration: none">Getting started</a></li>
+        <li><a href="#" aria-current="page" style="display: block; padding: 6px 12px; border-radius: 6px; color: #5A1F8F; background: #F0E7FB; text-decoration: none; font-weight: 600; box-shadow: inset 3px 0 0 #9447D6">Migrating from 1.x</a></li>
+      </ul>
+      <p style="margin: 0 0 6px; font-family: 'IBM Plex Mono', monospace; font-size: 13px; font-weight: 600; color: #55526A; letter-spacing: 0.04em">GUIDES</p>
+      <ul style="list-style: none; margin: 0 0 24px; padding: 0">
+        <li><a href="#" style="display: block; padding: 6px 12px; border-radius: 6px; color: #2C2A36; text-decoration: none">Validation options</a></li>
+        <li><a href="#" style="display: block; padding: 6px 12px; border-radius: 6px; color: #2C2A36; text-decoration: none">Validator</a></li>
+        <li><a href="#" style="display: block; padding: 6px 12px; border-radius: 6px; color: #2C2A36; text-decoration: none">Claims</a></li>
+        <li><a href="#" style="display: block; padding: 6px 12px; border-radius: 6px; color: #2C2A36; text-decoration: none">Expiry checker</a></li>
+        <li><a href="#" style="display: block; padding: 6px 12px; border-radius: 6px; color: #2C2A36; text-decoration: none">Dictionary extensions</a></li>
+      </ul>
+      <p style="margin: 0 0 6px; font-family: 'IBM Plex Mono', monospace; font-size: 13px; font-weight: 600; color: #55526A; letter-spacing: 0.04em">MORE</p>
+      <ul style="list-style: none; margin: 0; padding: 0">
+        <li><a href="#" style="display: block; padding: 6px 12px; border-radius: 6px; color: #2C2A36; text-decoration: none">Dependency injection</a></li>
+        <li><a href="#" style="display: block; padding: 6px 12px; border-radius: 6px; color: #2C2A36; text-decoration: none">Debugging</a></li>
+        <li><a href="#" style="display: block; padding: 6px 12px; border-radius: 6px; color: #2C2A36; text-decoration: none">Known limitations</a></li>
+      </ul>
+    </nav>
+
+    <main style="flex: 999 1 560px; min-width: 0; padding: 36px 48px 72px">
+      <div style="display: flex; flex-wrap: wrap; gap: 48px">
+        <article style="flex: 999 1 520px; min-width: 0; max-width: 820px">
+          <nav aria-label="Breadcrumb" style="font-size: 15px; color: #55526A; margin-bottom: 10px"><a href="#" style="color: #55526A">Docs</a> / <a href="#" style="color: #55526A">Get started</a> / Migrating from 1.x</nav>
+          <h1 style="margin: 0 0 12px; font-size: 42px; line-height: 1.15; letter-spacing: -0.02em">Migrating from 1.x</h1>
+          <p style="margin: 0 0 28px; font-size: 19px; color: #55526A">Version 2.0.0 renames no classes or methods. Six changes can still affect your code. Check each one before you upgrade.</p>
+
+          <h2 style="margin: 0 0 14px; font-size: 26px; letter-spacing: -0.01em">Summary of changes</h2>
+          <div style="overflow-x: auto; margin: 0 0 8px; border: 1px solid #E3E0EC; border-radius: 10px">
+            <table style="width: 100%; border-collapse: collapse; font-size: 16px">
+              <thead>
+                <tr style="text-align: left; background: #F7F6FB">
+                  <th scope="col" style="padding: 10px 14px">Change</th>
+                  <th scope="col" style="padding: 10px 14px">Affects you if</th>
+                  <th scope="col" style="padding: 10px 14px">What to do</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr style="border-top: 1px solid #E3E0EC"><td style="padding: 10px 14px; font-weight: 600; white-space: nowrap"><a href="#net-10" style="color: #1B1A22">.NET 10 only</a></td><td style="padding: 10px 14px; color: #3B3848">Your project targets .NET 9 or older.</td><td style="padding: 10px 14px; color: #3B3848">Move to .NET 10, or stay on 1.0.3.</td></tr>
+                <tr style="border-top: 1px solid #E3E0EC"><td style="padding: 10px 14px; font-weight: 600; white-space: nowrap"><a href="#minimum-secret-length" style="color: #1B1A22">Minimum secret length</a></td><td style="padding: 10px 14px; color: #3B3848">You use <code style="font-family: 'IBM Plex Mono', monospace; font-size: 15px; background: #F3F1F8; padding: 1px 6px; border-radius: 4px">WithSigningKeyFromSecret</code>.</td><td style="padding: 10px 14px; color: #3B3848">Use at least 32 bytes for HS256.</td></tr>
+                <tr style="border-top: 1px solid #E3E0EC"><td style="padding: 10px 14px; font-weight: 600; white-space: nowrap"><a href="#expiry-in-utc" style="color: #1B1A22">Expiry in UTC</a></td><td style="padding: 10px 14px; color: #3B3848">You use <code style="font-family: 'IBM Plex Mono', monospace; font-size: 15px; background: #F3F1F8; padding: 1px 6px; border-radius: 4px">WhenDoesJWTExpire</code>.</td><td style="padding: 10px 14px; color: #3B3848">Convert to local time yourself if you need it.</td></tr>
+                <tr style="border-top: 1px solid #E3E0EC"><td style="padding: 10px 14px; font-weight: 600; white-space: nowrap"><a href="#isempty" style="color: #1B1A22"><code style="font-family: 'IBM Plex Mono', monospace; font-size: 15px; background: #F3F1F8; padding: 1px 6px; border-radius: 4px">IsEmpty</code> on null</a></td><td style="padding: 10px 14px; color: #3B3848">You call it on a dictionary that can be empty or null.</td><td style="padding: 10px 14px; color: #3B3848">Check code that relied on the old result.</td></tr>
+                <tr style="border-top: 1px solid #E3E0EC"><td style="padding: 10px 14px; font-weight: 600; white-space: nowrap"><a href="#logging" style="color: #1B1A22">Logging stays off</a></td><td style="padding: 10px 14px; color: #3B3848">You read IdentityModel messages while you debug.</td><td style="padding: 10px 14px; color: #3B3848">Turn it on in your own app.</td></tr>
+                <tr style="border-top: 1px solid #E3E0EC"><td style="padding: 10px 14px; font-weight: 600; white-space: nowrap"><a href="#identitymodel-8" style="color: #1B1A22">IdentityModel 8</a></td><td style="padding: 10px 14px; color: #3B3848">Your app also uses IdentityModel packages directly.</td><td style="padding: 10px 14px; color: #3B3848">Move them to version 8 too.</td></tr>
+              </tbody>
+            </table>
+          </div>
+
+          <h2 id="net-10" style="margin: 40px 0 10px; font-size: 26px; letter-spacing: -0.01em">.NET 10 only</h2>
+          <p style="margin: 0 0 4px; font-family: 'IBM Plex Mono', monospace; font-size: 13px; font-weight: 600; color: #55526A; letter-spacing: 0.04em">AFFECTS YOU IF</p>
+          <p style="margin: 0 0 12px">Your project targets .NET 9 or older.</p>
+          <p style="margin: 0">Version 2.0.0 targets <code style="font-family: 'IBM Plex Mono', monospace; font-size: 15px; background: #F3F1F8; padding: 1px 6px; border-radius: 4px">net10.0</code> only. .NET 6, 7, 8 and 9 are no longer supported. Move your project to .NET 10, or keep using 1.0.3, which stays on nuget.org.</p>
+
+          <h2 id="minimum-secret-length" style="margin: 40px 0 10px; font-size: 26px; letter-spacing: -0.01em">Minimum secret length</h2>
+          <p style="margin: 0 0 4px; font-family: 'IBM Plex Mono', monospace; font-size: 13px; font-weight: 600; color: #55526A; letter-spacing: 0.04em">AFFECTS YOU IF</p>
+          <p style="margin: 0 0 12px">You use <code style="font-family: 'IBM Plex Mono', monospace; font-size: 15px; background: #F3F1F8; padding: 1px 6px; border-radius: 4px">WithSigningKeyFromSecret</code>.</p>
+          <p style="margin: 0 0 16px">A secret shorter than the minimum for the token's algorithm no longer validates: 32 bytes for HS256, 48 for HS384 and 64 for HS512, counted in UTF-8. <code style="font-family: 'IBM Plex Mono', monospace; font-size: 15px; background: #F3F1F8; padding: 1px 6px; border-radius: 4px">ValidateJWT</code> throws and <code style="font-family: 'IBM Plex Mono', monospace; font-size: 15px; background: #F3F1F8; padding: 1px 6px; border-radius: 4px">TryValidateJWT</code> returns false.</p>
+          <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 14px; margin: 0 0 8px">
+            <figure style="margin: 0; border: 1px solid #E3E0EC; border-radius: 10px; overflow: hidden">
+              <figcaption style="padding: 8px 16px; border-bottom: 1px solid #E3E0EC; background: #F7F6FB; font-size: 14px; font-weight: 600; color: #55526A">1.0.3</figcaption>
+              <pre style="margin: 0; padding: 14px 16px; overflow-x: auto; font-family: 'IBM Plex Mono', monospace; font-size: 14px; line-height: 1.7; background: #FCFBFE"><code>.<span class="m">WithSigningKeyFromSecret</span>(<span class="s">"my-secret"</span>)
+<span class="c">// 9 bytes: validated in 1.0.3</span></code></pre>
+            </figure>
+            <figure style="margin: 0; border: 1px solid #CDB4EE; border-radius: 10px; overflow: hidden">
+              <figcaption style="padding: 8px 16px; border-bottom: 1px solid #CDB4EE; background: #F3ECFC; font-size: 14px; font-weight: 600; color: #5A1F8F">2.0.0</figcaption>
+              <pre style="margin: 0; padding: 14px 16px; overflow-x: auto; font-family: 'IBM Plex Mono', monospace; font-size: 14px; line-height: 1.7; background: #FCFBFE"><code>.<span class="m">WithSigningKeyFromSecret</span>(secret)
+<span class="c">// At least 32 bytes for HS256,</span>
+<span class="c">// read from configuration</span></code></pre>
+            </figure>
+          </div>
+
+          <h2 id="expiry-in-utc" style="margin: 40px 0 10px; font-size: 26px; letter-spacing: -0.01em">Expiry in UTC</h2>
+          <p style="margin: 0 0 4px; font-family: 'IBM Plex Mono', monospace; font-size: 13px; font-weight: 600; color: #55526A; letter-spacing: 0.04em">AFFECTS YOU IF</p>
+          <p style="margin: 0 0 12px">You use <code style="font-family: 'IBM Plex Mono', monospace; font-size: 15px; background: #F3F1F8; padding: 1px 6px; border-radius: 4px">WhenDoesJWTExpire</code> or <code style="font-family: 'IBM Plex Mono', monospace; font-size: 15px; background: #F3F1F8; padding: 1px 6px; border-radius: 4px">HasJWTExpired</code>.</p>
+          <p style="margin: 0 0 16px"><code style="font-family: 'IBM Plex Mono', monospace; font-size: 15px; background: #F3F1F8; padding: 1px 6px; border-radius: 4px">WhenDoesJWTExpire</code> now returns UTC, not local time. <code style="font-family: 'IBM Plex Mono', monospace; font-size: 15px; background: #F3F1F8; padding: 1px 6px; border-radius: 4px">HasJWTExpired</code> now gives the correct result in every time zone.</p>
+          <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 14px; margin: 0 0 8px">
+            <figure style="margin: 0; border: 1px solid #E3E0EC; border-radius: 10px; overflow: hidden">
+              <figcaption style="padding: 8px 16px; border-bottom: 1px solid #E3E0EC; background: #F7F6FB; font-size: 14px; font-weight: 600; color: #55526A">1.0.3</figcaption>
+              <pre style="margin: 0; padding: 14px 16px; overflow-x: auto; font-family: 'IBM Plex Mono', monospace; font-size: 14px; line-height: 1.7; background: #FCFBFE"><code><span class="t">DateTime</span> expiry = checker
+    .<span class="m">WhenDoesJWTExpire</span>(jwt, secret);
+<span class="c">// Local time</span></code></pre>
+            </figure>
+            <figure style="margin: 0; border: 1px solid #CDB4EE; border-radius: 10px; overflow: hidden">
+              <figcaption style="padding: 8px 16px; border-bottom: 1px solid #CDB4EE; background: #F3ECFC; font-size: 14px; font-weight: 600; color: #5A1F8F">2.0.0</figcaption>
+              <pre style="margin: 0; padding: 14px 16px; overflow-x: auto; font-family: 'IBM Plex Mono', monospace; font-size: 14px; line-height: 1.7; background: #FCFBFE"><code><span class="t">DateTime</span> expiry = checker
+    .<span class="m">WhenDoesJWTExpire</span>(jwt, secret);
+<span class="t">DateTime</span> local = expiry.<span class="m">ToLocalTime</span>();</code></pre>
+            </figure>
+          </div>
+
+          <h2 id="isempty" style="margin: 40px 0 10px; font-size: 26px; letter-spacing: -0.01em"><code style="font-family: 'IBM Plex Mono', monospace">IsEmpty</code> on an empty or null dictionary</h2>
+          <p style="margin: 0 0 4px; font-family: 'IBM Plex Mono', monospace; font-size: 13px; font-weight: 600; color: #55526A; letter-spacing: 0.04em">AFFECTS YOU IF</p>
+          <p style="margin: 0 0 12px">You call it on a dictionary that can be empty or null.</p>
+          <p style="margin: 0">1.0.3 returned false for an empty dictionary and threw for null. 2.0.0 returns true for both.</p>
+
+          <h2 id="logging" style="margin: 40px 0 10px; font-size: 26px; letter-spacing: -0.01em">Personal-data logging stays off</h2>
+          <p style="margin: 0 0 4px; font-family: 'IBM Plex Mono', monospace; font-size: 13px; font-weight: 600; color: #55526A; letter-spacing: 0.04em">AFFECTS YOU IF</p>
+          <p style="margin: 0 0 12px">You read IdentityModel messages while you debug.</p>
+          <p style="margin: 0">The library no longer turns on personal data in IdentityModel messages. To see it while you debug, set <code style="font-family: 'IBM Plex Mono', monospace; font-size: 15px; background: #F3F1F8; padding: 1px 6px; border-radius: 4px">IdentityModelEventSource.ShowPII = true</code> in your own app. <a href="#">Debugging</a> has the details.</p>
+
+          <h2 id="identitymodel-8" style="margin: 40px 0 10px; font-size: 26px; letter-spacing: -0.01em">IdentityModel version 8</h2>
+          <p style="margin: 0 0 4px; font-family: 'IBM Plex Mono', monospace; font-size: 13px; font-weight: 600; color: #55526A; letter-spacing: 0.04em">AFFECTS YOU IF</p>
+          <p style="margin: 0 0 12px">Your app also uses the Microsoft IdentityModel packages directly.</p>
+          <p style="margin: 0">The package now depends on version 8, not version 6. Move your own references to version 8 too.</p>
+
+          <h2 id="other-changes" style="margin: 40px 0 10px; font-size: 26px; letter-spacing: -0.01em">Other changes</h2>
+          <ul style="margin: 0 0 40px; padding-left: 22px">
+            <li>With lifetime validation on, a token whose expiry is after 19 January 2038 now validates.</li>
+            <li>The dictionary extension methods no longer throw for a null dictionary, or a null value inside a list.</li>
+          </ul>
+
+          <nav aria-label="Previous and next" style="display: flex; flex-wrap: wrap; gap: 16px; justify-content: space-between">
+            <a href="#" style="text-decoration: none; flex: 1 1 220px; padding: 14px 18px; border: 1px solid #E3E0EC; border-radius: 10px"><span style="display: block; font-size: 14px; color: #55526A">Previous</span><span style="font-weight: 600">Getting started</span></a>
+            <a href="#" style="text-decoration: none; flex: 1 1 220px; padding: 14px 18px; border: 1px solid #E3E0EC; border-radius: 10px; text-align: right"><span style="display: block; font-size: 14px; color: #55526A">Next</span><span style="font-weight: 600">Validation options</span></a>
+          </nav>
+        </article>
+
+        <nav aria-label="On this page" style="flex: 1 1 180px; max-width: 220px; font-size: 14px">
+          <p style="margin: 0 0 8px; font-weight: 600">On this page</p>
+          <ul style="list-style: none; margin: 0; padding: 0 0 0 12px; border-left: 2px solid #E3E0EC; display: flex; flex-direction: column; gap: 6px">
+            <li><a href="#" style="color: #7A2DBE; text-decoration: none; font-weight: 600">Summary of changes</a></li>
+            <li><a href="#" style="color: #55526A; text-decoration: none">.NET 10 only</a></li>
+            <li><a href="#" style="color: #55526A; text-decoration: none">Minimum secret length</a></li>
+            <li><a href="#" style="color: #55526A; text-decoration: none">Expiry in UTC</a></li>
+            <li><a href="#" style="color: #55526A; text-decoration: none">IsEmpty on null</a></li>
+            <li><a href="#" style="color: #55526A; text-decoration: none">Logging stays off</a></li>
+            <li><a href="#" style="color: #55526A; text-decoration: none">IdentityModel 8</a></li>
+            <li><a href="#" style="color: #55526A; text-decoration: none">Other changes</a></li>
+          </ul>
+        </nav>
+      </div>
+    </main>
+  </div>
+
+  <footer style="background: #F7F6FB; border-top: 1px solid #E3E0EC">
+    <div style="max-width: 1400px; margin: 0 auto; padding: 28px 32px; display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; gap: 24px; font-size: 15px">
+      <div style="display: flex; align-items: center; gap: 12px">
+        <span aria-hidden="true" style="display: flex; gap: 3px">
+          <span style="width: 7px; height: 16px; border-radius: 2px; background: #E5427A"></span>
+          <span style="width: 7px; height: 16px; border-radius: 2px; background: #9447D6"></span>
+          <span style="width: 7px; height: 16px; border-radius: 2px; background: #1C9CC9"></span>
+        </span>
+        <p style="margin: 0; color: #55526A">JWT Validator 2.0.0 · MIT licence</p>
+      </div>
+      <nav aria-label="Footer" style="display: flex; flex-wrap: wrap; gap: 8px 28px; font-weight: 600">
+        <a href="#">Library on GitHub<svg aria-hidden="true" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" style="margin-left: 4px; vertical-align: -1px"><path d="M7 17 17 7M8 7h9v9"></path></svg></a>
+        <a href="#">NuGet package<svg aria-hidden="true" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" style="margin-left: 4px; vertical-align: -1px"><path d="M7 17 17 7M8 7h9v9"></path></svg></a>
+        <a href="#">Site repository<svg aria-hidden="true" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" style="margin-left: 4px; vertical-align: -1px"><path d="M7 17 17 7M8 7h9v9"></path></svg></a>
+        <a href="#">Licence<svg aria-hidden="true" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" style="margin-left: 4px; vertical-align: -1px"><path d="M7 17 17 7M8 7h9v9"></path></svg></a>
+      </nav>
+    </div>
+  </footer>
+</div>
+</body>
+</html>

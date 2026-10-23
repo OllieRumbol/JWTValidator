@@ -1,0 +1,124 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Approved design: Docs page on a phone</title>
+<!-- Approved design mockup. Fonts load from Google Fonts here only; the site hosts its own. -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&amp;family=IBM+Plex+Sans:wght@400;500;600;700&amp;display=swap" rel="stylesheet">
+<style>
+body{margin:0}
+a{color:#7A2DBE}a:hover{color:#5A1F8F}
+.k{color:#7A2DBE}.t{color:#0A7398}.s{color:#A0461A}.c{color:#5E6573}.m{color:#6B4E00}
+</style>
+</head>
+<body>
+<div style="width: 860px; height: 900px; box-sizing: border-box; background: #DDE2E8; display: flex; gap: 80px; font-family: 'IBM Plex Sans', system-ui, sans-serif">
+
+  <div style="width: 390px; display: flex; flex-direction: column; gap: 12px">
+    <p style="margin: 0; height: 32px; font-size: 16px; font-weight: 600; color: #1F2630">Docs page, top</p>
+    <div style="width: 390px; height: 844px; box-sizing: border-box; border-radius: 40px; border: 1px solid #C5CCD6; overflow: hidden; background: #FFFFFF; color: #1B1A22; font-size: 16px; line-height: 1.6">
+      <header style="display: flex; align-items: center; justify-content: space-between; padding: 12px 16px; border-bottom: 1px solid #E3E0EC">
+        <a href="#" style="display: flex; align-items: center; gap: 10px; text-decoration: none; color: #1B1A22">
+          <span aria-hidden="true" style="display: flex; gap: 3px">
+            <span style="width: 8px; height: 20px; border-radius: 2px; background: #E5427A"></span>
+            <span style="width: 8px; height: 20px; border-radius: 2px; background: #9447D6"></span>
+            <span style="width: 8px; height: 20px; border-radius: 2px; background: #1C9CC9"></span>
+          </span>
+          <span style="font-weight: 700; font-size: 18px">JWT Validator</span>
+        </a>
+        <button type="button" aria-label="Open menu" aria-expanded="false" style="width: 44px; height: 44px; display: grid; place-items: center; background: #FFFFFF; border: 1px solid #E3E0EC; border-radius: 8px; color: #1B1A22; cursor: pointer">
+          <svg aria-hidden="true" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M4 7h16M4 12h16M4 17h16"></path></svg>
+        </button>
+      </header>
+      <div style="padding: 20px 16px">
+        <nav aria-label="Breadcrumb" style="font-size: 14px; color: #55526A; margin-bottom: 8px"><a href="#" style="color: #55526A">Docs</a> / <a href="#" style="color: #55526A">Guides</a></nav>
+        <h1 style="margin: 0 0 10px; font-size: 30px; line-height: 1.15; letter-spacing: -0.02em">Validation options</h1>
+        <p style="margin: 0 0 18px; color: #55526A">Build a JWTValidatorOptions object. It says where the signing keys come from, and which parts of the token to check.</p>
+
+        <div style="border: 1px solid #E3E0EC; border-radius: 10px; margin: 0 0 22px; overflow: hidden">
+          <button type="button" aria-expanded="true" style="width: 100%; display: flex; justify-content: space-between; align-items: center; font: inherit; font-weight: 600; color: #1B1A22; background: #F7F6FB; border: 0; padding: 12px 14px; min-height: 44px; cursor: pointer">
+            On this page
+            <svg aria-hidden="true" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 15 6-6 6 6"></path></svg>
+          </button>
+          <ul style="list-style: none; margin: 0; padding: 8px 14px 12px; display: flex; flex-direction: column; gap: 2px; font-size: 15px">
+            <li><a href="#" style="display: block; padding: 6px 0; color: #7A2DBE; text-decoration: none; font-weight: 600">Choose a signing key</a></li>
+            <li><a href="#" style="display: block; padding: 6px 0 6px 14px; color: #3B3848; text-decoration: none">Minimum secret length</a></li>
+            <li><a href="#" style="display: block; padding: 6px 0; color: #3B3848; text-decoration: none">Add checks and build</a></li>
+            <li><a href="#" style="display: block; padding: 6px 0; color: #3B3848; text-decoration: none">Reference</a></li>
+          </ul>
+        </div>
+
+        <h2 style="margin: 0 0 8px; font-size: 22px; letter-spacing: -0.01em">Choose a signing key</h2>
+        <p style="margin: 0 0 10px">Start with <code style="font-family: 'IBM Plex Mono', monospace; font-size: 14px; background: #F3F1F8; padding: 1px 5px; border-radius: 4px">Create()</code>, then choose one source for the key:</p>
+        <ul style="margin: 0 0 16px; padding-left: 20px">
+          <li><code style="font-family: 'IBM Plex Mono', monospace; font-size: 14px; background: #F3F1F8; padding: 1px 5px; border-radius: 4px">WithSigningKeyFromSecret</code> for a token signed with a secret.</li>
+        </ul>
+        <div role="note" style="background: #FDEEF3; border: 1px solid #F3C3D4; border-radius: 10px; padding: 12px 14px">
+          <p style="margin: 0 0 2px; font-family: 'IBM Plex Mono', monospace; font-size: 12px; font-weight: 600; color: #A8174D">CHANGED IN 2.0.0</p>
+          <p style="margin: 0; font-size: 15px">A secret shorter than the minimum no longer validates.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div style="width: 390px; display: flex; flex-direction: column; gap: 12px">
+    <p style="margin: 0; height: 32px; font-size: 16px; font-weight: 600; color: #1F2630">Further down: a table and wide code</p>
+    <div style="width: 390px; height: 844px; box-sizing: border-box; border-radius: 40px; border: 1px solid #C5CCD6; overflow: hidden; background: #FFFFFF; color: #1B1A22; font-size: 16px; line-height: 1.6">
+      <header style="display: flex; align-items: center; justify-content: space-between; padding: 12px 16px; border-bottom: 1px solid #E3E0EC">
+        <a href="#" style="display: flex; align-items: center; gap: 10px; text-decoration: none; color: #1B1A22">
+          <span aria-hidden="true" style="display: flex; gap: 3px">
+            <span style="width: 8px; height: 20px; border-radius: 2px; background: #E5427A"></span>
+            <span style="width: 8px; height: 20px; border-radius: 2px; background: #9447D6"></span>
+            <span style="width: 8px; height: 20px; border-radius: 2px; background: #1C9CC9"></span>
+          </span>
+          <span style="font-weight: 700; font-size: 18px">JWT Validator</span>
+        </a>
+        <button type="button" aria-label="Open menu" aria-expanded="false" style="width: 44px; height: 44px; display: grid; place-items: center; background: #FFFFFF; border: 1px solid #E3E0EC; border-radius: 8px; color: #1B1A22; cursor: pointer">
+          <svg aria-hidden="true" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M4 7h16M4 12h16M4 17h16"></path></svg>
+        </button>
+      </header>
+      <div style="padding: 20px 16px">
+        <h3 style="margin: 0 0 6px; font-size: 19px">Minimum secret length</h3>
+        <p style="margin: 0 0 12px; font-size: 15px">The length is counted in UTF-8 bytes.</p>
+        <div style="overflow-x: auto; margin: 0 0 24px; border: 1px solid #E3E0EC; border-radius: 10px">
+          <table style="width: 100%; border-collapse: collapse; font-size: 15px">
+            <thead><tr style="text-align: left; background: #F7F6FB"><th scope="col" style="padding: 9px 12px">Algorithm</th><th scope="col" style="padding: 9px 12px">Minimum length</th></tr></thead>
+            <tbody style="font-family: 'IBM Plex Mono', monospace">
+              <tr style="border-top: 1px solid #E3E0EC"><td style="padding: 9px 12px">HS256</td><td style="padding: 9px 12px">32 bytes</td></tr>
+              <tr style="border-top: 1px solid #E3E0EC"><td style="padding: 9px 12px">HS384</td><td style="padding: 9px 12px">48 bytes</td></tr>
+              <tr style="border-top: 1px solid #E3E0EC"><td style="padding: 9px 12px">HS512</td><td style="padding: 9px 12px">64 bytes</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <h2 style="margin: 0 0 8px; font-size: 22px; letter-spacing: -0.01em">Add checks and build</h2>
+        <p style="margin: 0 0 12px; font-size: 15px">Long lines scroll sideways inside the box. The page does not.</p>
+        <figure style="margin: 0 0 24px; border: 1px solid #E3E0EC; border-radius: 10px; overflow: hidden">
+          <figcaption style="display: flex; justify-content: space-between; align-items: center; padding: 4px 4px 4px 12px; border-bottom: 1px solid #E3E0EC; background: #F7F6FB; font-family: 'IBM Plex Mono', monospace; font-size: 13px; color: #55526A">
+            ID token from Google
+            <button type="button" style="font: inherit; font-family: 'IBM Plex Sans', sans-serif; font-size: 15px; font-weight: 600; color: #6B24B2; background: #F0E7FB; border: 0; border-radius: 6px; padding: 8px 12px; min-height: 44px; cursor: pointer">Copy</button>
+          </figcaption>
+          <div style="position: relative">
+            <pre tabindex="0" aria-label="Code example, scrolls sideways" style="margin: 0; padding: 14px 14px 18px; overflow-x: auto; white-space: pre; font-family: 'IBM Plex Mono', monospace; font-size: 13px; line-height: 1.7; background: #FCFBFE"><code><span class="t">JWTValidatorOptions</span> options = <span class="t">JWTValidatorOptionsBuilderCreator</span>
+    .<span class="m">Create</span>()
+    .<span class="m">WithSigningKeyFromOpenIdUrl</span>(<span class="s">"https://accounts.google.com/.well-known/openid-configuration"</span>)
+    .<span class="m">WithIssuer</span>(<span class="s">"https://accounts.google.com"</span>)
+    .<span class="m">WithExpiryDate</span>()
+    .<span class="m">Build</span>();</code></pre>
+            <span aria-hidden="true" style="position: absolute; top: 0; right: 0; bottom: 0; width: 36px; background: linear-gradient(90deg, rgba(252, 251, 254, 0), #FCFBFE)"></span>
+            <span aria-hidden="true" style="position: absolute; left: 14px; right: 140px; bottom: 6px; height: 4px; border-radius: 2px; background: #CDB4EE"></span>
+          </div>
+        </figure>
+
+        <nav aria-label="Previous and next" style="display: flex; flex-direction: column; gap: 10px">
+          <a href="#" style="text-decoration: none; padding: 12px 14px; border: 1px solid #E3E0EC; border-radius: 10px"><span style="display: block; font-size: 13px; color: #55526A">Previous</span><span style="font-weight: 600">Migrating from 1.x</span></a>
+          <a href="#" style="text-decoration: none; padding: 12px 14px; border: 1px solid #E3E0EC; border-radius: 10px; text-align: right"><span style="display: block; font-size: 13px; color: #55526A">Next</span><span style="font-weight: 600">Validator</span></a>
+        </nav>
+      </div>
+    </div>
+  </div>
+</div>
+</body>
+</html>
