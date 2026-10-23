@@ -1,0 +1,173 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Approved design: Versions page</title>
+<!-- Approved design mockup. Fonts load from Google Fonts here only; the site hosts its own. -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&amp;family=IBM+Plex+Sans:wght@400;500;600;700&amp;display=swap" rel="stylesheet">
+<style>
+body{margin:0;background:#FFFFFF}
+a{color:#7A2DBE}a:hover{color:#5A1F8F}
+</style>
+</head>
+<body>
+<div style="background: #FFFFFF; color: #1B1A22; font-family: 'IBM Plex Sans', system-ui, sans-serif; font-size: 17px; line-height: 1.6; min-height: 100%">
+
+  <header style="border-bottom: 1px solid #E3E0EC">
+    <div style="max-width: 1160px; margin: 0 auto; padding: 14px 32px; display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 16px">
+      <a href="#" style="display: flex; align-items: center; gap: 12px; text-decoration: none; color: #1B1A22">
+        <span aria-hidden="true" style="display: flex; gap: 4px">
+          <span style="width: 10px; height: 24px; border-radius: 3px; background: #E5427A"></span>
+          <span style="width: 10px; height: 24px; border-radius: 3px; background: #9447D6"></span>
+          <span style="width: 10px; height: 24px; border-radius: 3px; background: #1C9CC9"></span>
+        </span>
+        <span style="font-weight: 700; font-size: 20px; letter-spacing: -0.01em">JWT Validator</span>
+      </a>
+      <nav aria-label="Main" style="display: flex; flex-wrap: wrap; gap: 4px; font-weight: 500">
+        <a href="#" style="color: #1B1A22; text-decoration: none; padding: 10px 14px; border-radius: 8px">Docs</a>
+        <a href="#" aria-current="page" style="color: #5A1F8F; text-decoration: none; padding: 10px 14px; border-radius: 8px; background: #F0E7FB; font-weight: 600">Versions</a>
+        <a href="#" style="color: #1B1A22; text-decoration: none; padding: 10px 14px; border-radius: 8px">NuGet</a>
+        <a href="#" style="color: #1B1A22; text-decoration: none; padding: 10px 14px; border-radius: 8px">GitHub</a>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <section style="background: #F7F6FB; border-bottom: 1px solid #E3E0EC">
+      <div style="max-width: 1160px; margin: 0 auto; padding: 56px 32px 48px">
+        <h1 style="margin: 0 0 10px; font-size: 44px; line-height: 1.1; letter-spacing: -0.03em">Versions</h1>
+        <p style="margin: 0 0 22px; font-size: 19px; color: #55526A; max-width: 40em">Every released version of the JWTValidator package, newest first. Each one is on nuget.org.</p>
+        <div style="display: flex; flex-wrap: wrap; gap: 10px 20px; font-size: 14px; color: #3B3848">
+          <span style="display: flex; align-items: center; gap: 8px"><span style="font-weight: 600; color: #FFFFFF; background: #6B24B2; border-radius: 999px; padding: 1px 10px">Latest</span>The version to install</span>
+          <span style="display: flex; align-items: center; gap: 8px"><span style="font-weight: 600; color: #3B3848; background: #EEEDF2; border-radius: 999px; padding: 1px 10px">Previous</span>Still on nuget.org</span>
+          <span style="display: flex; align-items: center; gap: 8px"><span style="font-weight: 600; color: #A8174D; background: #FDEEF3; border-radius: 999px; padding: 1px 10px">Unlisted</span>Hidden from search on nuget.org</span>
+        </div>
+      </div>
+    </section>
+
+    <div style="max-width: 1160px; margin: 0 auto; padding: 48px 32px 80px">
+      <ol style="list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 28px">
+
+        <li>
+          <article aria-labelledby="v200" style="display: flex; flex-wrap: wrap; gap: 20px 40px">
+            <div style="flex: 1 1 200px; max-width: 240px">
+              <h2 id="v200" style="margin: 0 0 4px; font-family: 'IBM Plex Mono', monospace; font-size: 30px; font-weight: 600; letter-spacing: -0.02em">2.0.0</h2>
+              <p style="margin: 0 0 10px; color: #55526A">[Release date]</p>
+              <span style="display: inline-block; font-size: 14px; font-weight: 600; color: #FFFFFF; background: #6B24B2; border-radius: 999px; padding: 1px 10px">Latest</span>
+            </div>
+            <div style="flex: 999 1 520px; min-width: 0; border: 1px solid #CDB4EE; border-radius: 14px; padding: 26px 28px; box-shadow: 0 8px 24px rgba(27, 26, 34, 0.06)">
+              <p style="margin: 0 0 18px; font-size: 19px">Brings the library up to date for .NET 10. No class or method names changed, but six changes can affect your code.</p>
+              <h3 style="margin: 0 0 8px; font-family: 'IBM Plex Mono', monospace; font-size: 13px; font-weight: 600; color: #A8174D; letter-spacing: 0.04em">BREAKING CHANGES</h3>
+              <ul style="margin: 0 0 18px; padding-left: 22px">
+                <li>.NET 10 only. .NET 6, 7, 8 and 9 are no longer supported.</li>
+                <li>A secret shorter than the minimum for the token's algorithm no longer validates: 32 bytes for HS256, 48 for HS384 and 64 for HS512.</li>
+                <li><code style="font-family: 'IBM Plex Mono', monospace; font-size: 15px">WhenDoesJWTExpire</code> returns UTC, not local time. <code style="font-family: 'IBM Plex Mono', monospace; font-size: 15px">HasJWTExpired</code> is correct in every time zone.</li>
+                <li><code style="font-family: 'IBM Plex Mono', monospace; font-size: 15px">IsEmpty</code> returns true for an empty or null dictionary.</li>
+                <li>The library no longer turns on personal-data logging.</li>
+                <li>Depends on version 8 of the Microsoft IdentityModel packages, not version 6.</li>
+              </ul>
+              <h3 style="margin: 0 0 8px; font-family: 'IBM Plex Mono', monospace; font-size: 13px; font-weight: 600; color: #55526A; letter-spacing: 0.04em">OTHER CHANGES</h3>
+              <ul style="margin: 0 0 22px; padding-left: 22px">
+                <li>With lifetime validation on, a token whose expiry is after 19 January 2038 now validates.</li>
+                <li>The dictionary extension methods no longer throw for a null dictionary, or a null value inside a list.</li>
+              </ul>
+              <a href="#" style="display: inline-block; background: #6B24B2; color: #FFFFFF; text-decoration: none; font-weight: 600; padding: 11px 22px; border-radius: 8px">Read the migration guide</a>
+            </div>
+          </article>
+        </li>
+
+        <li>
+          <article aria-labelledby="v103" style="display: flex; flex-wrap: wrap; gap: 20px 40px">
+            <div style="flex: 1 1 200px; max-width: 240px">
+              <h2 id="v103" style="margin: 0 0 4px; font-family: 'IBM Plex Mono', monospace; font-size: 30px; font-weight: 600; letter-spacing: -0.02em">1.0.3</h2>
+              <p style="margin: 0 0 10px; color: #55526A">8 November 2022</p>
+              <span style="display: inline-block; font-size: 14px; font-weight: 600; color: #3B3848; background: #EEEDF2; border-radius: 999px; padding: 1px 10px">Previous</span>
+            </div>
+            <div style="flex: 999 1 520px; min-width: 0; border: 1px solid #E3E0EC; border-radius: 14px; padding: 24px 28px">
+              <p style="margin: 0 0 12px; font-size: 18px">Added the expiry checker: find out whether a token has expired, and when it expires.</p>
+              <ul style="margin: 0; padding-left: 22px; color: #3B3848">
+                <li>New <code style="font-family: 'IBM Plex Mono', monospace; font-size: 15px">JWTExpiryChecker</code> class, with <code style="font-family: 'IBM Plex Mono', monospace; font-size: 15px">HasJWTExpired</code> and <code style="font-family: 'IBM Plex Mono', monospace; font-size: 15px">WhenDoesJWTExpire</code> and their <code style="font-family: 'IBM Plex Mono', monospace; font-size: 15px">Try</code> versions.</li>
+                <li>Parameter checks across the library.</li>
+              </ul>
+            </div>
+          </article>
+        </li>
+
+        <li>
+          <article aria-labelledby="v102" style="display: flex; flex-wrap: wrap; gap: 20px 40px">
+            <div style="flex: 1 1 200px; max-width: 240px">
+              <h2 id="v102" style="margin: 0 0 4px; font-family: 'IBM Plex Mono', monospace; font-size: 30px; font-weight: 600; letter-spacing: -0.02em">1.0.2</h2>
+              <p style="margin: 0 0 10px; color: #55526A">19 September 2022</p>
+              <span style="display: inline-block; font-size: 14px; font-weight: 600; color: #3B3848; background: #EEEDF2; border-radius: 999px; padding: 1px 10px">Previous</span>
+            </div>
+            <div style="flex: 999 1 520px; min-width: 0; border: 1px solid #E3E0EC; border-radius: 14px; padding: 24px 28px">
+              <p style="margin: 0 0 12px; font-size: 18px">Made the options builder strict and nested.</p>
+              <ul style="margin: 0; padding-left: 22px; color: #3B3848">
+                <li>The builder's methods must be called in a set order.</li>
+                <li>You give either a secret or an OpenID URL, not both.</li>
+                <li><code style="font-family: 'IBM Plex Mono', monospace; font-size: 15px">JWTValidatorOptions</code> can only be made by the builder.</li>
+              </ul>
+            </div>
+          </article>
+        </li>
+
+        <li>
+          <article aria-labelledby="v101" style="display: flex; flex-wrap: wrap; gap: 20px 40px">
+            <div style="flex: 1 1 200px; max-width: 240px">
+              <h2 id="v101" style="margin: 0 0 4px; font-family: 'IBM Plex Mono', monospace; font-size: 30px; font-weight: 600; letter-spacing: -0.02em">1.0.1</h2>
+              <p style="margin: 0 0 10px; color: #55526A">10 September 2022</p>
+              <span style="display: inline-block; font-size: 14px; font-weight: 600; color: #3B3848; background: #EEEDF2; border-radius: 999px; padding: 1px 10px">Previous</span>
+            </div>
+            <div style="flex: 999 1 520px; min-width: 0; border: 1px solid #E3E0EC; border-radius: 14px; padding: 24px 28px">
+              <p style="margin: 0 0 12px; font-size: 18px">Fixed the package so it installs correctly.</p>
+              <ul style="margin: 0; padding-left: 22px; color: #3B3848">
+                <li>Moved the models into the main project, so the package's dependencies resolve on every machine.</li>
+              </ul>
+            </div>
+          </article>
+        </li>
+
+        <li>
+          <article aria-labelledby="v100" style="display: flex; flex-wrap: wrap; gap: 20px 40px">
+            <div style="flex: 1 1 200px; max-width: 240px">
+              <h2 id="v100" style="margin: 0 0 4px; font-family: 'IBM Plex Mono', monospace; font-size: 30px; font-weight: 600; letter-spacing: -0.02em; color: #55526A">1.0.0</h2>
+              <p style="margin: 0 0 10px; color: #55526A">2022</p>
+              <span style="display: inline-block; font-size: 14px; font-weight: 600; color: #A8174D; background: #FDEEF3; border-radius: 999px; padding: 1px 10px">Unlisted</span>
+            </div>
+            <div style="flex: 999 1 520px; min-width: 0; border: 1px dashed #D5D1E0; border-radius: 14px; padding: 24px 28px; background: #FCFBFE">
+              <p style="margin: 0 0 12px; font-size: 18px">The first version. Replaced by 1.0.1 the next day, because its dependencies did not install correctly.</p>
+              <ul style="margin: 0; padding-left: 22px; color: #3B3848">
+                <li>The options builder, to choose what to validate.</li>
+                <li><code style="font-family: 'IBM Plex Mono', monospace; font-size: 15px">TryValidateJWT</code>, which returns the claims as a dictionary.</li>
+                <li>Extension methods for the claims dictionary.</li>
+              </ul>
+            </div>
+          </article>
+        </li>
+      </ol>
+    </div>
+  </main>
+
+  <footer style="background: #F7F6FB; border-top: 1px solid #E3E0EC">
+    <div style="max-width: 1160px; margin: 0 auto; padding: 40px 32px; display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; gap: 24px; font-size: 16px">
+      <div style="display: flex; align-items: center; gap: 12px">
+        <span aria-hidden="true" style="display: flex; gap: 3px">
+          <span style="width: 7px; height: 16px; border-radius: 2px; background: #E5427A"></span>
+          <span style="width: 7px; height: 16px; border-radius: 2px; background: #9447D6"></span>
+          <span style="width: 7px; height: 16px; border-radius: 2px; background: #1C9CC9"></span>
+        </span>
+        <p style="margin: 0; color: #55526A">JWT Validator 2.0.0 · MIT licence</p>
+      </div>
+      <nav aria-label="Footer" style="display: flex; flex-wrap: wrap; gap: 8px 28px; font-weight: 600">
+        <a href="#">Library on GitHub</a>
+        <a href="#">NuGet package</a>
+        <a href="#">Site repository</a>
+        <a href="#">Licence</a>
+      </nav>
+    </div>
+  </footer>
+</div>
+</body>
+</html>

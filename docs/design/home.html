@@ -134,21 +134,31 @@ a{color:#7A2DBE}a:hover{color:#5A1F8F}
     </section>
 
     <section style="padding: 0 32px">
-      <div style="max-width: 1096px; margin: 0 auto; background: #F3ECFC; border-radius: 16px; padding: 44px 48px; display: flex; flex-wrap: wrap; gap: 40px">
-        <div style="flex: 1 1 280px; min-width: 0">
+      <div style="max-width: 1096px; margin: 0 auto; background: #F3ECFC; border-radius: 16px; padding: 40px 44px; display: flex; flex-wrap: wrap; gap: 32px 48px">
+        <div style="flex: 1 1 260px; min-width: 0">
           <p style="margin: 0 0 8px; font-family: 'IBM Plex Mono', monospace; font-size: 14px; font-weight: 600; color: #C21E5A">New in 2.0.0</p>
-          <h2 style="margin: 0 0 12px; font-size: 30px; letter-spacing: -0.02em">Same names. Safer behaviour.</h2>
-          <p style="margin: 0 0 20px; color: #4A4660">Version 2.0.0 renames nothing, but six changes can affect your code.</p>
+          <h2 style="margin: 0 0 12px; font-size: 30px; line-height: 1.2; letter-spacing: -0.02em">Same names. Safer behaviour.</h2>
+          <p style="margin: 0 0 20px; color: #4A4660">Six changes can affect your code. Here is what to do about each.</p>
           <a href="#" style="display: inline-block; background: #6B24B2; color: #FFFFFF; text-decoration: none; font-weight: 600; padding: 11px 22px; border-radius: 8px">Read the migration guide</a>
         </div>
-        <ul style="flex: 2 1 480px; min-width: 0; margin: 0; padding-left: 22px; display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 10px 32px">
-          <li>.NET 10 only.</li>
-          <li>Secrets must meet the minimum length.</li>
-          <li>Expiry times are in UTC.</li>
-          <li><code style="font-family: 'IBM Plex Mono', monospace; font-size: 15px">IsEmpty</code> is true for a null dictionary.</li>
-          <li>Personal-data logging stays off.</li>
-          <li>Depends on IdentityModel version 8.</li>
-        </ul>
+        <div style="flex: 2 1 560px; min-width: 0; overflow-x: auto; background: #FFFFFF; border-radius: 12px">
+          <table style="width: 100%; border-collapse: collapse; font-size: 16px">
+            <thead>
+              <tr style="text-align: left; border-bottom: 1px solid #E3E0EC">
+                <th scope="col" style="padding: 12px 18px">Change</th>
+                <th scope="col" style="padding: 12px 18px">What to do</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr style="border-bottom: 1px solid #EEECF4"><td style="padding: 10px 18px; font-weight: 600">.NET 10 only</td><td style="padding: 10px 18px; color: #3B3848">Move to .NET 10, or stay on 1.0.3.</td></tr>
+              <tr style="border-bottom: 1px solid #EEECF4"><td style="padding: 10px 18px; font-weight: 600">Minimum secret length</td><td style="padding: 10px 18px; color: #3B3848">Use at least 32 bytes for HS256.</td></tr>
+              <tr style="border-bottom: 1px solid #EEECF4"><td style="padding: 10px 18px; font-weight: 600">Expiry in UTC</td><td style="padding: 10px 18px; color: #3B3848">Convert to local time yourself if you need it.</td></tr>
+              <tr style="border-bottom: 1px solid #EEECF4"><td style="padding: 10px 18px; font-weight: 600"><code style="font-family: 'IBM Plex Mono', monospace; font-size: 15px">IsEmpty</code> on null</td><td style="padding: 10px 18px; color: #3B3848">Check code that relied on the old result.</td></tr>
+              <tr style="border-bottom: 1px solid #EEECF4"><td style="padding: 10px 18px; font-weight: 600">Logging stays off</td><td style="padding: 10px 18px; color: #3B3848">Turn it on in your own app while you debug.</td></tr>
+              <tr><td style="padding: 10px 18px; font-weight: 600">IdentityModel 8</td><td style="padding: 10px 18px; color: #3B3848">Align any IdentityModel packages you use directly.</td></tr>
+            </tbody>
+          </table>
+        </div>
       </div>
     </section>
 

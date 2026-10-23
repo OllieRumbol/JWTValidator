@@ -252,6 +252,7 @@ The approved design is stored in `docs/design/`. It is the reference for the bui
 | --- | --- |
 | `home.png`, `home.html` | Home at 1280 px |
 | `docs-page.png`, `docs-page.html` | A docs page ("Validation options") at 1280 px |
+| `versions.png`, `versions.html` | The Versions page at 1280 px, as it looks in release 3 |
 | `phone.png`, `phone.html` | Home and the open menu at 390 px |
 | `logo.png`, `logo.html` | The logo on light and dark, and the package icon at 128, 64 and 32 px |
 
