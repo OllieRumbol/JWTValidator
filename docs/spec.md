@@ -3,7 +3,7 @@
 > **What this document is for:** It answers *what are we building, and why?* It is agreed before any design or code, and it is the source of truth for requirements.
 
 Status: Approved
-Last updated: 2026-10-22
+Last updated: 2026-10-23
 
 ---
 
@@ -54,7 +54,7 @@ This project brings the site up to date for version 2.0.0 of the library, and ma
 3. Every page works on a screen 320 pixels wide, and every page and menu item can be reached on a touch screen.
 4. The site meets the performance targets in section 6.6.2.
 5. The site meets WCAG 2.2 level AA.
-6. Every package the site depends on is at its latest stable version when the packages are upgraded, and no package has a known vulnerability at each release.
+6. Every package the site depends on is at its latest stable version when the packages are upgraded, except where section 6.1.12, item 1 allows it, and no package has a known vulnerability at each release.
 7. Every pull request is built and checked automatically. A merge into `main` deploys the site with no manual steps and no long-lived personal token.
 8. The site has a new visual design, which the maintainer approves from mockups before it is built.
 9. The spelling, grammar and wording of every page are checked once the final design and content are in place.
@@ -285,7 +285,7 @@ This project brings the site up to date for version 2.0.0 of the library, and ma
 
 #### 6.1.12 Dependencies
 
-1. Every package SHALL be at its latest stable version when the packages are upgraded in release 1.
+1. Every package SHALL be at its latest stable version when the packages are upgraded in release 1, unless that version is incompatible with another package the site uses. The plan SHALL record each exception and its reason.
 2. At each release, the package audit SHALL report no known vulnerabilities.
 3. The site SHALL NOT use an interface that its packages report as deprecated.
 
@@ -420,6 +420,8 @@ The visual design comes from mockups that the maintainer approves (section 3, go
 
 None. Two questions were raised and answered on 2026-10-22: the spelling standard (section 6.1.8, item 4) and the publish date of 1.0.0 (section 2). The changelog shows the year only for 1.0.0 (section 6.1.6, item 2).
 
+On 2026-10-23, with the plan's approval, section 6.1.12, item 1 was changed to allow a package to stay below its latest version when the latest is incompatible with another package. The plan records each exception.
+
 ---
 
 ## 8. Assumptions
@@ -447,7 +449,7 @@ None. Two questions were raised and answered on 2026-10-22: the spelling standar
 * No page scrolls sideways at 320 pixels. Wide code examples and tables scroll inside their own box.
 * Every section of a documentation page can be opened from its own address.
 * The site loads nothing from another host and sets no cookies.
-* Every package was at its latest stable version when upgraded, and the package audit reports no known vulnerabilities at each release.
+* Every package was at its latest stable version when upgraded, or is a recorded exception (section 6.1.12, item 1), and the package audit reports no known vulnerabilities at each release.
 * Every pull request into `main` or `release/*` runs the checks in section 6.1.11, item 1, and cannot merge until they pass.
 * A merge into `main` deploys the site without a personal token.
 * The repository has the README in section 6.1.11, item 7, and an MIT licence. It tracks no build output and no copy of the source.
