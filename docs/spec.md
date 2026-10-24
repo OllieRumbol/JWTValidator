@@ -3,7 +3,7 @@
 > **What this document is for:** It answers *what are we building, and why?* It is agreed before any design or code, and it is the source of truth for requirements.
 
 Status: Approved
-Last updated: 2026-10-23
+Last updated: 2026-10-24
 
 ---
 
@@ -170,7 +170,7 @@ This project brings the site up to date for version 2.0.0 of the library, and ma
 3. The six addresses in section 6.2.1 that exist today SHALL keep working. Each SHALL show the same page, or the page that replaces it.
 4. WHEN the reader opens a page from a link, the page SHALL start at the top.
 5. WHEN the reader selects a link to a section of the current page, the page SHALL scroll to that section.
-6. Each section of a documentation page SHALL have its own address. Opening that address SHALL show the page, scrolled to the section, so a reader can share a link to one section.
+6. Each section of a documentation page SHALL have its own address. Opening that address SHALL show the page, scrolled to the section, so a reader can share a link to one section. Each section heading SHALL have a link to that address, shown on hover and on keyboard focus. Selecting the link SHALL copy the address to the clipboard and show "Link copied". WHEN the copy fails, the link SHALL still open the address, so the reader can copy it from the address bar.
 7. The browser's Back and Forward buttons SHALL move between the pages the reader visited.
 8. WHEN the address does not match a page, the site SHALL show the "Page not found" page, with a link to Home.
 9. Each page SHALL have its own title in the browser tab, in the form `<page name> — JWT Validator`. Home SHALL use `JWT Validator`.
@@ -199,7 +199,7 @@ This project brings the site up to date for version 2.0.0 of the library, and ma
    | Claims | The shape of the claims dictionary: claim names as in the token, every value a string, arrays, numbers, booleans, nested objects, `null`, and the times `exp`, `nbf` and `iat`. |
    | Expiry checker | `HasJWTExpired`, `TryHasJWTExpired`, `WhenDoesJWTExpire` and `TryGetWhenDoesJWTExpire`, each with a secret and with an OpenID URL. Times are in UTC. |
    | Dictionary extensions | `Print`, `ContainsKeyAndValue`, `ContainsValueInList` and `IsEmpty`, including their result for a `null` or empty dictionary. |
-   | Dependency injection | The interfaces `IJWTValidator` and `IJWTExpiryChecker`, and the `JWTExpiryChecker` constructor that takes an `IJWTValidator`. |
+   | Dependency injection | The public interface `IJWTValidator`, and the `JWTExpiryChecker` constructor that takes an `IJWTValidator`, with an example that registers them in a dependency injection container. `IJWTExpiryChecker` is internal to the library, so readers cannot use it, and it is not documented. |
    | Debugging | How an application turns on personal data in IdentityModel messages itself. |
    | Migration from 1.x | Each change in section 2, and what a reader must do about it. |
    | Known limitations | The process-wide claim type map that each validation clears, and the OpenID configuration that is downloaded synchronously on every call. |
@@ -207,8 +207,9 @@ This project brings the site up to date for version 2.0.0 of the library, and ma
 3. Each public method SHALL be documented with a summary, its signatures, its parameters, its return value, and when it throws or returns `false`.
 4. WHEN a method's behaviour changed in 2.0.0, its documentation SHALL include a "Changed in 2.0.0" note that links to the migration guide. This applies at least to `WhenDoesJWTExpire`, `HasJWTExpired`, `IsEmpty`, `Print`, `ContainsKeyAndValue`, `ContainsValueInList` and `WithSigningKeyFromSecret`.
 5. Every fact SHALL agree with the library README and the package release notes at tag `v2.0.0`. Where the site gives more detail, it SHALL NOT contradict them. Each topic is checked against them, one by one.
-6. Every C# example SHALL compile against version 2.0.0 when placed in a .NET 10 console application with the package installed. Examples MAY use placeholder values, for example `"your-client-id"`. Before 2.0.0 is released, the examples are compiled against the library source on the library's `main` branch. After the release, they are compiled again against the package.
+6. Every C# example SHALL compile when placed in a .NET 10 console application with the package installed. Before 2.0.0 is released, the examples SHALL compile against a pre-release of 2.0.0. After the release, they SHALL compile against 2.0.0. Examples MAY use placeholder values, for example `"your-client-id"`. A dependency injection example MAY also reference `Microsoft.Extensions.DependencyInjection`, and no example may reference any other package.
 7. Every example that uses a secret SHALL use a secret long enough for its algorithm (section 2).
+8. Snippets that are not C#, such as project file XML and shell commands, are not compiled. Each SHALL be labelled with its language.
 
 #### 6.1.4 Documentation layout
 
@@ -237,7 +238,7 @@ This project brings the site up to date for version 2.0.0 of the library, and ma
 #### 6.1.7 Home page
 
 1. Home SHALL say what the library does, in one or two sentences.
-2. Home SHALL show the install command and a short example that compiles (section 6.1.3, item 6).
+2. Home SHALL show the install command and a short example that compiles (section 6.1.3, item 6), in two versions: a token from an OpenID Connect provider, shown first because it is the library's main use, and a token signed with a secret. The reader SHALL switch between them with tabs that work with the mouse, touch and the keyboard, including the arrow keys.
 3. Home SHALL describe the four parts of the library: the options builder, the validator, the expiry checker and the dictionary extensions. Each SHALL link to its documentation.
 4. Home SHALL say what is new in the latest version, and link to the migration guide.
 5. Home SHALL have one personal section about why the library was built.
@@ -285,7 +286,7 @@ This project brings the site up to date for version 2.0.0 of the library, and ma
 
 #### 6.1.12 Dependencies
 
-1. Every package SHALL be at its latest stable version when the packages are upgraded in release 1, unless that version is incompatible with another package the site uses. The plan SHALL record each exception and its reason.
+1. Every package SHALL be at its latest stable version when the packages are upgraded in release 1, unless that version is incompatible with another package the site uses. Each exception SHALL be recorded with its reason.
 2. At each release, the package audit SHALL report no known vulnerabilities.
 3. The site SHALL NOT use an interface that its packages report as deprecated.
 
@@ -302,6 +303,7 @@ This project brings the site up to date for version 2.0.0 of the library, and ma
 | `#/documentation/validator` | The documentation for the validator |
 | `#/documentation/expiry` | The documentation for the expiry checker |
 | `#/documentation/dictionary` | The documentation for the dictionary extensions |
+| `#/docs` | The first documentation page in reading order |
 | `#/no-such-page` | "Page not found", with a link to Home |
 
 #### 6.2.2 Navigation
@@ -314,6 +316,8 @@ This project brings the site up to date for version 2.0.0 of the library, and ma
 | Versions, after moving there from Home | Select Back | Home |
 | A 375-pixel screen, menu closed | Select the menu button, then Versions | The panel closes. Versions is shown, at the top. |
 | A 375-pixel screen, menu open | Press Escape | The panel closes. Focus is on the menu button. |
+| A documentation page | Select the link beside a section heading | The clipboard holds the section's address. "Link copied" shows. |
+| Home, "OpenID Connect" example shown, focus on its tab | Press the right arrow key | The "Secret" tab is selected and has focus. The secret example shows. |
 
 #### 6.2.3 Code examples
 
@@ -338,7 +342,7 @@ This project brings the site up to date for version 2.0.0 of the library, and ma
 
 | Item | Today | Limit (section 6.6.2) | Result today |
 | --- | --- | --- | --- |
-| Script, compressed with gzip | 426 KB | 300 KB | Fails |
+| JavaScript for the first load of Home, compressed with gzip | 426 KB | 300 KB | Fails |
 | Largest image | 15.6 MB | 200 KB | Fails |
 | Total for the first load of Home | More than 1.8 MB | 500 KB | Fails |
 
@@ -353,7 +357,12 @@ This project brings the site up to date for version 2.0.0 of the library, and ma
 
 ### 6.5 User interface
 
-The site has no forms, no sign-in and no data that loads after the page. So pages have no loading, empty or error states, except the "Page not found" page and the copy failure message.
+The site has no forms, no sign-in and no data that loads after the page. So pages have no loading, empty or error states, except the "Page not found" page and the copy failure messages.
+
+If the build splits the site into parts that load when a page is opened:
+
+1. A part that takes longer than half a second to load SHALL show a loading message.
+2. A part that fails to load, for example because a new version was deployed meanwhile, SHALL show a message with a link that reloads the page.
 
 | Page | Purpose | Reader actions |
 | --- | --- | --- |
@@ -378,9 +387,9 @@ The visual design comes from mockups that the maintainer approves (section 3, go
 #### 6.6.2 Performance
 
 1. Lighthouse SHALL give Home and the longest documentation page a mobile performance score of at least 90.
-2. The script SHALL be at most 300 KB, compressed with gzip.
+2. The JavaScript that the first load of any page downloads SHALL be at most 300 KB in total, compressed with gzip. When the script is split into several files, the files that page loads count together.
 3. Each image SHALL be at most 200 KB.
-4. The first load of any page SHALL transfer at most 500 KB in total.
+4. The first load of any page SHALL transfer at most 500 KB in total, counted as the bytes sent over the network, after compression.
 5. The pipeline SHALL check items 2 and 3 on every pull request. Lighthouse runs by hand at the end of each release.
 
 #### 6.6.3 Browsers and screens
@@ -420,7 +429,15 @@ The visual design comes from mockups that the maintainer approves (section 3, go
 
 None. Two questions were raised and answered on 2026-10-22: the spelling standard (section 6.1.8, item 4) and the publish date of 1.0.0 (section 2). The changelog shows the year only for 1.0.0 (section 6.1.6, item 2).
 
-On 2026-10-23, with the plan's approval, section 6.1.12, item 1 was changed to allow a package to stay below its latest version when the latest is incompatible with another package. The plan records each exception.
+On 2026-10-23, with the plan's approval, section 6.1.12, item 1 was changed to allow a package to stay below its latest version when the latest is incompatible with another package. Each exception is recorded with its reason.
+
+On 2026-10-24, after the planning review, the maintainer approved these changes:
+
+* Section 6.1.3: `IJWTExpiryChecker` is internal to the library, so it is not documented. Examples compile against a pre-release of 2.0.0 before the release. A dependency injection example may reference `Microsoft.Extensions.DependencyInjection`. Snippets that are not C# are labelled and not compiled.
+* Sections 6.1.1, item 6 and 6.1.7, item 2: the section link copies its address, and the Home example has OpenID Connect and secret tabs, as the approved design shows.
+* Section 6.5: loading and failure messages, if the site is split into parts.
+* Section 6.6.2: how the script size and the transfer size are measured.
+* Section 6.2: worked examples for `#/docs`, the section link and the tabs.
 
 ---
 
