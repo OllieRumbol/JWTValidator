@@ -3,7 +3,7 @@
 > **What this document is for:** It answers *how will we build it?* It turns the approved requirements in spec.md into a design, and it is agreed before any code is written.
 
 Status: Approved
-Last updated: 2026-10-23
+Last updated: 2026-10-24
 
 ---
 
@@ -54,9 +54,11 @@ The site has no secrets and no environment-specific settings.
 | Site address | `https://ollierumbol.github.io/JWTValidator/` | `index.html` | Used in the Open Graph tags, which need absolute addresses. |
 | Library and repository links | nuget.org package page, library repository, site repository, licence | `src/content/links.ts` | One place for every external link. |
 | Latest library version | From the newest entry in `src/content/versions.ts` | Computed | The footer reads it (spec section 6.1.2, item 6). It is never typed twice. |
-| Node version | 24 (the current LTS, "Krypton") | `package.json` `engines`, `.nvmrc` and the workflows | Local and pipeline builds use the same major version. |
-| Package version for the examples | `2.0.0-beta.1`, then `2.0.0` | `examples/Directory.Build.props` | Section 3.5, "Example compilation". |
-| Size limits | Script 300 KB gzipped, each image 200 KB, first load 500 KB | `scripts/check-size.mjs` and the end-to-end tests | The numbers in spec section 6.6.2. |
+| Node version | 24, the current LTS ("Krypton") | `.nvmrc` only. `package.json` `engines` says `>=24`, and the workflows read `.nvmrc` with `node-version-file`. | One place for the version. Node 26 is expected to become LTS at about the end of October 2026; moving to it is a one-line change, checked at each release. |
+| Package version for the examples | A pre-release of 2.0.0 (`2.0.0-beta.1`), then `2.0.0` | `examples/Directory.Build.props` | Section 3.5, "Example compilation". |
+| Size limits | As spec section 6.6.2 sets them | `scripts/check-size.mjs` and the end-to-end tests | How each is measured: section 7.2, tests 13 and 14. |
+| Path alias | `@/` for `src/` | `vite.config.ts` and `tsconfig.json` | Absolute imports, as the React rules require. |
+| Type-checked files | `src/`, `e2e/`, `scripts/` and `vite.config.ts` | `tsconfig.json`, plus `tsconfig.node.json` for the files that run in Node | Every TypeScript file is checked, not only the app. |
 
 ---
 
@@ -66,28 +68,36 @@ The site has no secrets and no environment-specific settings.
 
 ```
 index.html                    Page shell: title, description, Open Graph tags,
-                              content security policy, noscript message
+                              noscript message. The build adds the content
+                              security policy (section 3.5).
 public/                       favicon.ico, og-image.png (1200 x 630)
 src/main.tsx                  Starts React
 src/app/
   router.tsx                  Every route, including the old addresses
   theme.ts                    MUI theme: colours, fonts, spacing, shapes
   RootLayout.tsx              Header, footer, scroll restoration, <Outlet />
-src/components/
-  SiteHeader.tsx              Logo, header links, menu button below the md breakpoint
-  MobileMenu.tsx              Drawer with every header link and the docs list
-  SiteFooter.tsx              Footer links and latest version
-  Logo.tsx                    The three bars and the name
-  CodeBlock.tsx               Highlighted C#, caption, scrolls sideways, CopyButton
-  CopyButton.tsx              Clipboard copy, success and failure messages
-  ChangedNote.tsx             "Changed in 2.0.0" note with a link to the migration guide
-  MethodReference.tsx         Summary, signatures, parameters, returns, failures
-  SectionHeading.tsx          Heading with an id and a "link to this section" link
-  ScrollTable.tsx             A table inside a box that scrolls sideways
-  docs/DocsLayout.tsx         Sidebar, article, "On this page", previous and next
-  docs/DocsNav.tsx            The grouped list of docs pages (sidebar and menu)
-  docs/OnThisPage.tsx         The page's own sections
-  docs/PrevNextLinks.tsx      Reading-order links
+src/components/               One folder per shared component, <Name>/<Name>.tsx,
+                              with its tests beside it (React rules)
+  SiteHeader/                 Logo, header links, menu button below the md breakpoint
+  MobileMenu/                 Drawer with every header link and the docs list
+  SiteFooter/                 Footer links and latest version
+  Logo/                       The three bars and the name
+  ExternalLink/               A link to another site, with the arrow and the
+                              "leaves this site" text for screen readers
+  CodeBlock/                  Highlighted code, caption, scrolls sideways, CopyButton
+  CopyButton/                 Clipboard copy, success and failure messages
+  ExampleTabs/                Tabs that switch between code examples (Home)
+  ChangedNote/                "Changed in 2.0.0" note with a link to the migration guide
+  MethodReference/            Summary, signatures, parameters, returns, failures
+  MethodTable/                The table of a page's methods, linking to each reference
+  SectionHeading/             Heading with an id and a section link that copies
+                              its address
+  ScrollTable/                A table inside a box that scrolls sideways
+  RouteFallback/              Loading and failed-to-load messages for split pages
+  DocsLayout/                 Sidebar, article, "On this page", previous and next
+  DocsNav/                    The grouped list of docs pages (sidebar and menu)
+  OnThisPage/                 The page's own sections, collapsible on a phone
+  PrevNextLinks/              Reading-order links
 src/pages/
   home/                       HomePage and its sections, TokenDiagram
   docs/<slug>/                One folder per docs page (section 3.4)
@@ -103,9 +113,13 @@ src/hooks/
 examples/
   *.cs                        Every C# example, as a complete program
   Directory.Build.props       Package version for the examples
-  build-examples.ps1|.sh      Compiles each example in its own console project
+  build-examples.ps1          Compiles each example in its own console project.
+                              PowerShell, which runs on the pipeline's Ubuntu
+                              runners and on Windows.
 scripts/
-  check-size.mjs              Size limits on the build output
+  check-size.mjs              Size limits on the build output (section 7.2, test 14)
+  csp.ts                      Vite plugin that adds the content security policy
+                              to the built index.html only
 e2e/                          End-to-end tests (section 7)
 .github/workflows/
   ci.yml                      Checks on every pull request
@@ -126,7 +140,7 @@ Routes, defined in `src/app/router.tsx` with a hash router and a root layout:
 | Path | Page |
 | --- | --- |
 | `/` | Home |
-| `/docs` | Redirect to `/docs/getting-started` |
+| `/docs` | Redirect to the first page in `docsPages`. That is `getting-started` from release 3, and `validation-options` in release 2, before Getting started exists. |
 | `/docs/:slug` | The docs page for `slug`, or "Page not found" when the slug is unknown |
 | `/docs/:slug/:section` | The same page, scrolled to the element with id `section` |
 | `/versions` | Versions |
@@ -144,12 +158,18 @@ Main component contracts:
 type CodeBlockProps = {
   code: string;          // Exact text. CopyButton copies this, without line numbers.
   caption?: string;      // For example "Program.cs"
-  language?: "csharp" | "shell";
+  language?: "csharp" | "xml" | "shell";   // Default "csharp". The label shows the language.
 };
 
 type CopyButtonProps = {
   text: string;
   label?: string;        // Accessible name, default "Copy code"
+};
+
+type ExampleTabsProps = {
+  label: string;         // Accessible name of the tab list, for example "Signing key source"
+  examples: { id: string; title: string; code: string; caption?: string }[];
+                         // The first example is selected when the page opens
 };
 
 type ChangedNoteProps = {
@@ -162,6 +182,12 @@ type SectionHeadingProps = {
   children: React.ReactNode;
 };
 ```
+
+Only `csharp` examples come from `examples/` and are compiled. `xml` and `shell` snippets are written in the page and are not compiled (spec section 6.1.3, item 8).
+
+`SectionHeading`'s section link is a real link to the section address. Selecting it copies the full address and shows "Link copied" in the same way as `CopyButton`. When the clipboard rejects the write, the link opens the address as a normal link (spec section 6.1.1, item 6). The link shows on hover and on keyboard focus (section 3.6).
+
+`ExampleTabs` uses MUI's `Tabs`, which follows the ARIA tabs pattern: the arrow keys move between tabs, and each tab panel is labelled by its tab (spec section 6.1.7, item 2).
 
 Every docs page uses `DocsLayout`, which reads the page's metadata from `docsPages.ts` and its sections from the `SectionHeading` ids the page declares.
 
@@ -228,13 +254,15 @@ The docs pages, in reading order:
 | Fonts | IBM Plex Sans and IBM Plex Mono, from the `@fontsource` packages, Latin subset, only the weights in use | The approved design. Bundled with the site, so nothing loads from another host (spec section 6.6.4, item 2). `font-display: swap` shows text before the font arrives. | Google Fonts, which is another host. |
 | Syntax highlighting | `react-syntax-highlighter`, light build, C# grammar only, with a theme from the design colours | The existing package. Loading one grammar keeps the script small (spec section 6.6.2, item 2). | Highlighting every language, as today. A new highlighting package. |
 | Copy | The browser Clipboard API, with a polite live region for the result | No package needed. The live region announces "Copied" or the failure to screen readers (spec section 6.1.5, items 4 and 5). | A copy library. |
-| Example compilation | Every C# example is `examples/<name>.cs`, a complete console program. The site imports the file text with Vite's `?raw` import. The pipeline builds each file in its own temporary console project that references the `JWTValidator` package at the version in `examples/Directory.Build.props`. | The shown code is the compiled code (spec section 6.1.3, item 6). `2.0.0-beta.1` has the same API as 2.0.0 and is on nuget.org before 2.0.0, so the examples can be checked while release 3 is built. The version moves to `2.0.0` when it is released. | Examples as strings, checked by hand. A project reference to a local clone of the library. |
+| Example compilation | Every C# example is `examples/<name>.cs`, a complete console program. The site imports the file text with Vite's `?raw` import. `examples/build-examples.ps1` builds each file in its own temporary .NET 10 console project that references the `JWTValidator` package at the version in `examples/Directory.Build.props`. A file whose name starts with `di-` also gets `Microsoft.Extensions.DependencyInjection`. The script passes when the folder has no `.cs` files. | The shown code is the compiled code (spec section 6.1.3, items 6 and 8). `2.0.0-beta.1` is a pre-release of 2.0.0 with the same API, and is on nuget.org before 2.0.0, so the examples can be checked while release 3 is built. The version moves to `2.0.0` when it is released. One PowerShell script runs on the pipeline and on Windows, so there are not two scripts to keep in step. | Examples as strings, checked by hand. A project reference to a local clone of the library. A Bash and a PowerShell script side by side. |
 | Images | Release 1: each current image converted once to WebP under 200 KB, with a one-off `sharp-cli` command. Release 2: the photos are removed, because the design has none. | Spec section 6.1.10, releases 1 and 2. The conversion is one command, so little work is lost when release 2 removes the photos. | Keeping the JPGs until release 2. An image plugin in the build, which release 2 would make unused. |
 | Shared-link preview | Site-wide tags in `index.html`, with a 1200 x 630 PNG of the logo and name | Search engines and link previews read only `index.html` (spec section 6.1.9). | Tags per page, which a hash-routed site cannot serve. |
-| Content security policy | A `<meta http-equiv="Content-Security-Policy">` tag that allows only the site's own origin for scripts, fonts, images and connections, and inline styles for Emotion | Makes the browser block any load from another host, which enforces spec section 6.6.4, item 2. GitHub Pages cannot set response headers, so a meta tag is the only way. | No policy. |
+| Content security policy | A `<meta http-equiv="Content-Security-Policy">` tag that allows only the site's own origin for scripts, fonts, images and connections, and inline styles for Emotion. `scripts/csp.ts` adds it to the built `index.html` only, so `npm run dev`, which needs an inline refresh script, keeps working. Vite's `assetsInlineLimit` is `0`, so no asset becomes a `data:` address that the policy would block. | Makes the browser block any load from another host, which enforces spec section 6.6.4, item 2. GitHub Pages cannot set response headers, so a meta tag is the only way. | No policy. A policy in dev too, which would need `'unsafe-inline'` for scripts. |
+| Split pages | Lazy routes only if the size check needs them. A lazy page uses `RouteFallback`: a loading message after 0.5 seconds, and, when its file fails to load, a message with a link that reloads the page. | Spec section 6.5. A file can disappear when a new version is deployed while a reader has the site open. | Splitting every page by default. |
+| Example tabs and section links | `ExampleTabs` on MUI's `Tabs`. The section link copies with the same Clipboard code as `CopyButton`. | The approved design (section 3.6) and spec sections 6.1.1, item 6 and 6.1.7, item 2. | Custom tab code. |
 | Reduced motion | A global rule that removes transitions and animations when the reader asks for reduced motion | Spec section 6.7. One rule covers MUI's transitions and the site's own. | Changing each MUI transition in the theme. |
 | No JavaScript | A `<noscript>` message in `index.html` | Spec section 6.7. | — |
-| Deployment | GitHub's Pages actions: build, upload the artifact, deploy | No personal token and no `gh-pages` branch (spec section 6.1.11, items 3 to 5). The workflow gets only `pages: write` and `id-token: write`. | The current push to `gh-pages`. |
+| Deployment | GitHub's Pages actions: build, upload the artifact, deploy. Runs on every push to `main`, and by hand (`workflow_dispatch`) to deploy `main` again. One deploy at a time (`concurrency`), as GitHub's Pages starter workflow does. To roll back, revert the bad change in a pull request into `main`, which deploys the reverted site. | No personal token and no `gh-pages` branch (spec section 6.1.11, items 3 to 5). The workflow gets only `pages: write` and `id-token: write`. A rollback goes through the same checks as any change. | The current push to `gh-pages`. Deploying an old build by hand. |
 | Package audit | `npm audit` in the pipeline. It fails pull requests into `main` and only reports on pull requests into `release/*`. | Spec section 6.1.12, item 2 applies at each release, which is a merge into `main`. A new advisory then does not block unrelated task work. | Failing every pull request. Checking by hand. |
 
 A significant decision gets an ADR. These two get one each, because they have long-term effects and are easy to "improve" away:
@@ -328,7 +356,7 @@ The site collects nothing at run time (spec section 6.6.4, item 1).
 | Old secrets | After the first deploy with the Pages actions works, the maintainer deletes the `TOKEN`, `EMAIL` and `USERNAME` secrets, and the `gh-pages` branch. |
 | Third-party actions | GitHub's own `actions/*` only. Playwright and .NET come from their official set-up steps and npm, not from community actions. Each action is pinned to its current major version. |
 | Requests to other hosts | None. Enforced by the content security policy (section 3.5) and tested (section 7, test 13). |
-| Cookies and storage | None. |
+| Cookies and storage | No cookies (spec section 6.6.4, item 1), tested in section 7, test 13. React Router's `ScrollRestoration` keeps scroll positions in the browser's `sessionStorage` for the open tab. It holds no personal data and is gone when the tab closes. |
 | Rendering of HTML | The site renders only its own content. No HTML from another source is inserted. |
 | Branch protection | As spec section 4. The required checks are added as section 8 describes. |
 
@@ -342,7 +370,11 @@ The site collects nothing at run time (spec section 6.6.4, item 1).
 * **End-to-end tests** use Playwright in Chromium against the built site (`vite preview`). They prove the browser behaviour in spec sections 6.2.1 to 6.2.3 and 6.6. The accessibility check uses `@axe-core/playwright`, so colour contrast is checked with real styles. A simulated browser cannot check contrast.
 * **Content data** is plain TypeScript, tested without rendering.
 * **Not automated:** Lighthouse scores, the keyboard walkthrough, the browser check (spec section 6.6.3, item 3), the fact check against the library README, and the wording check. They are done by hand for each release and recorded in the release pull request.
-* Accessibility tests start in release 2 (spec section 6.1.10, item 6). Size limits apply from release 1.
+* Accessibility tests start in release 2 (spec section 6.1.10, item 6). Tests 10 and 11 are added with the first redesigned part, the header and menu, and each later task adds its page to them. Accessibility problems are found in the task that causes them, not at the end. Size limits apply from release 1.
+* **Sizes** are measured as spec section 6.6.2 defines them:
+  * Test 14 reads Vite's build manifest. For each route, it adds up the gzipped size of every JavaScript file that the route loads on first load.
+  * Test 13 adds up the bytes each response sent over the network, from Playwright's `request.sizes()`. `vite preview` may not compress responses as GitHub Pages does, so test 13 gzips each text response itself when the server did not.
+* A Lighthouse mobile run on Home and the longest docs page is part of the size task in release 1, not only the release checks. The score of 90 is tight for a site drawn in the browser, so a problem is found early.
 * A test that a change breaks is fixed or updated with that change, never skipped.
 
 ### 7.2 Tests
@@ -356,14 +388,19 @@ The site collects nothing at run time (spec section 6.6.4, item 1).
 | 5 | Every docs slug is unique, every page has a group, and previous and next follow the reading order with no gaps | Data | 6.1.4 item 4 | Broken or circular previous and next links. |
 | 6 | Each page sets its tab title in the form `<page name> — JWT Validator`, and Home sets `JWT Validator` | Component | 6.1.1 item 9 | Missing or repeated titles. |
 | 7 | The footer shows the newest version from the versions data | Component | 6.1.2 item 6 | A version number typed in two places. |
-| 8 | Every address in spec section 6.2.1 gives the page in that table | End-to-end | 6.1.1 items 2, 3, 8; 6.2.1 | Broken bookmarks. Blank page for unknown addresses. |
-| 9 | Every row of spec section 6.2.2: start at the top, section link, shared section link, Back, phone menu, Escape | End-to-end | 6.1.1 items 4 to 7; 6.2.2 | The kept scroll position (spec section 4.1, item 9). |
+| 8 | Every address in spec section 6.2.1, including `#/docs`, gives the page in that table | End-to-end | 6.1.1 items 2, 3, 8; 6.2.1 | Broken bookmarks. Blank page for unknown addresses. A docs link that lands on "Page not found". |
+| 9 | Every row of spec section 6.2.2: start at the top, section link, shared section link, Back, phone menu, Escape, copying a section link, and the example tabs with the arrow keys | End-to-end | 6.1.1 items 4 to 7; 6.1.7 item 2; 6.2.2 | The kept scroll position (spec section 4.1, item 9). Tabs that the keyboard cannot reach. |
 | 10 | At 320 px, no page is wider than the screen, and wide code and tables scroll inside their box | End-to-end | 6.6.3 item 2; 6.2.3 | The clipped example (spec section 4.1, item 4). Sideways page scroll. |
 | 11 | At 320 px and 1280 px, every page has no accessibility violations | End-to-end | 6.6.1 item 2 | Low contrast, missing names, invalid structure (spec section 4.1, item 11). |
 | 12 | With JavaScript off, the page shows the noscript message | End-to-end | 6.7 | A blank page. |
-| 13 | Loading each page makes no request to another host, and transfers at most 500 KB | End-to-end | 6.6.4 item 2; 6.6.2 item 4 | A font, image or script from another host. Size growth. |
-| 14 | The script is at most 300 KB gzipped and each image at most 200 KB | Script, `scripts/check-size.mjs` | 6.6.2 items 2, 3, 5 | The 1.3 MB script and the 15.6 MB image (spec section 4.1, items 2 and 3). |
-| 15 | Every file in `examples/` compiles against the package version in `examples/Directory.Build.props` | Script, .NET | 6.1.3 items 6, 7 | Examples that do not compile (spec section 4.1, item 5). |
+| 13 | Loading each page makes no request to another host, transfers at most 500 KB, and sets no cookies | End-to-end | 6.6.4 items 1, 2; 6.6.2 item 4 | A font, image or script from another host. Size growth. A cookie from a package. |
+| 14 | For each route, the JavaScript loaded on first load is at most 300 KB gzipped, and each image is at most 200 KB | Script, `scripts/check-size.mjs` | 6.6.2 items 2, 3, 5 | The 1.3 MB script and the 15.6 MB image (spec section 4.1, items 2 and 3). |
+| 15 | Every file in `examples/` compiles against the package version in `examples/Directory.Build.props`, and the script passes when there are none | Script, .NET | 6.1.3 items 6, 7 | Examples that do not compile (spec section 4.1, item 5). |
+| 16 | The section link copies the section's full address and shows "Link copied", and opens the address when the clipboard rejects the write | Component | 6.1.1 item 6 | A link that copies the wrong address, or does nothing on failure. |
+| 17 | The example tabs show the OpenID Connect example first, switch with the mouse and the arrow keys, and copy the shown example | Component | 6.1.7 item 2 | The wrong default tab. Copying the hidden example. |
+| 18 | With reduced motion asked for, opening the menu has no transition | End-to-end | 6.7 | Animations that ignore the reader's setting. |
+| 19 | The built `index.html` has the site description, and the Open Graph title, description, image and address, and the image file exists | End-to-end | 6.1.9 | A broken link preview. |
+| 20 | When a split page's file fails to load, the page shows the reload message (only if lazy routes are used) | Component | 6.5 | A blank page after a new deploy. |
 
 ---
 
@@ -371,23 +408,30 @@ The site collects nothing at run time (spec section 6.6.4, item 1).
 
 **Hosting.** GitHub Pages, as spec section 5.1 requires. Public repository, so hosting and Actions minutes are free (spec section 6.6.5). No Azure resources.
 
-**Pages source.** The maintainer changes the repository's Pages source from the `gh-pages` branch to "GitHub Actions" before the first deploy with `deploy.yml`. The live site keeps the last `gh-pages` version until that deploy finishes.
+**Pages source.** The maintainer changes the repository's Pages source from the `gh-pages` branch to "GitHub Actions" just before the first deploy with `deploy.yml`. Whether the old site stays up in between is not documented, so the maintainer checks the live site straight after that deploy (section 9).
 
 **`ci.yml`** runs on every pull request into `main` or `release/**`, and on pushes to those branches:
 
 | Job | Steps |
 | --- | --- |
-| `build` | Set up Node 24 with the npm cache. `npm ci`. Type check. Lint. Prettier check. Component tests. Build. Size check (test 14). `npm audit`: failing for pull requests into `main`, reporting only for `release/**`. Upload the `dist` folder for the next job. |
+| `build` | Set up Node from `.nvmrc` with the npm cache. `npm ci`. Type check. Lint. Prettier check. Component tests. Build. Size check (test 14). `npm audit`: failing for pull requests into `main`, reporting only for `release/**`. Upload the `dist` folder for the next job. |
 | `e2e` | Needs `build`. Download `dist`. Install Playwright's Chromium. Serve `dist` with `vite preview`. Run the end-to-end tests. Upload the report when a test fails. |
-| `examples` | Set up .NET 10. Run `examples/build-examples` on every `.cs` file. Passes when the folder has no examples yet. |
+| `examples` | Set up .NET 10. Run `pwsh examples/build-examples.ps1`. The script exists from the task that adds `ci.yml`, and passes when the folder has no `.cs` files yet. |
 
-**`deploy.yml`** runs on every push to `main`: build, upload the Pages artifact, deploy. Only the deploy job has the Pages permissions.
+**`deploy.yml`** runs on every push to `main`, and by hand with `workflow_dispatch`: build, upload the Pages artifact, deploy. Only the deploy job has the Pages permissions. `concurrency` lets one deploy run at a time. To roll back, revert the change in a pull request into `main`.
 
-**Required checks.** When `ci.yml` exists on `main`, the maintainer adds `build`, `e2e` and `examples` to both rulesets ("Protect main" and "Protect release branches").
+**Required checks.** A required check must report on every pull request into its branch, or no pull request can merge. So:
+
+1. When `ci.yml` is merged into `release/phase-1-foundation`, the maintainer adds `build`, `e2e` and `examples` to "Protect release branches".
+2. When release 1 is merged into `main`, `ci.yml` is on `main`, and the maintainer adds the same checks to "Protect main".
+
+Until then, pull requests into `main`, such as planning changes, merge without checks, as they do today.
 
 **Branches and releases.** Each release in spec section 6.1.10 has a release branch from `main`: `release/phase-1-foundation`, `release/phase-2-redesign` and `release/phase-3-content`. Task branches start from the release branch and merge into it. When the maintainer approves a release, one pull request merges the release branch into `main`, which deploys it. The release pull request records the manual checks in section 7.1. `release/phase-3-content` merges only after 2.0.0 is listed on nuget.org (spec section 6.1.10, item 2).
 
-**Cleanup in release 1.** Removed: `dist/`, `examples/dist/`, `.babelrc`, `webpack.config.js`, the Babel 6 and webpack packages, `file-loader`, `gh-pages`, the unused font package, `peerDependencies`, `main` and the `transpile` and `prepublishOnly` scripts in `package.json`. The `examples/` folder name is reused for the C# examples (section 3.5).
+**Planning changes during a phase.** A change to `docs/spec.md` or `docs/plan.md` goes into `main` by pull request, as before. Straight after it merges, a pull request merges `main` into the open release branch, so task sessions read the current documents. Ticks in `docs/tasks.md` are made on the release branch and reach `main` with the release.
+
+**Cleanup in release 1.** The first task removes `dist/` and `examples/dist/`, because Vite builds into `dist/` and the 2022 files would be mixed with new build output. The same task adds `dist/`, `playwright-report/` and `test-results/` to `.gitignore`, and moves `favicon.ico` to `public/`. Later in release 1: `.babelrc`, `webpack.config.js`, the Babel 6 and webpack packages, `file-loader`, `gh-pages`, the unused font package, `peerDependencies`, `main`, and the `transpile` and `prepublishOnly` scripts in `package.json`. The `examples/` folder name is reused for the C# examples (section 3.5).
 
 ---
 
@@ -396,10 +440,12 @@ The site collects nothing at run time (spec section 6.6.4, item 1).
 | Risk | Likelihood | Mitigation |
 | --- | --- | --- |
 | TypeScript stays on 6.0 while `typescript-eslint` does not support 7, so the project falls behind the latest version. | Certain | Recorded as the exception in section 3.5, as spec section 6.1.12, item 1 allows. Check at each release whether `typescript-eslint` supports 7, and move when it does. |
-| MUI, Emotion, React and the router together exceed the 300 KB script limit. | Low | Load each page's code only when it is opened (lazy routes). Import MUI components by path. Test 14 shows the size on every pull request. |
+| MUI, Emotion, React and the router together exceed the 300 KB script limit. | Low | Load each page's code only when it is opened (lazy routes, with the states in section 3.5). Import MUI components by path. Test 14 shows the size on every pull request. |
 | Fonts push the first load past 500 KB. | Low | Latin subset and only the weights in use, about 20 KB each. Test 13 measures the total. |
 | React Router 8 or MUI 9 changed an API this plan relies on, for example the hash router in data mode or `ScrollRestoration`. | Medium | Release 1's router and MUI upgrades confirm each API before release 2 builds on it. A change goes back into this plan for approval. |
-| The React plugin for Vite 8 needs extra packages for the React Compiler. | Medium | Install what the plugin's documentation lists at the time. Record the packages in the README. |
+| The React plugin for Vite 8 needs extra packages for the React Compiler. | Medium | Install what the plugin's documentation lists at the time. The README lists them. |
+| The Lighthouse mobile score of 90 is hard to reach for a site drawn in the browser, with up to 300 KB of script. | Medium | Run Lighthouse in the release 1 size task, not only at the release. If it falls short, split pages (section 3.5), and keep the hero free of large images, as the design already is. |
+| Node 26 becomes the LTS during the project. | Medium | The version is in `.nvmrc` only. Check at each release, and move in a small task when the packages support it. |
 | 2.0.0 or its beta is released later than planned. | Medium | Releases 1 and 2 do not depend on it. Release 3's examples build against `2.0.0-beta.1` until 2.0.0 exists. Release 3 waits (spec section 6.1.10, item 2). |
 | Playwright's browser download makes the pipeline slow. | Low | Install Chromium only. Cache it between runs. |
 | Switching the Pages source causes a short outage. | Low | Switch just before the first `deploy.yml` run, and check the live site straight after. |
