@@ -3,7 +3,7 @@
 > **What this document is for:** It answers *what are we building, and why?* It is agreed before any design or code, and it is the source of truth for requirements.
 
 Status: Approved
-Last updated: 2026-10-24
+Last updated: 2026-10-25
 
 ---
 
@@ -94,7 +94,7 @@ This project brings the site up to date for version 2.0.0 of the library, and ma
 3. **The script is large.**
    The production script is 1.33 MB, or 426 KB compressed with gzip.
 4. **A code example is clipped.**
-   `src/components/home/CodeSnippet.tsx:13`. The example grows to its longest line and is centred, so both sides are cut off and the line numbers are hidden.
+   `src/components/home/CodeSnippet.tsx:14`. The `<Typography>` around the example has no width, so the example grows to its longest line and is centred, so both sides are cut off and the line numbers are hidden.
 5. **Examples that are wrong or do not compile.**
    * `src/components/home/CodeSnippet.tsx:34` calls `DictionaryContainsKeyAndValue`, which does not exist. The method is `ContainsKeyAndValue`.
    * Every example uses the secret `"serguhvalhoier....."`, which is 19 characters. It fails in 2.0.0.
@@ -429,7 +429,7 @@ The visual design comes from mockups that the maintainer approves (section 3, go
 
 None. Two questions were raised and answered on 2026-10-22: the spelling standard (section 6.1.8, item 4) and the publish date of 1.0.0 (section 2). The changelog shows the year only for 1.0.0 (section 6.1.6, item 2).
 
-On 2026-10-23, with the plan's approval, section 6.1.12, item 1 was changed to allow a package to stay below its latest version when the latest is incompatible with another package. Each exception is recorded with its reason.
+On 2026-10-23, section 6.1.12, item 1 was changed to allow a package to stay below its latest version when the latest is incompatible with another package. Each exception is recorded with its reason.
 
 On 2026-10-24, after the planning review, the maintainer approved these changes:
 
@@ -462,7 +462,7 @@ On 2026-10-24, after the planning review, the maintainer approved these changes:
 * The Versions page matches section 6.2.4, and lists no unreleased version.
 * The automated accessibility check finds no violations on any page. Lighthouse gives the four pages in section 6.6.1, item 3 an accessibility score of 100. The keyboard check passes.
 * Home and the longest documentation page have a Lighthouse mobile performance score of at least 90.
-* The script is at most 300 KB gzipped, each image is at most 200 KB, and the first load of any page is at most 500 KB.
+* The JavaScript that the first load of any page downloads is at most 300 KB in total, gzipped. Each image is at most 200 KB. The first load of any page transfers at most 500 KB.
 * No page scrolls sideways at 320 pixels. Wide code examples and tables scroll inside their own box.
 * Every section of a documentation page can be opened from its own address.
 * The site loads nothing from another host and sets no cookies.

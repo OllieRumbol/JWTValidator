@@ -3,7 +3,7 @@
 > **What this document is for:** It answers *how will we build it?* It turns the approved requirements in spec.md into a design, and it is agreed before any code is written.
 
 Status: Approved
-Last updated: 2026-10-24
+Last updated: 2026-10-25
 
 ---
 
@@ -56,7 +56,9 @@ The site has no secrets and no environment-specific settings.
 | Latest library version | From the newest entry in `src/content/versions.ts` | Computed | The footer reads it (spec section 6.1.2, item 6). It is never typed twice. |
 | Node version | 24, the current LTS ("Krypton") | `.nvmrc` only. `package.json` `engines` says `>=24`, and the workflows read `.nvmrc` with `node-version-file`. | One place for the version. Node 26 is expected to become LTS at about the end of October 2026; moving to it is a one-line change, checked at each release. |
 | Package version for the examples | A pre-release of 2.0.0 (`2.0.0-beta.1`), then `2.0.0` | `examples/Directory.Build.props` | Section 3.5, "Example compilation". |
-| Size limits | As spec section 6.6.2 sets them | `scripts/check-size.mjs` and the end-to-end tests | How each is measured: section 7.2, tests 13 and 14. |
+| Size limits | As spec section 6.6.2 sets them | `scripts/check-size.mjs` and the end-to-end tests | How each is measured: section 7.1, "Sizes". |
+| Build manifest | `build.manifest: true` | `vite.config.ts` | `scripts/check-size.mjs` reads it to find the files each route loads. |
+| TypeScript compiler options | `target` `ES2022`, `module` `ESNext`, `moduleResolution` `bundler`, `jsx` `react-jsx`, `strict` on, and `paths` `{"@/*": ["./src/*"]}` without `baseUrl` | `tsconfig.json` | TypeScript 6.0 reports `target` `ES5`, `moduleResolution` `node` and `baseUrl` as deprecated, and spec section 6.1.12, item 3 forbids deprecated interfaces. So no `ignoreDeprecations` either. |
 | Path alias | `@/` for `src/` | `vite.config.ts` and `tsconfig.json` | Absolute imports, as the React rules require. |
 | Type-checked files | `src/`, `e2e/`, `scripts/` and `vite.config.ts` | `tsconfig.json`, plus `tsconfig.node.json` for the files that run in Node | Every TypeScript file is checked, not only the app. |
 
@@ -113,9 +115,9 @@ src/hooks/
 examples/
   *.cs                        Every C# example, as a complete program
   Directory.Build.props       Package version for the examples
-  build-examples.ps1          Compiles each example in its own console project.
-                              PowerShell, which runs on the pipeline's Ubuntu
-                              runners and on Windows.
+  build-examples.ps1          Compiles each example in its own console project
+                              under examples/.build/. Runs on Windows PowerShell
+                              5.1 and on PowerShell 7 (section 3.5).
 scripts/
   check-size.mjs              Size limits on the build output (section 7.2, test 14)
   csp.ts                      Vite plugin that adds the content security policy
@@ -185,7 +187,11 @@ type SectionHeadingProps = {
 
 Only `csharp` examples come from `examples/` and are compiled. `xml` and `shell` snippets are written in the page and are not compiled (spec section 6.1.3, item 8).
 
-`SectionHeading`'s section link is a real link to the section address. Selecting it copies the full address and shows "Link copied" in the same way as `CopyButton`. When the clipboard rejects the write, the link opens the address as a normal link (spec section 6.1.1, item 6). The link shows on hover and on keyboard focus (section 3.6).
+`SectionHeading`'s section link is a real link to the section address. Selecting it copies the full address and shows "Link copied" in the same way as `CopyButton`. When the clipboard rejects the write, the link opens the address as a normal link (spec section 6.1.1, item 6).
+
+"Copied" and "Link copied" show for 2 seconds, then the button or link returns to normal. The live region keeps the announcement.
+
+Links within the current docs page, such as "On this page" and the section links, replace the history entry instead of adding one. So Back returns to the previous page, not to the previous section (spec section 6.1.1, item 7).
 
 `ExampleTabs` uses MUI's `Tabs`, which follows the ARIA tabs pattern: the arrow keys move between tabs, and each tab panel is labelled by its tab (spec section 6.1.7, item 2).
 
@@ -254,11 +260,12 @@ The docs pages, in reading order:
 | Fonts | IBM Plex Sans and IBM Plex Mono, from the `@fontsource` packages, Latin subset, only the weights in use | The approved design. Bundled with the site, so nothing loads from another host (spec section 6.6.4, item 2). `font-display: swap` shows text before the font arrives. | Google Fonts, which is another host. |
 | Syntax highlighting | `react-syntax-highlighter`, light build, C# grammar only, with a theme from the design colours | The existing package. Loading one grammar keeps the script small (spec section 6.6.2, item 2). | Highlighting every language, as today. A new highlighting package. |
 | Copy | The browser Clipboard API, with a polite live region for the result | No package needed. The live region announces "Copied" or the failure to screen readers (spec section 6.1.5, items 4 and 5). | A copy library. |
-| Example compilation | Every C# example is `examples/<name>.cs`, a complete console program. The site imports the file text with Vite's `?raw` import. `examples/build-examples.ps1` builds each file in its own temporary .NET 10 console project that references the `JWTValidator` package at the version in `examples/Directory.Build.props`. A file whose name starts with `di-` also gets `Microsoft.Extensions.DependencyInjection`. The script passes when the folder has no `.cs` files. | The shown code is the compiled code (spec section 6.1.3, items 6 and 8). `2.0.0-beta.1` is a pre-release of 2.0.0 with the same API, and is on nuget.org before 2.0.0, so the examples can be checked while release 3 is built. The version moves to `2.0.0` when it is released. One PowerShell script runs on the pipeline and on Windows, so there are not two scripts to keep in step. | Examples as strings, checked by hand. A project reference to a local clone of the library. A Bash and a PowerShell script side by side. |
+| Example compilation | Every C# example is `examples/<name>.cs`, a complete console program. The site imports the file text with Vite's `?raw` import. `examples/build-examples.ps1` builds each file in its own temporary .NET 10 console project under `examples/.build/<name>/`, which is ignored by git. Because the projects sit below `examples/`, they pick up `examples/Directory.Build.props`, which holds the `JWTValidator` version and the `Microsoft.Extensions.DependencyInjection` version, both as properties. A file whose name starts with `di-` also gets that package. The script passes when the folder has no `.cs` files. It uses only syntax that runs on both Windows PowerShell 5.1 (`powershell -File` on a Windows machine) and PowerShell 7 (`pwsh` in the pipeline). | The shown code is the compiled code (spec section 6.1.3, items 6 and 8). `2.0.0-beta.1` is a pre-release of 2.0.0 with the same API, and is on nuget.org before 2.0.0, so the examples can be checked while release 3 is built. The version moves to `2.0.0` when it is released. One PowerShell script runs on the pipeline and on Windows, so there are not two scripts to keep in step. | Examples as strings, checked by hand. A project reference to a local clone of the library. A Bash and a PowerShell script side by side. |
 | Images | Release 1: each current image converted once to WebP under 200 KB, with a one-off `sharp-cli` command. Release 2: the photos are removed, because the design has none. | Spec section 6.1.10, releases 1 and 2. The conversion is one command, so little work is lost when release 2 removes the photos. | Keeping the JPGs until release 2. An image plugin in the build, which release 2 would make unused. |
 | Shared-link preview | Site-wide tags in `index.html`, with a 1200 x 630 PNG of the logo and name | Search engines and link previews read only `index.html` (spec section 6.1.9). | Tags per page, which a hash-routed site cannot serve. |
 | Content security policy | A `<meta http-equiv="Content-Security-Policy">` tag that allows only the site's own origin for scripts, fonts, images and connections, and inline styles for Emotion. `scripts/csp.ts` adds it to the built `index.html` only, so `npm run dev`, which needs an inline refresh script, keeps working. Vite's `assetsInlineLimit` is `0`, so no asset becomes a `data:` address that the policy would block. | Makes the browser block any load from another host, which enforces spec section 6.6.4, item 2. GitHub Pages cannot set response headers, so a meta tag is the only way. | No policy. A policy in dev too, which would need `'unsafe-inline'` for scripts. |
-| Split pages | Lazy routes only if the size check needs them. A lazy page uses `RouteFallback`: a loading message after 0.5 seconds, and, when its file fails to load, a message with a link that reloads the page. | Spec section 6.5. A file can disappear when a new version is deployed while a reader has the site open. | Splitting every page by default. |
+| Split pages | Lazy routes only if the size check needs them. A lazy page uses `RouteFallback`, which shows the loading and failure messages in spec section 6.5. | Spec section 6.5. A file can disappear when a new version is deployed while a reader has the site open. | Splitting every page by default. |
+| Favicon | Made from the logo's three bars | The old favicon does not match the approved logo (section 3.6). | Keeping the old favicon. |
 | Example tabs and section links | `ExampleTabs` on MUI's `Tabs`. The section link copies with the same Clipboard code as `CopyButton`. | The approved design (section 3.6) and spec sections 6.1.1, item 6 and 6.1.7, item 2. | Custom tab code. |
 | Reduced motion | A global rule that removes transitions and animations when the reader asks for reduced motion | Spec section 6.7. One rule covers MUI's transitions and the site's own. | Changing each MUI transition in the theme. |
 | No JavaScript | A `<noscript>` message in `index.html` | Spec section 6.7. | — |
@@ -312,7 +319,7 @@ The theme holds these values. No component uses a colour that is not in the them
 | Success | Background `#E3F3E8`, text `#1F6B36` | "Copied" and "Link copied". 5.7:1. |
 | Failure | The changed note colours | "Copy failed" |
 | External links | A 14 px arrow after the text, and "leaves this site" for screen readers | Links to nuget.org and GitHub, which open in the same tab (spec 6.1.2, item 7) |
-| Section links | The "#" link after a heading shows on hover and on keyboard focus only | Spec 6.1.1, item 6 |
+| Section links | The "#" link after a heading, in the link colour, as `states.png` shows | When it shows: spec section 6.1.1, item 6 |
 | Fonts | IBM Plex Sans (400, 500, 600, 700), IBM Plex Mono (400, 500, 600) | Text and code |
 | Breakpoints | MUI defaults. Below `md` (900 px) the header links become the menu button and the docs sidebar moves into the menu. Below `lg` (1200 px) "On this page" moves to the top of the article. | Spec sections 6.1.2 and 6.1.4 |
 
@@ -341,7 +348,7 @@ The site has no server and makes no network calls of its own. These are the fail
 
 The site collects nothing at run time (spec section 6.6.4, item 1).
 
-* **Pull requests:** the `ci.yml` run shows each check. The size check prints each file's gzipped size against its limit.
+* **Pull requests:** the `ci.yml` run shows each check. The size check prints each route's gzipped JavaScript total, and each image's size, against its limit.
 * **Deployments:** the `deploy.yml` run and the repository's Pages environment show what is live and when it went live.
 * **Releases:** the release pull request into `main` records the Lighthouse scores, the keyboard check, the browser check and the package audit result.
 
@@ -370,11 +377,11 @@ The site collects nothing at run time (spec section 6.6.4, item 1).
 * **End-to-end tests** use Playwright in Chromium against the built site (`vite preview`). They prove the browser behaviour in spec sections 6.2.1 to 6.2.3 and 6.6. The accessibility check uses `@axe-core/playwright`, so colour contrast is checked with real styles. A simulated browser cannot check contrast.
 * **Content data** is plain TypeScript, tested without rendering.
 * **Not automated:** Lighthouse scores, the keyboard walkthrough, the browser check (spec section 6.6.3, item 3), the fact check against the library README, and the wording check. They are done by hand for each release and recorded in the release pull request.
-* Accessibility tests start in release 2 (spec section 6.1.10, item 6). Tests 10 and 11 are added with the first redesigned part, the header and menu, and each later task adds its page to them. Accessibility problems are found in the task that causes them, not at the end. Size limits apply from release 1.
+* Accessibility tests start in release 2 (spec section 6.1.10, item 6). Tests 10 and 11 start with the first redesigned part, the header, menu and footer. Each page joins them when it is rebuilt in the new design, and not before, because the old pages have the defects in spec section 4.1. Accessibility problems are found in the change that causes them, not at the end. Size limits apply from release 1.
 * **Sizes** are measured as spec section 6.6.2 defines them:
   * Test 14 reads Vite's build manifest. For each route, it adds up the gzipped size of every JavaScript file that the route loads on first load.
   * Test 13 adds up the bytes each response sent over the network, from Playwright's `request.sizes()`. `vite preview` may not compress responses as GitHub Pages does, so test 13 gzips each text response itself when the server did not.
-* A Lighthouse mobile run on Home and the longest docs page is part of the size task in release 1, not only the release checks. The score of 90 is tight for a site drawn in the browser, so a problem is found early.
+* A Lighthouse mobile run on Home and the longest docs page is done as soon as the size limits are met in release 1, not only at the release. The score of 90 is tight for a site drawn in the browser, so a problem is found early.
 * A test that a change breaks is fixed or updated with that change, never skipped.
 
 ### 7.2 Tests
@@ -400,7 +407,7 @@ The site collects nothing at run time (spec section 6.6.4, item 1).
 | 17 | The example tabs show the OpenID Connect example first, switch with the mouse and the arrow keys, and copy the shown example | Component | 6.1.7 item 2 | The wrong default tab. Copying the hidden example. |
 | 18 | With reduced motion asked for, opening the menu has no transition | End-to-end | 6.7 | Animations that ignore the reader's setting. |
 | 19 | The built `index.html` has the site description, and the Open Graph title, description, image and address, and the image file exists | End-to-end | 6.1.9 | A broken link preview. |
-| 20 | When a split page's file fails to load, the page shows the reload message (only if lazy routes are used) | Component | 6.5 | A blank page after a new deploy. |
+| 20 | A split page shows the loading message when its file is slow, and the reload message when its file fails to load (only if lazy routes are used) | Component | 6.5 | A blank page while loading, or after a new deploy. |
 
 ---
 
@@ -410,13 +417,15 @@ The site collects nothing at run time (spec section 6.6.4, item 1).
 
 **Pages source.** The maintainer changes the repository's Pages source from the `gh-pages` branch to "GitHub Actions" just before the first deploy with `deploy.yml`. Whether the old site stays up in between is not documented, so the maintainer checks the live site straight after that deploy (section 9).
 
+**Pages environment.** The `github-pages` environment allows deployments from the `gh-pages` branch only (checked on 2026-10-25). Before the first deploy from `main`, the maintainer adds `main` to its deployment branches. When the `gh-pages` branch is deleted, its entry is removed. Without this, the first deploy from `main` is rejected.
+
 **`ci.yml`** runs on every pull request into `main` or `release/**`, and on pushes to those branches:
 
 | Job | Steps |
 | --- | --- |
-| `build` | Set up Node from `.nvmrc` with the npm cache. `npm ci`. Type check. Lint. Prettier check. Component tests. Build. Size check (test 14). `npm audit`: failing for pull requests into `main`, reporting only for `release/**`. Upload the `dist` folder for the next job. |
-| `e2e` | Needs `build`. Download `dist`. Install Playwright's Chromium. Serve `dist` with `vite preview`. Run the end-to-end tests. Upload the report when a test fails. |
-| `examples` | Set up .NET 10. Run `pwsh examples/build-examples.ps1`. The script exists from the task that adds `ci.yml`, and passes when the folder has no `.cs` files yet. |
+| `build` | Set up Node from `.nvmrc` with the npm cache. `npm ci`. Type check. Lint. Prettier check. Component tests. Build. Size check (test 14). `npm audit`: failing for pull requests into `main`, and reporting only for pull requests into `release/**` and for pushes. Upload the `dist` folder for the next job. |
+| `e2e` | Needs `build`. Set up Node from `.nvmrc` with the npm cache. `npm ci`. Download `dist`. Install Playwright's Chromium. Serve `dist` with `vite preview`. Run the end-to-end tests. Upload the report when a test fails. |
+| `examples` | Set up .NET 10. Run `pwsh examples/build-examples.ps1`. The script is added together with `ci.yml`, and passes when the folder has no `.cs` files yet. |
 
 **`deploy.yml`** runs on every push to `main`, and by hand with `workflow_dispatch`: build, upload the Pages artifact, deploy. Only the deploy job has the Pages permissions. `concurrency` lets one deploy run at a time. To roll back, revert the change in a pull request into `main`.
 
@@ -429,9 +438,9 @@ Until then, pull requests into `main`, such as planning changes, merge without c
 
 **Branches and releases.** Each release in spec section 6.1.10 has a release branch from `main`: `release/phase-1-foundation`, `release/phase-2-redesign` and `release/phase-3-content`. Task branches start from the release branch and merge into it. When the maintainer approves a release, one pull request merges the release branch into `main`, which deploys it. The release pull request records the manual checks in section 7.1. `release/phase-3-content` merges only after 2.0.0 is listed on nuget.org (spec section 6.1.10, item 2).
 
-**Planning changes during a phase.** A change to `docs/spec.md` or `docs/plan.md` goes into `main` by pull request, as before. Straight after it merges, a pull request merges `main` into the open release branch, so task sessions read the current documents. Ticks in `docs/tasks.md` are made on the release branch and reach `main` with the release.
+**Planning changes during a phase.** A change to `docs/spec.md` or `docs/plan.md` goes into `main` by pull request, as before. Straight after it merges, a pull request merges `main` into the open release branch, so work on the release branch reads the current documents. Progress records are made on the release branch and reach `main` with the release.
 
-**Cleanup in release 1.** The first task removes `dist/` and `examples/dist/`, because Vite builds into `dist/` and the 2022 files would be mixed with new build output. The same task adds `dist/`, `playwright-report/` and `test-results/` to `.gitignore`, and moves `favicon.ico` to `public/`. Later in release 1: `.babelrc`, `webpack.config.js`, the Babel 6 and webpack packages, `file-loader`, `gh-pages`, the unused font package, `peerDependencies`, `main`, and the `transpile` and `prepublishOnly` scripts in `package.json`. The `examples/` folder name is reused for the C# examples (section 3.5).
+**Cleanup in release 1.** The move to Vite removes `dist/` and `examples/dist/`, because Vite builds into `dist/` and the 2022 files would be mixed with new build output. The same change adds `dist/`, `playwright-report/` and `test-results/` to `.gitignore`, and moves `favicon.ico` to `public/`. Later in release 1: `.babelrc`, `webpack.config.js`, the Babel 6 and webpack packages, `file-loader`, `gh-pages`, the unused font package, `peerDependencies`, `main`, and the `start`, `transpile` and `prepublishOnly` scripts in `package.json`. The `examples/` folder name is reused for the C# examples (section 3.5).
 
 ---
 
@@ -444,8 +453,8 @@ Until then, pull requests into `main`, such as planning changes, merge without c
 | Fonts push the first load past 500 KB. | Low | Latin subset and only the weights in use, about 20 KB each. Test 13 measures the total. |
 | React Router 8 or MUI 9 changed an API this plan relies on, for example the hash router in data mode or `ScrollRestoration`. | Medium | Release 1's router and MUI upgrades confirm each API before release 2 builds on it. A change goes back into this plan for approval. |
 | The React plugin for Vite 8 needs extra packages for the React Compiler. | Medium | Install what the plugin's documentation lists at the time. The README lists them. |
-| The Lighthouse mobile score of 90 is hard to reach for a site drawn in the browser, with up to 300 KB of script. | Medium | Run Lighthouse in the release 1 size task, not only at the release. If it falls short, split pages (section 3.5), and keep the hero free of large images, as the design already is. |
-| Node 26 becomes the LTS during the project. | Medium | The version is in `.nvmrc` only. Check at each release, and move in a small task when the packages support it. |
+| The Lighthouse mobile score of 90 is hard to reach for a site drawn in the browser, with up to 300 KB of script. | Medium | Run Lighthouse as soon as the size limits are met in release 1, not only at the release. If it falls short, split pages (section 3.5), and keep the hero free of large images, as the design already is. |
+| Node 26 becomes the LTS during the project. | Medium | The version is in `.nvmrc` only. Check at each release, and move in a small change when the packages support it. |
 | 2.0.0 or its beta is released later than planned. | Medium | Releases 1 and 2 do not depend on it. Release 3's examples build against `2.0.0-beta.1` until 2.0.0 exists. Release 3 waits (spec section 6.1.10, item 2). |
 | Playwright's browser download makes the pipeline slow. | Low | Install Chromium only. Cache it between runs. |
 | Switching the Pages source causes a short outage. | Low | Switch just before the first `deploy.yml` run, and check the live site straight after. |
