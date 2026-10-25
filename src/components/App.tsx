@@ -19,6 +19,7 @@ import BuilderDocuments from "./documentation/builder/BuilderDocuments";
 import DictionaryExtensionsPage from "./documentation/dictionaryExtensions/DictionaryExtensionsPage";
 import ValidatorPage from "./documentation/validator/ValidatorPage";
 import ExpiryCheckerPage from "./documentation/expiryChecker/ExpiryCheckerPage";
+import VersionNotice from "./shared/VersionNotice";
 
 const darkTheme = createTheme({
   palette: {
@@ -137,6 +138,8 @@ const App = () => {
             </Grid>
           </AppBar>
         </Box>
+
+        <VersionNotice />
 
         <Routes>
           <Route path="/" element={<HomePage />} />
