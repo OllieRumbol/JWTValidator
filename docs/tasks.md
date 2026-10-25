@@ -215,6 +215,7 @@ Base branch: release/phase-2-redesign
     - `index.html` has the viewport meta tag, in the same change as the menu (spec 6.1.2, item 5).
     - `ScrollRestoration` is in the root layout.
     - The NuGet link reads "NuGet", the GitHub link goes to the library repository, and every link to another site uses `ExternalLink` and opens in the same tab.
+    - The version notice from PR #14 stays below the header on every page, with the same wording, styled with the theme's "Changed in 2.0.0" colours. The site still documents 1.0.3 until release 3.
     - Plan 7.2 tests 3, 7 and 18 exist and pass. The rows of test 9 for starting at the top, Back, the phone menu and pressing Escape in the open menu exist and pass.
     - Plan 7.2 tests 10 and 11 exist and pass for the header, the menu and the footer.
   - Verify: `npm test && npm run build && npm run e2e`
@@ -419,10 +420,11 @@ Base branch: release/phase-3-content
   - Depends on: T33
   - Done when:
     - 2.0.0 is listed on nuget.org.
+    - The version notice is removed from the site, in the release branch, before the release pull request.
     - The release pull request into `main` records the same checks as T24, including the TypeScript and Node check, plus the spec 9 checklist.
     - The maintainer approves and merges it, and the deploy passes.
   - Verify: `gh run list --workflow deploy.yml --limit 1` shows success. Every item in spec 9 is true on the live site.
-  - Notes: Remind the maintainer to tick task T17 in the library repository from the library's own session; this project does not change that repository (spec 3, non-goals). When every task is ticked, suggest `/retrospective`.
+  - Notes: Remind the maintainer to do two things in the library repository from the library's own session, because this project does not change that repository (spec 3, non-goals): tick task T17, and remove the README note that says the documentation site still describes 1.0.3. When every task is ticked, suggest `/retrospective`.
 
 ---
 
