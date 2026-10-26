@@ -6,8 +6,9 @@ import Box from "@mui/material/Box";
 import { Theme } from "@mui/material/styles";
 import { SxProps } from "@mui/system";
 
-// Named imports use the package's ES module entry. The per-icon paths are CommonJS,
-// and Vite passes their default export through as an object.
+// package.json sets "type": "module", so Vite uses Node's interop: a default import from
+// a CommonJS file such as @mui/icons-material/Construction gives the whole module.exports
+// object. Named imports use the package's ES module entry.
 import {
   Construction as ConstructionIcon,
   Verified as VerifiedIcon,
