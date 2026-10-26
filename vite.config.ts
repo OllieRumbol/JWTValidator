@@ -1,3 +1,4 @@
+/// <reference types="vitest/config" />
 import { fileURLToPath, URL } from "node:url";
 import { defineConfig } from "vite";
 import react, { reactCompilerPreset } from "@vitejs/plugin-react";
@@ -18,5 +19,11 @@ export default defineConfig({
     assetsInlineLimit: 0,
     // The size check reads the manifest to find the files each route loads.
     manifest: true,
+  },
+  test: {
+    environment: "jsdom",
+    setupFiles: ["./src/test/setup.ts"],
+    // Component tests sit beside their components. The Playwright tests in e2e/ run separately.
+    include: ["src/**/*.test.{ts,tsx}"],
   },
 });

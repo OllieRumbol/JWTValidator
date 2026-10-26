@@ -12,5 +12,5 @@
     "isolatedModules": true,
     "noEmit": true
   },
-  "include": ["vite.config.ts", "scripts", "e2e"]
+  "include": ["vite.config.ts", "playwright.config.ts", "scripts", "e2e"]
 }

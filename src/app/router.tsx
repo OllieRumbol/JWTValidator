@@ -1,4 +1,4 @@
-import { createHashRouter } from "react-router";
+import { createHashRouter, type RouteObject } from "react-router";
 import RootLayout from "@/app/RootLayout";
 import HomePage from "@/components/home/HomePage";
 import VersionsPage from "@/components/versions/VersionsPage";
@@ -7,8 +7,8 @@ import ValidatorPage from "@/components/documentation/validator/ValidatorPage";
 import ExpiryCheckerPage from "@/components/documentation/expiryChecker/ExpiryCheckerPage";
 import DictionaryExtensionsPage from "@/components/documentation/dictionaryExtensions/DictionaryExtensionsPage";
 
-// GitHub Pages serves only files, so the route is kept in the hash (spec section 5.1).
-const router = createHashRouter([
+// Exported so tests can build their own router from the same routes.
+export const routes: RouteObject[] = [
   {
     path: "/",
     element: <RootLayout />,
@@ -29,6 +29,9 @@ const router = createHashRouter([
       { path: "*", element: null },
     ],
   },
-]);
+];
+
+// GitHub Pages serves only files, so the route is kept in the hash (spec section 5.1).
+const router = createHashRouter(routes);
 
 export default router;
