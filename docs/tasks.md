@@ -50,7 +50,7 @@ Base branch: release/phase-1-foundation
     - Left to later tasks: Node 12 in the old workflow and gh-pages (T9), `npm audit` (T13), type-checking `vite.config.ts` (T5), `@types/react-router-dom` (T3).
     - Evidence: pull request #16
 
-- [ ] **T3 — Upgrade React to 19 and the router to 8**
+- [x] **T3 — Upgrade React to 19 and the router to 8**
   - Refs: plan 3.3 (routes), plan 3.5 (React, router), plan 9 (API changes), spec 4.1 item 13
   - Depends on: T2
   - Done when:
@@ -59,7 +59,12 @@ Base branch: release/phase-1-foundation
     - The packages `react-router-dom` and `@types/react-router-dom` are removed if version 8 no longer needs them.
     - The browser console shows no deprecation warnings from React or the router.
   - Verify: `npm run typecheck && npm run build && npm run preview`, then open the six current addresses in spec 6.2.1.
-  - Notes: Do not add `ScrollRestoration`, redirects or "Page not found" yet. They are release 2 work (spec 6.1.10, item 5). If the hash router in data mode or `ScrollRestoration` is missing or changed in version 8, stop and propose a plan change (plan 9).
+  - Notes:
+    - Plan 9 check: React Router 8.5.0 still exports `createHashRouter`, `RouterProvider` (from `react-router/dom`) and `ScrollRestoration`, so no plan change is needed. Version 8 has no `react-router-dom`.
+    - MUI stays on 5, because 5.18 already supports React 19. The six routes match T2: same text and element counts.
+    - An empty `{ path: "*", element: null }` route keeps the old result for an unknown address: the layout with an empty body. Without it, the data router shows its own error page. Release 2 replaces it with "Page not found".
+    - Console messages that were there before T3, release 2 removes them: `<pre>` inside `<p>` in the code samples, and a missing `key` in `VersionList`.
+    - Evidence: pull request #PR
 
 - [ ] **T4 — Upgrade MUI to 9**
   - Refs: plan 3.5 (UI library), plan 9 (API changes)
@@ -444,4 +449,5 @@ None.
 
 - 2026-10-26 — T1
 - 2026-10-26 — T2
+- 2026-10-26 — T3
 

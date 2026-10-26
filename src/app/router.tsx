@@ -21,7 +21,9 @@ const router = createHashRouter([
       { path: "documentation/dictionary", element: <DictionaryExtensionsPage /> },
       // Keeps the header and footer on an unknown address, as before. Without it the
       // router shows its own error page. Release 2 replaces it with "Page not found".
-      { path: "*" },
+      // The element is null, not missing, because the router warns about a leaf route
+      // with no element.
+      { path: "*", element: null },
     ],
   },
 ]);
