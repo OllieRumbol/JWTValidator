@@ -1,13 +1,19 @@
 import { describe, expect, test } from "vitest";
 import { render, screen } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
+import { createMemoryRouter } from "react-router";
 import { RouterProvider } from "react-router/dom";
-import router from "@/app/router";
+import { routes } from "@/app/router";
+
+// Each test gets its own router, so no test depends on where another one left off.
+function renderHome() {
+  const router = createMemoryRouter(routes, { initialEntries: ["/"] });
+  render(<RouterProvider router={router} />);
+}
 
 describe("Home", () => {
   test("shows the title and the How it works section", async () => {
-    window.location.hash = "#/";
-    render(<RouterProvider router={router} />);
+    renderHome();
 
     expect(
       await screen.findByRole("heading", { level: 1, name: "JWT Validator" }),
@@ -19,8 +25,7 @@ describe("Home", () => {
 
   test("opens the documentation menu with a link to each page", async () => {
     const user = userEvent.setup();
-    window.location.hash = "#/";
-    render(<RouterProvider router={router} />);
+    renderHome();
 
     await user.click(
       await screen.findByRole("button", { name: "Documentation" }),

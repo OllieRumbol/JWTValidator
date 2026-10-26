@@ -54,8 +54,12 @@ for (const route of routes) {
 
     await page.goto(route, { waitUntil: "networkidle" });
 
+    // data: and blob: addresses never leave the page. Every other scheme is a request.
     const otherHosts = requested.filter(
-      (url) => url.startsWith("http") && new URL(url).origin !== siteOrigin,
+      (url) =>
+        !url.startsWith("data:") &&
+        !url.startsWith("blob:") &&
+        new URL(url).origin !== siteOrigin,
     );
     expect(otherHosts).toEqual([]);
 
@@ -63,7 +67,10 @@ for (const route of routes) {
 
     const sizes = await Promise.all(finished.map(bytesSent));
     const total = sizes.reduce((sum, size) => sum + size, 0);
-    console.log(`${route}: ${(total / 1000).toFixed(1)} KB sent`);
+    test.info().annotations.push({
+      type: "Sent over the network",
+      description: `${(total / 1000).toFixed(1)} KB`,
+    });
     expect(total).toBeLessThanOrEqual(TRANSFER_LIMIT);
   });
 }
