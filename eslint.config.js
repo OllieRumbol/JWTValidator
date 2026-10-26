@@ -29,7 +29,7 @@ export default defineConfig(
   },
   {
     // JavaScript files, such as this one, are in no tsconfig.
-    files: ["**/*.js"],
+    files: ["**/*.{js,mjs,cjs}"],
     extends: [tseslint.configs.disableTypeChecked],
     languageOptions: { globals: globals.node },
   },

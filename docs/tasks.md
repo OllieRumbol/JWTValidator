@@ -82,7 +82,7 @@ Base branch: release/phase-1-foundation
     - Lists changed here have keys. `VersionCard`'s task list still has none, and release 2 rebuilds that page.
     - Evidence: pull request #18
 
-- [ ] **T5 — Add lint, format and the React Compiler**
+- [x] **T5 — Add lint, format and the React Compiler**
   - Refs: plan 2 (type-checked files), plan 3.5 (lint and format, React), plan 9 (React Compiler packages)
   - Depends on: T4
   - Done when:
@@ -91,7 +91,12 @@ Base branch: release/phase-1-foundation
     - The React Compiler is on, with the packages the Vite React plugin lists.
     - `npm run typecheck`, `npm run lint` and `npm run format:check` pass.
   - Verify: `npm run typecheck && npm run lint && npm run format:check && npm run build`
-  - Notes: Fix what the lint finds in the current code only where it is needed to pass. Do not rewrite components that release 2 replaces.
+  - Notes:
+    - The React Compiler runs through Babel (`@rolldown/plugin-babel`, `@babel/core` 8, `babel-plugin-react-compiler`), as the plugin README lists. Its Rust compiler is marked experimental. The README (T11) must list these three packages.
+    - Lint uses typed rules and fails on warnings, because three React Hooks rules that report a skipped component are warnings. JavaScript files (`.js`, `.mjs`, `.cjs`) are linted without types, because no tsconfig covers them.
+    - Prettier uses `endOfLine: "auto"`, because the Windows checkout is CRLF and the repository stores LF. It does not format `docs/`.
+    - Lint fixes only: unused values, a key on VersionCard's static list, and the Popper `anchorEl` read during render. Pages match T3 at 1280 and 390 px.
+    - Evidence: pull request #PR
 
 - [ ] **T6 — Meet the size limits**
   - Refs: spec 6.6.2, spec 6.2.5, plan 3.5 (syntax highlighting, images, split pages), plan 7.1 (sizes, Lighthouse), plan 7.2 test 14
@@ -456,4 +461,5 @@ None.
 - 2026-10-26 — T2
 - 2026-10-26 — T3
 - 2026-10-26 — T4
+- 2026-10-26 — T5
 
