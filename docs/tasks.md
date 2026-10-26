@@ -129,7 +129,7 @@ Base branch: release/phase-1-foundation
     - Component tests build their own memory router from the `routes` that `src/app/router.tsx` exports.
     - Test 13 lists the six current addresses itself. T18 adds its new routes to that list. Sent today: Home 233 KB, Versions 282 KB, each docs page 386 KB.
     - No lazy routes (T6), so test 20 and `RouteFallback` are not needed.
-    - Evidence: pull request #PR
+    - Evidence: pull request #21
 
 - [ ] **T8 — Check every pull request**
   - Refs: spec 6.1.11 items 1 and 2, plan 8 (`ci.yml`, required checks), plan 3.5 (example compilation), plan 6 (pipeline token, third-party actions)
