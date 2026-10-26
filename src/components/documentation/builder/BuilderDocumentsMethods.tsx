@@ -4,8 +4,7 @@ import Panel from "../../shared/Panel";
 import Typography from "@mui/material/Typography";
 import DocumentationCard from "../DocumentationCard";
 import Grid from "@mui/material/Grid";
-import { Theme } from "@mui/material/styles";
-import { SxProps } from "@mui/system";
+import { SxProps, Theme } from "@mui/material/styles";
 import BuilderMethods from "./BuilderMethods";
 
 const item: SxProps<Theme> = {
@@ -21,10 +20,10 @@ const BuilderDocumentsMethods = () => {
       <Typography variant="h2" component="h2" sx={{ mb: 3 }}>
         Methods
       </Typography>
-      <Grid container spacing={5}>
-        {BuilderMethods.map((methodDetails, index) => {
+      <Grid container spacing={5} sx={{ width: "100%" }}>
+        {BuilderMethods.map((methodDetails) => {
           return (
-            <Grid item xs={12}>
+            <Grid key={methodDetails.title} size={12}>
               <DocumentationCard
                 title={methodDetails.title}
                 summary={methodDetails.summary}

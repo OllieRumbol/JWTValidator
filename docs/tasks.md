@@ -66,7 +66,7 @@ Base branch: release/phase-1-foundation
     - Console messages that were there before T3, release 2 removes them: `<pre>` inside `<p>` in the code samples, and a missing `key` in `VersionList`.
     - Evidence: pull request #17
 
-- [ ] **T4 — Upgrade MUI to 9**
+- [x] **T4 — Upgrade MUI to 9**
   - Refs: plan 3.5 (UI library), plan 9 (API changes)
   - Depends on: T3
   - Done when:
@@ -75,7 +75,12 @@ Base branch: release/phase-1-foundation
     - Every page looks as it did before. Grid layouts use the MUI 9 Grid API.
     - The unused `@fontsource/roboto` package is removed.
   - Verify: `npm run typecheck && npm run build && npm run preview`, then compare every route with the live site at 1280 px and 390 px.
-  - Notes: Follow MUI's migration guides from 5 to 9 in order.
+  - Notes:
+    - Followed the guides to 6, 7 and 9 (MUI has no 8). The new Grid does not stretch inside `Panel`, which centres its children, so every Grid container has `sx={{ width: "100%" }}`. Without it, a long code line pushed the method cards off both sides of the page.
+    - MUI 9 resolves `@mui/icons-material/<Icon>` to an ES module, so the icons use per-icon imports again. This replaces the named imports in T2.
+    - Compared with the T3 build and the old webpack build of `main` (the browser pane cannot open github.io): page and section heights match at 1280, 980 and 390 px.
+    - Lists changed here have keys. `VersionCard`'s task list still has none, and release 2 rebuilds that page.
+    - Evidence: pull request #18
 
 - [ ] **T5 — Add lint, format and the React Compiler**
   - Refs: plan 2 (type-checked files), plan 3.5 (lint and format, React), plan 9 (React Compiler packages)
@@ -450,4 +455,5 @@ None.
 - 2026-10-26 — T1
 - 2026-10-26 — T2
 - 2026-10-26 — T3
+- 2026-10-26 — T4
 

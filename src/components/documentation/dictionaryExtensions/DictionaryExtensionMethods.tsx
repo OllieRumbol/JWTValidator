@@ -11,10 +11,10 @@ const DictionaryExtensionMethods = () => {
       <Typography variant="h2" component="h2" sx={{ mb: 3 }}>
         Methods
       </Typography>
-      <Grid container spacing={5}>
-        {DictionaryExtensionMethodDetails.map((methodDetails, index) => {
+      <Grid container spacing={5} sx={{ width: "100%" }}>
+        {DictionaryExtensionMethodDetails.map((methodDetails) => {
           return (
-            <Grid item xs={12}>
+            <Grid key={methodDetails.title} size={12}>
               <DocumentationCard
                 title={methodDetails.title}
                 summary={methodDetails.summary}

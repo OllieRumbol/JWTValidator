@@ -50,8 +50,7 @@ const RootLayout = () => {
           <Grid
             container
             direction="row"
-            justifyContent="flex-end"
-            alignItems="center"
+            sx={{ justifyContent: "flex-end", alignItems: "center" }}
           >
             <Toolbar>
               <Link to="/">
