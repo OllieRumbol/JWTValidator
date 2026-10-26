@@ -22,6 +22,20 @@ export default defineConfig(
     // Includes the React Compiler rules, so a component the compiler skips is reported.
     extends: [reactHooks.configs.flat.recommended],
     languageOptions: { globals: globals.browser },
+    rules: {
+      "no-restricted-imports": [
+        "error",
+        {
+          paths: [
+            {
+              name: "react-syntax-highlighter",
+              message:
+                "Use src/components/shared/SyntaxHighlighter. The full build adds every grammar to the bundle.",
+            },
+          ],
+        },
+      ],
+    },
   },
   {
     files: ["vite.config.ts", "scripts/**/*.ts", "e2e/**/*.ts"],

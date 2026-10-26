@@ -1,7 +1,7 @@
 // Checks the size limits in spec section 6.6.2 on the build in dist/ (plan section 7.2, test 14):
 // the gzipped JavaScript that each route loads on first load, and the size of each image.
 // Run it after `npm run build`. It exits with 1 when a limit is exceeded.
-import { readFileSync, readdirSync, statSync } from "node:fs";
+import { existsSync, readFileSync, readdirSync, statSync } from "node:fs";
 import { extname, join } from "node:path";
 import { gzipSync } from "node:zlib";
 
@@ -21,9 +21,12 @@ const IMAGE_EXTENSIONS = [
 ];
 
 const distDir = "dist";
-const manifest = JSON.parse(
-  readFileSync(join(distDir, ".vite", "manifest.json"), "utf8"),
-);
+const manifestPath = join(distDir, ".vite", "manifest.json");
+if (!existsSync(manifestPath)) {
+  console.error(`${manifestPath} was not found. Run npm run build first.`);
+  process.exit(1);
+}
+const manifest = JSON.parse(readFileSync(manifestPath, "utf8"));
 
 const formatKb = (bytes) => `${(bytes / KB).toFixed(1)} KB`;
 
@@ -62,7 +65,8 @@ function findImages(dir) {
 }
 
 // 1. Work out what each route loads first. Every route loads the entry. A lazy route also
-//    loads its own chunk, which the manifest lists as a dynamic import.
+//    loads its own chunk, which the manifest lists as a dynamic import. A chunk that a lazy
+//    route itself loads lazily on its first render is not counted, so avoid that pattern.
 const entryKey = Object.keys(manifest).find((key) => manifest[key].isEntry);
 const entryChunks = staticClosure(entryKey);
 const lazyKeys = Object.keys(manifest).filter(
