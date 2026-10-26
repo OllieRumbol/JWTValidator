@@ -50,7 +50,12 @@ export default defineConfig(
     rules: { "no-restricted-imports": "off" },
   },
   {
-    files: ["vite.config.ts", "scripts/**/*.ts", "e2e/**/*.ts"],
+    files: [
+      "vite.config.ts",
+      "playwright.config.ts",
+      "scripts/**/*.ts",
+      "e2e/**/*.ts",
+    ],
     languageOptions: { globals: globals.node },
   },
   {
