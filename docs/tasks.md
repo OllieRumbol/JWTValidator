@@ -96,7 +96,7 @@ Base branch: release/phase-1-foundation
     - Lint uses typed rules and fails on warnings, because three React Hooks rules that report a skipped component are warnings. JavaScript files (`.js`, `.mjs`, `.cjs`) are linted without types, because no tsconfig covers them.
     - Prettier uses `endOfLine: "auto"`, because the Windows checkout is CRLF and the repository stores LF. It does not format `docs/`.
     - Lint fixes only: unused values, a key on VersionCard's static list, and the Popper `anchorEl` read during render. Pages match T3 at 1280 and 390 px.
-    - Evidence: pull request #PR
+    - Evidence: pull request #19
 
 - [ ] **T6 — Meet the size limits**
   - Refs: spec 6.6.2, spec 6.2.5, plan 3.5 (syntax highlighting, images, split pages), plan 7.1 (sizes, Lighthouse), plan 7.2 test 14
