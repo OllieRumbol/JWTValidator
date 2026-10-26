@@ -113,7 +113,7 @@ Base branch: release/phase-1-foundation
     - The highlighter is imported only through `src/components/shared/SyntaxHighlighter.ts`. Lint rejects any other import of `react-syntax-highlighter` in `src/`.
     - No lazy routes were needed. First-load JavaScript is 187.5 KB gzipped (465 KB before). `check-size` does not count a chunk that a lazy route loads lazily.
     - Lighthouse 13.5 mobile: Home 97, Builder 92 (three runs).
-    - Evidence: pull request #PR
+    - Evidence: pull request #20
 
 - [ ] **T7 — Set up component and end-to-end tests**
   - Refs: plan 7.1, plan 7.2 tests 13 and 20, spec 6.5, spec 6.6.2 item 4, spec 6.6.4 items 1 and 2, plan 3.5 (split pages)
