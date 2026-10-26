@@ -33,9 +33,21 @@ export default defineConfig(
                 "Use src/components/shared/SyntaxHighlighter. The full build adds every grammar to the bundle.",
             },
           ],
+          patterns: [
+            {
+              group: ["react-syntax-highlighter/*"],
+              message:
+                "Use src/components/shared/SyntaxHighlighter, which registers the grammars the site needs.",
+            },
+          ],
         },
       ],
     },
+  },
+  {
+    // The one module that may import the highlighter, so only C# is in the bundle.
+    files: ["src/components/shared/SyntaxHighlighter.ts"],
+    rules: { "no-restricted-imports": "off" },
   },
   {
     files: ["vite.config.ts", "scripts/**/*.ts", "e2e/**/*.ts"],
