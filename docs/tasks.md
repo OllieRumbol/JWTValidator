@@ -64,7 +64,7 @@ Base branch: release/phase-1-foundation
     - MUI stays on 5, because 5.18 already supports React 19. The six routes match T2: same text and element counts.
     - An empty `{ path: "*", element: null }` route keeps the old result for an unknown address: the layout with an empty body. Without it, the data router shows its own error page. Release 2 replaces it with "Page not found".
     - Console messages that were there before T3, release 2 removes them: `<pre>` inside `<p>` in the code samples, and a missing `key` in `VersionList`.
-    - Evidence: pull request #PR
+    - Evidence: pull request #17
 
 - [ ] **T4 — Upgrade MUI to 9**
   - Refs: plan 3.5 (UI library), plan 9 (API changes)
