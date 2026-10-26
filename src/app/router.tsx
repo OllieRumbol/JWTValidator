@@ -19,6 +19,9 @@ const router = createHashRouter([
       { path: "documentation/validator", element: <ValidatorPage /> },
       { path: "documentation/expiry", element: <ExpiryCheckerPage /> },
       { path: "documentation/dictionary", element: <DictionaryExtensionsPage /> },
+      // Keeps the header and footer on an unknown address, as before. Without it the
+      // router shows its own error page. Release 2 replaces it with "Page not found".
+      { path: "*" },
     ],
   },
 ]);
