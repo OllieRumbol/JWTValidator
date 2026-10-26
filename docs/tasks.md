@@ -18,7 +18,7 @@ Goal: The site builds with Vite on current packages, every pull request is check
 
 Base branch: release/phase-1-foundation
 
-- [ ] **T1 — Create the phase 1 release branch (maintainer)**
+- [x] **T1 — Create the phase 1 release branch (maintainer)**
   - Refs: plan 8 (branches and releases), spec 8 assumption 4
   - Depends on: the pull request that adds this file, merged into `main`
   - Done when:
@@ -26,7 +26,10 @@ Base branch: release/phase-1-foundation
     - `docs/spec.md`, `docs/plan.md` and `docs/tasks.md` on the release branch match `main`.
     - The result of pushing a new `release/*` branch under the "Protect release branches" ruleset is recorded in Notes.
   - Verify: `git ls-remote --heads origin release/phase-1-foundation` shows the commit that `git rev-parse origin/main` shows, and `git diff origin/main origin/release/phase-1-foundation -- docs` prints nothing.
-  - Notes: Push with `git push origin main:refs/heads/release/phase-1-foundation`. If the ruleset blocks it, create the branch on the GitHub website, and record that in Notes and in the README (T11).
+  - Notes:
+    - Spec 8, assumption 4 holds: on 2026-10-26, `git push origin main:refs/heads/release/phase-1-foundation` created the branch at `041f109` under the "Protect release branches" ruleset. No change is needed in the README (T11).
+    - The ruleset applies to the new branch: pull request required, no force push.
+    - Evidence: pull request #15
 
 - [ ] **T2 — Move the build to Vite and TypeScript 6.0**
   - Refs: plan 2 (base path, Node version, path alias, build manifest, TypeScript compiler options), plan 3.1, plan 3.5 (build tool, TypeScript), plan 8 (cleanup in release 1)
@@ -433,4 +436,6 @@ Base branch: release/phase-3-content
 None.
 
 ## Completed log
+
+- 2026-10-26 — T1
 
