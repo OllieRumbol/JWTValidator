@@ -21,9 +21,9 @@ const BuilderDocumentsMethods = () => {
         Methods
       </Typography>
       <Grid container spacing={5} sx={{ width: "100%" }}>
-        {BuilderMethods.map((methodDetails, index) => {
+        {BuilderMethods.map((methodDetails) => {
           return (
-            <Grid size={12}>
+            <Grid key={methodDetails.title} size={12}>
               <DocumentationCard
                 title={methodDetails.title}
                 summary={methodDetails.summary}

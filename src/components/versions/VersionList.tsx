@@ -32,9 +32,9 @@ const VersionList = () => {
         }}
       >
         <Grid container spacing={5} sx={{ width: "100%" }}>
-          {Versions.map((version, index) => {
+          {Versions.map((version) => {
             return (
-              <Grid size={12}>
+              <Grid key={version.title} size={12}>
                 <Box sx={item}>
                   <VersionCard version={version} />
                 </Box>

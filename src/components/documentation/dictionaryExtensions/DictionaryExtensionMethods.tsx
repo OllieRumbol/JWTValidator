@@ -12,9 +12,9 @@ const DictionaryExtensionMethods = () => {
         Methods
       </Typography>
       <Grid container spacing={5} sx={{ width: "100%" }}>
-        {DictionaryExtensionMethodDetails.map((methodDetails, index) => {
+        {DictionaryExtensionMethodDetails.map((methodDetails) => {
           return (
-            <Grid size={12}>
+            <Grid key={methodDetails.title} size={12}>
               <DocumentationCard
                 title={methodDetails.title}
                 summary={methodDetails.summary}
