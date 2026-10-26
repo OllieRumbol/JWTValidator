@@ -80,7 +80,7 @@ Base branch: release/phase-1-foundation
     - MUI 9 resolves `@mui/icons-material/<Icon>` to an ES module, so the icons use per-icon imports again. This replaces the named imports in T2.
     - Compared with the T3 build and the old webpack build of `main` (the browser pane cannot open github.io): page and section heights match at 1280, 980 and 390 px.
     - Lists changed here have keys. `VersionCard`'s task list still has none, and release 2 rebuilds that page.
-    - Evidence: pull request #PR
+    - Evidence: pull request #18
 
 - [ ] **T5 — Add lint, format and the React Compiler**
   - Refs: plan 2 (type-checked files), plan 3.5 (lint and format, React), plan 9 (React Compiler packages)
