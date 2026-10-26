@@ -31,7 +31,7 @@ Base branch: release/phase-1-foundation
     - The ruleset applies to the new branch: pull request required, no force push.
     - Evidence: pull request #15
 
-- [ ] **T2 — Move the build to Vite and TypeScript 6.0**
+- [x] **T2 — Move the build to Vite and TypeScript 6.0**
   - Refs: plan 2 (base path, Node version, path alias, build manifest, TypeScript compiler options), plan 3.1, plan 3.5 (build tool, TypeScript), plan 8 (cleanup in release 1)
   - Depends on: T1
   - Done when:
@@ -43,7 +43,12 @@ Base branch: release/phase-1-foundation
     - `webpack.config.js`, `public/index.html`, `.babelrc` and the webpack, Babel, loader and `html-webpack-plugin` packages are removed. Images are imported through Vite, not `file-loader`.
     - The six current routes look and work as they did before.
   - Verify: `npm run typecheck && npm run build && npm run preview`, then open every current route at `http://localhost:4173/JWTValidator/` and compare with the live site. `git ls-files | grep -E "webpack|babelrc|^dist/|^examples/dist/"` prints nothing, and `git status --short` after the build shows no files under `dist/`.
-  - Notes: Keep React 18 and MUI 5 in this task. T3 and T4 upgrade them, so each change can be checked on its own. TypeScript moves here because the current React types need TypeScript 5.6 or later.
+  - Notes:
+    - React 18 and MUI 5 stay. TypeScript is 6.0.3. The six routes match the old build: same text, element counts and section heights.
+    - Also done here, because they depended on webpack, Babel or `dist/`: removed `main`, `transpile`, `prepublishOnly` and `peerDependencies` (T11 only confirms them), pointed `deploy` at `dist` (T9 removes it), and regenerated the lock file.
+    - `"type": "module"` removes Vite's CommonJS warning. It also makes default imports from CommonJS files return `module.exports`, so `HowItWorks.tsx` uses named icon imports.
+    - Left to later tasks: Node 12 in the old workflow and gh-pages (T9), `npm audit` (T13), type-checking `vite.config.ts` (T5), `@types/react-router-dom` (T3).
+    - Evidence: pull request #16
 
 - [ ] **T3 — Upgrade React to 19 and the router to 8**
   - Refs: plan 3.3 (routes), plan 3.5 (React, router), plan 9 (API changes), spec 4.1 item 13
@@ -438,4 +443,5 @@ None.
 ## Completed log
 
 - 2026-10-26 — T1
+- 2026-10-26 — T2
 
