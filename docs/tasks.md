@@ -48,7 +48,7 @@ Base branch: release/phase-1-foundation
     - Also done here, because they depended on webpack, Babel or `dist/`: removed `main`, `transpile`, `prepublishOnly` and `peerDependencies` (T11 only confirms them), pointed `deploy` at `dist` (T9 removes it), and regenerated the lock file.
     - `"type": "module"` removes Vite's CommonJS warning. It also makes default imports from CommonJS files return `module.exports`, so `HowItWorks.tsx` uses named icon imports.
     - Left to later tasks: Node 12 in the old workflow and gh-pages (T9), `npm audit` (T13), type-checking `vite.config.ts` (T5), `@types/react-router-dom` (T3).
-    - Evidence: pull request #PR
+    - Evidence: pull request #16
 
 - [ ] **T3 — Upgrade React to 19 and the router to 8**
   - Refs: plan 3.3 (routes), plan 3.5 (React, router), plan 9 (API changes), spec 4.1 item 13
