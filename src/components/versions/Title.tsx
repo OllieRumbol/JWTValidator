@@ -1,7 +1,7 @@
 import React from "react";
 import Typography from "@mui/material/Typography";
 import "../../style/title.css";
-import versionHistory from "../../assets/versions.jpg";
+import versionHistory from "../../assets/versions.webp";
 
 const Title = () => {
   return (

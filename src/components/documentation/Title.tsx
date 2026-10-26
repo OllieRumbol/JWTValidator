@@ -1,7 +1,7 @@
 import React from "react";
 import Typography from "@mui/material/Typography";
 import "../../style/shared.css";
-import documents from "../../assets/documents.jpg";
+import documents from "../../assets/documents.webp";
 
 const Title = () => {
   return (
