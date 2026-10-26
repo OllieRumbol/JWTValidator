@@ -4,9 +4,11 @@ import "../../style/title.css";
 import codeBackground from "../../assets/codeBackground.jpg";
 
 const Title = () => {
-
   return (
-    <div className="article" style={{ backgroundImage: `url(${codeBackground})` }}>
+    <div
+      className="article"
+      style={{ backgroundImage: `url(${codeBackground})` }}
+    >
       <Typography className="header bold shadow" variant="h1" gutterBottom>
         JWT Validator
       </Typography>

@@ -36,7 +36,7 @@ const versions = [
       {
         name: "Combined models project into service project",
         isComplete: true,
-      }
+      },
     ],
   },
   {
@@ -60,7 +60,7 @@ const versions = [
       {
         name: "Unit tests",
         isComplete: true,
-      }
+      },
     ],
   },
   {
@@ -84,31 +84,29 @@ const versions = [
       {
         name: "Unit tests",
         isComplete: true,
-      }
+      },
     ],
   },
   {
     title: "1.0.4 - Planning",
     status: "in progress",
-    description:
-      "Not yet planned",
+    description: "Not yet planned",
     tasks: [
       {
         name: "N/A",
         isComplete: false,
-      }
+      },
     ],
   },
   {
     title: "1.0.5 - Future",
     status: "to do",
-    description:
-      "Not yet planned",
+    description: "Not yet planned",
     tasks: [
       {
         name: "N/A",
         isComplete: false,
-      }
+      },
     ],
   },
 ];

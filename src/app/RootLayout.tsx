@@ -71,7 +71,8 @@ const RootLayout = () => {
               </Button>
               <Popper
                 open={open}
-                anchorEl={anchorRef.current}
+                // A function, so the ref is read after render, as the React Compiler requires.
+                anchorEl={() => anchorRef.current!}
                 role={undefined}
                 placement="bottom-start"
                 transition

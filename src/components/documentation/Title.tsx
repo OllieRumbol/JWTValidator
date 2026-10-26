@@ -4,7 +4,6 @@ import "../../style/shared.css";
 import documents from "../../assets/documents.jpg";
 
 const Title = () => {
-  
   return (
     <div className="article" style={{ backgroundImage: `url(${documents})` }}>
       <Typography className="header bold shadow" variant="h1" gutterBottom>
