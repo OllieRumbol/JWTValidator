@@ -34,11 +34,10 @@
     "vite": "^8.3.5"
   },
   "dependencies": {
-    "@emotion/react": "^11.10.4",
-    "@emotion/styled": "^11.10.4",
-    "@fontsource/roboto": "^4.5.8",
-    "@mui/icons-material": "^5.10.6",
-    "@mui/material": "^5.10.8",
+    "@emotion/react": "^11.14.0",
+    "@emotion/styled": "^11.14.1",
+    "@mui/icons-material": "^9.5.0",
+    "@mui/material": "^9.5.0",
     "react-router": "^8.5.0",
     "react-syntax-highlighter": "^15.5.0"
   },

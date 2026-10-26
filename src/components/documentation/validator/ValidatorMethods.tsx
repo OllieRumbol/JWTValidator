@@ -11,10 +11,10 @@ const ValidatorMethods = () => {
       <Typography variant="h2" component="h2" sx={{ mb: 3 }}>
         Methods
       </Typography>
-      <Grid container spacing={5}>
+      <Grid container spacing={5} sx={{ width: "100%" }}>
         {ValidatorMethodDetails.map((methodDetails, index) => {
           return (
-            <Grid item xs={12}>
+            <Grid size={12}>
               <DocumentationCard
                 title={methodDetails.title}
                 summary={methodDetails.summary}

@@ -3,8 +3,7 @@ import Container from "@mui/material/Container";
 import Grid from "@mui/material/Grid";
 import Box from "@mui/material/Box";
 import Versions from "./Versions";
-import { Theme } from "@mui/material/styles";
-import { SxProps } from "@mui/system";
+import { SxProps, Theme } from "@mui/material/styles";
 import "../../style/shared.css";
 import VersionCard from "./VersionCard";
 
@@ -32,10 +31,10 @@ const VersionList = () => {
           alignItems: "center",
         }}
       >
-        <Grid container spacing={5}>
+        <Grid container spacing={5} sx={{ width: "100%" }}>
           {Versions.map((version, index) => {
             return (
-              <Grid item xs={12} md={12} lg={12}>
+              <Grid size={12}>
                 <Box sx={item}>
                   <VersionCard version={version} />
                 </Box>

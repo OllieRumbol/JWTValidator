@@ -12,8 +12,8 @@ const BuilderDocumentsCodeExample = () => {
       <Typography variant="h2" component="h2" sx={{ mb: 3 }}>
         Code example
       </Typography>
-      <Grid container spacing={5}>
-        <Grid item xs={12} md={6}>
+      <Grid container spacing={5} sx={{ width: "100%" }}>
+        <Grid size={{ xs: 12, md: 6 }}>
           <Typography variant="h4" component="h4" align="center" sx={{ mb: 3 }}>
             Symmetric Key Encryption
           </Typography>
@@ -31,7 +31,7 @@ const BuilderDocumentsCodeExample = () => {
             </SyntaxHighlighter>
           </Typography>
         </Grid>
-        <Grid item xs={12} md={6}>
+        <Grid size={{ xs: 12, md: 6 }}>
           <Typography variant="h4" component="h4" align="center" sx={{ mb: 3 }}>
             Asymmetric Key Encryption
           </Typography>
