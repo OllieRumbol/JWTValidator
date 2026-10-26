@@ -2,8 +2,7 @@ import React from "react";
 import "../../../style/shared.css";
 import Panel from "../../shared/Panel";
 import Typography from "@mui/material/Typography";
-import SyntaxHighlighter from "react-syntax-highlighter";
-import { vs2015 } from "react-syntax-highlighter/dist/esm/styles/hljs";
+import SyntaxHighlighter, { vs2015 } from "../../shared/SyntaxHighlighter";
 import Grid from "@mui/material/Grid";
 
 const BuilderDocumentsCodeExample = () => {

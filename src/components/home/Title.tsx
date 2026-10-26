@@ -1,7 +1,7 @@
 import React from "react";
 import Typography from "@mui/material/Typography";
 import "../../style/title.css";
-import codeBackground from "../../assets/codeBackground.jpg";
+import codeBackground from "../../assets/codeBackground.webp";
 
 const Title = () => {
   return (

@@ -1,8 +1,7 @@
 import React from "react";
 import Typography from "@mui/material/Typography";
 import Panel from "../../shared/Panel";
-import SyntaxHighlighter from "react-syntax-highlighter";
-import { vs2015 } from "react-syntax-highlighter/dist/esm/styles/hljs";
+import SyntaxHighlighter, { vs2015 } from "../../shared/SyntaxHighlighter";
 
 const DictionaryExtensionCodeSample = () => {
   return (

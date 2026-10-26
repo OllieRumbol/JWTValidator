@@ -98,7 +98,7 @@ Base branch: release/phase-1-foundation
     - Lint fixes only: unused values, a key on VersionCard's static list, and the Popper `anchorEl` read during render. Pages match T3 at 1280 and 390 px.
     - Evidence: pull request #19
 
-- [ ] **T6 — Meet the size limits**
+- [x] **T6 — Meet the size limits**
   - Refs: spec 6.6.2, spec 6.2.5, plan 3.5 (syntax highlighting, images, split pages), plan 7.1 (sizes, Lighthouse), plan 7.2 test 14
   - Depends on: T5
   - Done when:
@@ -108,7 +108,12 @@ Base branch: release/phase-1-foundation
     - `npm run check-size` passes. If that needed lazy routes, Notes says so.
     - A Lighthouse mobile run on Home and the Builder page scores at least 90 for performance, and the scores are in the pull request.
   - Verify: `npm run build && npm run check-size`. Then make one image too large on purpose, run it again, see it fail, and undo the change.
-  - Notes: Convert the images once with `npx sharp-cli`. Release 2 removes them (plan 3.5, images).
+  - Notes:
+    - Images converted once with `npx sharp-cli -f webp -q 60 resize 1600`. At 1920 px, `documents.webp` stayed over 200 KB even at quality 50. Release 2 removes them (plan 3.5, images).
+    - The highlighter is imported only through `src/components/shared/SyntaxHighlighter.ts`. Lint rejects any other import of `react-syntax-highlighter` in `src/`.
+    - No lazy routes were needed. First-load JavaScript is 187.5 KB gzipped (465 KB before). `check-size` does not count a chunk that a lazy route loads lazily.
+    - Lighthouse 13.5 mobile: Home 97, Builder 92 (three runs).
+    - Evidence: pull request #20
 
 - [ ] **T7 — Set up component and end-to-end tests**
   - Refs: plan 7.1, plan 7.2 tests 13 and 20, spec 6.5, spec 6.6.2 item 4, spec 6.6.4 items 1 and 2, plan 3.5 (split pages)
@@ -462,4 +467,5 @@ None.
 - 2026-10-26 — T3
 - 2026-10-26 — T4
 - 2026-10-26 — T5
+- 2026-10-26 — T6
 
