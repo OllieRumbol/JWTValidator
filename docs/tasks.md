@@ -142,7 +142,10 @@ Base branch: release/phase-1-foundation
     - The pull request for this task shows the three jobs passing.
     - The maintainer has added `build`, `e2e` and `examples` as required checks to "Protect release branches" only. "Protect main" gets them in T13 (plan 8).
   - Verify: `powershell -File examples/build-examples.ps1` passes locally. `gh pr checks <number>` shows `build`, `e2e` and `examples` passing. `gh api repos/OllieRumbol/JWTValidator/rules/branches/release/phase-1-foundation` lists a `required_status_checks` rule with the three checks.
-  - Notes: The `examples` job looks only for `.cs` files.
+  - Notes:
+    - The `examples` job looks only for `.cs` files. Until T26 adds the compile step, the script fails when it finds one, so no example passes without being compiled.
+    - On pull requests into `release/**` and on pushes, a failed `npm audit` is a warning annotation, and the job passes.
+    - Checkpoint: pull request #22 is open, and its three jobs pass. Next: the maintainer merges it and adds the three required checks. Then the `gh api` check in Verify runs, and a follow-up pull request ticks T8.
 
 - [ ] **T9 — Deploy with GitHub's Pages actions**
   - Refs: spec 6.1.11 items 3 to 5, plan 3.5 (deployment), plan 8 (`deploy.yml`, Pages source, Pages environment), plan 6 (pipeline token, old secrets)
