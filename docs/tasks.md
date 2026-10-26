@@ -115,7 +115,7 @@ Base branch: release/phase-1-foundation
     - Lighthouse 13.5 mobile: Home 97, Builder 92 (three runs).
     - Evidence: pull request #20
 
-- [ ] **T7 — Set up component and end-to-end tests**
+- [x] **T7 — Set up component and end-to-end tests**
   - Refs: plan 7.1, plan 7.2 tests 13 and 20, spec 6.5, spec 6.6.2 item 4, spec 6.6.4 items 1 and 2, plan 3.5 (split pages)
   - Depends on: T6
   - Done when:
@@ -124,7 +124,12 @@ Base branch: release/phase-1-foundation
     - Plan 7.2 test 13 exists and passes on every current route: no request to another host, no cookies, and at most 500 KB sent over the network, measured as plan 7.1 says.
     - If the site uses lazy routes, `RouteFallback` shows the loading and failure messages in spec 6.5, and plan 7.2 test 20 passes.
   - Verify: `npm test && npm run build && npm run e2e`
-  - Notes: The accessibility tests start in release 2 (plan 7.1).
+  - Notes:
+    - The accessibility tests start in release 2 (plan 7.1).
+    - Component tests build their own memory router from the `routes` that `src/app/router.tsx` exports.
+    - Test 13 lists the six current addresses itself. T18 adds its new routes to that list. Sent today: Home 233 KB, Versions 282 KB, each docs page 386 KB.
+    - No lazy routes (T6), so test 20 and `RouteFallback` are not needed.
+    - Evidence: pull request #PR
 
 - [ ] **T8 — Check every pull request**
   - Refs: spec 6.1.11 items 1 and 2, plan 8 (`ci.yml`, required checks), plan 3.5 (example compilation), plan 6 (pipeline token, third-party actions)
@@ -468,4 +473,5 @@ None.
 - 2026-10-26 — T4
 - 2026-10-26 — T5
 - 2026-10-26 — T6
+- 2026-10-26 — T7
 
