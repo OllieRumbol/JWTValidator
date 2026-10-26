@@ -4,9 +4,11 @@ import "../../style/title.css";
 import versionHistory from "../../assets/versions.jpg";
 
 const Title = () => {
-  
   return (
-    <div className="article" style={{ backgroundImage: `url(${versionHistory})` }}>
+    <div
+      className="article"
+      style={{ backgroundImage: `url(${versionHistory})` }}
+    >
       <Typography className="header bold shadow" variant="h1" gutterBottom>
         Versions
       </Typography>

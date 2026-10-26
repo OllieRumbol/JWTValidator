@@ -22,7 +22,11 @@ const VersionNotice = () => {
         documentation is coming soon. Until then, read the{" "}
         <a
           href="https://www.nuget.org/packages/JWTValidator"
-          style={{ color: "#A8174D", fontWeight: 600, textDecoration: "underline" }}
+          style={{
+            color: "#A8174D",
+            fontWeight: 600,
+            textDecoration: "underline",
+          }}
         >
           README and release notes on nuget.org
         </a>

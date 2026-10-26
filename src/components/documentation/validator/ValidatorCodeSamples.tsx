@@ -32,7 +32,7 @@ if (new JWTValidator().TryValidateJWT(JWT, jWTValidatorOptions, out Dictionary<s
           style={vs2015}
           showLineNumbers={true}
         >
-{`string JWT = "....";
+          {`string JWT = "....";
 JWTValidatorOptions jWTValidatorOptions = ...
 
 Dictionary<string, List<string>> result = new JWTValidator().ValidateJWT(JWT, jWTValidatorOptions);

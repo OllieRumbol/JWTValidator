@@ -18,7 +18,10 @@ const router = createHashRouter([
       { path: "documentation/builder", element: <BuilderDocuments /> },
       { path: "documentation/validator", element: <ValidatorPage /> },
       { path: "documentation/expiry", element: <ExpiryCheckerPage /> },
-      { path: "documentation/dictionary", element: <DictionaryExtensionsPage /> },
+      {
+        path: "documentation/dictionary",
+        element: <DictionaryExtensionsPage />,
+      },
       // Keeps the header and footer on an unknown address, as before. Without it the
       // router shows its own error page. Release 2 replaces it with "Page not found".
       // The element is null, not missing, because the router warns about a leaf route

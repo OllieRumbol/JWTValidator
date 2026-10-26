@@ -4,15 +4,7 @@ import Panel from "../../shared/Panel";
 import Typography from "@mui/material/Typography";
 import DocumentationCard from "../DocumentationCard";
 import Grid from "@mui/material/Grid";
-import { SxProps, Theme } from "@mui/material/styles";
 import BuilderMethods from "./BuilderMethods";
-
-const item: SxProps<Theme> = {
-  display: "flex",
-  flexDirection: "column",
-  alignItems: "center",
-  px: 3,
-};
 
 const BuilderDocumentsMethods = () => {
   return (

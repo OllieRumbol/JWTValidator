@@ -12,7 +12,8 @@ const ValidatorMethodDetails = [
   },
   {
     title: ".TryValidateJWT()",
-    summary: "The .TryValidateJWT() method is very similar to the .ValidateJWT() method. However, it makes use of the TryGet pattern to help better deal with exceptions and create a better technical flow for developers.",
+    summary:
+      "The .TryValidateJWT() method is very similar to the .ValidateJWT() method. However, it makes use of the TryGet pattern to help better deal with exceptions and create a better technical flow for developers.",
     syntax:
       "public bool TryValidateJWT(string jwt, JWTValidatorOptions options, out Dictionary<string, List<string>> result)",
     parameters:

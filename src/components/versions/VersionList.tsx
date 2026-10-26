@@ -15,7 +15,6 @@ const item: SxProps<Theme> = {
 };
 
 const VersionList = () => {
-
   return (
     <Box
       component="section"
