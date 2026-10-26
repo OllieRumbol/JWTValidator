@@ -1,0 +1,86 @@
+# Checks every pull request into main or a release branch, and every push to them (plan section 8).
+name: CI
+
+on:
+  pull_request:
+    branches: [main, "release/**"]
+  push:
+    branches: [main, "release/**"]
+
+permissions:
+  contents: read
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v7
+        with:
+          # No later step needs the token, so it is not left in .git/config.
+          persist-credentials: false
+      - uses: actions/setup-node@v7
+        with:
+          node-version-file: .nvmrc
+          cache: npm
+      - run: npm ci
+      - run: npm run typecheck
+      - run: npm run lint
+      - run: npm run format:check
+      - run: npm test
+      - run: npm run build
+      - run: npm run check-size
+      # A known vulnerability blocks a release into main. On task pull requests and
+      # pushes it is reported as a warning, so a new advisory does not block unrelated work.
+      - name: npm audit
+        env:
+          FAIL_ON_AUDIT: ${{ github.event_name == 'pull_request' && github.base_ref == 'main' }}
+        run: |
+          if npm audit; then
+            exit 0
+          fi
+          if [ "$FAIL_ON_AUDIT" = "true" ]; then
+            exit 1
+          fi
+          echo "::warning title=npm audit::Known vulnerabilities found. They will block the release pull request into main."
+      - uses: actions/upload-artifact@v7
+        with:
+          name: dist
+          path: dist
+
+  e2e:
+    needs: build
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v7
+        with:
+          # No later step needs the token, so it is not left in .git/config.
+          persist-credentials: false
+      - uses: actions/setup-node@v7
+        with:
+          node-version-file: .nvmrc
+          cache: npm
+      - run: npm ci
+      - uses: actions/download-artifact@v8
+        with:
+          name: dist
+          path: dist
+      - run: npx playwright install --with-deps chromium
+      # playwright.config.ts starts `vite preview` on the downloaded dist folder.
+      - run: npm run e2e
+      - if: failure()
+        uses: actions/upload-artifact@v7
+        with:
+          name: playwright-report
+          path: playwright-report
+
+  examples:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v7
+        with:
+          # No later step needs the token, so it is not left in .git/config.
+          persist-credentials: false
+      - uses: actions/setup-dotnet@v6
+        with:
+          dotnet-version: 10.0.x
+      - run: pwsh examples/build-examples.ps1
