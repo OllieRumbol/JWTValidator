@@ -131,7 +131,7 @@ Base branch: release/phase-1-foundation
     - No lazy routes (T6), so test 20 and `RouteFallback` are not needed.
     - Evidence: pull request #21
 
-- [ ] **T8 — Check every pull request**
+- [x] **T8 — Check every pull request**
   - Refs: spec 6.1.11 items 1 and 2, plan 8 (`ci.yml`, required checks), plan 3.5 (example compilation), plan 6 (pipeline token, third-party actions)
   - Depends on: T7
   - Done when:
@@ -145,7 +145,9 @@ Base branch: release/phase-1-foundation
   - Notes:
     - The `examples` job looks only for `.cs` files. Until T26 adds the compile step, the script fails when it finds one, so no example passes without being compiled.
     - On pull requests into `release/**` and on pushes, a failed `npm audit` is a warning annotation, and the job passes.
-    - Checkpoint: pull request #22 is open, and its three jobs pass. Next: the maintainer merges it and adds the three required checks. Then the `gh api` check in Verify runs, and a follow-up pull request ticks T8.
+    - "Protect release branches" requires `build`, `e2e` and `examples` since 2026-10-26, checked with the `gh api` command in Verify.
+    - `npm audit` also reports a moderate `prismjs` chain through `react-syntax-highlighter`. T13 needs a clean audit.
+    - Evidence: pull request #22
 
 - [ ] **T9 — Deploy with GitHub's Pages actions**
   - Refs: spec 6.1.11 items 3 to 5, plan 3.5 (deployment), plan 8 (`deploy.yml`, Pages source, Pages environment), plan 6 (pipeline token, old secrets)
@@ -477,4 +479,5 @@ None.
 - 2026-10-26 — T5
 - 2026-10-26 — T6
 - 2026-10-26 — T7
+- 2026-10-26 — T8
 
