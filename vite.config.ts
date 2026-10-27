@@ -3,12 +3,17 @@ import { fileURLToPath, URL } from "node:url";
 import { defineConfig } from "vite";
 import react, { reactCompilerPreset } from "@vitejs/plugin-react";
 import babel from "@rolldown/plugin-babel";
+import contentSecurityPolicy from "./scripts/csp";
 
 export default defineConfig({
   // GitHub Pages serves the site from https://ollierumbol.github.io/JWTValidator/.
   base: "/JWTValidator/",
   // The React Compiler runs through Babel. The plugin's Rust compiler is still experimental.
-  plugins: [react(), babel({ presets: [reactCompilerPreset()] })],
+  plugins: [
+    react(),
+    babel({ presets: [reactCompilerPreset()] }),
+    contentSecurityPolicy(),
+  ],
   resolve: {
     alias: {
       "@": fileURLToPath(new URL("./src", import.meta.url)),
