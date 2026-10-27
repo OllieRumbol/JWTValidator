@@ -176,8 +176,8 @@ Base branch: release/phase-1-foundation
   - Notes:
     - The image is the light wordmark from `docs/design/logo.html`, scaled about 3.3 times on Surface `#F7F6FB`, rendered once with `npx playwright screenshot` at 1200 x 630 (17.3 KB).
     - The policy tag is first in the built `<head>`. `<meta charset>` follows it, still within the first 1,024 bytes.
-    - Playwright's `getByText` skips text inside `<noscript>`, so test 12 finds the message by its role.
     - The real link preview can only be checked on the live site, after the phase 1 deploy (T13).
+    - Evidence: pull request #25
 
 - [ ] **T11 — Add the README and the licence, and remove stale settings**
   - Refs: spec 6.1.11 items 7 and 8, spec 4.1 item 14, plan 8 (cleanup in release 1), plan 9 (React Compiler packages)
