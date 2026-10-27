@@ -156,7 +156,9 @@ Base branch: release/phase-1-foundation
     - `.github/workflows/deploy.yml` runs on pushes to `main` and by `workflow_dispatch`: build, upload the Pages artifact, deploy. Only the deploy job has `pages: write` and `id-token: write`. It sets `concurrency` so one deploy runs at a time, and sets up Node from `.nvmrc`.
     - `.github/workflows/main_deploy.yml`, the `gh-pages` package and the `deploy` and `publish-demo` scripts are removed.
   - Verify: `actionlint` 1.7.12, the binary from the official `rhysd/actionlint` GitHub release, reports no errors on both workflows. The real deploy is checked in T13.
-  - Notes: The deploy can only run from `main`, so T13 checks it after the phase 1 merge.
+  - Notes:
+    - The deploy can only run from `main`, so T13 checks it after the phase 1 merge.
+    - Checkpoint: pull request #24 is open. The task-reviewer found no code defect, and the code review's one fix is in (the deploy runs only from `main`, also by hand). Next: the maintainer runs `actionlint` 1.7.12 on both workflows, because this session's permission check blocked running a downloaded binary. Then T9 is ticked on the same branch.
 
 - [ ] **T10 — Add page metadata and the security policy**
   - Refs: spec 6.1.9, spec 6.6.4 item 2, spec 6.7 (JavaScript off), plan 3.5 (shared-link preview, content security policy, no JavaScript), plan 2 (site address), plan 3.6 (logo), plan 7.2 tests 12 and 19
