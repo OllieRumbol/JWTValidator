@@ -17,6 +17,9 @@ concurrency:
 
 jobs:
   build:
+    # Only main is deployed, also when the workflow is run by hand from another branch.
+    # The deploy job needs this one, so it is skipped too.
+    if: github.ref == 'refs/heads/main'
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v7
