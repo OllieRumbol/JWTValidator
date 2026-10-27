@@ -50,5 +50,12 @@ test("has the content security policy before anything it covers", async ({
   const policy = page.locator(
     'head > meta[http-equiv="Content-Security-Policy"]:first-child',
   );
-  await expect(policy).toHaveAttribute("content", /default-src 'self'/);
+  const content = (await policy.getAttribute("content")) ?? "";
+  const directives = content.split(";").map((directive) => directive.trim());
+
+  // Only the site's own origin, for everything spec section 6.6.4, item 2 names.
+  for (const name of ["script-src", "img-src", "font-src", "connect-src"]) {
+    expect(directives).toContain(`${name} 'self'`);
+  }
+  expect(directives).toContain("style-src 'self' 'unsafe-inline'");
 });

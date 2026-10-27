@@ -163,7 +163,7 @@ Base branch: release/phase-1-foundation
     - The maintainer deletes the `TOKEN`, `EMAIL` and `USERNAME` secrets and the `gh-pages` branch after the first deploy (plan 6).
     - Evidence: pull request #24
 
-- [ ] **T10 — Add page metadata and the security policy**
+- [x] **T10 — Add page metadata and the security policy**
   - Refs: spec 6.1.9, spec 6.6.4 item 2, spec 6.7 (JavaScript off), plan 3.5 (shared-link preview, content security policy, no JavaScript), plan 2 (site address), plan 3.6 (logo), plan 7.2 tests 12 and 19
   - Depends on: T8
   - Done when:
@@ -173,7 +173,11 @@ Base branch: release/phase-1-foundation
     - Every current page still works on `npm run preview`, with no policy errors in the browser console, and `npm run dev` still works.
     - Plan 7.2 tests 12 and 19 exist and pass.
   - Verify: `npm run build && npm run e2e`, then open every route on `npm run preview` and on `npm run dev` with the console open.
-  - Notes: Draw the image with a script like the one used for the package icon (`System.Drawing` in PowerShell), or take it from `docs/design/logo.html`. Record which in Notes.
+  - Notes:
+    - The image is the light wordmark from `docs/design/logo.html`, scaled about 3.3 times on Surface `#F7F6FB`, rendered once with `npx playwright screenshot` at 1200 x 630 (17.3 KB).
+    - The policy tag is first in the built `<head>`. `<meta charset>` follows it, still within the first 1,024 bytes.
+    - Playwright's `getByText` skips text inside `<noscript>`, so test 12 finds the message by its role.
+    - The real link preview can only be checked on the live site, after the phase 1 deploy (T13).
 
 - [ ] **T11 — Add the README and the licence, and remove stale settings**
   - Refs: spec 6.1.11 items 7 and 8, spec 4.1 item 14, plan 8 (cleanup in release 1), plan 9 (React Compiler packages)
@@ -486,4 +490,5 @@ None.
 - 2026-10-26 — T7
 - 2026-10-26 — T8
 - 2026-10-27 — T9
+- 2026-10-27 — T10
 
