@@ -10,7 +10,9 @@
     "forceConsistentCasingInFileNames": true,
     "noFallthroughCasesInSwitch": true,
     "isolatedModules": true,
-    "noEmit": true
+    "noEmit": true,
+    // Vite's native config loader needs the extension on vite.config.ts imports.
+    "allowImportingTsExtensions": true
   },
   "include": ["vite.config.ts", "playwright.config.ts", "scripts", "e2e"]
 }
