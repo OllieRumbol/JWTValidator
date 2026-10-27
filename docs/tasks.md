@@ -149,7 +149,7 @@ Base branch: release/phase-1-foundation
     - `npm audit` also reports a moderate `prismjs` chain through `react-syntax-highlighter`. T13 needs a clean audit.
     - Evidence: pull request #22
 
-- [ ] **T9 — Deploy with GitHub's Pages actions**
+- [x] **T9 — Deploy with GitHub's Pages actions**
   - Refs: spec 6.1.11 items 3 to 5, plan 3.5 (deployment), plan 8 (`deploy.yml`, Pages source, Pages environment), plan 6 (pipeline token, old secrets)
   - Depends on: T8
   - Done when:
@@ -158,7 +158,10 @@ Base branch: release/phase-1-foundation
   - Verify: `actionlint` 1.7.12, the binary from the official `rhysd/actionlint` GitHub release, reports no errors on both workflows. The real deploy is checked in T13.
   - Notes:
     - The deploy can only run from `main`, so T13 checks it after the phase 1 merge.
-    - Checkpoint: pull request #24 is open. The task-reviewer found no code defect, and the code review's one fix is in (the deploy runs only from `main`, also by hand). Next: the maintainer runs `actionlint` 1.7.12 on both workflows, because this session's permission check blocked running a downloaded binary. Then T9 is ticked on the same branch.
+    - The build job runs only for `main`, so a manual run from another branch deploys nothing.
+    - `actionlint` 1.7.12 reported no errors on both workflows (run by the maintainer, exit 0).
+    - The maintainer deletes the `TOKEN`, `EMAIL` and `USERNAME` secrets and the `gh-pages` branch after the first deploy (plan 6).
+    - Evidence: pull request #24
 
 - [ ] **T10 — Add page metadata and the security policy**
   - Refs: spec 6.1.9, spec 6.6.4 item 2, spec 6.7 (JavaScript off), plan 3.5 (shared-link preview, content security policy, no JavaScript), plan 2 (site address), plan 3.6 (logo), plan 7.2 tests 12 and 19
@@ -482,4 +485,5 @@ None.
 - 2026-10-26 — T6
 - 2026-10-26 — T7
 - 2026-10-26 — T8
+- 2026-10-27 — T9
 
