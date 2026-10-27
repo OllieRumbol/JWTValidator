@@ -3,7 +3,7 @@ import { fileURLToPath, URL } from "node:url";
 import { defineConfig } from "vite";
 import react, { reactCompilerPreset } from "@vitejs/plugin-react";
 import babel from "@rolldown/plugin-babel";
-import contentSecurityPolicy from "./scripts/csp";
+import contentSecurityPolicy from "./scripts/csp.ts";
 
 export default defineConfig({
   // GitHub Pages serves the site from https://ollierumbol.github.io/JWTValidator/.
