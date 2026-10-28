@@ -193,13 +193,16 @@ Base branch: release/phase-1-foundation
     - The README describes the site at the end of release 1, including the checks on `main` from T13. T24 and T26 update it for their phases.
     - Evidence: pull request #26
 
-- [ ] **T12 — Record the hash routing decision**
+- [x] **T12 — Record the hash routing decision**
   - Refs: plan 3.5 (ADRs, router), spec 3 non-goals
   - Depends on: T1
   - Done when:
     - `docs/adr/0001-hash-routing-on-github-pages.md` records the context, the decision and the consequences, including that search engines index one page.
   - Verify: The maintainer reads the ADR.
-  - Notes: Checkpoint: pull request #27 is open with the ADR. Next: the maintainer reads it and approves it or asks for changes. Then T12 is ticked on the same branch.
+  - Notes:
+    - The maintainer read and accepted the ADR on 2026-10-28, after comparing the other options. The two options raised then are in its "Options rejected" table.
+    - Checked with `curl`: a `404.html` fallback on GitHub Pages answers 404, and a folder's `index.html` answers 200.
+    - Evidence: pull request #27
 
 - [ ] **T13 — Release phase 1 (maintainer)**
   - Refs: spec 6.1.10 items 4 to 6, spec 6.1.11 items 2 to 4, spec 6.1.12, spec 6.6.2, spec 6.6.3 item 3, plan 5 (releases), plan 8 (Pages source, Pages environment, required checks), plan 9 (TypeScript, Node), plan 6 (old secrets)
@@ -496,4 +499,5 @@ None.
 - 2026-10-27 — T9
 - 2026-10-27 — T10
 - 2026-10-28 — T11
+- 2026-10-28 — T12
 
