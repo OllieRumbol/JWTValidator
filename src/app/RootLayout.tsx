@@ -14,8 +14,12 @@ import MenuList from "@mui/material/MenuList";
 import ClickAwayListener from "@mui/material/ClickAwayListener";
 import MenuItem from "@mui/material/MenuItem";
 import VersionNotice from "@/components/shared/VersionNotice";
+import theme from "@/app/theme";
 
 const darkTheme = createTheme({
+  // Keeps the design tokens available to new components on old pages, until T17
+  // rebuilds this layout and removes this theme.
+  tokens: theme.tokens,
   palette: {
     mode: "dark",
     primary: {

@@ -59,8 +59,9 @@ const theme = createTheme({
 export function globalStyles(theme: Theme): CSSObject {
   return {
     body: { fontFamily: theme.tokens.fontSans },
-    // Keyboard focus on every focusable part (plan section 3.6, WCAG 2.2, 2.4.7).
-    ":focus-visible": {
+    // Keyboard focus on every focusable part (plan section 3.6, WCAG 2.2, 2.4.7). The
+    // "html" makes this rule win over MUI's "outline: 0" on buttons.
+    "html :focus-visible": {
       outline: `2px solid ${theme.tokens.focusRing}`,
       outlineOffset: "2px",
     },

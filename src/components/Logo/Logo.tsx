@@ -56,6 +56,7 @@ const Logo = ({ size = "medium" }: LogoProps) => {
         component="span"
         sx={(theme) => ({
           color: theme.tokens.text,
+          fontFamily: theme.tokens.fontSans,
           fontWeight: 700,
           fontSize,
           letterSpacing: "-0.01em",

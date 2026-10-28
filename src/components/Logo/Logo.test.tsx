@@ -38,4 +38,13 @@ describe("Logo", () => {
       fontWeight: "700",
     });
   });
+
+  test("draws the header size by default, as in home.html", () => {
+    renderLogo();
+
+    screen.getAllByTestId("logo-bar").forEach((bar) => {
+      expect(bar).toHaveStyle({ width: "10px", height: "24px" });
+    });
+    expect(screen.getByText("JWT Validator")).toHaveStyle({ fontSize: "20px" });
+  });
 });
