@@ -255,7 +255,12 @@ Base branch: release/phase-2-redesign
     - A global rule removes transitions and animations when the reader asks for reduced motion.
     - `npm run check-size` and plan 7.2 test 13 still pass.
   - Verify: `npm run build && npm run check-size && npm run e2e`
-  - Notes: Plan 7.2 test 18 needs the menu, so T17 adds it. Old components keep their colours until T21 and T22 replace them.
+  - Notes:
+    - Plan 7.2 test 18 needs the menu, so T17 adds it. Old components keep their colours until T21 and T22 replace them.
+    - The theme and the global rules are applied at the root (`src/main.tsx`). The old `RootLayout` still wraps every page in its own dark MUI theme, so old pages keep their colours and Roboto headings. Only plain body text uses Plex. T17 removes that dark theme when it rebuilds `RootLayout`.
+    - The tokens are on `theme.tokens`. MUI's `primary`, `text`, `background` and `divider` use them. `success` and `info` are not set, so the old Alerts do not change.
+    - `public/favicon.ico` is the light package icon from `docs/design/logo.html` at 32 and 64 px, drawn with Playwright and packed into one ICO file (1.8 KB).
+    - `Logo` has the `large` size (`logo.png`) and the `medium` size (header). The footer's smaller bars are for T17. Reduced motion sets every duration to 0. A Playwright probe showed the menu at 0.285 s, and 0 s with reduced motion.
 
 - [ ] **T16 — Add the content data**
   - Refs: plan 3.4 (data model, docs pages), plan 3.1 (`src/content/`), plan 2 (links, latest version), spec 6.1.6, spec 6.2.4, plan 7.2 tests 4 and 5
