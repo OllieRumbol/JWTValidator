@@ -245,7 +245,7 @@ Base branch: release/phase-2-redesign
     - "Protect release branches" applies at once: no force-push, pull requests only, and the `build`, `e2e` and `examples` checks.
     - Evidence: pull request #31
 
-- [ ] **T15 — Add the theme, fonts and logo**
+- [x] **T15 — Add the theme, fonts and logo**
   - Refs: plan 3.6 (tokens, breakpoints), plan 3.5 (fonts, reduced motion, favicon), plan 3.1 (`theme.ts`, `Logo`), spec 6.6.4 item 2, spec 6.7 (reduced motion), `docs/design/logo.png`
   - Depends on: T14
   - Done when:
@@ -255,7 +255,12 @@ Base branch: release/phase-2-redesign
     - A global rule removes transitions and animations when the reader asks for reduced motion.
     - `npm run check-size` and plan 7.2 test 13 still pass.
   - Verify: `npm run build && npm run check-size && npm run e2e`
-  - Notes: Plan 7.2 test 18 needs the menu, so T17 adds it. Old components keep their colours until T21 and T22 replace them.
+  - Notes:
+    - Theme and global rules are applied in `src/main.tsx`. The old `RootLayout` still wraps every page in its own dark theme, so old pages keep their colours and Roboto headings. That theme now carries `tokens` too, so new components work on old pages. T17 removes it. Test 18 is in T17.
+    - The focus ring selector is `html :focus-visible`, because MUI's `outline: 0` on buttons beat `:focus-visible` (a Playwright probe showed `none`). With it, every link and button showed the ring on Tab, and none on a mouse click.
+    - `Logo` has `large` (`logo.png`) and `medium` (header) sizes. T17 adds the phone header size (bars 8 x 20 px, name 18 px, `phone.html`) and the footer's bars. Reduced motion took the old menu's transition from 0.285 s to 0 s.
+    - `public/favicon.ico` is the light package icon from `logo.html` at 32 and 64 px, drawn with Playwright by a one-off script that is not in the repository. To change it, draw it again from `logo.html`.
+    - Evidence: pull request #32
 
 - [ ] **T16 — Add the content data**
   - Refs: plan 3.4 (data model, docs pages), plan 3.1 (`src/content/`), plan 2 (links, latest version), spec 6.1.6, spec 6.2.4, plan 7.2 tests 4 and 5
@@ -510,4 +515,5 @@ None.
 - 2026-10-28 — T12
 - 2026-10-28 — T13
 - 2026-10-28 — T14
+- 2026-10-28 — T15
 
