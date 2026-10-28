@@ -54,16 +54,17 @@ The React Compiler runs through Babel. It needs these three packages, which `npm
 
 These are the checks that run on every pull request:
 
-| Command                                        | What it does                                                                                  |
-| ---------------------------------------------- | --------------------------------------------------------------------------------------------- |
-| `npm run typecheck`                            | Type checks the site, the tests and the scripts                                               |
-| `npm run lint`                                 | Runs ESLint. Any warning fails.                                                               |
-| `npm run format:check`                         | Checks the formatting. `npm run format` fixes it.                                             |
-| `npm test`                                     | Runs the component tests                                                                      |
-| `npm run build`                                | Builds the site into `dist/`                                                                  |
-| `npm run check-size`                           | Checks the size limits on `dist/`. Run it after a build.                                      |
-| `npm run e2e`                                  | Serves `dist/` with `npm run preview` and runs the end-to-end tests in Chromium. Build first. |
-| `powershell -File examples/build-examples.ps1` | Checks the C# examples in `examples/`. There are none yet, so it passes.                      |
+| Command                                        | What it does                                                                                                               |
+| ---------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------- |
+| `npm run typecheck`                            | Type checks the site, the tests and the scripts                                                                            |
+| `npm run lint`                                 | Runs ESLint. Any warning fails.                                                                                            |
+| `npm run format:check`                         | Checks the formatting. `npm run format` fixes it.                                                                          |
+| `npm test`                                     | Runs the component tests                                                                                                   |
+| `npm run build`                                | Builds the site into `dist/`                                                                                               |
+| `npm run check-size`                           | Checks the size limits on `dist/`. Run it after a build.                                                                   |
+| `npm run e2e`                                  | Serves `dist/` with `npm run preview` and runs the end-to-end tests in Chromium. Build first.                              |
+| `powershell -File examples/build-examples.ps1` | Checks the C# examples in `examples/`. There are none yet, so it passes.                                                   |
+| `npm audit`                                    | Reports known vulnerabilities in the packages. It fails a pull request into `main`, and only warns on other pull requests. |
 
 Before the first `npm run e2e`, install Chromium for Playwright:
 
@@ -111,7 +112,7 @@ This section changes when the content moves to its own data files and the C# exa
 - A small fix outside a release is a branch named `fix/<short-name>` from `main`.
 - Changes to the planning documents in `docs/` go into `main` by pull request. Then `main` is merged into the open release branch.
 
-`main` and `release/*` are protected. They cannot be force-pushed, and every change needs a pull request. A pull request into a release branch merges only when the `build`, `e2e` and `examples` checks pass.
+`main` and `release/*` are protected. They cannot be force-pushed, and every change needs a pull request. A pull request into a release branch merges only when the `build`, `e2e` and `examples` checks pass. From the end of release 1, the same is true for `main`.
 
 ## Deployment
 
