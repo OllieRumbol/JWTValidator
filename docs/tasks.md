@@ -234,13 +234,16 @@ Goal: The site has the approved design, the new header, menu, footer and docs la
 
 Base branch: release/phase-2-redesign
 
-- [ ] **T14 — Create the phase 2 release branch (maintainer)**
+- [x] **T14 — Create the phase 2 release branch (maintainer)**
   - Refs: plan 8 (branches and releases)
   - Depends on: T13
   - Done when:
     - `release/phase-2-redesign` exists on origin, at the same commit as `main`.
   - Verify: `git ls-remote --heads origin release/phase-2-redesign`
-  - Notes: Create it as in T1.
+  - Notes:
+    - With the maintainer's approval on 2026-10-28, `git push origin main:refs/heads/release/phase-2-redesign` created the branch at `5c8bf23`, the same commit as `main`.
+    - "Protect release branches" applies at once: no force-push, pull requests only, and the `build`, `e2e` and `examples` checks.
+    - Evidence: pull request #31
 
 - [ ] **T15 — Add the theme, fonts and logo**
   - Refs: plan 3.6 (tokens, breakpoints), plan 3.5 (fonts, reduced motion, favicon), plan 3.1 (`theme.ts`, `Logo`), spec 6.6.4 item 2, spec 6.7 (reduced motion), `docs/design/logo.png`
@@ -506,4 +509,5 @@ None.
 - 2026-10-28 — T11
 - 2026-10-28 — T12
 - 2026-10-28 — T13
+- 2026-10-28 — T14
 
