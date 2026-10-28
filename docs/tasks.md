@@ -204,7 +204,7 @@ Base branch: release/phase-1-foundation
     - Checked with `curl`: a `404.html` fallback on GitHub Pages answers 404, and a folder's `index.html` answers 200.
     - Evidence: pull request #27
 
-- [ ] **T13 — Release phase 1 (maintainer)**
+- [x] **T13 — Release phase 1 (maintainer)**
   - Refs: spec 6.1.10 items 4 to 6, spec 6.1.11 items 2 to 4, spec 6.1.12, spec 6.6.2, spec 6.6.3 item 3, plan 5 (releases), plan 8 (Pages source, Pages environment, required checks), plan 9 (TypeScript, Node), plan 6 (old secrets)
   - Depends on: T2 to T12
   - Done when:
@@ -223,7 +223,10 @@ Base branch: release/phase-1-foundation
   - Verify: `gh run list --workflow deploy.yml --limit 1` shows success. The live site opens at every current address. `gh api repos/OllieRumbol/JWTValidator/rules/branches/main` lists the three checks. `gh api repos/OllieRumbol/JWTValidator/environments/github-pages/deployment-branch-policies` lists `main` only. `gh secret list` prints nothing.
   - Notes:
     - The accessibility targets apply from release 2 (spec 6.1.10, item 6).
-    - The maintainer approved an extra step on 2026-10-28: T2 missed `react-syntax-highlighter` 16, and 15 failed `npm audit` (`prismjs` 1.27). Pull request #28 upgrades it to 16.1.2. The code-block HTML on every page is the same as with 15.
+    - The maintainer approved an extra step on 2026-10-28: T2 missed `react-syntax-highlighter` 16, and 15 failed `npm audit`. Pull request #28 upgraded it, with the same code-block HTML.
+    - The first deploy from `main` was rejected, because the environment did not allow `main` yet. The live site stayed unchanged. The re-run passed once both Pages settings were saved.
+    - Lighthouse mobile: Home 96 to 97, Builder 90 to 91. The browser check, the audit and the size check are recorded in pull request #29.
+    - Evidence: pull requests #28 and #29
 
 ## Phase 2 — Redesign
 
@@ -502,4 +505,5 @@ None.
 - 2026-10-27 — T10
 - 2026-10-28 — T11
 - 2026-10-28 — T12
+- 2026-10-28 — T13
 
