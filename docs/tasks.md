@@ -221,7 +221,9 @@ Base branch: release/phase-1-foundation
     - The maintainer adds `build`, `e2e` and `examples` as required checks to "Protect main".
     - The maintainer deletes the `TOKEN`, `EMAIL` and `USERNAME` secrets and the `gh-pages` branch, and removes `gh-pages` from the environment's deployment branches.
   - Verify: `gh run list --workflow deploy.yml --limit 1` shows success. The live site opens at every current address. `gh api repos/OllieRumbol/JWTValidator/rules/branches/main` lists the three checks. `gh api repos/OllieRumbol/JWTValidator/environments/github-pages/deployment-branch-policies` lists `main` only. `gh secret list` prints nothing.
-  - Notes: The accessibility targets apply from release 2 (spec 6.1.10, item 6).
+  - Notes:
+    - The accessibility targets apply from release 2 (spec 6.1.10, item 6).
+    - The maintainer approved an extra step on 2026-10-28: T2 missed `react-syntax-highlighter` 16, and 15 failed `npm audit` (`prismjs` 1.27). Pull request #28 upgrades it to 16.1.2. The code-block HTML on every page is the same as with 15.
 
 ## Phase 2 — Redesign
 
