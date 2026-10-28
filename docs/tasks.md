@@ -191,6 +191,7 @@ Base branch: release/phase-1-foundation
     - `LICENSE` is a copy of the library's `LICENSE.txt`, with the same copyright line. `package.json` and the lock file say MIT.
     - `main`, `peerDependencies` and the `start`, `transpile` and `prepublishOnly` scripts were already gone before T11.
     - The README describes the site at the end of release 1, including the checks on `main` from T13. T24 and T26 update it for their phases.
+    - Evidence: pull request #26
 
 - [ ] **T12 — Record the hash routing decision**
   - Refs: plan 3.5 (ADRs, router), spec 3 non-goals
