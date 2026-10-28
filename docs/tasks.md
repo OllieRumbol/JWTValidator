@@ -179,7 +179,7 @@ Base branch: release/phase-1-foundation
     - The real link preview can only be checked on the live site, after the phase 1 deploy (T13).
     - Evidence: pull request #25
 
-- [ ] **T11 — Add the README and the licence, and remove stale settings**
+- [x] **T11 — Add the README and the licence, and remove stale settings**
   - Refs: spec 6.1.11 items 7 and 8, spec 4.1 item 14, plan 8 (cleanup in release 1), plan 9 (React Compiler packages)
   - Depends on: T9, T10
   - Done when:
@@ -187,7 +187,11 @@ Base branch: release/phase-1-foundation
     - `LICENSE` holds the MIT licence, and `package.json` says `MIT`.
     - `package.json` has no `main`, `peerDependencies`, `start`, `transpile` or `prepublishOnly`.
   - Verify: `test -f LICENSE && grep -q "MIT License" LICENSE`, then `node -e "const p=require('./package.json'); const bad=['main','peerDependencies'].filter(k=>p[k]).concat(['start','transpile','prepublishOnly'].filter(s=>p.scripts[s])); if(bad.length||p.license!=='MIT'){console.error(bad, p.license); process.exit(1)}"`, then `npm ci && npm run build`.
-  - Notes: Use the copyright holder name from the library's `LICENSE.txt`. T24 and T26 update the README for their phases.
+  - Notes:
+    - `LICENSE` is a copy of the library's `LICENSE.txt`, with the same copyright line. `package.json` and the lock file say MIT.
+    - `main`, `peerDependencies` and the `start`, `transpile` and `prepublishOnly` scripts were already gone before T11.
+    - The README describes the site at the end of release 1, including the checks on `main` from T13. T24 and T26 update it for their phases.
+    - Evidence: pull request #26
 
 - [ ] **T12 — Record the hash routing decision**
   - Refs: plan 3.5 (ADRs, router), spec 3 non-goals
@@ -491,4 +495,5 @@ None.
 - 2026-10-26 — T8
 - 2026-10-27 — T9
 - 2026-10-27 — T10
+- 2026-10-28 — T11
 
