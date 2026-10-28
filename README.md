@@ -54,17 +54,17 @@ The React Compiler runs through Babel. It needs these three packages, which `npm
 
 These are the checks that run on every pull request:
 
-| Command                                        | What it does                                                                                                               |
-| ---------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------- |
-| `npm run typecheck`                            | Type checks the site, the tests and the scripts                                                                            |
-| `npm run lint`                                 | Runs ESLint. Any warning fails.                                                                                            |
-| `npm run format:check`                         | Checks the formatting. `npm run format` fixes it.                                                                          |
-| `npm test`                                     | Runs the component tests                                                                                                   |
-| `npm run build`                                | Builds the site into `dist/`                                                                                               |
-| `npm run check-size`                           | Checks the size limits on `dist/`. Run it after a build.                                                                   |
-| `npm run e2e`                                  | Serves `dist/` with `npm run preview` and runs the end-to-end tests in Chromium. Build first.                              |
-| `powershell -File examples/build-examples.ps1` | Checks the C# examples in `examples/`. There are none yet, so it passes.                                                   |
-| `npm audit`                                    | Reports known vulnerabilities in the packages. It fails a pull request into `main`, and only warns on other pull requests. |
+| Command                                        | What it does                                                                                                                          |
+| ---------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------- |
+| `npm run typecheck`                            | Type checks the site, the tests and the scripts                                                                                       |
+| `npm run lint`                                 | Runs ESLint. Any warning fails.                                                                                                       |
+| `npm run format:check`                         | Checks the formatting. `npm run format` fixes it.                                                                                     |
+| `npm test`                                     | Runs the component tests                                                                                                              |
+| `npm run build`                                | Builds the site into `dist/`                                                                                                          |
+| `npm run check-size`                           | Checks the size limits on `dist/`. Run it after a build.                                                                              |
+| `npm run e2e`                                  | Serves `dist/` with `npm run preview` and runs the end-to-end tests in Chromium. Build first.                                         |
+| `powershell -File examples/build-examples.ps1` | Checks the C# examples in `examples/`. There are none yet, so it passes. On macOS or Linux, use `pwsh` instead of `powershell -File`. |
+| `npm audit`                                    | Reports known vulnerabilities in the packages. It fails a pull request into `main`, and only warns on other pull requests.            |
 
 Before the first `npm run e2e`, install Chromium for Playwright:
 
@@ -99,7 +99,8 @@ The site follows the library's README and release notes for the version it docum
 1. Update each documentation page in `src/components/documentation/<part>/`. The introduction, the method details and the code examples are separate files.
 2. Add the version to `src/components/versions/Versions.ts`.
 3. Update what is new on Home in `src/components/home/NewRelease.tsx`.
-4. Run the checks, and open a pull request.
+4. Update the code example on Home in `src/components/home/CodeSnippet.tsx`.
+5. Run the checks, and open a pull request.
 
 This section changes when the content moves to its own data files and the C# examples are compiled.
 
