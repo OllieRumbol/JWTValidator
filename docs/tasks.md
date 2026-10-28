@@ -199,7 +199,7 @@ Base branch: release/phase-1-foundation
   - Done when:
     - `docs/adr/0001-hash-routing-on-github-pages.md` records the context, the decision and the consequences, including that search engines index one page.
   - Verify: The maintainer reads the ADR.
-  - Notes: —
+  - Notes: Checkpoint: pull request #27 is open with the ADR. Next: the maintainer reads it and approves it or asks for changes. Then T12 is ticked on the same branch.
 
 - [ ] **T13 — Release phase 1 (maintainer)**
   - Refs: spec 6.1.10 items 4 to 6, spec 6.1.11 items 2 to 4, spec 6.1.12, spec 6.6.2, spec 6.6.3 item 3, plan 5 (releases), plan 8 (Pages source, Pages environment, required checks), plan 9 (TypeScript, Node), plan 6 (old secrets)
