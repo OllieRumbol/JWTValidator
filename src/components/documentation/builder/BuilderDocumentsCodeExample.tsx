@@ -2,8 +2,7 @@ import React from "react";
 import "../../../style/shared.css";
 import Panel from "../../shared/Panel";
 import Typography from "@mui/material/Typography";
-import SyntaxHighlighter from "react-syntax-highlighter";
-import { vs2015 } from "react-syntax-highlighter/dist/esm/styles/hljs";
+import SyntaxHighlighter, { vs2015 } from "../../shared/SyntaxHighlighter";
 import Grid from "@mui/material/Grid";
 
 const BuilderDocumentsCodeExample = () => {
@@ -12,8 +11,8 @@ const BuilderDocumentsCodeExample = () => {
       <Typography variant="h2" component="h2" sx={{ mb: 3 }}>
         Code example
       </Typography>
-      <Grid container spacing={5}>
-        <Grid item xs={12} md={6}>
+      <Grid container spacing={5} sx={{ width: "100%" }}>
+        <Grid size={{ xs: 12, md: 6 }}>
           <Typography variant="h4" component="h4" align="center" sx={{ mb: 3 }}>
             Symmetric Key Encryption
           </Typography>
@@ -31,7 +30,7 @@ const BuilderDocumentsCodeExample = () => {
             </SyntaxHighlighter>
           </Typography>
         </Grid>
-        <Grid item xs={12} md={6}>
+        <Grid size={{ xs: 12, md: 6 }}>
           <Typography variant="h4" component="h4" align="center" sx={{ mb: 3 }}>
             Asymmetric Key Encryption
           </Typography>

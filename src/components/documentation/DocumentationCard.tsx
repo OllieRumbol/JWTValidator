@@ -2,11 +2,10 @@ import React from "react";
 import Card from "@mui/material/Card";
 import CardContent from "@mui/material/CardContent";
 import Typography from "@mui/material/Typography";
-import { CardActionArea } from "@mui/material";
-import Alert from "@mui/material/Alert/Alert";
-import AlertTitle from "@mui/material/AlertTitle/AlertTitle";
-import SyntaxHighlighter from "react-syntax-highlighter";
-import { vs2015 } from "react-syntax-highlighter/dist/esm/styles/hljs";
+import CardActionArea from "@mui/material/CardActionArea";
+import Alert from "@mui/material/Alert";
+import AlertTitle from "@mui/material/AlertTitle";
+import SyntaxHighlighter, { vs2015 } from "../shared/SyntaxHighlighter";
 
 import "../../style/shared.css";
 

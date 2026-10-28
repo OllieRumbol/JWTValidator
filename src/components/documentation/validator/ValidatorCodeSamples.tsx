@@ -1,8 +1,7 @@
 import React from "react";
 import Typography from "@mui/material/Typography";
 import Panel from "../../shared/Panel";
-import SyntaxHighlighter from "react-syntax-highlighter";
-import { vs2015 } from "react-syntax-highlighter/dist/esm/styles/hljs";
+import SyntaxHighlighter, { vs2015 } from "../../shared/SyntaxHighlighter";
 
 const ValidatorCodeSamples = () => {
   return (
@@ -32,7 +31,7 @@ if (new JWTValidator().TryValidateJWT(JWT, jWTValidatorOptions, out Dictionary<s
           style={vs2015}
           showLineNumbers={true}
         >
-{`string JWT = "....";
+          {`string JWT = "....";
 JWTValidatorOptions jWTValidatorOptions = ...
 
 Dictionary<string, List<string>> result = new JWTValidator().ValidateJWT(JWT, jWTValidatorOptions);

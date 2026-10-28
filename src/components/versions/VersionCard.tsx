@@ -5,7 +5,7 @@ import Typography from "@mui/material/Typography";
 import FormGroup from "@mui/material/FormGroup";
 import FormControlLabel from "@mui/material/FormControlLabel";
 import Checkbox from "@mui/material/Checkbox";
-import { CardActionArea } from "@mui/material";
+import CardActionArea from "@mui/material/CardActionArea";
 
 import "../../style/shared.css";
 
@@ -27,10 +27,17 @@ type Task = {
 
 const VersionCard = (props: VersionCardProps) => {
   const { title, status, description, tasks } = props.version;
-  const color = status == "done" ? "#388e3c" : status == "in progress" ? "#f57c00" : status == "to do" ? "#d32f2f" : "#e3f2fd";
+  const color =
+    status == "done"
+      ? "#388e3c"
+      : status == "in progress"
+        ? "#f57c00"
+        : status == "to do"
+          ? "#d32f2f"
+          : "#e3f2fd";
 
   return (
-    <Card style={{width: "100%"}}>
+    <Card style={{ width: "100%" }}>
       <CardActionArea>
         <CardContent>
           <Typography gutterBottom variant="h3" style={{ color: color }}>
@@ -39,7 +46,9 @@ const VersionCard = (props: VersionCardProps) => {
           <Typography gutterBottom variant="h4">
             Description of version
           </Typography>
-          <Typography gutterBottom variant="body1">{description}</Typography>
+          <Typography gutterBottom variant="body1">
+            {description}
+          </Typography>
           <Typography gutterBottom variant="h4">
             Features
           </Typography>
@@ -47,6 +56,7 @@ const VersionCard = (props: VersionCardProps) => {
             {tasks.map((task, index) => {
               return (
                 <FormControlLabel
+                  key={index}
                   disabled
                   checked={task.isComplete}
                   control={<Checkbox />}

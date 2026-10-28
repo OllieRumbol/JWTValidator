@@ -1,0 +1,18 @@
+{
+  "compilerOptions": {
+    "target": "ES2022",
+    "lib": ["ES2022"],
+    "module": "ESNext",
+    "moduleResolution": "bundler",
+    "types": ["node"],
+    "strict": true,
+    "skipLibCheck": true,
+    "forceConsistentCasingInFileNames": true,
+    "noFallthroughCasesInSwitch": true,
+    "isolatedModules": true,
+    "noEmit": true,
+    // Vite's native config loader needs the extension on vite.config.ts imports.
+    "allowImportingTsExtensions": true
+  },
+  "include": ["vite.config.ts", "playwright.config.ts", "scripts", "e2e"]
+}

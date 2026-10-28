@@ -10,7 +10,6 @@ import CodeSnippet from "./CodeSnippet";
 import NewRelease from "./NewRelease";
 
 const HomePage = () => {
-
   return (
     <Container maxWidth={false} className="noWhiteSpace">
       <Tite />

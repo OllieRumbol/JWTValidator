@@ -18,7 +18,7 @@ Goal: The site builds with Vite on current packages, every pull request is check
 
 Base branch: release/phase-1-foundation
 
-- [ ] **T1 — Create the phase 1 release branch (maintainer)**
+- [x] **T1 — Create the phase 1 release branch (maintainer)**
   - Refs: plan 8 (branches and releases), spec 8 assumption 4
   - Depends on: the pull request that adds this file, merged into `main`
   - Done when:
@@ -26,9 +26,12 @@ Base branch: release/phase-1-foundation
     - `docs/spec.md`, `docs/plan.md` and `docs/tasks.md` on the release branch match `main`.
     - The result of pushing a new `release/*` branch under the "Protect release branches" ruleset is recorded in Notes.
   - Verify: `git ls-remote --heads origin release/phase-1-foundation` shows the commit that `git rev-parse origin/main` shows, and `git diff origin/main origin/release/phase-1-foundation -- docs` prints nothing.
-  - Notes: Push with `git push origin main:refs/heads/release/phase-1-foundation`. If the ruleset blocks it, create the branch on the GitHub website, and record that in Notes and in the README (T11).
+  - Notes:
+    - Spec 8, assumption 4 holds: on 2026-10-26, `git push origin main:refs/heads/release/phase-1-foundation` created the branch at `041f109` under the "Protect release branches" ruleset. No change is needed in the README (T11).
+    - The ruleset applies to the new branch: pull request required, no force push.
+    - Evidence: pull request #15
 
-- [ ] **T2 — Move the build to Vite and TypeScript 6.0**
+- [x] **T2 — Move the build to Vite and TypeScript 6.0**
   - Refs: plan 2 (base path, Node version, path alias, build manifest, TypeScript compiler options), plan 3.1, plan 3.5 (build tool, TypeScript), plan 8 (cleanup in release 1)
   - Depends on: T1
   - Done when:
@@ -40,9 +43,14 @@ Base branch: release/phase-1-foundation
     - `webpack.config.js`, `public/index.html`, `.babelrc` and the webpack, Babel, loader and `html-webpack-plugin` packages are removed. Images are imported through Vite, not `file-loader`.
     - The six current routes look and work as they did before.
   - Verify: `npm run typecheck && npm run build && npm run preview`, then open every current route at `http://localhost:4173/JWTValidator/` and compare with the live site. `git ls-files | grep -E "webpack|babelrc|^dist/|^examples/dist/"` prints nothing, and `git status --short` after the build shows no files under `dist/`.
-  - Notes: Keep React 18 and MUI 5 in this task. T3 and T4 upgrade them, so each change can be checked on its own. TypeScript moves here because the current React types need TypeScript 5.6 or later.
+  - Notes:
+    - React 18 and MUI 5 stay. TypeScript is 6.0.3. The six routes match the old build: same text, element counts and section heights.
+    - Also done here, because they depended on webpack, Babel or `dist/`: removed `main`, `transpile`, `prepublishOnly` and `peerDependencies` (T11 only confirms them), pointed `deploy` at `dist` (T9 removes it), and regenerated the lock file.
+    - `"type": "module"` removes Vite's CommonJS warning. It also makes default imports from CommonJS files return `module.exports`, so `HowItWorks.tsx` uses named icon imports.
+    - Left to later tasks: Node 12 in the old workflow and gh-pages (T9), `npm audit` (T13), type-checking `vite.config.ts` (T5), `@types/react-router-dom` (T3).
+    - Evidence: pull request #16
 
-- [ ] **T3 — Upgrade React to 19 and the router to 8**
+- [x] **T3 — Upgrade React to 19 and the router to 8**
   - Refs: plan 3.3 (routes), plan 3.5 (React, router), plan 9 (API changes), spec 4.1 item 13
   - Depends on: T2
   - Done when:
@@ -51,9 +59,14 @@ Base branch: release/phase-1-foundation
     - The packages `react-router-dom` and `@types/react-router-dom` are removed if version 8 no longer needs them.
     - The browser console shows no deprecation warnings from React or the router.
   - Verify: `npm run typecheck && npm run build && npm run preview`, then open the six current addresses in spec 6.2.1.
-  - Notes: Do not add `ScrollRestoration`, redirects or "Page not found" yet. They are release 2 work (spec 6.1.10, item 5). If the hash router in data mode or `ScrollRestoration` is missing or changed in version 8, stop and propose a plan change (plan 9).
+  - Notes:
+    - Plan 9 check: React Router 8.5.0 still exports `createHashRouter`, `RouterProvider` (from `react-router/dom`) and `ScrollRestoration`, so no plan change is needed. Version 8 has no `react-router-dom`.
+    - MUI stays on 5, because 5.18 already supports React 19. The six routes match T2: same text and element counts.
+    - An empty `{ path: "*", element: null }` route keeps the old result for an unknown address: the layout with an empty body. Without it, the data router shows its own error page. Release 2 replaces it with "Page not found".
+    - Console messages that were there before T3, release 2 removes them: `<pre>` inside `<p>` in the code samples, and a missing `key` in `VersionList`.
+    - Evidence: pull request #17
 
-- [ ] **T4 — Upgrade MUI to 9**
+- [x] **T4 — Upgrade MUI to 9**
   - Refs: plan 3.5 (UI library), plan 9 (API changes)
   - Depends on: T3
   - Done when:
@@ -62,9 +75,14 @@ Base branch: release/phase-1-foundation
     - Every page looks as it did before. Grid layouts use the MUI 9 Grid API.
     - The unused `@fontsource/roboto` package is removed.
   - Verify: `npm run typecheck && npm run build && npm run preview`, then compare every route with the live site at 1280 px and 390 px.
-  - Notes: Follow MUI's migration guides from 5 to 9 in order.
+  - Notes:
+    - Followed the guides to 6, 7 and 9 (MUI has no 8). The new Grid does not stretch inside `Panel`, which centres its children, so every Grid container has `sx={{ width: "100%" }}`. Without it, a long code line pushed the method cards off both sides of the page.
+    - MUI 9 resolves `@mui/icons-material/<Icon>` to an ES module, so the icons use per-icon imports again. This replaces the named imports in T2.
+    - Compared with the T3 build and the old webpack build of `main` (the browser pane cannot open github.io): page and section heights match at 1280, 980 and 390 px.
+    - Lists changed here have keys. `VersionCard`'s task list still has none, and release 2 rebuilds that page.
+    - Evidence: pull request #18
 
-- [ ] **T5 — Add lint, format and the React Compiler**
+- [x] **T5 — Add lint, format and the React Compiler**
   - Refs: plan 2 (type-checked files), plan 3.5 (lint and format, React), plan 9 (React Compiler packages)
   - Depends on: T4
   - Done when:
@@ -73,9 +91,14 @@ Base branch: release/phase-1-foundation
     - The React Compiler is on, with the packages the Vite React plugin lists.
     - `npm run typecheck`, `npm run lint` and `npm run format:check` pass.
   - Verify: `npm run typecheck && npm run lint && npm run format:check && npm run build`
-  - Notes: Fix what the lint finds in the current code only where it is needed to pass. Do not rewrite components that release 2 replaces.
+  - Notes:
+    - The React Compiler runs through Babel (`@rolldown/plugin-babel`, `@babel/core` 8, `babel-plugin-react-compiler`), as the plugin README lists. Its Rust compiler is marked experimental. The README (T11) must list these three packages.
+    - Lint uses typed rules and fails on warnings, because three React Hooks rules that report a skipped component are warnings. JavaScript files (`.js`, `.mjs`, `.cjs`) are linted without types, because no tsconfig covers them.
+    - Prettier uses `endOfLine: "auto"`, because the Windows checkout is CRLF and the repository stores LF. It does not format `docs/`.
+    - Lint fixes only: unused values, a key on VersionCard's static list, and the Popper `anchorEl` read during render. Pages match T3 at 1280 and 390 px.
+    - Evidence: pull request #19
 
-- [ ] **T6 — Meet the size limits**
+- [x] **T6 — Meet the size limits**
   - Refs: spec 6.6.2, spec 6.2.5, plan 3.5 (syntax highlighting, images, split pages), plan 7.1 (sizes, Lighthouse), plan 7.2 test 14
   - Depends on: T5
   - Done when:
@@ -85,9 +108,14 @@ Base branch: release/phase-1-foundation
     - `npm run check-size` passes. If that needed lazy routes, Notes says so.
     - A Lighthouse mobile run on Home and the Builder page scores at least 90 for performance, and the scores are in the pull request.
   - Verify: `npm run build && npm run check-size`. Then make one image too large on purpose, run it again, see it fail, and undo the change.
-  - Notes: Convert the images once with `npx sharp-cli`. Release 2 removes them (plan 3.5, images).
+  - Notes:
+    - Images converted once with `npx sharp-cli -f webp -q 60 resize 1600`. At 1920 px, `documents.webp` stayed over 200 KB even at quality 50. Release 2 removes them (plan 3.5, images).
+    - The highlighter is imported only through `src/components/shared/SyntaxHighlighter.ts`. Lint rejects any other import of `react-syntax-highlighter` in `src/`.
+    - No lazy routes were needed. First-load JavaScript is 187.5 KB gzipped (465 KB before). `check-size` does not count a chunk that a lazy route loads lazily.
+    - Lighthouse 13.5 mobile: Home 97, Builder 92 (three runs).
+    - Evidence: pull request #20
 
-- [ ] **T7 — Set up component and end-to-end tests**
+- [x] **T7 — Set up component and end-to-end tests**
   - Refs: plan 7.1, plan 7.2 tests 13 and 20, spec 6.5, spec 6.6.2 item 4, spec 6.6.4 items 1 and 2, plan 3.5 (split pages)
   - Depends on: T6
   - Done when:
@@ -96,9 +124,14 @@ Base branch: release/phase-1-foundation
     - Plan 7.2 test 13 exists and passes on every current route: no request to another host, no cookies, and at most 500 KB sent over the network, measured as plan 7.1 says.
     - If the site uses lazy routes, `RouteFallback` shows the loading and failure messages in spec 6.5, and plan 7.2 test 20 passes.
   - Verify: `npm test && npm run build && npm run e2e`
-  - Notes: The accessibility tests start in release 2 (plan 7.1).
+  - Notes:
+    - The accessibility tests start in release 2 (plan 7.1).
+    - Component tests build their own memory router from the `routes` that `src/app/router.tsx` exports.
+    - Test 13 lists the six current addresses itself. T18 adds its new routes to that list. Sent today: Home 233 KB, Versions 282 KB, each docs page 386 KB.
+    - No lazy routes (T6), so test 20 and `RouteFallback` are not needed.
+    - Evidence: pull request #21
 
-- [ ] **T8 — Check every pull request**
+- [x] **T8 — Check every pull request**
   - Refs: spec 6.1.11 items 1 and 2, plan 8 (`ci.yml`, required checks), plan 3.5 (example compilation), plan 6 (pipeline token, third-party actions)
   - Depends on: T7
   - Done when:
@@ -109,18 +142,28 @@ Base branch: release/phase-1-foundation
     - The pull request for this task shows the three jobs passing.
     - The maintainer has added `build`, `e2e` and `examples` as required checks to "Protect release branches" only. "Protect main" gets them in T13 (plan 8).
   - Verify: `powershell -File examples/build-examples.ps1` passes locally. `gh pr checks <number>` shows `build`, `e2e` and `examples` passing. `gh api repos/OllieRumbol/JWTValidator/rules/branches/release/phase-1-foundation` lists a `required_status_checks` rule with the three checks.
-  - Notes: The `examples` job looks only for `.cs` files.
+  - Notes:
+    - The `examples` job looks only for `.cs` files. Until T26 adds the compile step, the script fails when it finds one, so no example passes without being compiled.
+    - On pull requests into `release/**` and on pushes, a failed `npm audit` is a warning annotation, and the job passes.
+    - "Protect release branches" requires `build`, `e2e` and `examples` since 2026-10-26, checked with the `gh api` command in Verify.
+    - `npm audit` also reports a moderate `prismjs` chain through `react-syntax-highlighter`. T13 needs a clean audit.
+    - Evidence: pull request #22
 
-- [ ] **T9 — Deploy with GitHub's Pages actions**
+- [x] **T9 — Deploy with GitHub's Pages actions**
   - Refs: spec 6.1.11 items 3 to 5, plan 3.5 (deployment), plan 8 (`deploy.yml`, Pages source, Pages environment), plan 6 (pipeline token, old secrets)
   - Depends on: T8
   - Done when:
     - `.github/workflows/deploy.yml` runs on pushes to `main` and by `workflow_dispatch`: build, upload the Pages artifact, deploy. Only the deploy job has `pages: write` and `id-token: write`. It sets `concurrency` so one deploy runs at a time, and sets up Node from `.nvmrc`.
     - `.github/workflows/main_deploy.yml`, the `gh-pages` package and the `deploy` and `publish-demo` scripts are removed.
   - Verify: `actionlint` 1.7.12, the binary from the official `rhysd/actionlint` GitHub release, reports no errors on both workflows. The real deploy is checked in T13.
-  - Notes: The deploy can only run from `main`, so T13 checks it after the phase 1 merge.
+  - Notes:
+    - The deploy can only run from `main`, so T13 checks it after the phase 1 merge.
+    - The build job runs only for `main`, so a manual run from another branch deploys nothing.
+    - `actionlint` 1.7.12 reported no errors on both workflows (run by the maintainer, exit 0).
+    - The maintainer deletes the `TOKEN`, `EMAIL` and `USERNAME` secrets and the `gh-pages` branch after the first deploy (plan 6).
+    - Evidence: pull request #24
 
-- [ ] **T10 — Add page metadata and the security policy**
+- [x] **T10 — Add page metadata and the security policy**
   - Refs: spec 6.1.9, spec 6.6.4 item 2, spec 6.7 (JavaScript off), plan 3.5 (shared-link preview, content security policy, no JavaScript), plan 2 (site address), plan 3.6 (logo), plan 7.2 tests 12 and 19
   - Depends on: T8
   - Done when:
@@ -130,9 +173,13 @@ Base branch: release/phase-1-foundation
     - Every current page still works on `npm run preview`, with no policy errors in the browser console, and `npm run dev` still works.
     - Plan 7.2 tests 12 and 19 exist and pass.
   - Verify: `npm run build && npm run e2e`, then open every route on `npm run preview` and on `npm run dev` with the console open.
-  - Notes: Draw the image with a script like the one used for the package icon (`System.Drawing` in PowerShell), or take it from `docs/design/logo.html`. Record which in Notes.
+  - Notes:
+    - The image is the light wordmark from `docs/design/logo.html`, scaled about 3.3 times on Surface `#F7F6FB`, rendered once with `npx playwright screenshot` at 1200 x 630 (17.3 KB).
+    - The policy tag is first in the built `<head>`. `<meta charset>` follows it, still within the first 1,024 bytes.
+    - The real link preview can only be checked on the live site, after the phase 1 deploy (T13).
+    - Evidence: pull request #25
 
-- [ ] **T11 — Add the README and the licence, and remove stale settings**
+- [x] **T11 — Add the README and the licence, and remove stale settings**
   - Refs: spec 6.1.11 items 7 and 8, spec 4.1 item 14, plan 8 (cleanup in release 1), plan 9 (React Compiler packages)
   - Depends on: T9, T10
   - Done when:
@@ -140,15 +187,22 @@ Base branch: release/phase-1-foundation
     - `LICENSE` holds the MIT licence, and `package.json` says `MIT`.
     - `package.json` has no `main`, `peerDependencies`, `start`, `transpile` or `prepublishOnly`.
   - Verify: `test -f LICENSE && grep -q "MIT License" LICENSE`, then `node -e "const p=require('./package.json'); const bad=['main','peerDependencies'].filter(k=>p[k]).concat(['start','transpile','prepublishOnly'].filter(s=>p.scripts[s])); if(bad.length||p.license!=='MIT'){console.error(bad, p.license); process.exit(1)}"`, then `npm ci && npm run build`.
-  - Notes: Use the copyright holder name from the library's `LICENSE.txt`. T24 and T26 update the README for their phases.
+  - Notes:
+    - `LICENSE` is a copy of the library's `LICENSE.txt`, with the same copyright line. `package.json` and the lock file say MIT.
+    - `main`, `peerDependencies` and the `start`, `transpile` and `prepublishOnly` scripts were already gone before T11.
+    - The README describes the site at the end of release 1, including the checks on `main` from T13. T24 and T26 update it for their phases.
+    - Evidence: pull request #26
 
-- [ ] **T12 — Record the hash routing decision**
+- [x] **T12 — Record the hash routing decision**
   - Refs: plan 3.5 (ADRs, router), spec 3 non-goals
   - Depends on: T1
   - Done when:
     - `docs/adr/0001-hash-routing-on-github-pages.md` records the context, the decision and the consequences, including that search engines index one page.
   - Verify: The maintainer reads the ADR.
-  - Notes: —
+  - Notes:
+    - The maintainer read and accepted the ADR on 2026-10-28, after comparing the other options. The two options raised then are in its "Options rejected" table.
+    - Checked with `curl`: a `404.html` fallback on GitHub Pages answers 404, and a folder's `index.html` answers 200.
+    - Evidence: pull request #27
 
 - [ ] **T13 — Release phase 1 (maintainer)**
   - Refs: spec 6.1.10 items 4 to 6, spec 6.1.11 items 2 to 4, spec 6.1.12, spec 6.6.2, spec 6.6.3 item 3, plan 5 (releases), plan 8 (Pages source, Pages environment, required checks), plan 9 (TypeScript, Node), plan 6 (old secrets)
@@ -167,7 +221,9 @@ Base branch: release/phase-1-foundation
     - The maintainer adds `build`, `e2e` and `examples` as required checks to "Protect main".
     - The maintainer deletes the `TOKEN`, `EMAIL` and `USERNAME` secrets and the `gh-pages` branch, and removes `gh-pages` from the environment's deployment branches.
   - Verify: `gh run list --workflow deploy.yml --limit 1` shows success. The live site opens at every current address. `gh api repos/OllieRumbol/JWTValidator/rules/branches/main` lists the three checks. `gh api repos/OllieRumbol/JWTValidator/environments/github-pages/deployment-branch-policies` lists `main` only. `gh secret list` prints nothing.
-  - Notes: The accessibility targets apply from release 2 (spec 6.1.10, item 6).
+  - Notes:
+    - The accessibility targets apply from release 2 (spec 6.1.10, item 6).
+    - The maintainer approved an extra step on 2026-10-28: T2 missed `react-syntax-highlighter` 16, and 15 failed `npm audit` (`prismjs` 1.27). Pull request #28 upgrades it to 16.1.2. The code-block HTML on every page is the same as with 15.
 
 ## Phase 2 — Redesign
 
@@ -433,4 +489,17 @@ Base branch: release/phase-3-content
 None.
 
 ## Completed log
+
+- 2026-10-26 — T1
+- 2026-10-26 — T2
+- 2026-10-26 — T3
+- 2026-10-26 — T4
+- 2026-10-26 — T5
+- 2026-10-26 — T6
+- 2026-10-26 — T7
+- 2026-10-26 — T8
+- 2026-10-27 — T9
+- 2026-10-27 — T10
+- 2026-10-28 — T11
+- 2026-10-28 — T12
 

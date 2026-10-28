@@ -10,6 +10,14 @@
 
 # production
 /build
+dist/
+
+# test reports
+playwright-report/
+test-results/
+
+# temporary projects that compile the C# examples
+examples/.build/
 
 # misc
 .DS_Store

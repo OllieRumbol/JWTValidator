@@ -3,9 +3,7 @@ import Panel from "../shared/Panel";
 import Typography from "@mui/material/Typography";
 import Grid from "@mui/material/Grid";
 import Box from "@mui/material/Box";
-import { Theme } from "@mui/material/styles";
-import { SxProps } from "@mui/system";
-
+import { SxProps, Theme } from "@mui/material/styles";
 import ConstructionIcon from "@mui/icons-material/Construction";
 import VerifiedIcon from "@mui/icons-material/Verified";
 import ExtensionIcon from "@mui/icons-material/Extension";
@@ -24,8 +22,8 @@ const HowItWorks = () => {
         How it works
       </Typography>
       <div>
-        <Grid container spacing={5}>
-          <Grid item xs={12} md={4}>
+        <Grid container spacing={5} sx={{ width: "100%" }}>
+          <Grid size={{ xs: 12, md: 4 }}>
             <Box sx={item}>
               <ConstructionIcon style={{ height: "5em", width: "5em" }} />
               <br />
@@ -39,7 +37,7 @@ const HowItWorks = () => {
               </Typography>
             </Box>
           </Grid>
-          <Grid item xs={12} md={4}>
+          <Grid size={{ xs: 12, md: 4 }}>
             <Box sx={item}>
               <VerifiedIcon style={{ height: "5em", width: "5em" }} />
               <br />
@@ -54,7 +52,7 @@ const HowItWorks = () => {
               </Typography>
             </Box>
           </Grid>
-          <Grid item xs={12} md={4}>
+          <Grid size={{ xs: 12, md: 4 }}>
             <Box sx={item}>
               <ExtensionIcon style={{ height: "5em", width: "5em" }} />
               <br />
