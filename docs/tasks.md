@@ -294,11 +294,11 @@ Base branch: release/phase-2-redesign
   - Notes:
     - Tests 10 and 11 check the header, the version notice, the footer and the open menu. Each page joins them in the task that rebuilds it (plan 7.1).
     - The maintainer chose (2026-10-29) to add the design's missing colours as theme tokens, with plan 3.6 updated in pull request #36. T19 to T22 add any other design colour to `theme.ts` when they first need it.
-    - The menu follows `phone.html`: "Docs" is a label above `DocsNav`, and the NuGet item reads "NuGet package". The header's "Docs" link and the `DocsNav` links show an empty page until T18 adds the routes.
+    - The menu follows `phone.html`, with "NuGet package" as the NuGet item. "Docs" was a label above `DocsNav` until T18 made it a link.
     - The old dark theme and `app.css` are gone, so the old pages show in the light theme with underlined links until T21 and T22. `RootLayout` wraps every page in `<main>`. `src/test/renderRoute.tsx` renders the site with the theme.
     - Evidence: pull request #37
 
-- [ ] **T18 — Add the new routes, redirects and "Page not found"**
+- [x] **T18 — Add the new routes, redirects and "Page not found"**
   - Refs: plan 3.3 (routes), spec 6.1.1 items 1 to 3, 8 and 9, spec 6.2.1, plan 7.2 tests 6, 8, 10 and 11, spec 4.1 item 10, `docs/design/not-found.png`
   - Depends on: T17
   - Done when:
@@ -307,7 +307,12 @@ Base branch: release/phase-2-redesign
     - Each page sets its tab title (spec 6.1.1, item 9).
     - Plan 7.2 tests 6 and 8, including `#/docs`, exist and pass. "Page not found" is in tests 10 and 11.
   - Verify: `npm test && npm run build && npm run e2e`
-  - Notes: Docs slugs that release 3 adds show "Page not found" until then.
+  - Notes:
+    - Docs slugs that release 3 adds show "Page not found" until then. At the maintainer's request, "Docs" in the menu is now a link to `/docs`, unlike `phone.html`, so the menu holds every header link (spec 6.1.2, item 2).
+    - Redirects are loaders that return React Router's `replace()`. A plain `redirect()` adds a history entry, so Back returned to the old address. Tests prove this.
+    - One route, `docs/:slug/:section?`, covers both docs addresses in plan 3.3. `DocsPage.tsx` maps each slug to its page. T21 replaces the old pages in that map, and T20 scrolls to the section.
+    - `PageTitle` uses React's `<title>`, which React puts before the static one in `index.html`. Test 8 also checks a heading that only the expected page has, and test 13 loads every page at its new address. Phone sizes and hover for "Page not found" are not in the design, so they were chosen here.
+    - Evidence: pull request #39
 
 - [ ] **T19 — Build the code, tabs and reference components**
   - Refs: spec 6.1.5, spec 6.1.1 item 6, spec 6.1.7 item 2, spec 6.1.3 item 8, plan 3.3 (component contracts), plan 3.5 (syntax highlighting, copy, example tabs and section links), plan 3.6 (code colours, states), plan 4 (clipboard failure), plan 7.2 tests 1, 2, 16 and 17, spec 4.1 item 4, `docs/design/docs-page.png`, `docs/design/states.png`
@@ -528,4 +533,5 @@ None.
 - 2026-10-28 — T15
 - 2026-10-29 — T16
 - 2026-10-29 — T17
+- 2026-10-29 — T18
 
