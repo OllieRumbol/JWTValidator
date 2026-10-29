@@ -45,7 +45,8 @@ const MobileMenu = ({ open, onClose }: MobileMenuProps) => {
           role: "dialog",
           "aria-modal": true,
           "aria-label": "Menu",
-          sx: { maxHeight: "100%" },
+          // The text size and line height in phone.html.
+          sx: { maxHeight: "100%", fontSize: "16px", lineHeight: 1.5 },
         },
       }}
     >
@@ -128,7 +129,11 @@ const MobileMenu = ({ open, onClose }: MobileMenuProps) => {
             </Box>
           </li>
           <li>
-            <ExternalLink href={links.nugetPackage} sx={itemStyle}>
+            <ExternalLink
+              href={links.nugetPackage}
+              sx={itemStyle}
+              onClick={onClose}
+            >
               NuGet package
             </ExternalLink>
           </li>
@@ -136,6 +141,7 @@ const MobileMenu = ({ open, onClose }: MobileMenuProps) => {
             <ExternalLink
               href={links.libraryRepository}
               sx={(theme) => ({ ...itemStyle(theme), borderBottom: 0 })}
+              onClick={onClose}
             >
               GitHub
             </ExternalLink>

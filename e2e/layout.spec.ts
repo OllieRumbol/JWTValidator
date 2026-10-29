@@ -54,6 +54,10 @@ test.describe("navigation (test 9)", () => {
     await page.goBack();
 
     await expect(page).toHaveURL(/#\/$/);
+    // Home's title until T22 rebuilds Home.
+    await expect(
+      page.getByRole("heading", { level: 1, name: "JWT Validator" }),
+    ).toBeVisible();
   });
 
   test("on a phone, the menu closes on a link and the page starts at the top", async ({
@@ -103,6 +107,19 @@ test("the header shows its links on a desktop and the menu button on a phone", a
   await expect(menuButton).toBeVisible();
 });
 
+test("the menu closes when the window widens past the menu's breakpoint", async ({
+  page,
+}) => {
+  await page.setViewportSize(PHONE);
+  await page.goto("#/");
+  const menu = await openMenu(page);
+
+  await page.setViewportSize(DESKTOP);
+
+  await expect(menu).toBeHidden();
+  await expect(page.getByRole("navigation", { name: "Main" })).toHaveCount(1);
+});
+
 // Test 18 (spec section 6.7).
 test.describe("with reduced motion asked for", () => {
   test.use({ reducedMotion: "reduce" });
@@ -147,6 +164,7 @@ test.describe("at 320 px", () => {
     const menu = await openMenu(page);
 
     const box = (await menu.boundingBox())!;
+    expect(box.x).toBeGreaterThanOrEqual(0);
     expect(box.x + box.width).toBeLessThanOrEqual(NARROWEST.width);
     const overflows = await menu.evaluate(
       (element) => element.scrollWidth > element.clientWidth,

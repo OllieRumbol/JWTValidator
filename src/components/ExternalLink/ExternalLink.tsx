@@ -7,6 +7,8 @@ type ExternalLinkProps = {
   href: string;
   children: ReactNode;
   sx?: SxProps<Theme>;
+  // For example to close the menu, so it is closed when Back returns to this page.
+  onClick?: () => void;
 };
 
 // Hidden on screen, read by screen readers.
@@ -24,9 +26,9 @@ const visuallyHidden = {
 
 // A link to another site. It opens in the same tab (spec section 6.1.2, item 7), shows
 // an arrow, and tells screen readers that it leaves this site (plan section 3.6).
-const ExternalLink = ({ href, children, sx }: ExternalLinkProps) => {
+const ExternalLink = ({ href, children, sx, onClick }: ExternalLinkProps) => {
   return (
-    <Link href={href} sx={sx}>
+    <Link href={href} sx={sx} onClick={onClick}>
       {children}
       <Box
         component="svg"

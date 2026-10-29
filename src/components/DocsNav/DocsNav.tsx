@@ -1,3 +1,4 @@
+import { useId } from "react";
 import Box from "@mui/material/Box";
 import { NavLink } from "react-router";
 import { docsPages, type DocsGroup } from "@/content/docsPages";
@@ -13,6 +14,10 @@ type DocsNavProps = {
 // The grouped list of docs pages, with the current page marked (spec section 6.1.4,
 // items 1 and 2). The sidebar and the menu both show it.
 const DocsNav = ({ onNavigate }: DocsNavProps) => {
+  // The sidebar and the open menu can show DocsNav at the same time, so each needs its
+  // own ids.
+  const idPrefix = useId();
+
   return (
     <Box>
       {groups.map((group) => {
@@ -21,7 +26,7 @@ const DocsNav = ({ onNavigate }: DocsNavProps) => {
           return null;
         }
 
-        const labelId = `docs-group-${group.toLowerCase().replaceAll(" ", "-")}`;
+        const labelId = `${idPrefix}-${group.toLowerCase().replaceAll(" ", "-")}`;
         return (
           <Box key={group}>
             <Box

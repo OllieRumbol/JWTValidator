@@ -32,6 +32,7 @@ const SiteFooter = () => {
           alignItems: "center",
           gap: 3,
           fontSize: "16px",
+          lineHeight: 1.6,
         }}
       >
         <Box sx={{ display: "flex", alignItems: "center", gap: "12px" }}>
