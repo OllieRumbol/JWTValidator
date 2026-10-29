@@ -120,6 +120,25 @@ test("the menu closes when the window widens past the menu's breakpoint", async 
   await expect(page.getByRole("navigation", { name: "Main" })).toHaveCount(1);
 });
 
+// The design is light only. A transparent page let a browser's dark background hide the
+// header's dark text and menu icon.
+test.describe("with the browser in dark mode", () => {
+  test.use({ colorScheme: "dark" });
+
+  test("the page still draws its own light background", async ({ page }) => {
+    await page.goto("#/");
+
+    const styles = await page.evaluate(() => ({
+      background: getComputedStyle(document.body).backgroundColor,
+      colorScheme: getComputedStyle(document.documentElement).colorScheme,
+    }));
+    expect(styles).toEqual({
+      background: "rgb(255, 255, 255)",
+      colorScheme: "light",
+    });
+  });
+});
+
 // Test 18 (spec section 6.7).
 test.describe("with reduced motion asked for", () => {
   test.use({ reducedMotion: "reduce" });

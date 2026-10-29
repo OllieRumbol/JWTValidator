@@ -81,7 +81,14 @@ const theme = createTheme({
 // Rules for the whole page, applied with MUI's GlobalStyles.
 export function globalStyles(theme: Theme): CSSObject {
   return {
-    body: { fontFamily: theme.tokens.fontSans },
+    // The design is light only (plan section 3.6). Without these, the page is
+    // transparent, and a browser that draws its own background dark hides the header.
+    html: { colorScheme: "light" },
+    body: {
+      fontFamily: theme.tokens.fontSans,
+      color: theme.tokens.text,
+      backgroundColor: theme.tokens.background,
+    },
     // Keyboard focus on every focusable part (plan section 3.6, WCAG 2.2, 2.4.7). The
     // "html" makes this rule win over MUI's "outline: 0" on buttons.
     "html :focus-visible": {
