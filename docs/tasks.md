@@ -274,8 +274,8 @@ Base branch: release/phase-2-redesign
   - Notes:
     - Release 3 adds the other six docs pages and the 2.0.0 entry.
     - 1.0.3 is `Latest` until T28 adds 2.0.0 and makes it `Previous`. `latestVersion` reads the first entry, for the footer (test 7, T17).
-    - Each version's summary and changes are today's Versions page text, unchanged, typos included. Content is fixed in release 3 (spec 6.1.10). The old page still shows 1.0.4 and 1.0.5 until T21 moves it to `versions.ts`.
-    - `getAdjacentPages(slug)` gives previous and next from the reading order, for `PrevNextLinks` (T19). Every link in `links.ts` returned 200 on 2026-10-29.
+    - Each version's summary and changes are today's Versions page text, unchanged apart from one trailing space, typos included. Content is fixed in release 3 (spec 6.1.10). The old page still shows 1.0.4 and 1.0.5 until T21 moves it to `versions.ts`.
+    - `getAdjacentPages(slug)` gives previous and next from the reading order, for `PrevNextLinks` (T20). Every link in `links.ts` returned 200 on 2026-10-29.
 
 - [ ] **T17 — Build the header, menu, footer and layout**
   - Refs: spec 6.1.2, spec 6.1.4 item 2, spec 6.1.1 items 4 and 7, spec 6.7 (reduced motion), plan 3.1 (`RootLayout`, `SiteHeader`, `MobileMenu`, `SiteFooter`, `ExternalLink`, `DocsNav`), plan 3.5 (router, UI library), plan 3.6, plan 7.1, plan 7.2 tests 3, 7, 9, 10, 11 and 18, spec 4.1 items 1, 6, 7 and 9, `docs/design/home.png`, `docs/design/phone.png`, `docs/design/states.png`
