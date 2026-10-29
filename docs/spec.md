@@ -3,7 +3,7 @@
 > **What this document is for:** It answers *what are we building, and why?* It is agreed before any design or code, and it is the source of truth for requirements.
 
 Status: Approved
-Last updated: 2026-10-25
+Last updated: 2026-10-29
 
 ---
 
@@ -27,9 +27,10 @@ This project brings the site up to date for version 2.0.0 of the library, and ma
   | 1.0.1 | 10 September 2022 | Yes |
   | 1.0.2 | 19 September 2022 | Yes |
   | 1.0.3 | 8 November 2022 | Yes |
-  | 2.0.0 | Not yet released | — |
+  | 2.0.0-beta.1 | 24 October 2026 | Yes. A pre-release. |
+  | 2.0.0 | 25 October 2026 | Yes |
 
-* **Version 2.0.0.** The work on 2.0.0 is in progress in the library repository. The library README and the package release notes for 2.0.0 are written. The release itself is not done yet. Version 2.0.0 adds no features and renames nothing. It changes behaviour only:
+* **Version 2.0.0.** Version 2.0.0 is released, with the tag `v2.0.0` in the library repository. Version 2.0.0 adds no features and renames nothing. It changes behaviour only:
   1. .NET 10 only. .NET 6, 7, 8 and 9 are no longer supported.
   2. A secret shorter than the minimum for the token's algorithm no longer validates: 32 bytes for HS256, 48 for HS384 and 64 for HS512.
   3. `WhenDoesJWTExpire` returns UTC, not local time. `HasJWTExpired` gives the correct result in every time zone.
