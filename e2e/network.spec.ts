@@ -2,15 +2,14 @@
 // cookies and transfers at most 500 KB (spec section 6.6.4, items 1 and 2, and 6.6.2, item 4).
 import { gzipSync } from "node:zlib";
 import { expect, test, type Request } from "@playwright/test";
+import { docsPages } from "../src/content/docsPages.ts";
 
-// The six addresses the site has today (spec section 6.2.1).
+// Every page: Home, Versions, each docs page and "Page not found" (spec section 6.1.1).
 const routes = [
   "#/",
   "#/versions",
-  "#/documentation/builder",
-  "#/documentation/validator",
-  "#/documentation/expiry",
-  "#/documentation/dictionary",
+  ...docsPages.map((page) => `#/docs/${page.slug}`),
+  "#/no-such-page",
 ];
 
 // 1 KB is 1,000 bytes, as in scripts/check-size.mjs.

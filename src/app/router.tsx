@@ -1,11 +1,16 @@
-import { createHashRouter, type RouteObject } from "react-router";
+import { createHashRouter, replace, type RouteObject } from "react-router";
 import RootLayout from "@/app/RootLayout";
 import HomePage from "@/components/home/HomePage";
 import VersionsPage from "@/components/versions/VersionsPage";
-import BuilderDocuments from "@/components/documentation/builder/BuilderDocuments";
-import ValidatorPage from "@/components/documentation/validator/ValidatorPage";
-import ExpiryCheckerPage from "@/components/documentation/expiryChecker/ExpiryCheckerPage";
-import DictionaryExtensionsPage from "@/components/documentation/dictionaryExtensions/DictionaryExtensionsPage";
+import { docsPages } from "@/content/docsPages";
+import DocsPage from "@/pages/docs/DocsPage";
+import NotFoundPage from "@/pages/not-found/NotFoundPage";
+
+// A route that sends the reader to another address. It replaces the history entry, so
+// Back does not return to the old address (plan section 3.3).
+function redirectTo(path: string): RouteObject["loader"] {
+  return () => replace(path);
+}
 
 // Exported so tests can build their own router from the same routes.
 export const routes: RouteObject[] = [
@@ -15,18 +20,35 @@ export const routes: RouteObject[] = [
     children: [
       { index: true, element: <HomePage /> },
       { path: "versions", element: <VersionsPage /> },
-      { path: "documentation/builder", element: <BuilderDocuments /> },
-      { path: "documentation/validator", element: <ValidatorPage /> },
-      { path: "documentation/expiry", element: <ExpiryCheckerPage /> },
+      {
+        path: "docs",
+        children: [
+          {
+            index: true,
+            loader: redirectTo(`/docs/${docsPages[0].slug}`),
+          },
+          // The section, when there is one, is the element to scroll to (T20).
+          { path: ":slug/:section?", element: <DocsPage /> },
+        ],
+      },
+      // The addresses from before the redesign (spec section 6.2.1).
+      {
+        path: "documentation/builder",
+        loader: redirectTo("/docs/validation-options"),
+      },
+      {
+        path: "documentation/validator",
+        loader: redirectTo("/docs/validator"),
+      },
+      {
+        path: "documentation/expiry",
+        loader: redirectTo("/docs/expiry-checker"),
+      },
       {
         path: "documentation/dictionary",
-        element: <DictionaryExtensionsPage />,
+        loader: redirectTo("/docs/dictionary-extensions"),
       },
-      // Keeps the header and footer on an unknown address, as before. Without it the
-      // router shows its own error page. Release 2 replaces it with "Page not found".
-      // The element is null, not missing, because the router warns about a leaf route
-      // with no element.
-      { path: "*", element: null },
+      { path: "*", element: <NotFoundPage /> },
     ],
   },
 ];
