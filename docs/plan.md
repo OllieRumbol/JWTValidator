@@ -3,7 +3,7 @@
 > **What this document is for:** It answers *how will we build it?* It turns the approved requirements in spec.md into a design, and it is agreed before any code is written.
 
 Status: Approved
-Last updated: 2026-10-25
+Last updated: 2026-10-29
 
 ---
 
@@ -315,6 +315,10 @@ The theme holds these values. No component uses a colour that is not in the them
 | Changed note | Background `#FDEEF3`, border `#F3C3D4`, label `#A8174D` | "Changed in 2.0.0" |
 | Code | Background `#FCFBFE`. Keywords `#7A2DBE`, types `#0A7398`, strings `#A0461A`, methods `#6B4E00`, comments `#5E6573` | Every colour at least 4.5:1 on the code background |
 | Hover | Tint `#F3F1F8` behind header and docs list links. Copy button `#E4D6F7` with text `#5A1F8F`. | Pointer hover |
+| Selected | Background `#F0E7FB`, border `#CDB4EE`, text `#5A1F8F` | The current docs page, the open menu button, and the Copy button. The text is 8.6:1 on the background. |
+| Link hover | `#5A1F8F` | Links under the pointer. 10.4:1 on white. |
+| Docs list text | `#2C2A36` | Links in the docs list. 14.1:1 on white. |
+| Divider | `#EEECF4` | Lines between items in the menu and in tables |
 | Focus ring | 2 px solid `#6B24B2` outline, 2 px offset, on `:focus-visible` | Keyboard focus on every focusable part (WCAG 2.2, 2.4.7). 8.3:1 against white. |
 | Success | Background `#E3F3E8`, text `#1F6B36` | "Copied" and "Link copied". 5.7:1. |
 | Failure | The changed note colours | "Copy failed" |
@@ -322,6 +326,8 @@ The theme holds these values. No component uses a colour that is not in the them
 | Section links | The "#" link after a heading, in the link colour, as `states.png` shows | When it shows: spec section 6.1.1, item 6 |
 | Fonts | IBM Plex Sans (400, 500, 600, 700), IBM Plex Mono (400, 500, 600) | Text and code |
 | Breakpoints | MUI defaults. Below `md` (900 px) the header links become the menu button and the docs sidebar moves into the menu. Below `lg` (1200 px) "On this page" moves to the top of the article. | Spec sections 6.1.2 and 6.1.4 |
+
+The table lists the main tokens. The theme also holds every other colour that `docs/design/` uses, for example `#3B3848` for body text in some sections. The task that first needs a colour adds it to the theme.
 
 Every pair was measured on 2026-10-23 with the WCAG formula. The lowest are the logo bars (pink 3.9:1, cyan 3.2:1), which are graphics and need 3:1, and the code types (5.2:1), which are text and need 4.5:1. The accessibility tests in section 7 check them again on the built pages.
 
