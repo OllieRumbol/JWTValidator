@@ -13,6 +13,8 @@ const linkStyle = (theme: Theme) => ({
   textDecoration: "none",
   backgroundColor: theme.tokens.primary,
   color: theme.tokens.background,
+  // The design shows no hover for these links, so the darker link hover colour is used.
+  "&:hover": { backgroundColor: theme.tokens.linkHover },
 });
 
 const secondaryLinkStyle = (theme: Theme) => ({
@@ -20,6 +22,7 @@ const secondaryLinkStyle = (theme: Theme) => ({
   backgroundColor: theme.tokens.background,
   color: theme.tokens.primary,
   border: `1px solid ${theme.tokens.selected.border}`,
+  "&:hover": { backgroundColor: theme.tokens.selected.background },
 });
 
 // Shown for an address that matches no page, and for an unknown docs page (spec section
