@@ -82,6 +82,10 @@ describe("Menu", () => {
       "href",
       "/",
     );
+    expect(nav.getByRole("link", { name: "Docs" })).toHaveAttribute(
+      "href",
+      "/docs",
+    );
     expect(nav.getByRole("link", { name: "Versions" })).toBeVisible();
     expect(
       nav.getByRole("link", { name: "NuGet package, leaves this site" }),
@@ -104,6 +108,16 @@ describe("Menu", () => {
 
     await expectMenuClosed(menuButton);
     expect(router.state.location.pathname).toBe("/versions");
+  });
+
+  test("Docs opens the first docs page and closes the menu", async () => {
+    const router = renderRoute("/");
+    const { user, menuButton, menu } = await openMenu();
+
+    await user.click(within(menu).getByRole("link", { name: "Docs" }));
+
+    await expectMenuClosed(menuButton);
+    expect(router.state.location.pathname).toBe("/docs/validation-options");
   });
 
   test("closes on the close button", async () => {

@@ -106,17 +106,26 @@ const MobileMenu = ({ open, onClose }: MobileMenuProps) => {
             sx={(theme) => ({
               paddingBottom: "8px",
               borderBottom: `1px solid ${theme.tokens.divider}`,
-              // The docs list is indented below "Docs" in the menu.
-              "& a": { paddingLeft: "20px" },
             })}
           >
+            {/* A link, unlike phone.html, so the menu holds every header link (spec
+                section 6.1.2, item 2). */}
             <Box
-              component="p"
-              sx={{ margin: 0, padding: "11px 12px 4px", fontWeight: 600 }}
+              component={RouterLink}
+              to="/docs"
+              onClick={onClose}
+              sx={(theme) => ({
+                ...itemStyle(theme),
+                padding: "11px 12px 4px",
+                borderBottom: 0,
+              })}
             >
               Docs
             </Box>
-            <DocsNav onNavigate={onClose} />
+            {/* The docs list is indented below "Docs" in the menu. */}
+            <Box sx={{ "& a": { paddingLeft: "20px" } }}>
+              <DocsNav onNavigate={onClose} />
+            </Box>
           </Box>
           <li>
             <Box
