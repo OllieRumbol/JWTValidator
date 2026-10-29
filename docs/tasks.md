@@ -262,7 +262,7 @@ Base branch: release/phase-2-redesign
     - `public/favicon.ico` is the light package icon from `logo.html` at 32 and 64 px, drawn with Playwright by a one-off script that is not in the repository. To change it, draw it again from `logo.html`.
     - Evidence: pull request #32
 
-- [ ] **T16 — Add the content data**
+- [x] **T16 — Add the content data**
   - Refs: plan 3.4 (data model, docs pages), plan 3.1 (`src/content/`), plan 2 (links, latest version), spec 6.1.6, spec 6.2.4, plan 7.2 tests 4 and 5
   - Depends on: T14
   - Done when:
@@ -273,9 +273,10 @@ Base branch: release/phase-2-redesign
   - Verify: `npm test`
   - Notes:
     - Release 3 adds the other six docs pages and the 2.0.0 entry.
-    - 1.0.3 is `Latest` until T28 adds 2.0.0 and makes it `Previous`. `latestVersion` reads the first entry, for the footer (test 7, T17).
+    - 2.0.0 was listed on nuget.org on 2026-10-25, but the maintainer chose to keep 1.0.3 `Latest` in release 2, as planned, and to correct spec 2 in a planning change. T28 adds 2.0.0. `latestVersion` reads the first entry, for the footer (test 7, T17).
     - Each version's summary and changes are today's Versions page text, unchanged apart from one trailing space, typos included. Content is fixed in release 3 (spec 6.1.10). The old page still shows 1.0.4 and 1.0.5 until T21 moves it to `versions.ts`.
     - `getAdjacentPages(slug)` gives previous and next from the reading order, for `PrevNextLinks` (T20). Every link in `links.ts` returned 200 on 2026-10-29.
+    - Evidence: pull request #33
 
 - [ ] **T17 — Build the header, menu, footer and layout**
   - Refs: spec 6.1.2, spec 6.1.4 item 2, spec 6.1.1 items 4 and 7, spec 6.7 (reduced motion), plan 3.1 (`RootLayout`, `SiteHeader`, `MobileMenu`, `SiteFooter`, `ExternalLink`, `DocsNav`), plan 3.5 (router, UI library), plan 3.6, plan 7.1, plan 7.2 tests 3, 7, 9, 10, 11 and 18, spec 4.1 items 1, 6, 7 and 9, `docs/design/home.png`, `docs/design/phone.png`, `docs/design/states.png`
@@ -520,4 +521,5 @@ None.
 - 2026-10-28 — T13
 - 2026-10-28 — T14
 - 2026-10-28 — T15
+- 2026-10-29 — T16
 
