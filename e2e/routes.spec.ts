@@ -3,51 +3,71 @@
 import AxeBuilder from "@axe-core/playwright";
 import { expect, test } from "@playwright/test";
 
-// Spec section 6.2.1, with the address each one ends on and the page's tab title.
+// Spec section 6.2.1, with the address each one ends on, the page's tab title, and a
+// heading only that page has. The docs headings are the old pages' until T21.
 const addresses = [
-  { from: "", to: /JWTValidator\/(#\/)?$/, title: "JWT Validator" },
-  { from: "#/", to: /#\/$/, title: "JWT Validator" },
-  { from: "#/versions", to: /#\/versions$/, title: "Versions — JWT Validator" },
+  {
+    from: "",
+    to: /JWTValidator\/(#\/)?$/,
+    title: "JWT Validator",
+    heading: "How it works",
+  },
+  { from: "#/", to: /#\/$/, title: "JWT Validator", heading: "How it works" },
+  {
+    from: "#/versions",
+    to: /#\/versions$/,
+    title: "Versions — JWT Validator",
+    heading: "Versions",
+  },
   {
     from: "#/documentation/builder",
     to: /#\/docs\/validation-options$/,
     title: "Validation options — JWT Validator",
+    heading: "Builder Introduction",
   },
   {
     from: "#/documentation/validator",
     to: /#\/docs\/validator$/,
     title: "Validator — JWT Validator",
+    heading: "Validator Introduction",
   },
   {
     from: "#/documentation/expiry",
     to: /#\/docs\/expiry-checker$/,
     title: "Expiry checker — JWT Validator",
+    heading: "Expiry Checker Introduction",
   },
   {
     from: "#/documentation/dictionary",
     to: /#\/docs\/dictionary-extensions$/,
     title: "Dictionary extensions — JWT Validator",
+    heading: "Dictionary Extensions Introduction",
   },
   {
     from: "#/docs",
     to: /#\/docs\/validation-options$/,
     title: "Validation options — JWT Validator",
+    heading: "Builder Introduction",
   },
   {
     from: "#/no-such-page",
     to: /#\/no-such-page$/,
     title: "Page not found — JWT Validator",
+    heading: "Page not found",
   },
 ];
 
 // Test 8 (spec sections 6.1.1, items 2, 3 and 8, and 6.2.1).
 test.describe("addresses (test 8)", () => {
-  for (const { from, to, title } of addresses) {
+  for (const { from, to, title, heading } of addresses) {
     test(`"${from || "(nothing)"}" shows the right page`, async ({ page }) => {
       await page.goto(from);
 
       await expect(page).toHaveURL(to);
       await expect(page).toHaveTitle(title);
+      await expect(
+        page.getByRole("heading", { name: heading, exact: true }),
+      ).toBeVisible();
     });
   }
 

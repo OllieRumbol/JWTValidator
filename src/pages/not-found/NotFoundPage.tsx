@@ -71,6 +71,7 @@ const NotFoundPage = () => {
             margin: "0 0 8px",
             fontFamily: theme.tokens.fontMono,
             fontSize: "15px",
+            lineHeight: 1.6,
             fontWeight: 600,
             color: theme.tokens.changedNote.label,
           })}
