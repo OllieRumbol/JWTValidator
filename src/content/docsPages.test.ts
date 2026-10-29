@@ -28,10 +28,12 @@ describe("docsPages", () => {
     expect(getAdjacentPages(first.slug).previous).toBeUndefined();
     expect(getAdjacentPages(last.slug).next).toBeUndefined();
 
-    // Following "next" from the first page visits every page once, in order.
+    // Following "next" from the first page visits every page once, in order. A loop
+    // fails here instead of running for ever.
     const visited: string[] = [];
     let page: (typeof docsPages)[number] | undefined = first;
     while (page) {
+      expect(visited, "next pages form a loop").not.toContain(page.slug);
       visited.push(page.slug);
       const next: (typeof docsPages)[number] | undefined = getAdjacentPages(
         page.slug,
