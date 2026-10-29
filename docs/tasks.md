@@ -278,7 +278,7 @@ Base branch: release/phase-2-redesign
     - `getAdjacentPages(slug)` gives previous and next from the reading order, for `PrevNextLinks` (T20). Every link in `links.ts` returned 200 on 2026-10-29.
     - Evidence: pull request #33
 
-- [ ] **T17 — Build the header, menu, footer and layout**
+- [x] **T17 — Build the header, menu, footer and layout**
   - Refs: spec 6.1.2, spec 6.1.4 item 2, spec 6.1.1 items 4 and 7, spec 6.7 (reduced motion), plan 3.1 (`RootLayout`, `SiteHeader`, `MobileMenu`, `SiteFooter`, `ExternalLink`, `DocsNav`), plan 3.5 (router, UI library), plan 3.6, plan 7.1, plan 7.2 tests 3, 7, 9, 10, 11 and 18, spec 4.1 items 1, 6, 7 and 9, `docs/design/home.png`, `docs/design/phone.png`, `docs/design/states.png`
   - Depends on: T15, T16
   - Done when:
@@ -292,11 +292,11 @@ Base branch: release/phase-2-redesign
     - Plan 7.2 tests 10 and 11 exist and pass for the header, the menu and the footer.
   - Verify: `npm test && npm run build && npm run e2e`
   - Notes:
-    - Each page joins tests 10 and 11 in the task that rebuilds it (plan 7.1). Here they check the header, the version notice, the footer and the open menu only.
-    - The design uses colours that plan 3.6 did not list. On 2026-10-29 the maintainer chose to add them as theme tokens. Plan 3.6 is updated in pull request #36. T19 to T22 add any other design colour to `theme.ts` when they first need it.
-    - The menu follows `phone.html`: "Docs" is a label above `DocsNav`, not a link, and the NuGet item reads "NuGet package". The header's "Docs" link (`/docs`) and the `DocsNav` links show an empty page until T18 adds the routes.
-    - `RootLayout`'s dark theme and `src/style/app.css` are removed, so the old pages show in the light theme, with underlined links, until T21 and T22. `RootLayout` now wraps every page in `<main>`.
-    - Added `@axe-core/playwright` 4.14.0 (test 11), the DOM types in `tsconfig.node.json` for `page.evaluate`, and `src/test/renderRoute.tsx`, which renders the site with the theme. Test 9's desktop rows use a 600 px high window, so Home can scroll 1,500 px. `Logo` has the footer's bars (`xsmall`), the phone header size (`small`) and a size for each breakpoint.
+    - Tests 10 and 11 check the header, the version notice, the footer and the open menu. Each page joins them in the task that rebuilds it (plan 7.1).
+    - The maintainer chose (2026-10-29) to add the design's missing colours as theme tokens, with plan 3.6 updated in pull request #36. T19 to T22 add any other design colour to `theme.ts` when they first need it.
+    - The menu follows `phone.html`: "Docs" is a label above `DocsNav`, and the NuGet item reads "NuGet package". The header's "Docs" link and the `DocsNav` links show an empty page until T18 adds the routes.
+    - The old dark theme and `app.css` are gone, so the old pages show in the light theme with underlined links until T21 and T22. `RootLayout` wraps every page in `<main>`. `src/test/renderRoute.tsx` renders the site with the theme.
+    - Evidence: pull request #37
 
 - [ ] **T18 — Add the new routes, redirects and "Page not found"**
   - Refs: plan 3.3 (routes), spec 6.1.1 items 1 to 3, 8 and 9, spec 6.2.1, plan 7.2 tests 6, 8, 10 and 11, spec 4.1 item 10, `docs/design/not-found.png`
@@ -527,4 +527,5 @@ None.
 - 2026-10-28 — T14
 - 2026-10-28 — T15
 - 2026-10-29 — T16
+- 2026-10-29 — T17
 
