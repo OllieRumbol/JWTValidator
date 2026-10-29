@@ -26,6 +26,7 @@
   },
   "homepage": "https://ollierumbol.github.io/JWTValidator",
   "devDependencies": {
+    "@axe-core/playwright": "^4.14.0",
     "@babel/core": "^8.0.9",
     "@eslint/js": "^10.0.1",
     "@playwright/test": "^1.64.1",

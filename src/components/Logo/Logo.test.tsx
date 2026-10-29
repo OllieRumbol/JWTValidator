@@ -4,10 +4,10 @@ import { ThemeProvider } from "@mui/material/styles";
 import theme from "@/app/theme";
 import Logo from "./Logo";
 
-function renderLogo(size?: "medium" | "large") {
+function renderLogo(size?: "small" | "medium" | "large", showName?: boolean) {
   render(
     <ThemeProvider theme={theme}>
-      <Logo size={size} />
+      <Logo size={size} showName={showName} />
     </ThemeProvider>,
   );
 }
@@ -46,5 +46,21 @@ describe("Logo", () => {
       expect(bar).toHaveStyle({ width: "10px", height: "24px" });
     });
     expect(screen.getByText("JWT Validator")).toHaveStyle({ fontSize: "20px" });
+  });
+
+  test("draws the phone header size, as in phone.html", () => {
+    renderLogo("small");
+
+    screen.getAllByTestId("logo-bar").forEach((bar) => {
+      expect(bar).toHaveStyle({ width: "8px", height: "20px" });
+    });
+    expect(screen.getByText("JWT Validator")).toHaveStyle({ fontSize: "18px" });
+  });
+
+  test("can show the bars without the name, as the footer does", () => {
+    renderLogo("medium", false);
+
+    expect(screen.getAllByTestId("logo-bar")).toHaveLength(3);
+    expect(screen.queryByText("JWT Validator")).toBeNull();
   });
 });
