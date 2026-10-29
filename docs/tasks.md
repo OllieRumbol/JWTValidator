@@ -298,7 +298,7 @@ Base branch: release/phase-2-redesign
     - The old dark theme and `app.css` are gone, so the old pages show in the light theme with underlined links until T21 and T22. `RootLayout` wraps every page in `<main>`. `src/test/renderRoute.tsx` renders the site with the theme.
     - Evidence: pull request #37
 
-- [ ] **T18 — Add the new routes, redirects and "Page not found"**
+- [x] **T18 — Add the new routes, redirects and "Page not found"**
   - Refs: plan 3.3 (routes), spec 6.1.1 items 1 to 3, 8 and 9, spec 6.2.1, plan 7.2 tests 6, 8, 10 and 11, spec 4.1 item 10, `docs/design/not-found.png`
   - Depends on: T17
   - Done when:
@@ -309,11 +309,10 @@ Base branch: release/phase-2-redesign
   - Verify: `npm test && npm run build && npm run e2e`
   - Notes:
     - Docs slugs that release 3 adds show "Page not found" until then.
-    - Redirects are route loaders that return React Router's `replace()`. A plain `redirect()` adds a history entry, so Back returned to the old address and was sent forward again. A test proves each.
-    - One route, `docs/:slug/:section?`, covers both docs addresses in plan 3.3. `src/pages/docs/DocsPage.tsx` maps each slug to its page. T21 replaces the old page components in that map. T20 scrolls to the section.
-    - `PageTitle` sets the tab title with React's `<title>`. React puts it before the static `<title>` in `index.html`, so the browser shows it. The static one stays for when JavaScript is off.
-    - Test 13 now loads every page at its new address, from `docsPages`.
-    - `not-found.html` shows 1280 px and no hover. Below 900 px, "Page not found" uses a 36 px heading and less padding. On hover, the links take the link hover colour and the selected tint.
+    - Redirects are loaders that return React Router's `replace()`. A plain `redirect()` adds a history entry, so Back returned to the old address. Tests prove this.
+    - One route, `docs/:slug/:section?`, covers both docs addresses in plan 3.3. `DocsPage.tsx` maps each slug to its page. T21 replaces the old pages in that map, and T20 scrolls to the section.
+    - `PageTitle` uses React's `<title>`, which React puts before the static one in `index.html`. Test 8 also checks a heading that only the expected page has, and test 13 loads every page at its new address. Phone sizes and hover for "Page not found" are not in the design, so they were chosen here.
+    - Evidence: pull request #39
 
 - [ ] **T19 — Build the code, tabs and reference components**
   - Refs: spec 6.1.5, spec 6.1.1 item 6, spec 6.1.7 item 2, spec 6.1.3 item 8, plan 3.3 (component contracts), plan 3.5 (syntax highlighting, copy, example tabs and section links), plan 3.6 (code colours, states), plan 4 (clipboard failure), plan 7.2 tests 1, 2, 16 and 17, spec 4.1 item 4, `docs/design/docs-page.png`, `docs/design/states.png`
@@ -534,4 +533,5 @@ None.
 - 2026-10-28 — T15
 - 2026-10-29 — T16
 - 2026-10-29 — T17
+- 2026-10-29 — T18
 
