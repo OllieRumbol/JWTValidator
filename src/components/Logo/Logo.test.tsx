@@ -4,10 +4,10 @@ import { ThemeProvider } from "@mui/material/styles";
 import theme from "@/app/theme";
 import Logo from "./Logo";
 
-function renderLogo(size?: "medium" | "large") {
+function renderLogo(size?: "medium" | "large", showName?: boolean) {
   render(
     <ThemeProvider theme={theme}>
-      <Logo size={size} />
+      <Logo size={size} showName={showName} />
     </ThemeProvider>,
   );
 }
@@ -46,5 +46,12 @@ describe("Logo", () => {
       expect(bar).toHaveStyle({ width: "10px", height: "24px" });
     });
     expect(screen.getByText("JWT Validator")).toHaveStyle({ fontSize: "20px" });
+  });
+
+  test("can show the bars without the name, as the footer does", () => {
+    renderLogo("medium", false);
+
+    expect(screen.getAllByTestId("logo-bar")).toHaveLength(3);
+    expect(screen.queryByText("JWT Validator")).toBeNull();
   });
 });

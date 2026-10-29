@@ -291,7 +291,12 @@ Base branch: release/phase-2-redesign
     - Plan 7.2 tests 3, 7 and 18 exist and pass. The rows of test 9 for starting at the top, Back, the phone menu and pressing Escape in the open menu exist and pass.
     - Plan 7.2 tests 10 and 11 exist and pass for the header, the menu and the footer.
   - Verify: `npm test && npm run build && npm run e2e`
-  - Notes: Each page joins tests 10 and 11 in the task that rebuilds it (plan 7.1).
+  - Notes:
+    - Each page joins tests 10 and 11 in the task that rebuilds it (plan 7.1). Here they check the header, the version notice, the footer and the open menu only.
+    - The design uses colours that plan 3.6 did not list. On 2026-10-29 the maintainer chose to add them as theme tokens. Plan 3.6 is updated in pull request #36. T19 to T22 add any other design colour to `theme.ts` when they first need it.
+    - The menu follows `phone.html`: "Docs" is a label above `DocsNav`, not a link, and the NuGet item reads "NuGet package". The header's "Docs" link (`/docs`) and the `DocsNav` links show an empty page until T18 adds the routes.
+    - `RootLayout`'s dark theme and `src/style/app.css` are removed, so the old pages show in the light theme, with underlined links, until T21 and T22. `RootLayout` now wraps every page in `<main>`.
+    - Added `@axe-core/playwright` 4.14.0 (test 11), the DOM types in `tsconfig.node.json` for `page.evaluate`, and `src/test/renderRoute.tsx`, which renders the site with the theme. Test 9's desktop rows use a 600 px high window, so Home can scroll 1,500 px. `Logo` has the footer's bars (`xsmall`), the phone header size (`small`) and a size for each breakpoint.
 
 - [ ] **T18 — Add the new routes, redirects and "Page not found"**
   - Refs: plan 3.3 (routes), spec 6.1.1 items 1 to 3, 8 and 9, spec 6.2.1, plan 7.2 tests 6, 8, 10 and 11, spec 4.1 item 10, `docs/design/not-found.png`

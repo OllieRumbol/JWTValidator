@@ -24,6 +24,12 @@ const tokens = {
     comment: "#5E6573",
   },
   hover: { tint: "#F3F1F8", copyButton: "#E4D6F7", copyButtonText: "#5A1F8F" },
+  // The current docs page, the open menu button and the Copy button.
+  selected: { background: "#F0E7FB", border: "#CDB4EE", text: "#5A1F8F" },
+  linkHover: "#5A1F8F",
+  docsListText: "#2C2A36",
+  // Lines between items in the menu and in tables. Lighter than "border".
+  divider: "#EEECF4",
   focusRing: "#6B24B2",
   success: { background: "#E3F3E8", text: "#1F6B36" },
   fontSans: "'IBM Plex Sans', system-ui, sans-serif",
@@ -52,6 +58,23 @@ const theme = createTheme({
   },
   typography: {
     fontFamily: tokens.fontSans,
+  },
+  components: {
+    // Links in text, as states.png shows them.
+    MuiLink: {
+      defaultProps: { underline: "always" },
+      styleOverrides: {
+        root: {
+          color: tokens.link,
+          textDecorationColor: "currentColor",
+          textUnderlineOffset: "3px",
+          "&:hover": {
+            color: tokens.linkHover,
+            textDecorationThickness: "2px",
+          },
+        },
+      },
+    },
   },
 });
 
