@@ -345,7 +345,7 @@ Base branch: release/phase-2-redesign
     - Test 11 leaves out the old content (`.noWhiteSpace`), where axe finds `heading-order` and `scrollable-region-focusable`. T21 removes the exclusion. Test 10 checks the whole page.
     - Evidence: pull request #41
 
-- [ ] **T21 — Move the docs and Versions pages to the new design**
+- [x] **T21 — Move the docs and Versions pages to the new design**
   - Refs: spec 6.1.6, spec 6.1.10 release 2, plan 3.2, plan 7.2 tests 4, 10 and 11, spec 4.1 items 11 and 12, `docs/design/versions.png`
   - Depends on: T20
   - Done when:
@@ -355,11 +355,11 @@ Base branch: release/phase-2-redesign
     - Plan 7.2 test 4 passes for 1.0.0 to 1.0.3. The four docs pages and Versions are in tests 10 and 11.
   - Verify: `npm test && npm run build && npm run e2e`
   - Notes:
-    - Content errors are fixed in release 3, not here (spec 6.1.10). T28 extends test 4 to 2.0.0.
-    - The maintainer chose (2026-10-30) to keep the 1.0.3 method text word for word in `src/content/methods/`. Each method's one parameter sentence is one entry, named by the signature's parameters, and "no parameters" shows as "None". `failsWhen` is optional until release 3, so "Fails when" is left out. One trailing space and two stray spaces in signatures were removed, and two examples lost a whitespace-only line or a final line break.
-    - Each page is in `src/pages/docs/<slug>/` and declares its sections. The old introduction is the lead paragraph under the title, and the section headings keep their 1.0.3 words. `DocsLayout` now takes the slug and sets the tab title. The examples are strings in the pages, not compiled: T26 moves them to `examples/`.
-    - The Versions intro and status key are from `versions.html`, and the unlisted entry is muted, as the design shows. The method table's box is named "Method summary", so its name differs from the "Methods" section.
-    - Tests 10 and 11 now check the whole of the four docs pages and Versions. Home still uses `Panel`, `shared.css`, `title.css` and the old highlighter theme, which T22 removes. The header does not mark the current page, as the design does: a T17 gap, raised with the maintainer.
+    - The maintainer chose (2026-10-30) to keep the 1.0.3 method text word for word in `src/content/methods/`: each parameter sentence is one entry named by the signature's parameters, and "no parameters" shows as "None". `failsWhen` is optional until T32 makes it required again. A few whitespace-only changes are listed in pull request #42.
+    - Each page is in `src/pages/docs/<slug>/` and declares its sections. The old introduction is the lead paragraph, and the headings keep their 1.0.3 words. `DocsLayout` takes the slug and sets the tab title. The examples are strings in the pages until T26 moves them to `examples/`.
+    - The Versions intro and status key are from `versions.html`, and the unlisted entry is muted. T28 adds the breaking changes, the "Other changes" heading and the migration guide button.
+    - Tests 10 and 11 check the whole of the four docs pages and Versions. Home still uses `Panel`, `shared.css`, `title.css` and the old highlighter theme, which T22 removes. The header does not mark the current page, as the design does: a T17 gap, raised with the maintainer.
+    - Evidence: pull request #42
 
 - [ ] **T22 — Move Home to the new design and remove the last photo**
   - Refs: spec 6.1.10 items 1 and 5, spec 6.1.7, plan 3.5 (images), plan 3.6, plan 7.2 tests 10 and 11, `docs/design/home.png`
@@ -551,4 +551,5 @@ None.
 - 2026-10-29 — T18
 - 2026-10-30 — T19
 - 2026-10-30 — T20
+- 2026-10-30 — T21
 
