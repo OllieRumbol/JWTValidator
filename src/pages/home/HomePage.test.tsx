@@ -1,9 +1,15 @@
-import { describe, expect, test } from "vitest";
+import { describe, expect, test, vi } from "vitest";
 import { screen, within } from "@testing-library/react";
 import { docsPages } from "@/content/docsPages";
 import { links } from "@/content/links";
-import { latestVersion } from "@/content/versions";
 import { renderRoute } from "@/test/renderRoute";
+
+// A version that does not exist, so the test fails if the badge types the real number
+// itself instead of reading it from the versions data.
+vi.mock("@/content/versions", async (importOriginal) => ({
+  ...(await importOriginal<typeof import("@/content/versions")>()),
+  latestVersion: "9.9.9",
+}));
 
 async function renderHome() {
   renderRoute("/");
@@ -18,9 +24,7 @@ describe("Home", () => {
   test("shows the latest version and links Get started to the first docs page", async () => {
     await renderHome();
 
-    expect(
-      screen.getByText(`Version ${latestVersion} · MIT licence`),
-    ).toBeVisible();
+    expect(screen.getByText("Version 9.9.9 · MIT licence")).toBeVisible();
     expect(screen.getByRole("link", { name: "Get started" })).toHaveAttribute(
       "href",
       `/docs/${docsPages[0].slug}`,
@@ -51,11 +55,16 @@ describe("Home", () => {
       "Expiry checker",
       "Dictionary extensions",
     ]);
-    // In docs order, so every link goes to a page that exists.
+    // Each link goes to a docs page that exists, and each part to its own page.
+    const docsPaths = docsPages.map((page) => `/docs/${page.slug}`);
     const targets = parts
       .getAllByRole("link")
       .map((link) => link.getAttribute("href"));
-    expect(targets).toEqual(docsPages.map((page) => `/docs/${page.slug}`));
+    expect(targets).toHaveLength(4);
+    expect(new Set(targets).size).toBe(4);
+    for (const target of targets) {
+      expect(docsPaths).toContain(target);
+    }
   });
 
   test("shows the example in one code block, without tabs", async () => {

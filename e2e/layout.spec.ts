@@ -8,8 +8,8 @@ const NARROWEST = { width: 320, height: 640 };
 // Short enough that Home can scroll the 1,500 pixels in spec section 6.2.2.
 const DESKTOP = { width: 1280, height: 600 };
 
-// The parts that T17 rebuilt. Each page joins tests 10 and 11 when it is rebuilt (plan
-// section 7.1), so the old page content is not checked here.
+// The parts that every page shares. The pages themselves are in tests 10 and 11 in
+// docs-layout.spec.ts.
 const LAYOUT_PARTS = [
   "header",
   'section[aria-label="Version notice"]',

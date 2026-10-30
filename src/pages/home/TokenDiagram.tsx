@@ -1,3 +1,4 @@
+import { Fragment } from "react";
 import Box from "@mui/material/Box";
 import type { Theme } from "@mui/material/styles";
 
@@ -111,6 +112,8 @@ const TokenDiagram = () => {
         component="figure"
         sx={(theme) => ({
           ...cardStyle(theme),
+          // phone.html shows the token only.
+          display: { xs: "none", sm: "block" },
           padding: "20px 22px",
           fontFamily: theme.tokens.fontMono,
           fontSize: "15px",
@@ -154,7 +157,7 @@ const TokenDiagram = () => {
           })}
         >
           {claims.map((claim) => (
-            <Box key={claim.name} sx={{ display: "contents" }}>
+            <Fragment key={claim.name}>
               <Box
                 component="dt"
                 sx={(theme) => ({ color: theme.tokens.link })}
@@ -162,7 +165,7 @@ const TokenDiagram = () => {
                 {claim.name}
               </Box>
               <dd>{claim.value}</dd>
-            </Box>
+            </Fragment>
           ))}
         </Box>
       </Box>

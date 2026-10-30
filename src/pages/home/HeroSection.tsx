@@ -22,11 +22,12 @@ const HeroSection = () => {
         sx={{
           maxWidth: 1160,
           margin: "0 auto",
-          padding: { xs: "48px 16px", md: "80px 32px" },
+          // The phone sizes are the ones phone.html shows.
+          padding: { xs: "30px 16px 24px", md: "80px 32px" },
           display: "flex",
           flexWrap: "wrap",
           alignItems: "center",
-          gap: { xs: "40px", md: "56px" },
+          gap: { xs: "24px", md: "56px" },
         }}
       >
         <Box sx={{ flex: "1 1 440px", minWidth: 0 }}>
@@ -34,10 +35,10 @@ const HeroSection = () => {
             component="p"
             sx={(theme) => ({
               display: "inline-block",
-              margin: "0 0 16px",
-              padding: "4px 14px",
+              margin: { xs: "0 0 12px", md: "0 0 16px" },
+              padding: { xs: "3px 12px", md: "4px 14px" },
               borderRadius: "999px",
-              fontSize: "14px",
+              fontSize: { xs: "13px", md: "14px" },
               fontWeight: 600,
               color: theme.tokens.selected.text,
               backgroundColor: theme.tokens.selected.background,
@@ -49,9 +50,9 @@ const HeroSection = () => {
             component="h1"
             id="home-title"
             sx={{
-              margin: "0 0 18px",
-              fontSize: { xs: "36px", md: "52px" },
-              lineHeight: 1.08,
+              margin: { xs: "0 0 12px", md: "0 0 18px" },
+              fontSize: { xs: "33px", md: "52px" },
+              lineHeight: { xs: 1.1, md: 1.08 },
               letterSpacing: "-0.03em",
             }}
           >
@@ -60,7 +61,7 @@ const HeroSection = () => {
           <Box
             component="p"
             sx={(theme) => ({
-              margin: "0 0 30px",
+              margin: { xs: "0 0 20px", md: "0 0 30px" },
               maxWidth: "33em",
               fontSize: { xs: "17px", md: "19px" },
               color: theme.tokens.mutedText,
@@ -71,11 +72,21 @@ const HeroSection = () => {
             issuer, audience and expiry, and get the claims back as a
             dictionary.
           </Box>
-          <Box sx={{ display: "flex", marginBottom: "26px" }}>
+          <Box
+            sx={{
+              display: "flex",
+              // Full width on a phone.
+              flexDirection: { xs: "column", sm: "row" },
+              marginBottom: { xs: "16px", md: "26px" },
+            }}
+          >
             <Box
               component={RouterLink}
               to={`/docs/${docsPages[0].slug}`}
-              sx={primaryLinkStyle}
+              sx={(theme) => ({
+                ...primaryLinkStyle(theme),
+                textAlign: "center",
+              })}
             >
               Get started
             </Box>
