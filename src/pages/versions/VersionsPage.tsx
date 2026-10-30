@@ -1,7 +1,5 @@
 import Box from "@mui/material/Box";
 import type { Theme } from "@mui/material/styles";
-import { Link as RouterLink } from "react-router";
-import { MIGRATION_GUIDE_PATH } from "@/content/docsPages";
 import PageTitle from "@/components/PageTitle/PageTitle";
 import { versions, type Version, type VersionStatus } from "@/content/versions";
 
@@ -96,32 +94,8 @@ const VersionEntry = ({ version }: { version: Version }) => {
         <Box component="p" sx={{ margin: "0 0 12px", fontSize: "18px" }}>
           {version.summary}
         </Box>
-        {version.breakingChanges && (
-          <>
-            <Box
-              component="h3"
-              sx={(theme) => ({
-                margin: "0 0 8px",
-                fontFamily: theme.tokens.fontMono,
-                fontSize: "13px",
-                fontWeight: 600,
-                letterSpacing: "0.04em",
-                textTransform: "uppercase",
-                color: theme.tokens.changedNote.label,
-              })}
-            >
-              Breaking changes
-            </Box>
-            <Box
-              component="ul"
-              sx={{ margin: "0 0 18px", paddingLeft: "22px" }}
-            >
-              {version.breakingChanges.map((change) => (
-                <li key={change}>{change}</li>
-              ))}
-            </Box>
-          </>
-        )}
+        {/* T28 adds the breaking changes, the "Other changes" heading and the
+            migration guide link, which only 2.0.0 has (spec section 6.1.6, item 4). */}
         <Box
           component="ul"
           sx={(theme) => ({
@@ -134,25 +108,6 @@ const VersionEntry = ({ version }: { version: Version }) => {
             <li key={change}>{change}</li>
           ))}
         </Box>
-        {version.breakingChanges && (
-          <Box
-            component={RouterLink}
-            to={MIGRATION_GUIDE_PATH}
-            sx={(theme) => ({
-              display: "inline-block",
-              marginTop: "22px",
-              padding: "11px 22px",
-              borderRadius: "8px",
-              fontWeight: 600,
-              textDecoration: "none",
-              color: theme.tokens.background,
-              backgroundColor: theme.tokens.primary,
-              "&:hover": { backgroundColor: theme.tokens.linkHover },
-            })}
-          >
-            Read the migration guide
-          </Box>
-        )}
       </Box>
     </Box>
   );

@@ -130,6 +130,23 @@ test.describe("section addresses (test 9)", () => {
   });
 });
 
+// A section's own spacing must not reach into the components inside it. An earlier
+// version removed the gap between each method's summary and its signature.
+test("a reference block keeps its own spacing inside its section", async ({
+  page,
+}) => {
+  await page.goto("#/docs/validator", { waitUntil: "networkidle" });
+
+  const summary = page
+    .getByRole("region", { name: "TryValidateJWT" })
+    .getByText(/is very similar to the \.ValidateJWT\(\) method/);
+  const margin = await summary.evaluate((element) => {
+    const style = getComputedStyle(element);
+    return [style.marginTop, style.marginBottom];
+  });
+  expect(margin).toEqual(["6px", "14px"]);
+});
+
 test.describe("layout at each width", () => {
   test("from 1200 px, the sidebar and On this page sit beside the article", async ({
     page,

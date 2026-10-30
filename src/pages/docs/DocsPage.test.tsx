@@ -75,19 +75,29 @@ describe("docs page layout", () => {
     },
   );
 
-  test("each page's reference starts with the method table", async () => {
-    renderRoute("/docs/validator");
+  test.each([
+    ["validation-options", "Create", "create"],
+    ["validator", "ValidateJWT", "validate-jwt"],
+    ["expiry-checker", "HasJWTExpired", "has-jwt-expired"],
+    ["dictionary-extensions", "Print", "print"],
+  ])(
+    "the reference of %s starts with the method table",
+    async (slug, firstMethod, firstId) => {
+      renderRoute(`/docs/${slug}`);
 
-    const methods = await screen.findByRole("region", { name: "Methods" });
-    // The heading's wrapper, then the table, then the reference blocks.
-    const table = methods.children[1];
-    expect(table).toHaveAccessibleName("Method summary");
-    expect(
-      within(table as HTMLElement).getByRole("link", {
-        name: "TryValidateJWT",
-      }),
-    ).toHaveAttribute("href", "/docs/validator/try-validate-jwt");
-  });
+      const methods = await screen.findByRole("region", { name: "Methods" });
+      // The heading's wrapper, then the table, then the reference blocks.
+      const table = methods.children[1] as HTMLElement;
+      expect(table).toHaveAccessibleName("Method summary");
+      expect(
+        within(table).getAllByRole("link")[0],
+      ).toHaveAccessibleName(firstMethod);
+      expect(within(table).getAllByRole("link")[0]).toHaveAttribute(
+        "href",
+        `/docs/${slug}/${firstId}`,
+      );
+    },
+  );
 
   test("an address such as #/docs/toString shows Page not found", async () => {
     renderRoute("/docs/toString");

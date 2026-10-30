@@ -356,7 +356,7 @@ Base branch: release/phase-2-redesign
   - Verify: `npm test && npm run build && npm run e2e`
   - Notes:
     - Content errors are fixed in release 3, not here (spec 6.1.10). T28 extends test 4 to 2.0.0.
-    - The maintainer chose (2026-10-30) to keep the 1.0.3 method text word for word in `src/content/methods/`. Each method's one parameter sentence is one entry, named by the signature's parameters, and "no parameters" shows as "None". `failsWhen` is optional until release 3, so "Fails when" is left out. One trailing space and two stray spaces in signatures were removed.
+    - The maintainer chose (2026-10-30) to keep the 1.0.3 method text word for word in `src/content/methods/`. Each method's one parameter sentence is one entry, named by the signature's parameters, and "no parameters" shows as "None". `failsWhen` is optional until release 3, so "Fails when" is left out. One trailing space and two stray spaces in signatures were removed, and two examples lost a whitespace-only line or a final line break.
     - Each page is in `src/pages/docs/<slug>/` and declares its sections. The old introduction is the lead paragraph under the title, and the section headings keep their 1.0.3 words. `DocsLayout` now takes the slug and sets the tab title. The examples are strings in the pages, not compiled: T26 moves them to `examples/`.
     - The Versions intro and status key are from `versions.html`, and the unlisted entry is muted, as the design shows. The method table's box is named "Method summary", so its name differs from the "Methods" section.
     - Tests 10 and 11 now check the whole of the four docs pages and Versions. Home still uses `Panel`, `shared.css`, `title.css` and the old highlighter theme, which T22 removes. The header does not mark the current page, as the design does: a T17 gap, raised with the maintainer.
@@ -454,7 +454,7 @@ Base branch: release/phase-3-content
     - Plan 7.2 test 4 covers 2.0.0.
     - The publish date of 2.0.0 is a placeholder marked in Notes until 2.0.0 is released.
   - Verify: `npm test && npm run build && npm run e2e`, and the `examples` job passes.
-  - Notes: —
+  - Notes: From T21: `VersionsPage` shows no breaking changes yet. Add them, the "Other changes" heading above the other changes, and the "Read the migration guide" button, as `versions.html` shows, with a test.
 
 - [ ] **T29 — Write Validation options, Validator and Claims**
   - Refs: spec 6.1.3 items 2 to 7 (Validation options, Secret length, Validator, Claims), spec 6.2.3, plan 3.4 (`MethodReference`), plan 7.2 tests 10 and 11, spec 4.1 item 5, `docs/design/docs-page.png`
@@ -500,7 +500,7 @@ Base branch: release/phase-3-content
     - Each docs topic is checked against the README and release notes at tag `v2.0.0`. Differences are fixed.
     - The 2.0.0 changelog date is the real publish date.
   - Verify: `gh pr checks <number>` shows every job passing. The fact check is listed topic by topic in the pull request.
-  - Notes: —
+  - Notes: From T21: make `failsWhen` required again in `src/content/methods/types.ts` (plan 3.4), once T29 to T31 give every method a "Fails when" text (spec 6.1.3, item 3).
 
 - [ ] **T33 — Check spelling, grammar and wording**
   - Refs: spec 6.1.8, spec 6.1.10 item 3, spec 3 goal 9
