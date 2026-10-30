@@ -63,6 +63,9 @@ const MethodReference = ({ method }: MethodReferenceProps) => {
           gridTemplateColumns: { xs: "1fr", sm: "max-content 1fr" },
           gap: { xs: "2px 24px", sm: "8px 24px" },
           fontSize: "16px",
+          // A long class name, such as IJWTValidatorOptionsBuilderFinisher, breaks
+          // instead of spilling out of the box at 320 px.
+          overflowWrap: "anywhere",
           "& dt": { color: theme.tokens.mutedText, fontWeight: 600 },
           "& dd": { margin: { xs: "0 0 8px", sm: 0 } },
           "& code": { fontFamily: theme.tokens.fontMono },

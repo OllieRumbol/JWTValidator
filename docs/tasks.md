@@ -390,9 +390,10 @@ Base branch: release/phase-2-redesign
     - No file in `src/` outside `src/app/theme.ts` holds a colour value.
   - Verify: `npm run build && npm run e2e`, then `grep -rnE "#[0-9A-Fa-f]{6}\b|rgba?\(" src --include=*.ts --include=*.tsx --include=*.css | grep -v "src/app/theme.ts"` prints nothing.
   - Notes:
-    - Earlier tasks added each page to the tests as they rebuilt it. Tests 10 and 11 are now in `e2e/pages.spec.ts`, which takes the docs pages from `docsPages`, so each release 3 page joins when it is added. "Page not found" moved there from `routes.spec.ts`.
-    - Axe 4.14 leaves the WCAG 2.2 AA `target-size` rule off by default. `e2e/accessibility.ts` turns it on for every axe check, including the header parts and the open menu. Every page passed with it, so no page needed a change.
-    - The other items needed no change: every list has a key from its data or a static list, axe's `nested-interactive`, `heading-order` and `page-has-heading-one` rules pass on every page, and the colour grep printed nothing before work started.
+    - Tests 10 and 11 are now in `e2e/pages.spec.ts`. `e2e/everyPage.ts` lists every page from `docsPages`, for tests 10, 11 and 13, so each release 3 page joins when it is added. "Page not found" moved there from `routes.spec.ts`.
+    - Test 10 now also checks that content wider than its box scrolls inside it. That check found the method reference lists at 320 px: a long class name such as `IJWTValidatorOptionsBuilderFinisher` spilled up to 26 px out of its box. `overflowWrap: "anywhere"` on the list fixes it.
+    - Axe 4.14 leaves the WCAG 2.2 AA `target-size` rule off by default. `e2e/accessibility.ts` turns it on for every axe check. Every page passed with it.
+    - The other items needed no change. Every list has a key from its data or a static list. No button is inside a link. Each page has one h1 and its outline was checked in the code, and axe's `heading-order` rule passes. The colour grep printed nothing before work started.
     - T24: the keyboard check by hand (spec 6.6.1, item 4) and Lighthouse accessibility 100 (item 3).
 
 - [ ] **T24 — Release phase 2 (maintainer)**
