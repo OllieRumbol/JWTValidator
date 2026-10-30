@@ -10,9 +10,14 @@ const addresses = [
     from: "",
     to: /JWTValidator\/(#\/)?$/,
     title: "JWT Validator",
-    heading: "How it works",
+    heading: "Four small parts",
   },
-  { from: "#/", to: /#\/$/, title: "JWT Validator", heading: "How it works" },
+  {
+    from: "#/",
+    to: /#\/$/,
+    title: "JWT Validator",
+    heading: "Four small parts",
+  },
   {
     from: "#/versions",
     to: /#\/versions$/,

@@ -1,24 +1,12 @@
 import Box from "@mui/material/Box";
 import type { Theme } from "@mui/material/styles";
 import { Link as RouterLink } from "react-router";
+import { primaryLinkStyle } from "@/app/theme";
 import PageTitle from "@/components/PageTitle/PageTitle";
 
-// The two links, as not-found.html shows them.
-const linkStyle = (theme: Theme) => ({
-  fontSize: "17px",
-  lineHeight: 1.6,
-  fontWeight: 600,
-  padding: "12px 24px",
-  borderRadius: "8px",
-  textDecoration: "none",
-  backgroundColor: theme.tokens.primary,
-  color: theme.tokens.background,
-  // The design shows no hover for these links, so the darker link hover colour is used.
-  "&:hover": { backgroundColor: theme.tokens.linkHover },
-});
-
+// The second link, as not-found.html shows it.
 const secondaryLinkStyle = (theme: Theme) => ({
-  ...linkStyle(theme),
+  ...primaryLinkStyle(theme),
   backgroundColor: theme.tokens.background,
   color: theme.tokens.primary,
   border: `1px solid ${theme.tokens.selected.border}`,
@@ -110,7 +98,7 @@ const NotFoundPage = () => {
             gap: "12px",
           }}
         >
-          <Box component={RouterLink} to="/" sx={linkStyle}>
+          <Box component={RouterLink} to="/" sx={primaryLinkStyle}>
             Go to Home
           </Box>
           <Box component={RouterLink} to="/docs" sx={secondaryLinkStyle}>
