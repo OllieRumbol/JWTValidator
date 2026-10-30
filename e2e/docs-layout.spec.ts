@@ -1,11 +1,9 @@
 // The docs layout in a real browser: the rows of plan section 7.2, test 9 for section
-// links, shared section links and copying a section link, and a docs page in tests 10
-// and 11.
-import AxeBuilder from "@axe-core/playwright";
+// links, shared section links and copying a section link. Tests 10 and 11 are in
+// pages.spec.ts.
 import { expect, test, type Page } from "@playwright/test";
 
 const DESKTOP = { width: 1280, height: 720 };
-const NARROWEST = { width: 320, height: 640 };
 
 // The page's top edge is at 0 or just below it after scrolling to a section. A section
 // near the end of a page may stop lower, when the page cannot scroll further.
@@ -193,43 +191,3 @@ test.describe("layout at each width", () => {
     ).toBeHidden();
   });
 });
-
-// Tests 10 and 11 on every page rebuilt in the new design: Home, the four docs pages
-// and Versions.
-const pages = [
-  "#/",
-  "#/docs/validation-options",
-  "#/docs/validator",
-  "#/docs/expiry-checker",
-  "#/docs/dictionary-extensions",
-  "#/versions",
-];
-
-for (const route of pages) {
-  test.describe(route, () => {
-    // Test 10 (spec section 6.6.3, item 2).
-    test("does not scroll sideways at 320 px", async ({ page }) => {
-      await page.setViewportSize(NARROWEST);
-      await page.goto(route, { waitUntil: "networkidle" });
-
-      const pageWidth = await page.evaluate(
-        () => document.documentElement.scrollWidth,
-      );
-      expect(pageWidth).toBeLessThanOrEqual(NARROWEST.width);
-    });
-
-    // Test 11 (spec section 6.6.1, item 2).
-    for (const viewport of [NARROWEST, DESKTOP]) {
-      test(`has no accessibility violations at ${viewport.width} px`, async ({
-        page,
-      }) => {
-        await page.setViewportSize(viewport);
-        await page.goto(route, { waitUntil: "networkidle" });
-
-        const results = await new AxeBuilder({ page }).analyze();
-
-        expect(results.violations).toEqual([]);
-      });
-    }
-  });
-}

@@ -1,7 +1,7 @@
 // The header, the menu and the footer in a real browser: plan section 7.2, the rows of
 // test 9 for the layout, tests 10 and 11 for these parts, and test 18.
-import AxeBuilder from "@axe-core/playwright";
 import { expect, test, type Page } from "@playwright/test";
+import { accessibilityCheck } from "./accessibility.ts";
 
 const PHONE = { width: 375, height: 812 };
 const NARROWEST = { width: 320, height: 640 };
@@ -9,7 +9,7 @@ const NARROWEST = { width: 320, height: 640 };
 const DESKTOP = { width: 1280, height: 600 };
 
 // The parts that every page shares. The pages themselves are in tests 10 and 11 in
-// docs-layout.spec.ts.
+// pages.spec.ts.
 const LAYOUT_PARTS = [
   "header",
   'section[aria-label="Version notice"]',
@@ -205,7 +205,7 @@ test.describe("accessibility", () => {
       await page.goto("#/");
       await expect(page.getByRole("banner")).toBeVisible();
 
-      let axe = new AxeBuilder({ page });
+      let axe = accessibilityCheck(page);
       for (const selector of LAYOUT_PARTS) {
         axe = axe.include(selector);
       }
@@ -220,7 +220,7 @@ test.describe("accessibility", () => {
     await page.goto("#/");
     await openMenu(page);
 
-    const results = await new AxeBuilder({ page })
+    const results = await accessibilityCheck(page)
       .include('[role="dialog"]')
       .analyze();
 
