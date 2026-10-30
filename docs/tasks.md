@@ -314,14 +314,19 @@ Base branch: release/phase-2-redesign
     - `PageTitle` uses React's `<title>`, which React puts before the static one in `index.html`. Test 8 also checks a heading that only the expected page has, and test 13 loads every page at its new address. Phone sizes and hover for "Page not found" are not in the design, so they were chosen here.
     - Evidence: pull request #39
 
-- [ ] **T19 — Build the code, tabs and reference components**
+- [x] **T19 — Build the code, tabs and reference components**
   - Refs: spec 6.1.5, spec 6.1.1 item 6, spec 6.1.7 item 2, spec 6.1.3 item 8, plan 3.3 (component contracts), plan 3.5 (syntax highlighting, copy, example tabs and section links), plan 3.6 (code colours, states), plan 4 (clipboard failure), plan 7.2 tests 1, 2, 16 and 17, spec 4.1 item 4, `docs/design/docs-page.png`, `docs/design/states.png`
   - Depends on: T15
   - Done when:
     - `CodeBlock` (C#, XML and shell, with a language label), `CopyButton`, `ExampleTabs`, `ChangedNote`, `SectionHeading` with its copying section link, `ScrollTable`, `MethodReference` and `MethodTable` follow plan 3.3 and match `docs/design/docs-page.png` and `states.png`.
     - Plan 7.2 tests 1, 2, 16 and 17 exist and pass.
   - Verify: `npm test`
-  - Notes: The "Returns" label must say "Returns" (spec 4.1, item 6). Sideways scrolling is checked by test 10 when T20 and T21 put these components on real pages. If this task grows past one session, split `ExampleTabs` and `SectionHeading` into their own task.
+  - Notes:
+    - The C# grammar does not mark type names or method calls, so they stay in the text colour, unlike `docs-page.png` (the limit of plan 3.5's C#-only highlighting). Test 10 checks sideways scrolling when T20 and T21 put these components on pages.
+    - Choices the design does not show: the language label is in the caption ("C# · Program.cs"), there are no line numbers, "Copy failed" stays until the next try with its hint in the live region only, and the section link sits next to its heading, always visible on a touch screen.
+    - Wide components have `minWidth: 0`, so their code or table scrolls inside them in a flex or grid parent. A temporary demo page (not committed) fitted 320 px with no axe violations. Every code box and table is a tab stop, even when it does not scroll: accepted.
+    - Added `useCopyToClipboard`, `HighlightedCode` (shared by `CodeBlock`, `ExampleTabs` and `MethodReference`), `methodSectionId` and the `bodyText` token. `visuallyHidden` moved to `theme.ts`. `ChangedNote` links to `/docs/migrating-from-1x`, which release 3 adds.
+    - Evidence: pull request #40
 
 - [ ] **T20 — Build the docs layout and section addresses**
   - Refs: spec 6.1.4, spec 6.1.1 items 5 and 6, spec 6.2.2, plan 3.1 (`DocsLayout`, `OnThisPage`, `PrevNextLinks`), plan 3.3 (section addresses, history entries), plan 3.6 (breakpoints), plan 4 (unknown section), `docs/design/docs-page.png`, `docs/design/docs-phone.png`
@@ -534,4 +539,5 @@ None.
 - 2026-10-29 — T16
 - 2026-10-29 — T17
 - 2026-10-29 — T18
+- 2026-10-30 — T19
 

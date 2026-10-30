@@ -2,6 +2,7 @@ import type { ReactNode } from "react";
 import Box from "@mui/material/Box";
 import Link from "@mui/material/Link";
 import type { SxProps, Theme } from "@mui/material/styles";
+import { visuallyHidden } from "@/app/theme";
 
 type ExternalLinkProps = {
   href: string;
@@ -10,19 +11,6 @@ type ExternalLinkProps = {
   // For example to close the menu, so it is closed when Back returns to this page.
   onClick?: () => void;
 };
-
-// Hidden on screen, read by screen readers.
-const visuallyHidden = {
-  position: "absolute",
-  width: "1px",
-  height: "1px",
-  margin: "-1px",
-  padding: 0,
-  overflow: "hidden",
-  clip: "rect(0 0 0 0)",
-  whiteSpace: "nowrap",
-  border: 0,
-} as const;
 
 // A link to another site. It opens in the same tab (spec section 6.1.2, item 7), shows
 // an arrow, and tells screen readers that it leaves this site (plan section 3.6).

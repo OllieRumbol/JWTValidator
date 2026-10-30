@@ -28,6 +28,8 @@ const tokens = {
   selected: { background: "#F0E7FB", border: "#CDB4EE", text: "#5A1F8F" },
   linkHover: "#5A1F8F",
   docsListText: "#2C2A36",
+  // Body text in tables and some sections of the design. Softer than "text".
+  bodyText: "#3B3848",
   // Lines between items in the menu and in tables. Lighter than "border".
   divider: "#EEECF4",
   focusRing: "#6B24B2",
@@ -77,6 +79,19 @@ const theme = createTheme({
     },
   },
 });
+
+// Hides text on screen and keeps it for screen readers.
+export const visuallyHidden = {
+  position: "absolute",
+  width: "1px",
+  height: "1px",
+  margin: "-1px",
+  padding: 0,
+  overflow: "hidden",
+  clip: "rect(0 0 0 0)",
+  whiteSpace: "nowrap",
+  border: 0,
+} as const;
 
 // Rules for the whole page, applied with MUI's GlobalStyles.
 export function globalStyles(theme: Theme): CSSObject {
