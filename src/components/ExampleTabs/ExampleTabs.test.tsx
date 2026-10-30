@@ -68,4 +68,16 @@ describe("ExampleTabs", () => {
 
     expect(await navigator.clipboard.readText()).toBe("var secret = true;");
   });
+
+  test("does not say Copied for an example that was not copied", async () => {
+    const user = userEvent.setup();
+    renderTabs();
+
+    await user.click(await screen.findByRole("button", { name: "Copy code" }));
+    await user.click(screen.getByRole("tab", { name: "Secret" }));
+
+    expect(screen.getByRole("button", { name: "Copy code" })).toHaveTextContent(
+      "Copy",
+    );
+  });
 });

@@ -39,7 +39,11 @@ describe("CodeBlock", () => {
       </>,
     );
 
-    const figures = await screen.findAllByRole("figure");
+    // The figure's name is the label only, not the Copy button.
+    expect(
+      await screen.findByRole("figure", { name: "XML · App.csproj" }),
+    ).toBeVisible();
+    const figures = screen.getAllByRole("figure");
     expect(figures[0]).toHaveTextContent(/^C#/);
     expect(figures[1]).toHaveTextContent(/^XML · App\.csproj/);
     expect(figures[2]).toHaveTextContent(/^Shell/);

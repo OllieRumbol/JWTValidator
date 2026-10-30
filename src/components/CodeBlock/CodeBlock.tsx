@@ -1,3 +1,4 @@
+import { useId } from "react";
 import Box from "@mui/material/Box";
 import CopyButton from "@/components/CopyButton/CopyButton";
 import HighlightedCode, { type CodeLanguage } from "./HighlightedCode";
@@ -19,10 +20,13 @@ const languageLabels: Record<CodeLanguage, string> = {
 // docs-page.html shows it.
 const CodeBlock = ({ code, caption, language = "csharp" }: CodeBlockProps) => {
   const label = languageLabels[language];
+  const labelId = useId();
 
   return (
     <Box
       component="figure"
+      // Named by the label only, not by the Copy button and its result.
+      aria-labelledby={labelId}
       sx={(theme) => ({
         margin: 0,
         // Lets the box shrink in a flex or grid parent, so wide code scrolls inside it.
@@ -47,7 +51,7 @@ const CodeBlock = ({ code, caption, language = "csharp" }: CodeBlockProps) => {
           color: theme.tokens.mutedText,
         })}
       >
-        <span>{caption ? `${label} · ${caption}` : label}</span>
+        <span id={labelId}>{caption ? `${label} · ${caption}` : label}</span>
         <CopyButton text={code} />
       </Box>
       <HighlightedCode code={code} language={language} />

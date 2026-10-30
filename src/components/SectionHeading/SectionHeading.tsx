@@ -25,7 +25,7 @@ const linkSizes = { 2: "20px", 3: "16px" };
 // bar (plan section 3.3).
 //
 // The link sits next to the heading, not inside it, so the heading's accessible name is
-// only its text.
+// only its text. Use it on a docs page only: the address needs the page's slug.
 const SectionHeading = ({ id, level, children }: SectionHeadingProps) => {
   const { slug } = useParams();
   const path = `/docs/${slug}/${id}`;
@@ -38,6 +38,8 @@ const SectionHeading = ({ id, level, children }: SectionHeadingProps) => {
   async function handleClick(event: MouseEvent<HTMLAnchorElement>) {
     event.preventDefault();
     const address = new URL(href, window.location.href).href;
+    // Emptied first, so a second "Link copied" is a change, and screen readers announce it.
+    setAnnouncement("");
     const copied = await copy(address);
     setAnnouncement(copied ? "Link copied" : "");
     if (!copied) {
@@ -53,9 +55,11 @@ const SectionHeading = ({ id, level, children }: SectionHeadingProps) => {
         flexWrap: "wrap",
         alignItems: "baseline",
         columnGap: "8px",
-        // The link shows on hover of the heading, and on keyboard focus.
+        // The link shows on hover of the heading, and on keyboard focus. A touch screen
+        // has no hover, so there it always shows.
         "& .section-link": { opacity: 0 },
         "&:hover .section-link, & .section-link:focus-visible": { opacity: 1 },
+        "@media (hover: none)": { "& .section-link": { opacity: 1 } },
       }}
     >
       <Box

@@ -39,6 +39,8 @@ const CopyButton = ({ text, label = "Copy code" }: CopyButtonProps) => {
   const [announcement, setAnnouncement] = useState("");
 
   async function handleClick() {
+    // Emptied first, so a second "Copied" is a change, and screen readers announce it.
+    setAnnouncement("");
     const copied = await copy(text);
     setAnnouncement(copied ? "Copied" : FAILED_MESSAGE);
   }

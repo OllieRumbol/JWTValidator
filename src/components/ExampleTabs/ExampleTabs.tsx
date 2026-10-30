@@ -27,6 +27,8 @@ const ExampleTabs = ({ label, examples }: ExampleTabsProps) => {
   return (
     <Box
       component="figure"
+      // Without this, the figure takes its name from the tabs and the Copy result.
+      aria-label={label}
       sx={(theme) => ({
         margin: 0,
         // Lets the box shrink in a flex or grid parent, so wide code scrolls inside it.
@@ -94,7 +96,9 @@ const ExampleTabs = ({ label, examples }: ExampleTabsProps) => {
           ))}
         </Tabs>
         <Box sx={{ marginBottom: "6px" }}>
-          <CopyButton text={selected.code} />
+          {/* A new button for each example, so "Copied" never shows for one that
+              was not copied. */}
+          <CopyButton key={selected.id} text={selected.code} />
         </Box>
       </Box>
       {selected.caption && (
