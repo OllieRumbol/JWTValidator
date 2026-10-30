@@ -234,15 +234,18 @@ Goal: The site has the approved design, the new header, menu, footer and docs la
 
 Base branch: release/phase-2-redesign
 
-- [ ] **T14 — Create the phase 2 release branch (maintainer)**
+- [x] **T14 — Create the phase 2 release branch (maintainer)**
   - Refs: plan 8 (branches and releases)
   - Depends on: T13
   - Done when:
     - `release/phase-2-redesign` exists on origin, at the same commit as `main`.
   - Verify: `git ls-remote --heads origin release/phase-2-redesign`
-  - Notes: Create it as in T1.
+  - Notes:
+    - With the maintainer's approval on 2026-10-28, `git push origin main:refs/heads/release/phase-2-redesign` created the branch at `5c8bf23`, the same commit as `main`.
+    - "Protect release branches" applies at once: no force-push, pull requests only, and the `build`, `e2e` and `examples` checks.
+    - Evidence: pull request #31
 
-- [ ] **T15 — Add the theme, fonts and logo**
+- [x] **T15 — Add the theme, fonts and logo**
   - Refs: plan 3.6 (tokens, breakpoints), plan 3.5 (fonts, reduced motion, favicon), plan 3.1 (`theme.ts`, `Logo`), spec 6.6.4 item 2, spec 6.7 (reduced motion), `docs/design/logo.png`
   - Depends on: T14
   - Done when:
@@ -252,9 +255,14 @@ Base branch: release/phase-2-redesign
     - A global rule removes transitions and animations when the reader asks for reduced motion.
     - `npm run check-size` and plan 7.2 test 13 still pass.
   - Verify: `npm run build && npm run check-size && npm run e2e`
-  - Notes: Plan 7.2 test 18 needs the menu, so T17 adds it. Old components keep their colours until T21 and T22 replace them.
+  - Notes:
+    - Theme and global rules are applied in `src/main.tsx`. The old `RootLayout` still wraps every page in its own dark theme, so old pages keep their colours and Roboto headings. That theme now carries `tokens` too, so new components work on old pages. T17 removes it. Test 18 is in T17.
+    - The focus ring selector is `html :focus-visible`, because MUI's `outline: 0` on buttons beat `:focus-visible` (a Playwright probe showed `none`). With it, every link and button showed the ring on Tab, and none on a mouse click.
+    - `Logo` has `large` (`logo.png`) and `medium` (header) sizes. T17 adds the phone header size (bars 8 x 20 px, name 18 px, `phone.html`) and the footer's bars. Reduced motion took the old menu's transition from 0.285 s to 0 s.
+    - `public/favicon.ico` is the light package icon from `logo.html` at 32 and 64 px, drawn with Playwright by a one-off script that is not in the repository. To change it, draw it again from `logo.html`.
+    - Evidence: pull request #32
 
-- [ ] **T16 — Add the content data**
+- [x] **T16 — Add the content data**
   - Refs: plan 3.4 (data model, docs pages), plan 3.1 (`src/content/`), plan 2 (links, latest version), spec 6.1.6, spec 6.2.4, plan 7.2 tests 4 and 5
   - Depends on: T14
   - Done when:
@@ -263,9 +271,14 @@ Base branch: release/phase-2-redesign
     - `links.ts` holds every external link, including the author's GitHub profile shown in `docs/design/home.png`.
     - Plan 7.2 test 5, and the data part of test 4 for 1.0.0 to 1.0.3, exist and pass.
   - Verify: `npm test`
-  - Notes: Release 3 adds the other six docs pages and the 2.0.0 entry.
+  - Notes:
+    - Release 3 adds the other six docs pages and the 2.0.0 entry.
+    - 2.0.0 was listed on nuget.org on 2026-10-25, but the maintainer chose to keep 1.0.3 `Latest` in release 2, as planned, and to correct spec 2 in a planning change. T28 adds 2.0.0. `latestVersion` reads the first entry, for the footer (test 7, T17).
+    - Each version's summary and changes are today's Versions page text, unchanged apart from one trailing space, typos included. Content is fixed in release 3 (spec 6.1.10). The old page still shows 1.0.4 and 1.0.5 until T21 moves it to `versions.ts`.
+    - `getAdjacentPages(slug)` gives previous and next from the reading order, for `PrevNextLinks` (T20). Every link in `links.ts` returned 200 on 2026-10-29.
+    - Evidence: pull request #33
 
-- [ ] **T17 — Build the header, menu, footer and layout**
+- [x] **T17 — Build the header, menu, footer and layout**
   - Refs: spec 6.1.2, spec 6.1.4 item 2, spec 6.1.1 items 4 and 7, spec 6.7 (reduced motion), plan 3.1 (`RootLayout`, `SiteHeader`, `MobileMenu`, `SiteFooter`, `ExternalLink`, `DocsNav`), plan 3.5 (router, UI library), plan 3.6, plan 7.1, plan 7.2 tests 3, 7, 9, 10, 11 and 18, spec 4.1 items 1, 6, 7 and 9, `docs/design/home.png`, `docs/design/phone.png`, `docs/design/states.png`
   - Depends on: T15, T16
   - Done when:
@@ -278,9 +291,14 @@ Base branch: release/phase-2-redesign
     - Plan 7.2 tests 3, 7 and 18 exist and pass. The rows of test 9 for starting at the top, Back, the phone menu and pressing Escape in the open menu exist and pass.
     - Plan 7.2 tests 10 and 11 exist and pass for the header, the menu and the footer.
   - Verify: `npm test && npm run build && npm run e2e`
-  - Notes: Each page joins tests 10 and 11 in the task that rebuilds it (plan 7.1).
+  - Notes:
+    - Tests 10 and 11 check the header, the version notice, the footer and the open menu. Each page joins them in the task that rebuilds it (plan 7.1).
+    - The maintainer chose (2026-10-29) to add the design's missing colours as theme tokens, with plan 3.6 updated in pull request #36. T19 to T22 add any other design colour to `theme.ts` when they first need it.
+    - The menu follows `phone.html`, with "NuGet package" as the NuGet item. "Docs" was a label above `DocsNav` until T18 made it a link.
+    - The old dark theme and `app.css` are gone, so the old pages show in the light theme with underlined links until T21 and T22. `RootLayout` wraps every page in `<main>`. `src/test/renderRoute.tsx` renders the site with the theme.
+    - Evidence: pull request #37
 
-- [ ] **T18 — Add the new routes, redirects and "Page not found"**
+- [x] **T18 — Add the new routes, redirects and "Page not found"**
   - Refs: plan 3.3 (routes), spec 6.1.1 items 1 to 3, 8 and 9, spec 6.2.1, plan 7.2 tests 6, 8, 10 and 11, spec 4.1 item 10, `docs/design/not-found.png`
   - Depends on: T17
   - Done when:
@@ -289,18 +307,28 @@ Base branch: release/phase-2-redesign
     - Each page sets its tab title (spec 6.1.1, item 9).
     - Plan 7.2 tests 6 and 8, including `#/docs`, exist and pass. "Page not found" is in tests 10 and 11.
   - Verify: `npm test && npm run build && npm run e2e`
-  - Notes: Docs slugs that release 3 adds show "Page not found" until then.
+  - Notes:
+    - Docs slugs that release 3 adds show "Page not found" until then. At the maintainer's request, "Docs" in the menu is now a link to `/docs`, unlike `phone.html`, so the menu holds every header link (spec 6.1.2, item 2).
+    - Redirects are loaders that return React Router's `replace()`. A plain `redirect()` adds a history entry, so Back returned to the old address. Tests prove this.
+    - One route, `docs/:slug/:section?`, covers both docs addresses in plan 3.3. `DocsPage.tsx` maps each slug to its page. T21 replaces the old pages in that map, and T20 scrolls to the section.
+    - `PageTitle` uses React's `<title>`, which React puts before the static one in `index.html`. Test 8 also checks a heading that only the expected page has, and test 13 loads every page at its new address. Phone sizes and hover for "Page not found" are not in the design, so they were chosen here.
+    - Evidence: pull request #39
 
-- [ ] **T19 — Build the code, tabs and reference components**
+- [x] **T19 — Build the code, tabs and reference components**
   - Refs: spec 6.1.5, spec 6.1.1 item 6, spec 6.1.7 item 2, spec 6.1.3 item 8, plan 3.3 (component contracts), plan 3.5 (syntax highlighting, copy, example tabs and section links), plan 3.6 (code colours, states), plan 4 (clipboard failure), plan 7.2 tests 1, 2, 16 and 17, spec 4.1 item 4, `docs/design/docs-page.png`, `docs/design/states.png`
   - Depends on: T15
   - Done when:
     - `CodeBlock` (C#, XML and shell, with a language label), `CopyButton`, `ExampleTabs`, `ChangedNote`, `SectionHeading` with its copying section link, `ScrollTable`, `MethodReference` and `MethodTable` follow plan 3.3 and match `docs/design/docs-page.png` and `states.png`.
     - Plan 7.2 tests 1, 2, 16 and 17 exist and pass.
   - Verify: `npm test`
-  - Notes: The "Returns" label must say "Returns" (spec 4.1, item 6). Sideways scrolling is checked by test 10 when T20 and T21 put these components on real pages. If this task grows past one session, split `ExampleTabs` and `SectionHeading` into their own task.
+  - Notes:
+    - The C# grammar does not mark type names or method calls, so they stay in the text colour, unlike `docs-page.png` (the limit of plan 3.5's C#-only highlighting). Test 10 checks sideways scrolling when T20 and T21 put these components on pages.
+    - Choices the design does not show: the language label is in the caption ("C# · Program.cs"), there are no line numbers, "Copy failed" stays until the next try with its hint in the live region only, and the section link sits next to its heading, always visible on a touch screen.
+    - Wide components have `minWidth: 0`, so their code or table scrolls inside them in a flex or grid parent. A temporary demo page (not committed) fitted 320 px with no axe violations. Every code box and table is a tab stop, even when it does not scroll: accepted.
+    - Added `useCopyToClipboard`, `HighlightedCode` (shared by `CodeBlock`, `ExampleTabs` and `MethodReference`), `methodSectionId` and the `bodyText` token. `visuallyHidden` moved to `theme.ts`. `ChangedNote` links to `/docs/migrating-from-1x`, which release 3 adds.
+    - Evidence: pull request #40
 
-- [ ] **T20 — Build the docs layout and section addresses**
+- [x] **T20 — Build the docs layout and section addresses**
   - Refs: spec 6.1.4, spec 6.1.1 items 5 and 6, spec 6.2.2, plan 3.1 (`DocsLayout`, `OnThisPage`, `PrevNextLinks`), plan 3.3 (section addresses, history entries), plan 3.6 (breakpoints), plan 4 (unknown section), `docs/design/docs-page.png`, `docs/design/docs-phone.png`
   - Depends on: T18, T19
   - Done when:
@@ -310,9 +338,14 @@ Base branch: release/phase-2-redesign
     - The rows of plan 7.2 test 9 for section links, shared section links and copying a section link exist and pass.
     - A docs page is in tests 10 and 11.
   - Verify: `npm test && npm run build && npm run e2e`
-  - Notes: —
+  - Notes:
+    - The old docs pages lost their photo title (`DocsLayout` shows the `h1`), and their 13 section headings became `SectionHeading`s. Their sections are declared in `src/pages/docs/pageContent.ts`, checked by a test. T21 moves the declarations into the new pages, and deletes the unused `documentation/Title.tsx` and `documents.webp`.
+    - "On this page" marks the section in the address, or the first one. It does not follow the scroll. From 1200 px it stays in view. The breadcrumb's group is plain text, and a phone leaves out the title. T21 adds each page's intro paragraph.
+    - Back and Forward to a section address restore the reader's position (plan 3.5). A first load has the key "default", so `useScrollToSection` replaces that entry to give it a key.
+    - Test 11 leaves out the old content (`.noWhiteSpace`), where axe finds `heading-order` and `scrollable-region-focusable`. T21 removes the exclusion. Test 10 checks the whole page.
+    - Evidence: pull request #41
 
-- [ ] **T21 — Move the docs and Versions pages to the new design**
+- [x] **T21 — Move the docs and Versions pages to the new design**
   - Refs: spec 6.1.6, spec 6.1.10 release 2, plan 3.2, plan 7.2 tests 4, 10 and 11, spec 4.1 items 11 and 12, `docs/design/versions.png`
   - Depends on: T20
   - Done when:
@@ -321,9 +354,14 @@ Base branch: release/phase-2-redesign
     - The old `src/components/documentation/` and `src/components/versions/` folders and their photos are removed.
     - Plan 7.2 test 4 passes for 1.0.0 to 1.0.3. The four docs pages and Versions are in tests 10 and 11.
   - Verify: `npm test && npm run build && npm run e2e`
-  - Notes: Content errors are fixed in release 3, not here (spec 6.1.10). T28 extends test 4 to 2.0.0.
+  - Notes:
+    - The maintainer chose (2026-10-30) to keep the 1.0.3 method text word for word in `src/content/methods/`: each parameter sentence is one entry named by the signature's parameters, and "no parameters" shows as "None". `failsWhen` is optional until T32 makes it required again. A few whitespace-only changes are listed in pull request #42.
+    - Each page is in `src/pages/docs/<slug>/` and declares its sections. The old introduction is the lead paragraph, and the headings keep their 1.0.3 words. `DocsLayout` takes the slug and sets the tab title. The examples are strings in the pages until T26 moves them to `examples/`.
+    - The Versions intro and status key are from `versions.html`, and the unlisted entry is muted. T28 adds the breaking changes, the "Other changes" heading and the migration guide button.
+    - Tests 10 and 11 check the whole of the four docs pages and Versions. Home still uses `Panel`, `shared.css`, `title.css` and the old highlighter theme, which T22 removes. At the maintainer's request, the header now marks the current page, as the design does, which T17 had missed.
+    - Evidence: pull request #42
 
-- [ ] **T22 — Move Home to the new design and remove the last photo**
+- [x] **T22 — Move Home to the new design and remove the last photo**
   - Refs: spec 6.1.10 items 1 and 5, spec 6.1.7, plan 3.5 (images), plan 3.6, plan 7.2 tests 10 and 11, `docs/design/home.png`
   - Depends on: T19, T21
   - Done when:
@@ -336,9 +374,14 @@ Base branch: release/phase-2-redesign
     - The last photo in `src/assets/` is deleted, and nothing imports it.
     - Home is in tests 10 and 11.
   - Verify: `npm run build && npm run check-size && npm run e2e`
-  - Notes: Release 3 adds the tabs, the migration button and the change table, and rewrites the Home text (T27).
+  - Notes:
+    - The maintainer chose (2026-10-30) the design text, made true for 1.0.3: the badge reads the version from `versions.ts`, the expiry text has no "in UTC", and the example section is "Validate a token". The old "New Release: 1.0.3" and "Licensing" sections are removed. The phone hero follows `phone.html`.
+    - Release 3 adds the tabs, the migration button and the change table, and rewrites the Home text (T27). The example is the old secret example, unchanged, with `DictionaryContainsKeyAndValue` (spec 4.1, item 5). The Back Story text is now in `src/pages/home/AuthorSection.tsx`, because `BackStory.tsx`, named in plan 3.2, is deleted.
+    - `@mui/icons-material` is removed, because Home was its last user. `primaryLinkStyle` is in `theme.ts`, and the theme has a `stepBackground` token.
+    - T24: README lines 88, 90, 101 and 102 name `src/assets/`, `src/style/` and the deleted Home files.
+    - Evidence: pull request #43
 
-- [ ] **T23 — Meet the accessibility targets on every page**
+- [x] **T23 — Meet the accessibility targets on every page**
   - Refs: spec 6.6.1, spec 6.6.3 item 2, spec 6.7, plan 3.6 (theme colours), plan 7.2 tests 10 and 11, spec 4.1 item 11
   - Depends on: T21, T22
   - Done when:
@@ -346,7 +389,12 @@ Base branch: release/phase-2-redesign
     - No button is inside a link, every list from data has a key from the data, and heading levels follow the page outline.
     - No file in `src/` outside `src/app/theme.ts` holds a colour value.
   - Verify: `npm run build && npm run e2e`, then `grep -rnE "#[0-9A-Fa-f]{6}\b|rgba?\(" src --include=*.ts --include=*.tsx --include=*.css | grep -v "src/app/theme.ts"` prints nothing.
-  - Notes: Earlier tasks added each page to the tests as they rebuilt it. This task closes anything left.
+  - Notes:
+    - Tests 10 and 11 are in `e2e/pages.spec.ts`. `e2e/everyPage.ts` lists every page from `docsPages` for tests 10, 11 and 13, so each release 3 page joins when it is added.
+    - Axe 4.14 leaves the WCAG 2.2 AA `target-size` rule off by default. `e2e/accessibility.ts` turns it on for every axe check. Chain `include()`, not `options()`, which replaces it.
+    - Test 10 also checks that wide content scrolls inside its box. It found long class names spilling out of the method reference lists at 320 px, fixed with `overflowWrap: "anywhere"`.
+    - T24: the keyboard check by hand (spec 6.6.1, item 4) and Lighthouse accessibility 100 (item 3).
+    - Evidence: pull request #44
 
 - [ ] **T24 — Release phase 2 (maintainer)**
   - Refs: spec 6.1.10 items 4 to 6, spec 6.1.12, spec 6.6.1 items 3 and 4, spec 6.6.2, spec 6.6.3 item 3, spec 6.7 (zoom), plan 5 (releases), plan 9 (TypeScript, Node)
@@ -363,7 +411,10 @@ Base branch: release/phase-2-redesign
       - The browser check in Chrome, Edge and Firefox, at desktop and phone widths.
     - The maintainer approves and merges it, and the deploy passes.
   - Verify: `gh run list --workflow deploy.yml --limit 1` shows success, and the live site matches `docs/design/`, apart from the release 3 parts that T22 leaves out.
-  - Notes: —
+  - Notes:
+    - Checkpoint (2026-10-30): the README and the font preloads go into the release branch through the T24 task pull request. The release pull request records the checks Claude ran. The keyboard check, 400 % zoom, the browser check, the merges and the deploy are the maintainer's.
+    - The maintainer approved an extra step on 2026-10-30: Lighthouse mobile performance was 78 to 87, because text drew in the fallback font and moved when IBM Plex arrived (CLS 0.145). `index.html` now preloads the four fonts that every page uses at phone width: Sans 400, 600 and 700, and Mono 600. A test checks that every page uses each preloaded font. Home is now 94, 94, 94, and Validation options 92, 94, 95.
+    - Node 26 has been the LTS since 2026-10-28, and every package allows it. Plan 9 says to move in a small change: proposed after this release, not done here.
 
 ## Phase 3 — Version 2.0.0 content
 
@@ -416,7 +467,7 @@ Base branch: release/phase-3-content
     - Plan 7.2 test 4 covers 2.0.0.
     - The publish date of 2.0.0 is a placeholder marked in Notes until 2.0.0 is released.
   - Verify: `npm test && npm run build && npm run e2e`, and the `examples` job passes.
-  - Notes: —
+  - Notes: From T21: `VersionsPage` shows no breaking changes yet. Add them, the "Other changes" heading above the other changes, and the "Read the migration guide" button, as `versions.html` shows, with a test.
 
 - [ ] **T29 — Write Validation options, Validator and Claims**
   - Refs: spec 6.1.3 items 2 to 7 (Validation options, Secret length, Validator, Claims), spec 6.2.3, plan 3.4 (`MethodReference`), plan 7.2 tests 10 and 11, spec 4.1 item 5, `docs/design/docs-page.png`
@@ -462,7 +513,7 @@ Base branch: release/phase-3-content
     - Each docs topic is checked against the README and release notes at tag `v2.0.0`. Differences are fixed.
     - The 2.0.0 changelog date is the real publish date.
   - Verify: `gh pr checks <number>` shows every job passing. The fact check is listed topic by topic in the pull request.
-  - Notes: —
+  - Notes: From T21: make `failsWhen` required again in `src/content/methods/types.ts` (plan 3.4), once T29 to T31 give every method a "Fails when" text (spec 6.1.3, item 3).
 
 - [ ] **T33 — Check spelling, grammar and wording**
   - Refs: spec 6.1.8, spec 6.1.10 item 3, spec 3 goal 9
@@ -506,4 +557,14 @@ None.
 - 2026-10-28 — T11
 - 2026-10-28 — T12
 - 2026-10-28 — T13
+- 2026-10-28 — T14
+- 2026-10-28 — T15
+- 2026-10-29 — T16
+- 2026-10-29 — T17
+- 2026-10-29 — T18
+- 2026-10-30 — T19
+- 2026-10-30 — T20
+- 2026-10-30 — T21
+- 2026-10-30 — T22
+- 2026-10-30 — T23
 
