@@ -5,6 +5,8 @@ import { cleanup } from "@testing-library/react";
 // The simulated browser has no scrolling, and prints "Not implemented" each time the
 // router's ScrollRestoration calls this. The end-to-end tests check scrolling.
 window.scrollTo = () => {};
+// Missing in the simulated browser. Tests spy on it to see which section was scrolled to.
+Element.prototype.scrollIntoView = () => {};
 
 // Testing Library cleans up by itself only when Vitest globals are on, and they are off.
 afterEach(() => {

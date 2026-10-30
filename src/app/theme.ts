@@ -30,6 +30,8 @@ const tokens = {
   docsListText: "#2C2A36",
   // Body text in tables and some sections of the design. Softer than "text".
   bodyText: "#3B3848",
+  // The docs sidebar's background, as docs-page.html shows it.
+  sidebar: "#FBFAFD",
   // Lines between items in the menu and in tables. Lighter than "border".
   divider: "#EEECF4",
   focusRing: "#6B24B2",

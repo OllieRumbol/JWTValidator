@@ -2,15 +2,19 @@ import React from "react";
 import "../../../style/shared.css";
 import Panel from "../../shared/Panel";
 import Typography from "@mui/material/Typography";
+import Box from "@mui/material/Box";
+import SectionHeading from "@/components/SectionHeading/SectionHeading";
 import SyntaxHighlighter, { vs2015 } from "../../shared/SyntaxHighlighter";
 import Grid from "@mui/material/Grid";
 
 const BuilderDocumentsCodeExample = () => {
   return (
     <Panel colour="#FFFFFF">
-      <Typography variant="h2" component="h2" sx={{ mb: 3 }}>
-        Code example
-      </Typography>
+      <Box sx={{ mb: 3 }}>
+        <SectionHeading id="code-example" level={2}>
+          Code example
+        </SectionHeading>
+      </Box>
       <Grid container spacing={5} sx={{ width: "100%" }}>
         <Grid size={{ xs: 12, md: 6 }}>
           <Typography variant="h4" component="h4" align="center" sx={{ mb: 3 }}>

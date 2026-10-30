@@ -1,13 +1,17 @@
 import React from "react";
 import Typography from "@mui/material/Typography";
+import Box from "@mui/material/Box";
+import SectionHeading from "@/components/SectionHeading/SectionHeading";
 import Panel from "../../shared/Panel";
 
 const ExpiryCheckerIntroduction = () => {
   return (
     <Panel colour="#DDDDDD">
-      <Typography variant="h2" component="h2" sx={{ mb: 3 }}>
-        Expiry Checker Introduction
-      </Typography>
+      <Box sx={{ mb: 3 }}>
+        <SectionHeading id="introduction" level={2}>
+          Expiry Checker Introduction
+        </SectionHeading>
+      </Box>
       <Typography align="center" variant="h5" component="h5" gutterBottom>
         With the release of version 1.0.3 came the new feature of "Jwt Expiry
         Checker". This new feature allows developers to quickly validate the

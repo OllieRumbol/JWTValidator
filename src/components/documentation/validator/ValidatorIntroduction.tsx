@@ -1,13 +1,17 @@
 import React from "react";
 import Typography from "@mui/material/Typography";
+import Box from "@mui/material/Box";
+import SectionHeading from "@/components/SectionHeading/SectionHeading";
 import Panel from "../../shared/Panel";
 
 const ValidatorIntroduction = () => {
   return (
     <Panel colour="#DDDDDD">
-      <Typography variant="h2" component="h2" sx={{ mb: 3 }}>
-        Validator Introduction
-      </Typography>
+      <Box sx={{ mb: 3 }}>
+        <SectionHeading id="introduction" level={2}>
+          Validator Introduction
+        </SectionHeading>
+      </Box>
       <Typography align="center" variant="h5" component="h5" gutterBottom>
         A key piller to this library is to enable developers to write the
         cleanest code possible that matches their coding style. That is why
