@@ -3,7 +3,7 @@ import Box from "@mui/material/Box";
 import IconButton from "@mui/material/IconButton";
 import type { Theme } from "@mui/material/styles";
 import useMediaQuery from "@mui/material/useMediaQuery";
-import { Link as RouterLink } from "react-router";
+import { Link as RouterLink, NavLink } from "react-router";
 import ExternalLink from "@/components/ExternalLink/ExternalLink";
 import Logo from "@/components/Logo/Logo";
 import MobileMenu, { MOBILE_MENU_ID } from "@/components/MobileMenu/MobileMenu";
@@ -19,6 +19,11 @@ const linkStyle = (theme: Theme) => ({
   "&:hover": {
     color: theme.tokens.text,
     backgroundColor: theme.tokens.hover.tint,
+  },
+  // The current page, as docs-page.png and versions.png show it. NavLink marks it.
+  '&[aria-current="page"]': {
+    color: theme.tokens.selected.text,
+    backgroundColor: theme.tokens.selected.background,
   },
 });
 
@@ -67,10 +72,10 @@ const SiteHeader = () => {
           aria-label="Main"
           sx={{ display: { xs: "none", md: "flex" }, gap: "4px" }}
         >
-          <Box component={RouterLink} to="/docs" sx={linkStyle}>
+          <Box component={NavLink} to="/docs" sx={linkStyle}>
             Docs
           </Box>
-          <Box component={RouterLink} to="/versions" sx={linkStyle}>
+          <Box component={NavLink} to="/versions" sx={linkStyle}>
             Versions
           </Box>
           <ExternalLink href={links.nugetPackage} sx={linkStyle}>

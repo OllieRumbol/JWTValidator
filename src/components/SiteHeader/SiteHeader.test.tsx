@@ -51,6 +51,36 @@ describe("Header", () => {
     ).toHaveAttribute("href", links.libraryRepository);
   });
 
+  test.each([
+    ["/docs/validator", "Docs"],
+    ["/versions", "Versions"],
+  ])("on %s it marks %s as the current page", async (path, current) => {
+    renderRoute(path);
+
+    const nav = within(
+      within(await screen.findByRole("banner")).getByRole("navigation", {
+        name: "Main",
+      }),
+    );
+    for (const name of ["Docs", "Versions"]) {
+      const link = nav.getByRole("link", { name });
+      if (name === current) {
+        expect(link).toHaveAttribute("aria-current", "page");
+      } else {
+        expect(link).not.toHaveAttribute("aria-current");
+      }
+    }
+  });
+
+  test("on Home it marks no header link as the current page", async () => {
+    renderRoute("/");
+
+    const banner = within(await screen.findByRole("banner"));
+    for (const link of banner.getAllByRole("link")) {
+      expect(link).not.toHaveAttribute("aria-current");
+    }
+  });
+
   test("opens links to other sites in the same tab", async () => {
     renderRoute("/");
 

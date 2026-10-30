@@ -32,6 +32,10 @@ const tokens = {
   bodyText: "#3B3848",
   // The docs sidebar's background, as docs-page.html shows it.
   sidebar: "#FBFAFD",
+  // The "Previous" status badge on the Versions page.
+  neutralBadge: "#EEEDF2",
+  // The raised cards on Home and the latest version on the Versions page.
+  cardShadow: "0 8px 24px rgba(27, 26, 34, 0.06)",
   // Lines between items in the menu and in tables. Lighter than "border".
   divider: "#EEECF4",
   focusRing: "#6B24B2",

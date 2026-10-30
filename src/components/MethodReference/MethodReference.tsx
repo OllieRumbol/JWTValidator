@@ -85,8 +85,12 @@ const MethodReference = ({ method }: MethodReferenceProps) => {
         {/* "Returns", not "Summary" (spec section 4.1, item 6). */}
         <dt>Returns</dt>
         <dd>{method.returns}</dd>
-        <dt>Fails when</dt>
-        <dd>{method.failsWhen}</dd>
+        {method.failsWhen && (
+          <>
+            <dt>Fails when</dt>
+            <dd>{method.failsWhen}</dd>
+          </>
+        )}
       </Box>
     </Box>
   );

@@ -1,30 +1,31 @@
+import type { ComponentType } from "react";
 import { useParams } from "react-router";
-import DocsLayout from "@/components/DocsLayout/DocsLayout";
-import PageTitle from "@/components/PageTitle/PageTitle";
-import { docsPages } from "@/content/docsPages";
 import NotFoundPage from "@/pages/not-found/NotFoundPage";
-import { pageContent } from "./pageContent";
+import DictionaryExtensionsPage from "./dictionary-extensions/DictionaryExtensionsPage";
+import ExpiryCheckerPage from "./expiry-checker/ExpiryCheckerPage";
+import ValidationOptionsPage from "./validation-options/ValidationOptionsPage";
+import ValidatorPage from "./validator/ValidatorPage";
+
+// The page for each slug in docsPages (plan section 3.4). Release 3 adds the rest.
+const pages: Record<string, ComponentType> = {
+  "validation-options": ValidationOptionsPage,
+  validator: ValidatorPage,
+  "expiry-checker": ExpiryCheckerPage,
+  "dictionary-extensions": DictionaryExtensionsPage,
+};
 
 // The docs page for the slug in the address, or "Page not found" for an unknown slug
-// (plan section 3.3).
+// (plan section 3.3). Each page sets its own title through DocsLayout.
 const DocsPage = () => {
   const { slug } = useParams();
-  const page = docsPages.find((docsPage) => docsPage.slug === slug);
-  const content = page ? pageContent[page.slug] : undefined;
+  // Own keys only, so an address such as #/docs/toString is not found on the prototype.
+  const Page = slug && Object.hasOwn(pages, slug) ? pages[slug] : undefined;
 
-  if (!page || !content) {
+  if (!Page) {
     return <NotFoundPage />;
   }
 
-  const { Content, sections } = content;
-  return (
-    <>
-      <PageTitle name={page.title} />
-      <DocsLayout page={page} sections={sections}>
-        <Content />
-      </DocsLayout>
-    </>
-  );
+  return <Page />;
 };
 
 export default DocsPage;

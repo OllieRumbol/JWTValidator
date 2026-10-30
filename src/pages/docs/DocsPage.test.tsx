@@ -3,7 +3,6 @@ import { screen, waitFor, within } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import { docsPages } from "@/content/docsPages";
 import { renderRoute } from "@/test/renderRoute";
-import { pageContent } from "./pageContent";
 
 describe("docs page layout", () => {
   test("shows the docs list, the title, On this page, and previous and next", async () => {
@@ -54,22 +53,59 @@ describe("docs page layout", () => {
     expect(prevNext.getByRole("link")).toHaveTextContent(/^Previous/);
   });
 
-  // Each section in "On this page" must be a heading on the page, or its link leads
-  // nowhere.
+  // Each section in "On this page" must be a heading on the page, with the same text,
+  // or its link leads nowhere.
   test.each(docsPages.map((page) => page.slug))(
-    "every section of %s is a heading on the page",
+    "every section of %s in On this page is a heading on the page",
     async (slug) => {
       renderRoute(`/docs/${slug}`);
-      await screen.findByRole("heading", { level: 1 });
 
-      for (const section of pageContent[slug].sections) {
-        const heading = document.getElementById(section.id);
-        expect(heading, section.id).not.toBeNull();
-        expect(heading!.tagName).toBe(`H${section.level}`);
-        expect(heading).toHaveTextContent(section.title);
+      const onThisPage = (
+        await screen.findAllByRole("navigation", { name: "On this page" })
+      )[0];
+      const links = within(onThisPage).getAllByRole("link");
+      expect(links.length).toBeGreaterThan(0);
+      for (const link of links) {
+        const id = link.getAttribute("href")!.split("/").at(-1)!;
+        const heading = document.getElementById(id);
+        expect(heading, id).not.toBeNull();
+        expect(heading!.tagName).toMatch(/^H[23]$/);
+        expect(heading).toHaveTextContent(link.textContent);
       }
     },
   );
+
+  test.each([
+    ["validation-options", "Create", "create"],
+    ["validator", "ValidateJWT", "validate-jwt"],
+    ["expiry-checker", "HasJWTExpired", "has-jwt-expired"],
+    ["dictionary-extensions", "Print", "print"],
+  ])(
+    "the reference of %s starts with the method table",
+    async (slug, firstMethod, firstId) => {
+      renderRoute(`/docs/${slug}`);
+
+      const methods = await screen.findByRole("region", { name: "Methods" });
+      // The heading's wrapper, then the table, then the reference blocks.
+      const table = methods.children[1] as HTMLElement;
+      expect(table).toHaveAccessibleName("Method summary");
+      expect(
+        within(table).getAllByRole("link")[0],
+      ).toHaveAccessibleName(firstMethod);
+      expect(within(table).getAllByRole("link")[0]).toHaveAttribute(
+        "href",
+        `/docs/${slug}/${firstId}`,
+      );
+    },
+  );
+
+  test("an address such as #/docs/toString shows Page not found", async () => {
+    renderRoute("/docs/toString");
+
+    expect(
+      await screen.findByRole("heading", { level: 1, name: "Page not found" }),
+    ).toBeVisible();
+  });
 });
 
 describe("section addresses", () => {

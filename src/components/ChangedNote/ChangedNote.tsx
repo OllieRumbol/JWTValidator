@@ -2,13 +2,11 @@ import type { ReactNode } from "react";
 import Box from "@mui/material/Box";
 import Link from "@mui/material/Link";
 import { Link as RouterLink } from "react-router";
+import { MIGRATION_GUIDE_PATH } from "@/content/docsPages";
 
 type ChangedNoteProps = {
   children: ReactNode; // What changed, in one or two sentences
 };
-
-// The migration guide's slug in plan section 3.4. Release 3 adds the page.
-const MIGRATION_GUIDE_PATH = "/docs/migrating-from-1x";
 
 // A "Changed in 2.0.0" note with a link to the migration guide (spec section 6.1.3,
 // item 4), as docs-page.html shows it.

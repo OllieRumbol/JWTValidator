@@ -345,7 +345,7 @@ Base branch: release/phase-2-redesign
     - Test 11 leaves out the old content (`.noWhiteSpace`), where axe finds `heading-order` and `scrollable-region-focusable`. T21 removes the exclusion. Test 10 checks the whole page.
     - Evidence: pull request #41
 
-- [ ] **T21 — Move the docs and Versions pages to the new design**
+- [x] **T21 — Move the docs and Versions pages to the new design**
   - Refs: spec 6.1.6, spec 6.1.10 release 2, plan 3.2, plan 7.2 tests 4, 10 and 11, spec 4.1 items 11 and 12, `docs/design/versions.png`
   - Depends on: T20
   - Done when:
@@ -354,7 +354,12 @@ Base branch: release/phase-2-redesign
     - The old `src/components/documentation/` and `src/components/versions/` folders and their photos are removed.
     - Plan 7.2 test 4 passes for 1.0.0 to 1.0.3. The four docs pages and Versions are in tests 10 and 11.
   - Verify: `npm test && npm run build && npm run e2e`
-  - Notes: Content errors are fixed in release 3, not here (spec 6.1.10). T28 extends test 4 to 2.0.0.
+  - Notes:
+    - The maintainer chose (2026-10-30) to keep the 1.0.3 method text word for word in `src/content/methods/`: each parameter sentence is one entry named by the signature's parameters, and "no parameters" shows as "None". `failsWhen` is optional until T32 makes it required again. A few whitespace-only changes are listed in pull request #42.
+    - Each page is in `src/pages/docs/<slug>/` and declares its sections. The old introduction is the lead paragraph, and the headings keep their 1.0.3 words. `DocsLayout` takes the slug and sets the tab title. The examples are strings in the pages until T26 moves them to `examples/`.
+    - The Versions intro and status key are from `versions.html`, and the unlisted entry is muted. T28 adds the breaking changes, the "Other changes" heading and the migration guide button.
+    - Tests 10 and 11 check the whole of the four docs pages and Versions. Home still uses `Panel`, `shared.css`, `title.css` and the old highlighter theme, which T22 removes. At the maintainer's request, the header now marks the current page, as the design does, which T17 had missed.
+    - Evidence: pull request #42
 
 - [ ] **T22 — Move Home to the new design and remove the last photo**
   - Refs: spec 6.1.10 items 1 and 5, spec 6.1.7, plan 3.5 (images), plan 3.6, plan 7.2 tests 10 and 11, `docs/design/home.png`
@@ -449,7 +454,7 @@ Base branch: release/phase-3-content
     - Plan 7.2 test 4 covers 2.0.0.
     - The publish date of 2.0.0 is a placeholder marked in Notes until 2.0.0 is released.
   - Verify: `npm test && npm run build && npm run e2e`, and the `examples` job passes.
-  - Notes: —
+  - Notes: From T21: `VersionsPage` shows no breaking changes yet. Add them, the "Other changes" heading above the other changes, and the "Read the migration guide" button, as `versions.html` shows, with a test.
 
 - [ ] **T29 — Write Validation options, Validator and Claims**
   - Refs: spec 6.1.3 items 2 to 7 (Validation options, Secret length, Validator, Claims), spec 6.2.3, plan 3.4 (`MethodReference`), plan 7.2 tests 10 and 11, spec 4.1 item 5, `docs/design/docs-page.png`
@@ -495,7 +500,7 @@ Base branch: release/phase-3-content
     - Each docs topic is checked against the README and release notes at tag `v2.0.0`. Differences are fixed.
     - The 2.0.0 changelog date is the real publish date.
   - Verify: `gh pr checks <number>` shows every job passing. The fact check is listed topic by topic in the pull request.
-  - Notes: —
+  - Notes: From T21: make `failsWhen` required again in `src/content/methods/types.ts` (plan 3.4), once T29 to T31 give every method a "Fails when" text (spec 6.1.3, item 3).
 
 - [ ] **T33 — Check spelling, grammar and wording**
   - Refs: spec 6.1.8, spec 6.1.10 item 3, spec 3 goal 9
@@ -546,4 +551,5 @@ None.
 - 2026-10-29 — T18
 - 2026-10-30 — T19
 - 2026-10-30 — T20
+- 2026-10-30 — T21
 

@@ -18,7 +18,9 @@ describe("MethodTable", () => {
   test("lists each method with what it does, in a table that can scroll", async () => {
     renderOnDocsPage(<MethodTable methods={methods} />);
 
-    const region = await screen.findByRole("region", { name: "Methods" });
+    const region = await screen.findByRole("region", {
+      name: "Method summary",
+    });
     expect(region).toHaveAttribute("tabindex", "0");
     expect(screen.getAllByRole("row")).toHaveLength(3);
     expect(screen.getByText("What WithIssuer does.")).toBeVisible();
