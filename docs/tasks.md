@@ -354,7 +354,12 @@ Base branch: release/phase-2-redesign
     - The old `src/components/documentation/` and `src/components/versions/` folders and their photos are removed.
     - Plan 7.2 test 4 passes for 1.0.0 to 1.0.3. The four docs pages and Versions are in tests 10 and 11.
   - Verify: `npm test && npm run build && npm run e2e`
-  - Notes: Content errors are fixed in release 3, not here (spec 6.1.10). T28 extends test 4 to 2.0.0.
+  - Notes:
+    - Content errors are fixed in release 3, not here (spec 6.1.10). T28 extends test 4 to 2.0.0.
+    - The maintainer chose (2026-10-30) to keep the 1.0.3 method text word for word in `src/content/methods/`. Each method's one parameter sentence is one entry, named by the signature's parameters, and "no parameters" shows as "None". `failsWhen` is optional until release 3, so "Fails when" is left out. One trailing space and two stray spaces in signatures were removed.
+    - Each page is in `src/pages/docs/<slug>/` and declares its sections. The old introduction is the lead paragraph under the title, and the section headings keep their 1.0.3 words. `DocsLayout` now takes the slug and sets the tab title. The examples are strings in the pages, not compiled: T26 moves them to `examples/`.
+    - The Versions intro and status key are from `versions.html`, and the unlisted entry is muted, as the design shows. The method table's box is named "Method summary", so its name differs from the "Methods" section.
+    - Tests 10 and 11 now check the whole of the four docs pages and Versions. Home still uses `Panel`, `shared.css`, `title.css` and the old highlighter theme, which T22 removes. The header does not mark the current page, as the design does: a T17 gap, raised with the maintainer.
 
 - [ ] **T22 — Move Home to the new design and remove the last photo**
   - Refs: spec 6.1.10 items 1 and 5, spec 6.1.7, plan 3.5 (images), plan 3.6, plan 7.2 tests 10 and 11, `docs/design/home.png`

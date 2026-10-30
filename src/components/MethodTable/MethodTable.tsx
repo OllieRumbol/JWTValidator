@@ -15,7 +15,7 @@ const MethodTable = ({ methods }: MethodTableProps) => {
   const { slug } = useParams();
 
   return (
-    <ScrollTable label="Methods">
+    <ScrollTable label="Method summary">
       <table>
         <thead>
           <tr>

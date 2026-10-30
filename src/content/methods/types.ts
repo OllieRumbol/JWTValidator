@@ -6,7 +6,9 @@ export type MethodReference = {
   signatures: string[];
   parameters: { name: string; description: string }[];
   returns: string;
-  failsWhen: string; // When it throws or returns false
+  // When it throws or returns false. Optional in release 2 only, because the 1.0.3 text
+  // has none. Release 3 writes it for every method (spec section 6.1.3, item 3).
+  failsWhen?: string;
   changedIn2?: string; // The "Changed in 2.0.0" text, when there is one
 };
 

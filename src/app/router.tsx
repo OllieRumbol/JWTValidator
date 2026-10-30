@@ -1,7 +1,7 @@
 import { createHashRouter, replace, type RouteObject } from "react-router";
 import RootLayout from "@/app/RootLayout";
 import HomePage from "@/components/home/HomePage";
-import VersionsPage from "@/components/versions/VersionsPage";
+import VersionsPage from "@/pages/versions/VersionsPage";
 import { docsPages } from "@/content/docsPages";
 import DocsPage from "@/pages/docs/DocsPage";
 import NotFoundPage from "@/pages/not-found/NotFoundPage";

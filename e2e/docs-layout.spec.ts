@@ -13,7 +13,8 @@ async function expectInView(page: Page, id: string) {
   const top = await page.locator(`#${id}`).evaluate((element) => {
     return element.getBoundingClientRect().top;
   });
-  expect(top).toBeGreaterThanOrEqual(0);
+  // Up to 1 px above, because the browser rounds the scroll to whole pixels.
+  expect(top).toBeGreaterThanOrEqual(-1);
   expect(top).toBeLessThan(DESKTOP.height / 2);
 }
 
@@ -28,7 +29,7 @@ test.describe("section addresses (test 9)", () => {
 
     await page
       .getByRole("navigation", { name: "On this page" })
-      .getByRole("link", { name: "Technical details" })
+      .getByRole("link", { name: "Technical Details" })
       .click();
 
     await expect(page).toHaveURL(
@@ -84,7 +85,7 @@ test.describe("section addresses (test 9)", () => {
   test("Back to a section address returns to where the reader was, not to the section", async ({
     page,
   }) => {
-    await page.goto("#/docs/validation-options/introduction", {
+    await page.goto("#/docs/validation-options/code-example", {
       waitUntil: "networkidle",
     });
     // The reader scrolls on, below the section, then follows Next.
@@ -99,7 +100,7 @@ test.describe("section addresses (test 9)", () => {
 
     await page.goBack();
 
-    await expect(page).toHaveURL(/#\/docs\/validation-options\/introduction$/);
+    await expect(page).toHaveURL(/#\/docs\/validation-options\/code-example$/);
     await expect.poll(() => page.evaluate(() => window.scrollY)).toBe(position);
   });
 
@@ -111,15 +112,15 @@ test.describe("section addresses (test 9)", () => {
     await context.grantPermissions(["clipboard-read", "clipboard-write"]);
     await page.goto("#/docs/validator", { waitUntil: "networkidle" });
 
-    await page.getByRole("heading", { name: "Validator Introduction" }).hover();
+    await page.getByRole("heading", { name: "Code Samples" }).hover();
     await page
       .getByRole("link", {
-        name: "Link to this section: Validator Introduction",
+        name: "Link to this section: Code Samples",
       })
       .click();
 
     expect(await page.evaluate(() => navigator.clipboard.readText())).toBe(
-      `${baseURL}#/docs/validator/introduction`,
+      `${baseURL}#/docs/validator/code-samples`,
     );
     // The pill on screen, not the hidden live region with the same words, which
     // Playwright also counts as visible.
@@ -176,34 +177,41 @@ test.describe("layout at each width", () => {
   });
 });
 
-// "Page not found" and the docs layout are the new design. The old 1.0.3 content inside
-// the layout (".noWhiteSpace") has the defects in spec section 4.1, item 11, until T21
-// replaces it, so test 11 leaves it out.
-test.describe("a docs page (tests 10 and 11)", () => {
-  test("does not scroll sideways at 320 px", async ({ page }) => {
-    await page.setViewportSize(NARROWEST);
-    await page.goto("#/docs/validation-options", { waitUntil: "networkidle" });
+// Tests 10 and 11 on every page rebuilt in the new design: the four docs pages and
+// Versions. Home joins them in T22.
+const pages = [
+  "#/docs/validation-options",
+  "#/docs/validator",
+  "#/docs/expiry-checker",
+  "#/docs/dictionary-extensions",
+  "#/versions",
+];
 
-    const pageWidth = await page.evaluate(
-      () => document.documentElement.scrollWidth,
-    );
-    expect(pageWidth).toBeLessThanOrEqual(NARROWEST.width);
-  });
+for (const route of pages) {
+  test.describe(route, () => {
+    // Test 10 (spec section 6.6.3, item 2).
+    test("does not scroll sideways at 320 px", async ({ page }) => {
+      await page.setViewportSize(NARROWEST);
+      await page.goto(route, { waitUntil: "networkidle" });
 
-  for (const viewport of [NARROWEST, DESKTOP]) {
-    test(`the layout has no accessibility violations at ${viewport.width} px`, async ({
-      page,
-    }) => {
-      await page.setViewportSize(viewport);
-      await page.goto("#/docs/validation-options", {
-        waitUntil: "networkidle",
-      });
-
-      const results = await new AxeBuilder({ page })
-        .exclude(".noWhiteSpace")
-        .analyze();
-
-      expect(results.violations).toEqual([]);
+      const pageWidth = await page.evaluate(
+        () => document.documentElement.scrollWidth,
+      );
+      expect(pageWidth).toBeLessThanOrEqual(NARROWEST.width);
     });
-  }
-});
+
+    // Test 11 (spec section 6.6.1, item 2).
+    for (const viewport of [NARROWEST, DESKTOP]) {
+      test(`has no accessibility violations at ${viewport.width} px`, async ({
+        page,
+      }) => {
+        await page.setViewportSize(viewport);
+        await page.goto(route, { waitUntil: "networkidle" });
+
+        const results = await new AxeBuilder({ page }).analyze();
+
+        expect(results.violations).toEqual([]);
+      });
+    }
+  });
+}

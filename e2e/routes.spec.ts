@@ -4,7 +4,7 @@ import AxeBuilder from "@axe-core/playwright";
 import { expect, test } from "@playwright/test";
 
 // Spec section 6.2.1, with the address each one ends on, the page's tab title, and a
-// heading only that page has. The docs headings are the old pages' until T21.
+// heading only that page has.
 const addresses = [
   {
     from: "",
@@ -23,31 +23,31 @@ const addresses = [
     from: "#/documentation/builder",
     to: /#\/docs\/validation-options$/,
     title: "Validation options — JWT Validator",
-    heading: "Builder Introduction",
+    heading: "Technical Details",
   },
   {
     from: "#/documentation/validator",
     to: /#\/docs\/validator$/,
     title: "Validator — JWT Validator",
-    heading: "Validator Introduction",
+    heading: "TryValidateJWT",
   },
   {
     from: "#/documentation/expiry",
     to: /#\/docs\/expiry-checker$/,
     title: "Expiry checker — JWT Validator",
-    heading: "Expiry Checker Introduction",
+    heading: "TryHasJWTExpired",
   },
   {
     from: "#/documentation/dictionary",
     to: /#\/docs\/dictionary-extensions$/,
     title: "Dictionary extensions — JWT Validator",
-    heading: "Dictionary Extensions Introduction",
+    heading: "ContainsKeyAndValue",
   },
   {
     from: "#/docs",
     to: /#\/docs\/validation-options$/,
     title: "Validation options — JWT Validator",
-    heading: "Builder Introduction",
+    heading: "Technical Details",
   },
   {
     from: "#/no-such-page",
