@@ -321,7 +321,12 @@ Base branch: release/phase-2-redesign
     - `CodeBlock` (C#, XML and shell, with a language label), `CopyButton`, `ExampleTabs`, `ChangedNote`, `SectionHeading` with its copying section link, `ScrollTable`, `MethodReference` and `MethodTable` follow plan 3.3 and match `docs/design/docs-page.png` and `states.png`.
     - Plan 7.2 tests 1, 2, 16 and 17 exist and pass.
   - Verify: `npm test`
-  - Notes: The "Returns" label must say "Returns" (spec 4.1, item 6). Sideways scrolling is checked by test 10 when T20 and T21 put these components on real pages. If this task grows past one session, split `ExampleTabs` and `SectionHeading` into their own task.
+  - Notes:
+    - The "Returns" label must say "Returns" (spec 4.1, item 6). Sideways scrolling is checked by test 10 when T20 and T21 put these components on real pages. If this task grows past one session, split `ExampleTabs` and `SectionHeading` into their own task.
+    - The C# grammar marks keywords, strings, comments, numbers and declared method names, but not type names or method calls. So those stay in the text colour, unlike `docs-page.png`. This is the limit of the C#-only highlighting in plan 3.5.
+    - Choices the design does not show: the language label is in the caption bar ("C# · Program.cs"), as spec 6.1.3 item 8 needs. There are no line numbers. "Copy failed" stays until the next try. The section link sits next to its heading, not inside it, so the heading's name is its text only.
+    - Each component that can be wide has `minWidth: 0`, so it shrinks in a flex or grid parent and its code or table scrolls inside it. Without it, a temporary demo page was 725 px wide at 320 px. With it, the demo fitted 320 px and axe found no violations at 320 px and 1280 px. The demo is not committed.
+    - Added: `useCopyToClipboard` (the shared clipboard code in plan 3.5), `HighlightedCode` (the code view that `CodeBlock`, `ExampleTabs` and `MethodReference` share), `methodSectionId`, and the `bodyText` token. `visuallyHidden` moved to `theme.ts`. `ChangedNote` links to `/docs/migrating-from-1x`, which release 3 adds.
 
 - [ ] **T20 — Build the docs layout and section addresses**
   - Refs: spec 6.1.4, spec 6.1.1 items 5 and 6, spec 6.2.2, plan 3.1 (`DocsLayout`, `OnThisPage`, `PrevNextLinks`), plan 3.3 (section addresses, history entries), plan 3.6 (breakpoints), plan 4 (unknown section), `docs/design/docs-page.png`, `docs/design/docs-phone.png`
