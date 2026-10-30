@@ -1,8 +1,7 @@
 import ArticleSection from "@/components/ArticleSection/ArticleSection";
 import CodeBlock from "@/components/CodeBlock/CodeBlock";
 import DocsLayout from "@/components/DocsLayout/DocsLayout";
-import MethodReference from "@/components/MethodReference/MethodReference";
-import MethodTable from "@/components/MethodTable/MethodTable";
+import MethodsSection from "@/components/MethodsSection/MethodsSection";
 import type { DocsSection } from "@/content/docsPages";
 import { validatorMethods } from "@/content/methods/validator";
 
@@ -37,12 +36,7 @@ const ValidatorPage = () => {
         <CodeBlock code={tryValidateExample} />
         <CodeBlock code={validateExample} />
       </ArticleSection>
-      <ArticleSection id="methods" title="Methods">
-        <MethodTable methods={validatorMethods} />
-        {validatorMethods.map((method) => (
-          <MethodReference key={method.name} method={method} />
-        ))}
-      </ArticleSection>
+      <MethodsSection methods={validatorMethods} />
     </DocsLayout>
   );
 };

@@ -20,7 +20,8 @@ const ArticleSection = ({ id, title, children }: ArticleSectionProps) => {
         flexDirection: "column",
         gap: "16px",
         marginBottom: "44px",
-        "& p, & ul": { margin: 0 },
+        // Only the section's own paragraphs and lists, not those inside components.
+        "& > p, & > ul": { margin: 0 },
       }}
     >
       <SectionHeading id={id} level={2}>

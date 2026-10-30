@@ -1,8 +1,7 @@
 import ArticleSection from "@/components/ArticleSection/ArticleSection";
 import CodeBlock from "@/components/CodeBlock/CodeBlock";
 import DocsLayout from "@/components/DocsLayout/DocsLayout";
-import MethodReference from "@/components/MethodReference/MethodReference";
-import MethodTable from "@/components/MethodTable/MethodTable";
+import MethodsSection from "@/components/MethodsSection/MethodsSection";
 import type { DocsSection } from "@/content/docsPages";
 import { dictionaryExtensionMethods } from "@/content/methods/dictionaryExtensions";
 
@@ -44,12 +43,7 @@ const DictionaryExtensionsPage = () => {
           <CodeBlock key={example} code={example} />
         ))}
       </ArticleSection>
-      <ArticleSection id="methods" title="Methods">
-        <MethodTable methods={dictionaryExtensionMethods} />
-        {dictionaryExtensionMethods.map((method) => (
-          <MethodReference key={method.name} method={method} />
-        ))}
-      </ArticleSection>
+      <MethodsSection methods={dictionaryExtensionMethods} />
     </DocsLayout>
   );
 };

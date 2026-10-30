@@ -1,6 +1,7 @@
 import Box from "@mui/material/Box";
 import type { Theme } from "@mui/material/styles";
 import { Link as RouterLink } from "react-router";
+import { MIGRATION_GUIDE_PATH } from "@/content/docsPages";
 import PageTitle from "@/components/PageTitle/PageTitle";
 import { versions, type Version, type VersionStatus } from "@/content/versions";
 
@@ -42,9 +43,6 @@ const StatusBadge = ({ status }: { status: VersionStatus }) => (
     {status}
   </Box>
 );
-
-// The migration guide's slug in plan section 3.4. Release 3 adds the page.
-const MIGRATION_GUIDE_PATH = "/docs/migrating-from-1x";
 
 const VersionEntry = ({ version }: { version: Version }) => {
   const headingId = `version-${version.version.replaceAll(".", "-")}`;

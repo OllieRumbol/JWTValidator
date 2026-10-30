@@ -1,8 +1,7 @@
 import ArticleSection from "@/components/ArticleSection/ArticleSection";
 import CodeBlock from "@/components/CodeBlock/CodeBlock";
 import DocsLayout from "@/components/DocsLayout/DocsLayout";
-import MethodReference from "@/components/MethodReference/MethodReference";
-import MethodTable from "@/components/MethodTable/MethodTable";
+import MethodsSection from "@/components/MethodsSection/MethodsSection";
 import type { DocsSection } from "@/content/docsPages";
 import { validationOptionsMethods } from "@/content/methods/validationOptions";
 
@@ -55,12 +54,7 @@ const ValidationOptionsPage = () => {
           </li>
         </ul>
       </ArticleSection>
-      <ArticleSection id="methods" title="Methods">
-        <MethodTable methods={validationOptionsMethods} />
-        {validationOptionsMethods.map((method) => (
-          <MethodReference key={method.name} method={method} />
-        ))}
-      </ArticleSection>
+      <MethodsSection methods={validationOptionsMethods} />
     </DocsLayout>
   );
 };

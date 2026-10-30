@@ -29,6 +29,9 @@ export type DocsSection = {
   level: 2 | 3;
 };
 
+// The migration guide's address (plan section 3.4). Release 3 adds the page.
+export const MIGRATION_GUIDE_PATH = "/docs/migrating-from-1x";
+
 export type AdjacentPages = {
   previous?: DocsPage;
   next?: DocsPage;
