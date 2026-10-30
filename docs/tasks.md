@@ -358,7 +358,7 @@ Base branch: release/phase-2-redesign
     - The maintainer chose (2026-10-30) to keep the 1.0.3 method text word for word in `src/content/methods/`: each parameter sentence is one entry named by the signature's parameters, and "no parameters" shows as "None". `failsWhen` is optional until T32 makes it required again. A few whitespace-only changes are listed in pull request #42.
     - Each page is in `src/pages/docs/<slug>/` and declares its sections. The old introduction is the lead paragraph, and the headings keep their 1.0.3 words. `DocsLayout` takes the slug and sets the tab title. The examples are strings in the pages until T26 moves them to `examples/`.
     - The Versions intro and status key are from `versions.html`, and the unlisted entry is muted. T28 adds the breaking changes, the "Other changes" heading and the migration guide button.
-    - Tests 10 and 11 check the whole of the four docs pages and Versions. Home still uses `Panel`, `shared.css`, `title.css` and the old highlighter theme, which T22 removes. The header does not mark the current page, as the design does: a T17 gap, raised with the maintainer.
+    - Tests 10 and 11 check the whole of the four docs pages and Versions. Home still uses `Panel`, `shared.css`, `title.css` and the old highlighter theme, which T22 removes. At the maintainer's request, the header now marks the current page, as the design does, which T17 had missed.
     - Evidence: pull request #42
 
 - [ ] **T22 — Move Home to the new design and remove the last photo**
