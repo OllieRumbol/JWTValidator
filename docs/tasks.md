@@ -340,10 +340,10 @@ Base branch: release/phase-2-redesign
   - Verify: `npm test && npm run build && npm run e2e`
   - Notes:
     - The old docs pages lost their photo title, because `DocsLayout` shows the page title as the `h1`. Their 13 section headings are now `SectionHeading`s. `src/components/documentation/Title.tsx` and `documents.webp` are now unused, and T21 deletes them with the old folders.
-    - Each page's sections are declared in `pageContent` in `DocsPage.tsx`, and a test checks that each one is a heading on the page. T21 moves the declaration into each new page.
-    - "On this page" marks the section in the address, or the first section at the top. It does not follow the scroll, which the spec does not ask for. From 1200 px it stays in view while the article scrolls. The breadcrumb's group is plain text, because a group has no page. The intro paragraph under the title comes with each page's content in T21.
+    - Each page's sections are declared in `src/pages/docs/pageContent.ts`, with each heading's exact text, and a test checks that each one is a heading on the page with that text. T21 moves the declaration into each new page.
+    - "On this page" marks the section in the address, or the first section at the top. It does not follow the scroll, which the spec does not ask for. From 1200 px it stays in view while the article scrolls. The breadcrumb's group is plain text, because a group has no page, and on a phone it leaves out the title, as `docs-phone.html` does. The intro paragraph under the title comes with each page's content in T21.
     - Test 11 leaves out the old 1.0.3 content (`.noWhiteSpace`), where axe finds `heading-order` and `scrollable-region-focusable` (spec 4.1, item 11). T21 removes that exclusion. Test 10 checks the whole page, which fits 320 px.
-    - A hash typed in the address bar is a browser history step, so the router keeps the scroll position, as it does for Back. Spec 6.1.1, item 4 covers links only, so this is unchanged.
+    - Back and Forward to a section address restore the reader's position (plan 3.5). A first load has the location key "default", so after scrolling, `useScrollToSection` replaces that entry to give it a key. Without that, Back to a shared link's entry looked like a first load and jumped to the section.
 
 - [ ] **T21 — Move the docs and Versions pages to the new design**
   - Refs: spec 6.1.6, spec 6.1.10 release 2, plan 3.2, plan 7.2 tests 4, 10 and 11, spec 4.1 items 11 and 12, `docs/design/versions.png`

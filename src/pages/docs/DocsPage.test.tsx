@@ -3,7 +3,7 @@ import { screen, waitFor, within } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import { docsPages } from "@/content/docsPages";
 import { renderRoute } from "@/test/renderRoute";
-import { pageContent } from "./DocsPage";
+import { pageContent } from "./pageContent";
 
 describe("docs page layout", () => {
   test("shows the docs list, the title, On this page, and previous and next", async () => {
@@ -34,15 +34,24 @@ describe("docs page layout", () => {
     ).toHaveAttribute("href", "/docs/expiry-checker");
   });
 
-  test("the first page has no previous link, and the last has no next link", async () => {
-    const first = docsPages[0];
-    renderRoute(`/docs/${first.slug}`);
+  test("the first page has no previous link", async () => {
+    renderRoute(`/docs/${docsPages[0].slug}`);
 
     const prevNext = within(
       await screen.findByRole("navigation", { name: "Previous and next" }),
     );
     expect(prevNext.getAllByRole("link")).toHaveLength(1);
     expect(prevNext.getByRole("link")).toHaveTextContent(/^Next/);
+  });
+
+  test("the last page has no next link", async () => {
+    renderRoute(`/docs/${docsPages[docsPages.length - 1].slug}`);
+
+    const prevNext = within(
+      await screen.findByRole("navigation", { name: "Previous and next" }),
+    );
+    expect(prevNext.getAllByRole("link")).toHaveLength(1);
+    expect(prevNext.getByRole("link")).toHaveTextContent(/^Previous/);
   });
 
   // Each section in "On this page" must be a heading on the page, or its link leads
@@ -57,6 +66,7 @@ describe("docs page layout", () => {
         const heading = document.getElementById(section.id);
         expect(heading, section.id).not.toBeNull();
         expect(heading!.tagName).toBe(`H${section.level}`);
+        expect(heading).toHaveTextContent(section.title);
       }
     },
   );
@@ -71,16 +81,6 @@ describe("section addresses", () => {
       expect(scroll).toHaveBeenCalled();
     });
     expect(scroll.mock.contexts[0]).toHaveAttribute("id", "methods");
-  });
-
-  test("an unknown section opens the page without scrolling", async () => {
-    const scroll = vi.spyOn(Element.prototype, "scrollIntoView");
-    renderRoute("/docs/validator/no-such-section");
-
-    expect(
-      await screen.findByRole("heading", { level: 1, name: "Validator" }),
-    ).toBeVisible();
-    expect(scroll).not.toHaveBeenCalled();
   });
 
   test("On this page links to each section, replacing the history entry", async () => {

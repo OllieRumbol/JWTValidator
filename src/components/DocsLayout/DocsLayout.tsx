@@ -74,7 +74,16 @@ const DocsLayout = ({ page, sections, children }: DocsLayoutProps) => {
             <Link component={RouterLink} to="/docs">
               Docs
             </Link>{" "}
-            / {page.group} / {page.title}
+            / {page.group}
+            {/* On a phone the title shows just below, so docs-phone.html leaves it out
+                here. */}
+            <Box
+              component="span"
+              sx={{ display: { xs: "none", md: "inline" } }}
+            >
+              {" "}
+              / <span aria-current="page">{page.title}</span>
+            </Box>
           </Box>
           <Box
             component="h1"

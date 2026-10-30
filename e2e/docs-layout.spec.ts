@@ -34,7 +34,10 @@ test.describe("section addresses (test 9)", () => {
     await expect(page).toHaveURL(
       /#\/docs\/validation-options\/technical-details$/,
     );
-    expect(await page.evaluate(() => window.scrollY)).toBeGreaterThan(0);
+    // The scroll follows the address change, so wait for it.
+    await expect
+      .poll(() => page.evaluate(() => window.scrollY))
+      .toBeGreaterThan(0);
     await expectInView(page, "technical-details");
   });
 
@@ -78,6 +81,28 @@ test.describe("section addresses (test 9)", () => {
     await expect(page).toHaveURL(/#\/$/);
   });
 
+  test("Back to a section address returns to where the reader was, not to the section", async ({
+    page,
+  }) => {
+    await page.goto("#/docs/validation-options/introduction", {
+      waitUntil: "networkidle",
+    });
+    // The reader scrolls on, below the section, then follows Next.
+    await page.evaluate(() => window.scrollBy(0, 900));
+    const position = await page.evaluate(() => window.scrollY);
+    // dispatchEvent, because click() would first scroll the link into view.
+    await page
+      .getByRole("navigation", { name: "Previous and next" })
+      .getByRole("link", { name: /Next/ })
+      .dispatchEvent("click");
+    await expect(page).toHaveURL(/#\/docs\/validator$/);
+
+    await page.goBack();
+
+    await expect(page).toHaveURL(/#\/docs\/validation-options\/introduction$/);
+    await expect.poll(() => page.evaluate(() => window.scrollY)).toBe(position);
+  });
+
   test("the section link copies the section's address and shows Link copied", async ({
     page,
     context,
@@ -96,7 +121,11 @@ test.describe("section addresses (test 9)", () => {
     expect(await page.evaluate(() => navigator.clipboard.readText())).toBe(
       `${baseURL}#/docs/validator/introduction`,
     );
-    await expect(page.getByText("Link copied").first()).toBeVisible();
+    // The pill on screen, not the hidden live region with the same words, which
+    // Playwright also counts as visible.
+    await expect(
+      page.locator('span[aria-hidden="true"]', { hasText: "Link copied" }),
+    ).toBeVisible();
   });
 });
 
