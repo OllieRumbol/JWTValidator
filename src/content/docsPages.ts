@@ -21,6 +21,14 @@ export const docsPages: DocsPage[] = [
   },
 ];
 
+// A section of a docs page, for "On this page". The id is also the SectionHeading's id,
+// and the last part of the section address (plan section 3.3).
+export type DocsSection = {
+  id: string;
+  title: string;
+  level: 2 | 3;
+};
+
 export type AdjacentPages = {
   previous?: DocsPage;
   next?: DocsPage;

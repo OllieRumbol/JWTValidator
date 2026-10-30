@@ -4,12 +4,10 @@ import BuilderDocumentsIntroduction from "./BuilderDocumentsIntroduction";
 import BuilderDocumentsTechnicalDetails from "./BuilderDocumentsTechnicalDetails";
 import BuilderDocumentsMethods from "./BuilderDocumentsMethods";
 import BuilderDocumentsCodeExample from "./BuilderDocumentsCodeExample";
-import Title from "../Title";
 
 const BuilderDocuments = () => {
   return (
     <Container maxWidth={false} className="noWhiteSpace">
-      <Title />
       <BuilderDocumentsIntroduction />
       <BuilderDocumentsCodeExample />
       <BuilderDocumentsTechnicalDetails />

@@ -2,13 +2,17 @@ import React from "react";
 import "../../../style/shared.css";
 import Panel from "../../shared/Panel";
 import Typography from "@mui/material/Typography";
+import Box from "@mui/material/Box";
+import SectionHeading from "@/components/SectionHeading/SectionHeading";
 
 const BuilderDocumentsTechnicalDetails = () => {
   return (
     <Panel colour="#DDDDDD">
-      <Typography variant="h2" component="h2" sx={{ mb: 3 }}>
-        Technical Details
-      </Typography>
+      <Box sx={{ mb: 3 }}>
+        <SectionHeading id="technical-details" level={2}>
+          Technical Details
+        </SectionHeading>
+      </Box>
       <Typography align="center" variant="h5" component="h5">
         A variety of different builder design patterns have been used.
         <ul style={{ listStylePosition: "inside" }}>

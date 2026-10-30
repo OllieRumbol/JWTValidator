@@ -328,7 +328,7 @@ Base branch: release/phase-2-redesign
     - Added `useCopyToClipboard`, `HighlightedCode` (shared by `CodeBlock`, `ExampleTabs` and `MethodReference`), `methodSectionId` and the `bodyText` token. `visuallyHidden` moved to `theme.ts`. `ChangedNote` links to `/docs/migrating-from-1x`, which release 3 adds.
     - Evidence: pull request #40
 
-- [ ] **T20 — Build the docs layout and section addresses**
+- [x] **T20 — Build the docs layout and section addresses**
   - Refs: spec 6.1.4, spec 6.1.1 items 5 and 6, spec 6.2.2, plan 3.1 (`DocsLayout`, `OnThisPage`, `PrevNextLinks`), plan 3.3 (section addresses, history entries), plan 3.6 (breakpoints), plan 4 (unknown section), `docs/design/docs-page.png`, `docs/design/docs-phone.png`
   - Depends on: T18, T19
   - Done when:
@@ -338,7 +338,12 @@ Base branch: release/phase-2-redesign
     - The rows of plan 7.2 test 9 for section links, shared section links and copying a section link exist and pass.
     - A docs page is in tests 10 and 11.
   - Verify: `npm test && npm run build && npm run e2e`
-  - Notes: —
+  - Notes:
+    - The old docs pages lost their photo title (`DocsLayout` shows the `h1`), and their 13 section headings became `SectionHeading`s. Their sections are declared in `src/pages/docs/pageContent.ts`, checked by a test. T21 moves the declarations into the new pages, and deletes the unused `documentation/Title.tsx` and `documents.webp`.
+    - "On this page" marks the section in the address, or the first one. It does not follow the scroll. From 1200 px it stays in view. The breadcrumb's group is plain text, and a phone leaves out the title. T21 adds each page's intro paragraph.
+    - Back and Forward to a section address restore the reader's position (plan 3.5). A first load has the key "default", so `useScrollToSection` replaces that entry to give it a key.
+    - Test 11 leaves out the old content (`.noWhiteSpace`), where axe finds `heading-order` and `scrollable-region-focusable`. T21 removes the exclusion. Test 10 checks the whole page.
+    - Evidence: pull request #41
 
 - [ ] **T21 — Move the docs and Versions pages to the new design**
   - Refs: spec 6.1.6, spec 6.1.10 release 2, plan 3.2, plan 7.2 tests 4, 10 and 11, spec 4.1 items 11 and 12, `docs/design/versions.png`
@@ -540,4 +545,5 @@ None.
 - 2026-10-29 — T17
 - 2026-10-29 — T18
 - 2026-10-30 — T19
+- 2026-10-30 — T20
 
