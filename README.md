@@ -88,7 +88,7 @@ public/              Files copied to the site as they are: favicon and share ima
 scripts/             The size check, and the Vite plugin that adds the security policy
 src/
   app/               The routes, the theme, the fonts and the layout around every page
-  components/        One folder per shared component
+  components/        One folder per shared component, and shared/ for small shared parts
   content/           The text and data: docs pages, versions, links and method details
   hooks/             Shared hooks: copying, and scrolling to a section
   pages/             One folder per page
