@@ -194,9 +194,10 @@ test.describe("layout at each width", () => {
   });
 });
 
-// Tests 10 and 11 on every page rebuilt in the new design: the four docs pages and
-// Versions. Home joins them in T22.
+// Tests 10 and 11 on every page rebuilt in the new design: Home, the four docs pages
+// and Versions.
 const pages = [
+  "#/",
   "#/docs/validation-options",
   "#/docs/validator",
   "#/docs/expiry-checker",

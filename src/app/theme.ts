@@ -14,6 +14,8 @@ const tokens = {
   // Header, payload and signature, in that order.
   logoBars: ["#E5427A", "#9447D6", "#1C9CC9"],
   accentText: ["#C21E5A", "#7A2DBE", "#0A7398"],
+  // Behind the step numbers on Home, in the same order as "accentText".
+  stepBackground: ["#FDEEF3", "#F0E7FB", "#E6F5FA"],
   changedNote: { background: "#FDEEF3", border: "#F3C3D4", label: "#A8174D" },
   code: {
     background: "#FCFBFE",
@@ -98,6 +100,22 @@ export const visuallyHidden = {
   whiteSpace: "nowrap",
   border: 0,
 } as const;
+
+// A link drawn as the main button, as home.html and not-found.html show it.
+export function primaryLinkStyle(theme: Theme) {
+  return {
+    fontSize: "17px",
+    lineHeight: 1.6,
+    fontWeight: 600,
+    padding: "12px 24px",
+    borderRadius: "8px",
+    textDecoration: "none",
+    backgroundColor: theme.tokens.primary,
+    color: theme.tokens.background,
+    // The design shows no hover for these links, so the darker link hover colour is used.
+    "&:hover": { backgroundColor: theme.tokens.linkHover },
+  };
+}
 
 // Rules for the whole page, applied with MUI's GlobalStyles.
 export function globalStyles(theme: Theme): CSSObject {

@@ -54,9 +54,12 @@ test.describe("navigation (test 9)", () => {
     await page.goBack();
 
     await expect(page).toHaveURL(/#\/$/);
-    // Home's title until T22 rebuilds Home.
+    // Home's title.
     await expect(
-      page.getByRole("heading", { level: 1, name: "JWT Validator" }),
+      page.getByRole("heading", {
+        level: 1,
+        name: "Validate a JWT in C#, in a few readable lines.",
+      }),
     ).toBeVisible();
   });
 

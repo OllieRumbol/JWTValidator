@@ -374,7 +374,13 @@ Base branch: release/phase-2-redesign
     - The last photo in `src/assets/` is deleted, and nothing imports it.
     - Home is in tests 10 and 11.
   - Verify: `npm run build && npm run check-size && npm run e2e`
-  - Notes: Release 3 adds the tabs, the migration button and the change table, and rewrites the Home text (T27).
+  - Notes:
+    - Release 3 adds the tabs, the migration button and the change table, and rewrites the Home text (T27).
+    - The maintainer chose on 2026-10-30 to use the design text, made true for 1.0.3: the badge shows the latest version from `versions.ts` and "MIT licence", the expiry checker text has no "in UTC", and the example section is "Validate a token", about a secret. The old "New Release: 1.0.3" and "Licensing" sections are removed. The licence is in the badge and the footer.
+    - The example is the old secret example, unchanged, so it still calls `DictionaryContainsKeyAndValue` (spec 4.1, item 5). T27 replaces it with the compiled examples.
+    - The Back Story text is now in `src/pages/home/AuthorSection.tsx`. T27 drafts the personal section from there, because `BackStory.tsx`, which plan 3.2 names, is deleted.
+    - Outside the `Done when` list: `@mui/icons-material` is removed, because Home was its last user. `primaryLinkStyle` moved to `theme.ts`, shared by Home and "Page not found". The theme has a new `stepBackground` token (`#E6F5FA` for step 03). The result card uses the success text colour, not the design's near-identical `#1F7A3D`.
+    - T24: README lines 88, 90, 101 and 102 name `src/assets/`, `src/style/` and the deleted Home files.
 
 - [ ] **T23 — Meet the accessibility targets on every page**
   - Refs: spec 6.6.1, spec 6.6.3 item 2, spec 6.7, plan 3.6 (theme colours), plan 7.2 tests 10 and 11, spec 4.1 item 11
