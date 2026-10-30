@@ -39,13 +39,17 @@ describe("CopyButton", () => {
 
   test("works with the keyboard", async () => {
     const user = userEvent.setup();
-    renderOnDocsPage(<CopyButton text="text" label="Copy the command" />);
+    // Text that no other test copies, so the clipboard cannot hold it already.
+    renderOnDocsPage(
+      <CopyButton text="copied by keyboard" label="Copy the command" />,
+    );
 
     await screen.findByRole("button", { name: "Copy the command" });
     await user.tab();
     await user.keyboard("{Enter}");
 
-    expect(await navigator.clipboard.readText()).toBe("text");
+    expect(await navigator.clipboard.readText()).toBe("copied by keyboard");
+    expect(screen.getByRole("button", { name: "Copied" })).toBeVisible();
   });
 
   // Plan section 7.2, test 2 (spec section 6.1.5, item 5).

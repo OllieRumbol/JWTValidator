@@ -36,6 +36,17 @@ const SectionHeading = ({ id, level, children }: SectionHeadingProps) => {
   const labelId = useId();
 
   async function handleClick(event: MouseEvent<HTMLAnchorElement>) {
+    // A modifier click, such as Ctrl-click for a new tab, is left to the browser.
+    const isModifierClick =
+      event.button !== 0 ||
+      event.ctrlKey ||
+      event.metaKey ||
+      event.shiftKey ||
+      event.altKey;
+    if (isModifierClick) {
+      return;
+    }
+
     event.preventDefault();
     const address = new URL(href, window.location.href).href;
     // Emptied first, so a second "Link copied" is a change, and screen readers announce it.

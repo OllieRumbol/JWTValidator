@@ -72,6 +72,24 @@ describe("SectionHeading", () => {
     expect(router.state.location.pathname).toBe("/docs/validation-options");
   });
 
+  test("a Ctrl-click on the section link is left to the browser, and copies nothing", async () => {
+    const user = userEvent.setup();
+    const writeText = vi.spyOn(navigator.clipboard, "writeText");
+    renderHeading();
+
+    const link = await screen.findByRole("link", {
+      name: /Link to this section/,
+    });
+    await user.keyboard("{Control>}");
+    await user.click(link);
+    await user.keyboard("{/Control}");
+
+    expect(writeText).not.toHaveBeenCalled();
+    expect(
+      screen.queryByText("Link copied", { ignore: '[role="status"]' }),
+    ).toBeNull();
+  });
+
   test("the section link opens the address when the clipboard rejects the write", async () => {
     const user = userEvent.setup();
     vi.spyOn(navigator.clipboard, "writeText").mockRejectedValue(
