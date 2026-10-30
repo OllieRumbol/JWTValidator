@@ -1,6 +1,4 @@
-// Addresses in a real browser: plan section 7.2, test 8, and "Page not found" in tests 10
-// and 11.
-import AxeBuilder from "@axe-core/playwright";
+// Addresses in a real browser: plan section 7.2, test 8.
 import { expect, test } from "@playwright/test";
 
 // Spec section 6.2.1, with the address each one ends on, the page's tab title, and a
@@ -104,32 +102,4 @@ test.describe("addresses (test 8)", () => {
     await expect(page).toHaveURL(/#\/$/);
     await expect(page).toHaveTitle("JWT Validator");
   });
-});
-
-// "Page not found" is the first page in the new design, so the whole page is checked.
-test.describe("Page not found", () => {
-  // Test 10 (spec section 6.6.3, item 2).
-  test("does not scroll sideways at 320 px", async ({ page }) => {
-    await page.setViewportSize({ width: 320, height: 640 });
-    await page.goto("#/no-such-page");
-    await expect(page.getByRole("heading", { level: 1 })).toBeVisible();
-
-    const pageWidth = await page.evaluate(
-      () => document.documentElement.scrollWidth,
-    );
-    expect(pageWidth).toBeLessThanOrEqual(320);
-  });
-
-  // Test 11 (spec section 6.6.1, item 2).
-  for (const width of [320, 1280]) {
-    test(`has no accessibility violations at ${width} px`, async ({ page }) => {
-      await page.setViewportSize({ width, height: 800 });
-      await page.goto("#/no-such-page");
-      await expect(page.getByRole("heading", { level: 1 })).toBeVisible();
-
-      const results = await new AxeBuilder({ page }).analyze();
-
-      expect(results.violations).toEqual([]);
-    });
-  }
 });

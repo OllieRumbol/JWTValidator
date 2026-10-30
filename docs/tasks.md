@@ -381,7 +381,7 @@ Base branch: release/phase-2-redesign
     - T24: README lines 88, 90, 101 and 102 name `src/assets/`, `src/style/` and the deleted Home files.
     - Evidence: pull request #43
 
-- [ ] **T23 — Meet the accessibility targets on every page**
+- [x] **T23 — Meet the accessibility targets on every page**
   - Refs: spec 6.6.1, spec 6.6.3 item 2, spec 6.7, plan 3.6 (theme colours), plan 7.2 tests 10 and 11, spec 4.1 item 11
   - Depends on: T21, T22
   - Done when:
@@ -389,7 +389,12 @@ Base branch: release/phase-2-redesign
     - No button is inside a link, every list from data has a key from the data, and heading levels follow the page outline.
     - No file in `src/` outside `src/app/theme.ts` holds a colour value.
   - Verify: `npm run build && npm run e2e`, then `grep -rnE "#[0-9A-Fa-f]{6}\b|rgba?\(" src --include=*.ts --include=*.tsx --include=*.css | grep -v "src/app/theme.ts"` prints nothing.
-  - Notes: Earlier tasks added each page to the tests as they rebuilt it. This task closes anything left.
+  - Notes:
+    - Tests 10 and 11 are in `e2e/pages.spec.ts`. `e2e/everyPage.ts` lists every page from `docsPages` for tests 10, 11 and 13, so each release 3 page joins when it is added.
+    - Axe 4.14 leaves the WCAG 2.2 AA `target-size` rule off by default. `e2e/accessibility.ts` turns it on for every axe check. Chain `include()`, not `options()`, which replaces it.
+    - Test 10 also checks that wide content scrolls inside its box. It found long class names spilling out of the method reference lists at 320 px, fixed with `overflowWrap: "anywhere"`.
+    - T24: the keyboard check by hand (spec 6.6.1, item 4) and Lighthouse accessibility 100 (item 3).
+    - Evidence: pull request #44
 
 - [ ] **T24 — Release phase 2 (maintainer)**
   - Refs: spec 6.1.10 items 4 to 6, spec 6.1.12, spec 6.6.1 items 3 and 4, spec 6.6.2, spec 6.6.3 item 3, spec 6.7 (zoom), plan 5 (releases), plan 9 (TypeScript, Node)
@@ -558,4 +563,5 @@ None.
 - 2026-10-30 — T20
 - 2026-10-30 — T21
 - 2026-10-30 — T22
+- 2026-10-30 — T23
 

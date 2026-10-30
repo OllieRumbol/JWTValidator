@@ -2,15 +2,7 @@
 // cookies and transfers at most 500 KB (spec section 6.6.4, items 1 and 2, and 6.6.2, item 4).
 import { gzipSync } from "node:zlib";
 import { expect, test, type Request } from "@playwright/test";
-import { docsPages } from "../src/content/docsPages.ts";
-
-// Every page: Home, Versions, each docs page and "Page not found" (spec section 6.1.1).
-const routes = [
-  "#/",
-  "#/versions",
-  ...docsPages.map((page) => `#/docs/${page.slug}`),
-  "#/no-such-page",
-];
+import { everyPage } from "./everyPage.ts";
 
 // 1 KB is 1,000 bytes, as in scripts/check-size.mjs.
 const TRANSFER_LIMIT = 500 * 1000;
@@ -39,7 +31,7 @@ async function bytesSent(request: Request): Promise<number> {
   return sizes.responseHeadersSize + bodySize;
 }
 
-for (const route of routes) {
+for (const route of everyPage) {
   test(`${route} loads only from its own host, sets no cookies and transfers at most 500 KB`, async ({
     page,
     context,
