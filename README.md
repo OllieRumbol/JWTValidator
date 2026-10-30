@@ -24,7 +24,10 @@ The package page on nuget.org links to the live site, so the site address must n
 - [MUI](https://mui.com/) 9, styled with Emotion.
 - [React Router](https://reactrouter.com/) 8, with a hash router. GitHub Pages serves only files, so the page address is kept after the `#`.
 - `react-syntax-highlighter`, with only the C# grammar loaded.
+- The IBM Plex Sans and IBM Plex Mono fonts, from the `@fontsource` packages. They are bundled with the site, so nothing loads from another host. `src/app/fonts.ts` loads the Latin subset and only the weights in use.
+- One MUI theme in `src/app/theme.ts`. It holds every colour of the approved design in `docs/design/`, as tokens. No other file in `src/` holds a colour value.
 - [Vitest](https://vitest.dev/) and React Testing Library for component tests. [Playwright](https://playwright.dev/) for end-to-end tests.
+- [axe](https://github.com/dequelabs/axe-core) through `@axe-core/playwright` for the accessibility tests. They check every page at 320 px and 1280 px wide, with the WCAG 2.2 target size rule turned on (`e2e/accessibility.ts`).
 - ESLint, `typescript-eslint` and Prettier.
 - GitHub Actions checks every pull request and deploys to GitHub Pages.
 
@@ -62,7 +65,7 @@ These are the checks that run on every pull request:
 | `npm test`                                     | Runs the component tests                                                                                                              |
 | `npm run build`                                | Builds the site into `dist/`                                                                                                          |
 | `npm run check-size`                           | Checks the size limits on `dist/`. Run it after a build.                                                                              |
-| `npm run e2e`                                  | Serves `dist/` with `npm run preview` and runs the end-to-end tests in Chromium. Build first.                                         |
+| `npm run e2e`                                  | Serves `dist/` with `npm run preview` and runs the end-to-end tests in Chromium, including the accessibility tests. Build first.      |
 | `powershell -File examples/build-examples.ps1` | Checks the C# examples in `examples/`. There are none yet, so it passes. On macOS or Linux, use `pwsh` instead of `powershell -File`. |
 | `npm audit`                                    | Reports known vulnerabilities in the packages. It fails a pull request into `main`, and only warns on other pull requests.            |
 
@@ -84,25 +87,27 @@ examples/            The script that checks the C# examples, which come later
 public/              Files copied to the site as they are: favicon and share image
 scripts/             The size check, and the Vite plugin that adds the security policy
 src/
-  app/               The routes and the layout around every page
-  assets/            Images that the build hashes
-  components/        One folder per page, and shared components
-  style/             CSS
+  app/               The routes, the theme, the fonts and the layout around every page
+  components/        One folder per shared component
+  content/           The text and data: docs pages, versions, links and method details
+  hooks/             Shared hooks: copying, and scrolling to a section
+  pages/             One folder per page
+  style/             The one global CSS rule
   test/              Set-up for the component tests
 index.html           The page shell: title, description, share tags and noscript message
 ```
 
 ## Updating the content for a new library version
 
-The site follows the library's README and release notes for the version it documents. Today the content is in the page components:
+The site follows the library's README and release notes for the version it documents:
 
-1. Update each documentation page in `src/components/documentation/<part>/`. The introduction, the method details and the code examples are separate files.
-2. Add the version to `src/components/versions/Versions.ts`.
-3. Update what is new on Home in `src/components/home/NewRelease.tsx`.
-4. Update the code example on Home in `src/components/home/CodeSnippet.tsx`.
+1. Update the method details of each class in `src/content/methods/`.
+2. Update the text and the code examples of each documentation page in `src/pages/docs/<page>/`.
+3. Add the version at the top of `src/content/versions.ts`. The first entry is the newest version, which Home and the footer show.
+4. Update the code example on Home in `src/pages/home/ExampleSection.tsx`.
 5. Run the checks, and open a pull request.
 
-This section changes when the content moves to its own data files and the C# examples are compiled.
+This section changes when the C# examples move to `examples/` and are compiled.
 
 ## Branches and releases
 

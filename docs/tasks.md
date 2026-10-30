@@ -411,7 +411,10 @@ Base branch: release/phase-2-redesign
       - The browser check in Chrome, Edge and Firefox, at desktop and phone widths.
     - The maintainer approves and merges it, and the deploy passes.
   - Verify: `gh run list --workflow deploy.yml --limit 1` shows success, and the live site matches `docs/design/`, apart from the release 3 parts that T22 leaves out.
-  - Notes: —
+  - Notes:
+    - Checkpoint (2026-10-30): the README and the font preloads are in a task pull request into the release branch. The release pull request records the checks Claude ran. The keyboard check, 400 % zoom, the browser check, the merges and the deploy are the maintainer's.
+    - The maintainer approved an extra step on 2026-10-30: Lighthouse mobile performance was 78 to 87, because text drew in the fallback font and moved when IBM Plex arrived (CLS 0.145). `index.html` now preloads the four fonts that every page uses: Sans 400, 600 and 700, and Mono 600. Home is now 94, 94, 94, and Validation options 92, 94, 95.
+    - Node 26 has been the LTS since 2026-10-28, and every package allows it. Plan 9 says to move in a small change: proposed after this release, not done here.
 
 ## Phase 3 — Version 2.0.0 content
 
