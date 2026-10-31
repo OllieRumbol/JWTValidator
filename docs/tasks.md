@@ -396,7 +396,7 @@ Base branch: release/phase-2-redesign
     - T24: the keyboard check by hand (spec 6.6.1, item 4) and Lighthouse accessibility 100 (item 3).
     - Evidence: pull request #44
 
-- [ ] **T24 — Release phase 2 (maintainer)**
+- [x] **T24 — Release phase 2 (maintainer)**
   - Refs: spec 6.1.10 items 4 to 6, spec 6.1.12, spec 6.6.1 items 3 and 4, spec 6.6.2, spec 6.6.3 item 3, spec 6.7 (zoom), plan 5 (releases), plan 9 (TypeScript, Node)
   - Depends on: T15 to T23
   - Done when:
@@ -412,9 +412,10 @@ Base branch: release/phase-2-redesign
     - The maintainer approves and merges it, and the deploy passes.
   - Verify: `gh run list --workflow deploy.yml --limit 1` shows success, and the live site matches `docs/design/`, apart from the release 3 parts that T22 leaves out.
   - Notes:
-    - Checkpoint (2026-10-30): the README and the font preloads go into the release branch through the T24 task pull request. The release pull request records the checks Claude ran. The keyboard check, 400 % zoom, the browser check, the merges and the deploy are the maintainer's.
-    - The maintainer approved an extra step on 2026-10-30: Lighthouse mobile performance was 78 to 87, because text drew in the fallback font and moved when IBM Plex arrived (CLS 0.145). `index.html` now preloads the four fonts that every page uses at phone width: Sans 400, 600 and 700, and Mono 600. A test checks that every page uses each preloaded font. Home is now 94, 94, 94, and Validation options 92, 94, 95.
-    - Node 26 has been the LTS since 2026-10-28, and every package allows it. Plan 9 says to move in a small change: proposed after this release, not done here.
+    - Release 2 went live on 2026-10-30. The release record is in pull request #46: Lighthouse accessibility 100, mobile performance 92 to 97, and the maintainer's keyboard, 400 % zoom and browser checks all fine.
+    - `index.html` preloads the four fonts that every page uses at phone width, because text that moved when IBM Plex arrived kept mobile performance below 90. A test fails if a page stops using a preloaded font, so update the preloads when `src/app/fonts.ts` changes.
+    - Node 26 has been the LTS since 2026-10-28. Plan 9 says to move in a small change: proposed after this release, not done here.
+    - Evidence: pull requests #45 and #46
 
 ## Phase 3 — Version 2.0.0 content
 
@@ -569,4 +570,5 @@ None.
 - 2026-10-30 — T21
 - 2026-10-30 — T22
 - 2026-10-30 — T23
+- 2026-10-31 — T24
 
