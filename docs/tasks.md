@@ -534,7 +534,9 @@ Base branch: release/phase-3-content
     - The release pull request into `main` records the same checks as T24, including the TypeScript and Node check, plus the spec 9 checklist.
     - The maintainer approves and merges it, and the deploy passes.
   - Verify: `gh run list --workflow deploy.yml --limit 1` shows success. Every item in spec 9 is true on the live site.
-  - Notes: Remind the maintainer to do two things in the library repository from the library's own session, because this project does not change that repository (spec 3, non-goals): tick task T17, and remove the README note that says the documentation site still describes 1.0.3. When every task is ticked, suggest `/retrospective`.
+  - Notes:
+    - Remind the maintainer to do two things in the library repository from the library's own session, because this project does not change that repository (spec 3, non-goals): tick task T17, and remove the README note that says the documentation site still describes 1.0.3. When every task is ticked, suggest `/retrospective`.
+    - `package.json` overrides `minimatch` to `^11.0.3`, for advisory GHSA-g3hv-75wg-m249, because ESLint 10.14 and typescript-eslint 8.72 still require `minimatch` 10. When both allow 11, remove the override and check that `npm audit` stays clean.
 
 ---
 
