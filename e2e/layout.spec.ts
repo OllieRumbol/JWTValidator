@@ -92,6 +92,25 @@ test.describe("navigation (test 9)", () => {
     await expect(menu).toBeHidden();
     await expect(page.getByRole("button", { name: "Open menu" })).toBeFocused();
   });
+
+  test("on Home, the right arrow key moves from the OpenID Connect example to the secret example", async ({
+    page,
+  }) => {
+    await page.goto("#/");
+    const examples = page.getByRole("figure", { name: "Signing key source" });
+    const openIdConnect = examples.getByRole("tab", { name: "OpenID Connect" });
+    const secret = examples.getByRole("tab", { name: "Secret" });
+    await expect(openIdConnect).toHaveAttribute("aria-selected", "true");
+    await openIdConnect.focus();
+
+    await page.keyboard.press("ArrowRight");
+
+    await expect(secret).toHaveAttribute("aria-selected", "true");
+    await expect(secret).toBeFocused();
+    await expect(examples.getByRole("tabpanel")).toContainText(
+      "WithSigningKeyFromSecret",
+    );
+  });
 });
 
 test("the header shows its links on a desktop and the menu button on a phone", async ({

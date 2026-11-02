@@ -20,7 +20,8 @@ const parts = [
   },
   {
     name: "Expiry checker",
-    description: "Says when the token expires, and whether it has expired.",
+    description:
+      "Says when the token expires, in UTC, and whether it has expired.",
     slug: "expiry-checker",
     linkText: "Expiry checker",
   },

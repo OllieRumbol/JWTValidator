@@ -1,6 +1,5 @@
 // The docs pages, in reading order (plan section 3.4). Previous and next come from the
-// order. Release 3 adds Getting started, Claims, Dependency injection, Debugging and
-// Known limitations.
+// order. Release 3 adds Claims, Dependency injection, Debugging and Known limitations.
 
 export type DocsGroup = "Get started" | "Guides" | "More";
 
@@ -11,6 +10,7 @@ export type DocsPage = {
 };
 
 export const docsPages: DocsPage[] = [
+  { slug: "getting-started", title: "Getting started", group: "Get started" },
   {
     slug: "migrating-from-1x",
     title: "Migrating from 1.x",
