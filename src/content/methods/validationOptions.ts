@@ -89,7 +89,7 @@ export const validationOptionsMethods: MethodReference[] = [
     parameters: [],
     returns: "The same builder.",
     failsWhen:
-      'It does not fail. Validation then fails for a token that expired more than 5 minutes ago, that is not valid yet, or that has no "exp" claim.',
+      'It does not fail. Validation then fails for a token that expired more than 5 minutes ago, that will not be valid for more than 5 minutes, or that has no "exp" claim.',
     changedIn2:
       "A token whose expiry is after 19 January 2038 now validates. Version 1.0.3 rejected it.",
   },
@@ -107,7 +107,7 @@ export const validationOptionsMethods: MethodReference[] = [
     signatures: ["public String Print()"],
     parameters: [],
     returns:
-      'One line for each option, with "None" for an option that is not set. The text shows the secret, so do not write it to a log.',
+      'One line for each option. A text option that is not set shows "None", and the expiry check shows True or False. The text shows the secret, so do not write it to a log.',
     failsWhen: "It does not fail.",
   },
 ];

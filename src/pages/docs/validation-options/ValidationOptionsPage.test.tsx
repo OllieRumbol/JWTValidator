@@ -24,8 +24,16 @@ describe("Validation options", () => {
     const rows = table
       .getAllByRole("row")
       .slice(1)
-      .map((row) => row.textContent);
-    expect(rows).toEqual(["HS25632 bytes", "HS38448 bytes", "HS51264 bytes"]);
+      .map((row) =>
+        within(row)
+          .getAllByRole("cell")
+          .map((cell) => cell.textContent),
+      );
+    expect(rows).toEqual([
+      ["HS256", "32 bytes"],
+      ["HS384", "48 bytes"],
+      ["HS512", "64 bytes"],
+    ]);
   });
 
   test("says that a short secret no longer validates, and links to the migration guide", async () => {

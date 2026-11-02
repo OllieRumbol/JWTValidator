@@ -18,7 +18,10 @@ const sections: DocsSection[] = [
 
 // What ValidateJWT throws, and why. Checked with a probe against the 2.0.0 package (T29).
 const exceptions: { name: string; when: string }[] = [
-  { name: "ArgumentException", when: "The token is null or empty." },
+  {
+    name: "ArgumentException",
+    when: "The token is null or empty, or the options have no signing key. Options from the builder always have one.",
+  },
   { name: "ArgumentNullException", when: "The options are null." },
   {
     name: "SecurityTokenMalformedException",
@@ -42,7 +45,7 @@ const exceptions: { name: string; when: string }[] = [
   },
   {
     name: "SecurityTokenNotYetValidException",
-    when: "The token is not valid yet.",
+    when: "The token will not be valid for more than 5 minutes.",
   },
   {
     name: "SecurityTokenNoExpirationException",

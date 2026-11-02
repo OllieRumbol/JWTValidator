@@ -29,5 +29,5 @@ foreach (String role in claims.GetValueOrDefault("roles", []))
 }
 
 // The times are Unix seconds, as text. WithExpiryDate rejects a token without "exp".
-DateTimeOffset expiry = DateTimeOffset.FromUnixTimeSeconds(Int64.Parse(claims["exp"][0]));
+DateTimeOffset expiry = DateTimeOffset.FromUnixTimeSeconds(long.Parse(claims["exp"][0]));
 Console.WriteLine($"Expires at {expiry:u}");
