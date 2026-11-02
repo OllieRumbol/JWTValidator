@@ -110,7 +110,18 @@ describe("Home", () => {
     )
       .getAllByRole("row")
       .slice(1);
-    expect(rows).toHaveLength(6);
+    // The six changes in spec section 2, named as the migration guide names them.
+    const names = rows.map(
+      (row) => within(row).getAllByRole("cell")[0].textContent,
+    );
+    expect(names).toEqual([
+      ".NET 10 only",
+      "Minimum secret length",
+      "Expiry in UTC",
+      "IsEmpty on null",
+      "Logging stays off",
+      "IdentityModel 8",
+    ]);
     expect(
       section.getByRole("link", { name: "Read the migration guide" }),
     ).toHaveAttribute("href", MIGRATION_GUIDE_PATH);

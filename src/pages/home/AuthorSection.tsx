@@ -83,7 +83,7 @@ const AuthorSection = () => {
             minWidth: 0,
             maxWidth: 680,
             color: theme.tokens.bodyText,
-            "& > p, & > ul": { margin: "0 0 14px" },
+            "& > p": { margin: "0 0 14px" },
             "& > :last-child": { marginBottom: 0 },
           })}
         >

@@ -4,7 +4,7 @@ import { Link as RouterLink } from "react-router";
 import ArticleSection from "@/components/ArticleSection/ArticleSection";
 import CodeBlock from "@/components/CodeBlock/CodeBlock";
 import DocsLayout from "@/components/DocsLayout/DocsLayout";
-import { MIGRATION_GUIDE_PATH, type DocsSection } from "@/content/docsPages";
+import type { DocsSection } from "@/content/docsPages";
 import firstToken from "@examples/getting-started-first-token.cs?raw";
 
 const SLUG = "getting-started";
@@ -86,15 +86,13 @@ const GettingStartedPage = () => {
           </li>
           <li>
             Version 8 of the Microsoft IdentityModel packages. The package
-            depends on them, so NuGet adds them for you. If your app also uses
-            IdentityModel packages directly, use version 8 for them too.
+            depends on them. If your app also uses IdentityModel packages
+            directly, use version 8 for them too.
           </li>
         </ul>
         <p>
           If you use version 1.0.3, read{" "}
-          <Link component={RouterLink} to={MIGRATION_GUIDE_PATH}>
-            Migrating from 1.x
-          </Link>{" "}
+          <DocsLink slug="migrating-from-1x">Migrating from 1.x</DocsLink>{" "}
           before you upgrade.
         </p>
       </ArticleSection>

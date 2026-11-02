@@ -5,6 +5,7 @@ Console.WriteLine("Enter the ID token");
 String idToken = Console.ReadLine() ?? "";
 
 // Use your own client ID as the audience.
+// WithIssuer takes one value. Google can also issue tokens with the issuer "accounts.google.com", without "https://".
 JWTValidatorOptions options = JWTValidatorOptionsBuilderCreator
     .Create()
     .WithSigningKeyFromOpenIdUrl("https://accounts.google.com/.well-known/openid-configuration")
