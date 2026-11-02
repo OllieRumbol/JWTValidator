@@ -5,7 +5,7 @@ String jwt = Console.ReadLine() ?? "";
 
 JWTValidatorOptions options = JWTValidatorOptionsBuilderCreator
     .Create()
-    .WithSigningKeyFromSecret("my-secret") // 9 bytes: validated in 1.0.3
+    .WithSigningKeyFromSecret("my-short-secret-key") // 19 bytes: validated in 1.0.3
     .WithExpiryDate()
     .Build();
 

@@ -51,4 +51,18 @@ describe("versions", () => {
     ]);
     expect(withBreakingChanges[0].breakingChanges).toHaveLength(6);
   });
+
+  // VersionsPage shows text in backticks as code. An unmatched backtick would show the
+  // rest of the line as code.
+  test("closes every backtick it opens", () => {
+    for (const version of versions) {
+      for (const text of [
+        version.summary,
+        ...version.changes,
+        ...(version.breakingChanges ?? []),
+      ]) {
+        expect(text.split("`").length % 2, text).toBe(1);
+      }
+    }
+  });
 });
