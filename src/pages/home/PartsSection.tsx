@@ -7,7 +7,7 @@ const parts = [
   {
     name: "Options builder",
     description:
-      "Choose where the signing key comes from, then add the checks you need.",
+      "Sets where the signing keys come from, and the checks you need.",
     slug: "validation-options",
     linkText: "Validation options",
   },
@@ -28,7 +28,7 @@ const parts = [
   {
     name: "Dictionary extensions",
     description:
-      "Find a claim or a value in the result, or print it while you debug.",
+      "Finds a claim or a value in the result, or prints it while you debug.",
     slug: "dictionary-extensions",
     linkText: "Dictionary extensions",
   },

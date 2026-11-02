@@ -110,7 +110,7 @@ describe("Home", () => {
     )
       .getAllByRole("row")
       .slice(1);
-    // The six changes in spec section 2, named as the migration guide names them.
+    // The six changes in spec section 2.
     const names = rows.map(
       (row) => within(row).getAllByRole("cell")[0].textContent,
     );
@@ -119,7 +119,7 @@ describe("Home", () => {
       "Minimum secret length",
       "Expiry in UTC",
       "IsEmpty on null",
-      "Logging stays off",
+      "Personal data stays hidden",
       "IdentityModel 8",
     ]);
     expect(

@@ -43,8 +43,8 @@ const ExampleSection = () => {
             color: theme.tokens.mutedText,
           })}
         >
-          Choose where the signing keys come from. Most apps validate an ID
-          token from an OpenID Connect sign-in.
+          Choose where the signing keys come from. The library&apos;s main use
+          is to validate an ID token from an OpenID Connect sign-in.
         </Box>
         <ExampleTabs label="Signing key source" examples={examples} />
       </Box>

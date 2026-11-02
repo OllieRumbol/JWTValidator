@@ -4,9 +4,9 @@ import { Link as RouterLink } from "react-router";
 import { primaryLinkStyle } from "@/app/theme";
 import { MIGRATION_GUIDE_PATH } from "@/content/docsPages";
 
-// The six changes in spec section 2, as home.html words them. The migration guide's
-// table has a column for who each change affects, so its "What to do" text can be
-// shorter. These rows have no such column.
+// The six changes in spec section 2, as home.html words them, with the maintainer's
+// changes of 2026-11-02. The migration guide's table has a column for who each change
+// affects, so its "What to do" text can be shorter. These rows have no such column.
 const changes: { name: ReactNode; whatToDo: string }[] = [
   { name: ".NET 10 only", whatToDo: "Move to .NET 10, or stay on 1.0.3." },
   {
@@ -26,12 +26,12 @@ const changes: { name: ReactNode; whatToDo: string }[] = [
     whatToDo: "Check code that relied on the old result.",
   },
   {
-    name: "Logging stays off",
-    whatToDo: "Turn it on in your own app while you debug.",
+    name: "Personal data stays hidden",
+    whatToDo: "Show it in your own app while you debug.",
   },
   {
     name: "IdentityModel 8",
-    whatToDo: "Align any IdentityModel packages you use directly.",
+    whatToDo: "Use version 8 for any IdentityModel packages you use directly.",
   },
 ];
 
