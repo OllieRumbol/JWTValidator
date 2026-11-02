@@ -1,6 +1,7 @@
 import { describe, expect, test } from "vitest";
 import { screen, waitFor, within } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
+import { docsPages } from "@/content/docsPages";
 import { links } from "@/content/links";
 import { renderRoute } from "@/test/renderRoute";
 
@@ -147,7 +148,7 @@ describe("Menu", () => {
     await user.click(within(menu).getByRole("link", { name: "Docs" }));
 
     await expectMenuClosed(menuButton);
-    expect(router.state.location.pathname).toBe("/docs/validation-options");
+    expect(router.state.location.pathname).toBe(`/docs/${docsPages[0].slug}`);
   });
 
   test("closes on the close button", async () => {

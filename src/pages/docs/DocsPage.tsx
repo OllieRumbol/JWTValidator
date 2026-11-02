@@ -3,11 +3,13 @@ import { useParams } from "react-router";
 import NotFoundPage from "@/pages/not-found/NotFoundPage";
 import DictionaryExtensionsPage from "./dictionary-extensions/DictionaryExtensionsPage";
 import ExpiryCheckerPage from "./expiry-checker/ExpiryCheckerPage";
+import MigratingFrom1xPage from "./migrating-from-1x/MigratingFrom1xPage";
 import ValidationOptionsPage from "./validation-options/ValidationOptionsPage";
 import ValidatorPage from "./validator/ValidatorPage";
 
 // The page for each slug in docsPages (plan section 3.4). Release 3 adds the rest.
 const pages: Record<string, ComponentType> = {
+  "migrating-from-1x": MigratingFrom1xPage,
   "validation-options": ValidationOptionsPage,
   validator: ValidatorPage,
   "expiry-checker": ExpiryCheckerPage,

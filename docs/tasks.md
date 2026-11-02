@@ -463,7 +463,9 @@ Base branch: release/phase-3-content
     - `docsPages.ts` lists Getting started first, so `/docs` now opens it. Getting started is in tests 10 and 11, and the tabs row of test 9 passes.
     - Every fact is checked against the library README.
   - Verify: `npm test && npm run build && npm run e2e`, and the `examples` job passes.
-  - Notes: Draft the personal section from the current Back Story and `docs/design/home.html`. T28 comes first because Home links to the migration guide.
+  - Notes:
+    - Draft the personal section from the current Back Story and `docs/design/home.html`. T28 comes first because Home links to the migration guide.
+    - From T28: the migration guide is the first docs page until Getting started is added before it. `e2e/routes.spec.ts` expects `#/docs` to open the migration guide, so update it to Getting started.
 
 - [ ] **T28 — Write the migration guide and the 2.0.0 changelog entry**
   - Refs: spec 6.1.3 (Migration from 1.x), spec 6.1.3 item 6, spec 2 (the six changes and the two other changes), spec 6.1.6 item 4, plan 3.4, plan 7.2 tests 4, 10 and 11, `docs/design/migration-guide.png`
@@ -476,7 +478,13 @@ Base branch: release/phase-3-content
     - Plan 7.2 test 4 covers 2.0.0.
     - The publish date of 2.0.0 is a placeholder marked in Notes until 2.0.0 is released.
   - Verify: `npm test && npm run build && npm run e2e`, and the `examples` job passes.
-  - Notes: From T21: `VersionsPage` shows no breaking changes yet. Add them, the "Other changes" heading above the other changes, and the "Read the migration guide" button, as `versions.html` shows, with a test.
+  - Notes:
+    - From T21: the breaking changes, the "Other changes" heading and the "Read the migration guide" button are added to `VersionsPage`, with tests.
+    - Maintainer decisions on 2026-11-02: (1) each 1.0.3 and 2.0.0 panel shows the whole compiled program, not the design's fragments; (2) the 1.0.3 secret program keeps the 9-byte `"my-secret"`, under a spec 6.1.3 item 7 exception in pull request #52 into `main`; (3) the 1.0.0 to 1.0.3 entries are rewritten in the words of `versions.html`, which no task listed.
+    - Differences from the design: the article column is narrower than in `migration-guide.png`, so the panels sit one above the other, not side by side. "On this page" uses the full headings, because `DocsPage.test.tsx` requires each entry to match its heading.
+    - 2.0.0 was released on 25 October 2026, so its date is real, not a placeholder. `latestVersion` is now 2.0.0, so the footer and the Home badge show 2.0.0 while the other pages still describe 1.0.3, under the version notice (removed in T34).
+    - Work outside the `Done when` list: `CodeBlock` has a `highlighted` option for the 2.0.0 panels. `ArticleSection` styles inline code as `docs-page.html` does (a tinted box in text, code type in headings), so later pages get it too.
+    - Carried forward: until T27 adds Getting started, the migration guide is the first docs page, so `#/docs` and Home's "Get started" open it (T27). "Debugging" in the logging section is plain text until its page exists (T31).
 
 - [ ] **T29 — Write Validation options, Validator and Claims**
   - Refs: spec 6.1.3 items 2 to 7 (Validation options, Secret length, Validator, Claims), spec 6.2.3, plan 3.4 (`MethodReference`), plan 7.2 tests 10 and 11, spec 4.1 item 5, `docs/design/docs-page.png`
@@ -512,7 +520,8 @@ Base branch: release/phase-3-content
     - The three pages are in tests 10 and 11.
     - Every example is a compiled file in `examples/`.
   - Verify: `npm test && npm run build && npm run e2e`, and the `examples` job passes.
-  - Notes: —
+  - Notes:
+    - From T28: in the migration guide's logging section, link "Debugging" to the Debugging page, as `migration-guide.html` shows.
 
 - [ ] **T32 — Check the content against 2.0.0**
   - Refs: spec 6.1.3 items 5 and 6, spec 9, plan 3.5 (example compilation)
