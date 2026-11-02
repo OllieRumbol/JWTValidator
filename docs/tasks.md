@@ -468,7 +468,7 @@ Base branch: release/phase-3-content
     - Draft the personal section from the current Back Story and `docs/design/home.html`. T28 comes first because Home links to the migration guide.
     - From T28: the migration guide is the first docs page until Getting started is added before it. `e2e/routes.spec.ts` expects `#/docs` to open the migration guide, so update it to Getting started.
 
-- [ ] **T28 — Write the migration guide and the 2.0.0 changelog entry**
+- [x] **T28 — Write the migration guide and the 2.0.0 changelog entry**
   - Refs: spec 6.1.3 (Migration from 1.x), spec 6.1.3 item 6, spec 2 (the six changes and the two other changes), spec 6.1.6 item 4, plan 3.4, plan 7.2 tests 4, 10 and 11, `docs/design/migration-guide.png`
   - Depends on: T26
   - Done when:
@@ -480,12 +480,11 @@ Base branch: release/phase-3-content
     - The publish date of 2.0.0 is a placeholder marked in Notes until 2.0.0 is released.
   - Verify: `npm test && npm run build && npm run e2e`, and the `examples` job passes.
   - Notes:
-    - From T21: the breaking changes, the "Other changes" heading and the "Read the migration guide" button are added to `VersionsPage`, with tests.
-    - Maintainer decisions on 2026-11-02: (1) each 1.0.3 and 2.0.0 panel shows the whole compiled program, not the design's fragments; (2) the 1.0.3 secret program shows a short secret, under a spec 6.1.3 item 7 exception in pull request #52 into `main`. It is the 19-byte `"my-short-secret-key"`, not the design's 9-byte `"my-secret"`: a probe showed that 1.0.3 rejected secrets under 16 bytes and accepted 16 to 31 bytes (maintainer approved); (3) the 1.0.0 to 1.0.3 entries are rewritten in the words of `versions.html`, which no task listed.
-    - Differences from the design, approved by the maintainer on 2026-11-02: the panels sit one above the other below about 1,400 px and side by side above it; "On this page" uses the full headings, because `DocsPage.test.tsx` requires each entry to match its heading; the "What to do" column has a minimum width on narrow screens; the panel captions read "C# · 1.0.3" and "C# · 2.0.0".
-    - 2.0.0 was released on 25 October 2026, so its date is real, not a placeholder. `latestVersion` is now 2.0.0, so the footer and the Home badge show 2.0.0 while the other pages still describe 1.0.3, under the version notice (removed in T34).
-    - Work outside the `Done when` list: `CodeBlock` has a `highlighted` option for the 2.0.0 panels. `ArticleSection` styles inline code as `docs-page.html` does (a tinted box in text, code type in headings), so later pages get it too.
-    - Carried forward: until T27 adds Getting started, the migration guide is the first docs page, so `#/docs` and Home's "Get started" open it (T27). "Debugging" in the logging section is plain text until its page exists (T31).
+    - Each 1.0.3 and 2.0.0 panel is a whole compiled program. The 1.0.3 secret program uses the 19-byte `"my-short-secret-key"`, under the spec 6.1.3 item 7 exception: 1.0.3 rejected secrets under 16 bytes.
+    - Approved design differences: the panels stack below about 1,400 px; "On this page" uses the full headings; the "What to do" column has a minimum width on narrow screens; the captions read "C# · 1.0.3" and "C# · 2.0.0".
+    - 2.0.0 was released on 25 October 2026, so its date is real. `latestVersion` is 2.0.0, and the 1.0.0 to 1.0.3 entries use the words of `versions.html`.
+    - `CodeBlock` has a `highlighted` option. `ArticleSection` styles inline code as `docs-page.html` does, so later pages get it too.
+    - Evidence: pull request #53
 
 - [ ] **T29 — Write Validation options, Validator and Claims**
   - Refs: spec 6.1.3 items 2 to 7 (Validation options, Secret length, Validator, Claims), spec 6.2.3, plan 3.4 (`MethodReference`), plan 7.2 tests 10 and 11, spec 4.1 item 5, `docs/design/docs-page.png`
@@ -591,4 +590,5 @@ None.
 - 2026-10-31 — T24
 - 2026-11-02 — T25
 - 2026-11-02 — T26
+- 2026-11-02 — T28
 
