@@ -1,6 +1,10 @@
 import Box from "@mui/material/Box";
+import Link from "@mui/material/Link";
 import type { Theme } from "@mui/material/styles";
+import { Link as RouterLink } from "react-router";
 import PageTitle from "@/components/PageTitle/PageTitle";
+import { primaryLinkStyle } from "@/app/theme";
+import { MIGRATION_GUIDE_PATH } from "@/content/docsPages";
 import { versions, type Version, type VersionStatus } from "@/content/versions";
 
 // The badge colours of each status, as versions.html shows them.
@@ -39,6 +43,58 @@ const StatusBadge = ({ status }: { status: VersionStatus }) => (
     })}
   >
     {status}
+  </Box>
+);
+
+// A change's text, with the parts in backticks shown as code, for example a method name.
+// Splitting on backticks puts the code parts at the odd indexes.
+const ChangeText = ({ text }: { text: string }) => {
+  const parts = text.split("`");
+
+  return parts.map((part, index) =>
+    index % 2 === 1 ? <code key={index}>{part}</code> : part,
+  );
+};
+
+// The small capital heading above each list of changes, as versions.html shows it.
+const ChangesHeading = ({
+  children,
+  color,
+}: {
+  children: string;
+  color: (theme: Theme) => string;
+}) => (
+  <Box
+    component="h3"
+    sx={(theme) => ({
+      margin: "0 0 8px",
+      fontFamily: theme.tokens.fontMono,
+      fontSize: "13px",
+      fontWeight: 600,
+      letterSpacing: "0.04em",
+      textTransform: "uppercase",
+      color: color(theme),
+    })}
+  >
+    {children}
+  </Box>
+);
+
+const ChangesList = ({ changes }: { changes: string[] }) => (
+  <Box
+    component="ul"
+    sx={(theme) => ({
+      margin: 0,
+      paddingLeft: "22px",
+      color: theme.tokens.bodyText,
+      "& code": { fontFamily: theme.tokens.fontMono, fontSize: "15px" },
+    })}
+  >
+    {changes.map((change) => (
+      <li key={change}>
+        <ChangeText text={change} />
+      </li>
+    ))}
   </Box>
 );
 
@@ -94,20 +150,35 @@ const VersionEntry = ({ version }: { version: Version }) => {
         <Box component="p" sx={{ margin: "0 0 12px", fontSize: "18px" }}>
           {version.summary}
         </Box>
-        {/* T28 adds the breaking changes, the "Other changes" heading and the
-            migration guide link, which only 2.0.0 has (spec section 6.1.6, item 4). */}
-        <Box
-          component="ul"
-          sx={(theme) => ({
-            margin: 0,
-            paddingLeft: "22px",
-            color: theme.tokens.bodyText,
-          })}
-        >
-          {version.changes.map((change) => (
-            <li key={change}>{change}</li>
-          ))}
-        </Box>
+        {/* Only 2.0.0 has breaking changes. They come first, and link to the
+            migration guide (spec section 6.1.6, item 4). */}
+        {version.breakingChanges ? (
+          <>
+            <ChangesHeading color={(theme) => theme.tokens.changedNote.label}>
+              Breaking changes
+            </ChangesHeading>
+            <ChangesList changes={version.breakingChanges} />
+            <Box sx={{ marginTop: "18px" }}>
+              <ChangesHeading color={(theme) => theme.tokens.mutedText}>
+                Other changes
+              </ChangesHeading>
+            </Box>
+            <ChangesList changes={version.changes} />
+            <Link
+              component={RouterLink}
+              to={MIGRATION_GUIDE_PATH}
+              sx={(theme) => ({
+                ...primaryLinkStyle(theme),
+                display: "inline-block",
+                marginTop: "22px",
+              })}
+            >
+              Read the migration guide
+            </Link>
+          </>
+        ) : (
+          <ChangesList changes={version.changes} />
+        )}
       </Box>
     </Box>
   );
