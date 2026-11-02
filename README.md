@@ -57,17 +57,17 @@ The React Compiler runs through Babel. It needs these three packages, which `npm
 
 These are the checks that run on every pull request:
 
-| Command                                        | What it does                                                                                                                          |
-| ---------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------- |
-| `npm run typecheck`                            | Type checks the site, the tests and the scripts                                                                                       |
-| `npm run lint`                                 | Runs ESLint. Any warning fails.                                                                                                       |
-| `npm run format:check`                         | Checks the formatting. `npm run format` fixes it.                                                                                     |
-| `npm test`                                     | Runs the component tests                                                                                                              |
-| `npm run build`                                | Builds the site into `dist/`                                                                                                          |
-| `npm run check-size`                           | Checks the size limits on `dist/`. Run it after a build.                                                                              |
-| `npm run e2e`                                  | Serves `dist/` with `npm run preview` and runs the end-to-end tests in Chromium, including the accessibility tests. Build first.      |
-| `powershell -File examples/build-examples.ps1` | Checks the C# examples in `examples/`. There are none yet, so it passes. On macOS or Linux, use `pwsh` instead of `powershell -File`. |
-| `npm audit`                                    | Reports known vulnerabilities in the packages. It fails a pull request into `main`, and only warns on other pull requests.            |
+| Command                                        | What it does                                                                                                                                                                                     |
+| ---------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| `npm run typecheck`                            | Type checks the site, the tests and the scripts                                                                                                                                                  |
+| `npm run lint`                                 | Runs ESLint. Any warning fails.                                                                                                                                                                  |
+| `npm run format:check`                         | Checks the formatting. `npm run format` fixes it.                                                                                                                                                |
+| `npm test`                                     | Runs the component tests                                                                                                                                                                         |
+| `npm run build`                                | Builds the site into `dist/`                                                                                                                                                                     |
+| `npm run check-size`                           | Checks the size limits on `dist/`. Run it after a build.                                                                                                                                         |
+| `npm run e2e`                                  | Serves `dist/` with `npm run preview` and runs the end-to-end tests in Chromium, including the accessibility tests. Build first.                                                                 |
+| `powershell -File examples/build-examples.ps1` | Compiles each C# example in `examples/` against the package versions in `examples/Directory.Build.props`. It needs the .NET 10 SDK. On macOS or Linux, use `pwsh` instead of `powershell -File`. |
+| `npm audit`                                    | Reports known vulnerabilities in the packages. It fails a pull request into `main`, and only warns on other pull requests.                                                                       |
 
 Before the first `npm run e2e`, install Chromium for Playwright:
 
@@ -83,7 +83,7 @@ To see the built site, run `npm run build`, then `npm run preview`, and open htt
 .github/workflows/   ci.yml checks every pull request. deploy.yml deploys main.
 docs/                The specification, plan and tasks, and the approved design
 e2e/                 End-to-end tests (Playwright)
-examples/            The script that checks the C# examples, which come later
+examples/            The C# examples, their package versions, and the script that compiles them
 public/              Files copied to the site as they are: favicon and share image
 scripts/             The size check, and the Vite plugin that adds the security policy
 src/
@@ -101,13 +101,30 @@ index.html           The page shell: title, description, share tags and noscript
 
 The site follows the library's README and release notes for the version it documents:
 
-1. Update the method details of each class in `src/content/methods/`.
-2. Update the text and the code examples of each documentation page in `src/pages/docs/<page>/`.
-3. Add the version at the top of `src/content/versions.ts`. The first entry is the newest version, which Home and the footer show.
-4. Update the code example on Home in `src/pages/home/ExampleSection.tsx`.
-5. Run the checks, and open a pull request.
+1. In `examples/Directory.Build.props`, set `JWTValidatorVersion` to the new version. Run `powershell -File examples/build-examples.ps1`, and fix each example that does not compile.
+2. Update the method details of each class in `src/content/methods/`.
+3. Update the text and the code examples of each documentation page in `src/pages/docs/<page>/`.
+4. Add the version at the top of `src/content/versions.ts`. The first entry is the newest version, which Home and the footer show.
+5. Update the code example on Home in `src/pages/home/ExampleSection.tsx`.
+6. Run the checks, and open a pull request.
 
-This section changes when the C# examples move to `examples/` and are compiled.
+### Adding a C# example
+
+Every C# example on the site must be a file in `examples/`, so the `examples` check compiles the code that readers see. The 1.0.3 examples still in the pages move there when release 3 rewrites each page. `docs/adr/0002-compile-documentation-examples.md` explains why.
+
+1. Write the example as a complete console program in `examples/<page>-<name>.cs`, where `<page>` is the page slug or `home`, for example `examples/home-secret.cs`. Placeholder values, such as `"your-client-id"`, are allowed.
+2. An example may use only the `JWTValidator` package. An example that also uses `Microsoft.Extensions.DependencyInjection` must have a name that starts with `di-` instead of the page slug, for example `examples/di-register.cs`. The `di-` start adds that package.
+3. A secret must be long enough for its algorithm. For example, HS256 needs at least 32 bytes.
+4. Run `powershell -File examples/build-examples.ps1`.
+5. Import the file text through the `@examples` alias with `?raw`, from any folder, and pass it to `CodeBlock` or `ExampleTabs`:
+
+   ```tsx
+   import secretExample from "@examples/home-secret.cs?raw";
+
+   <CodeBlock code={secretExample} />;
+   ```
+
+Code that is not C#, such as project file XML or a shell command, stays in the page and is not compiled. Give it its language, for example `<CodeBlock code="dotnet build" language="shell" />`.
 
 ## Branches and releases
 

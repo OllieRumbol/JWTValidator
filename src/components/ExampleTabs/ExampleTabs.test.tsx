@@ -3,6 +3,9 @@ import { screen } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import { renderOnDocsPage } from "@/test/renderOnDocsPage";
 import ExampleTabs from "./ExampleTabs";
+// The compiled Home examples, as the site imports them (plan section 3.5, "Example compilation").
+import openIdConnectExample from "@examples/home-openid-connect.cs?raw";
+import secretExample from "@examples/home-secret.cs?raw";
 
 const examples = [
   { id: "openid", title: "OpenID Connect", code: "var openId = true;" },
@@ -79,5 +82,26 @@ describe("ExampleTabs", () => {
     expect(screen.getByRole("button", { name: "Copy code" })).toHaveTextContent(
       "Copy",
     );
+  });
+
+  test("shows and copies example files from examples/", async () => {
+    const user = userEvent.setup();
+    renderOnDocsPage(
+      <ExampleTabs
+        label="Signing key source"
+        examples={[
+          { id: "openid", title: "OpenID Connect", code: openIdConnectExample },
+          { id: "secret", title: "Secret", code: secretExample },
+        ]}
+      />,
+    );
+
+    expect(
+      await screen.findByRole("tabpanel", { name: "OpenID Connect" }),
+    ).toHaveTextContent(".WithSigningKeyFromOpenIdUrl(");
+    await user.click(screen.getByRole("tab", { name: "Secret" }));
+    await user.click(screen.getByRole("button", { name: "Copy code" }));
+
+    expect(await navigator.clipboard.readText()).toBe(secretExample);
   });
 });

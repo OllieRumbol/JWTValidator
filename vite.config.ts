@@ -17,6 +17,8 @@ export default defineConfig({
   resolve: {
     alias: {
       "@": fileURLToPath(new URL("./src", import.meta.url)),
+      // The compiled C# examples, imported with ?raw (plan section 3.5).
+      "@examples": fileURLToPath(new URL("./examples", import.meta.url)),
     },
   },
   build: {
