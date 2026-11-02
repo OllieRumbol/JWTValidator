@@ -1,101 +1,113 @@
 import type { MethodReference } from "./types";
 
-// The options builder's methods. The text is the 1.0.3 site's, unchanged. Each method's
-// one parameter sentence is kept whole, named by the signature's parameters. Release 3
-// rewrites it for 2.0.0 (plan section 3.2).
+// The options builder's methods, and Print on the options it builds, for 2.0.0. The
+// signatures are from the library source at tag v2.0.0. What each method throws was
+// checked with a probe against the 2.0.0 package (T29).
 export const validationOptionsMethods: MethodReference[] = [
   {
     name: "Create",
-    summary:
-      "The create method is the only way to create a new instance of the builder class. This method call can only be followed with either .WithSigningKeyFromSecret() or .WithSigningKeyFromOpenIdUrl() thus forcing the developer to add a signing key.",
-    signatures: [
-      "public static JWTValidatorOptionsBuilderCreator Create() => new JWTValidatorOptionsBuilderCreator();",
-    ],
+    summary: "Starts the builder.",
+    signatures: ["public static JWTValidatorOptionsBuilderCreator Create()"],
     parameters: [],
     returns:
-      "Returns an instance of the IJWTValidatorOptionsBuilderCreator class.",
+      "A JWTValidatorOptionsBuilderCreator. Its only methods choose the signing key.",
+    failsWhen: "It does not fail.",
   },
   {
     name: "WithSigningKeyFromSecret",
-    summary:
-      "Adds the private signing key to the JWTValidatorOptions model ready for validation",
+    summary: "Checks the signature with a secret.",
     signatures: [
-      "public IJWTValidatorOptionsBuilderFinisher WithSigningKeyFromSecret(string secret)",
+      "public IJWTValidatorOptionsBuilderFinisher WithSigningKeyFromSecret(String secret)",
     ],
     parameters: [
       {
         name: "secret",
         description:
-          "Takes only one parameter of type string containing the private signing key of the JWT",
+          "The secret that signed the token. It must be at least as long as the token's algorithm needs.",
       },
     ],
-    returns:
-      "Returns a new instance of IJWTValidatorOptionsBuilderFinisher class",
+    returns: "The builder, ready for checks or Build.",
+    failsWhen:
+      "Throws ArgumentNullException when the secret is null or empty. A secret that is too short does not fail here. Validation fails later.",
+    changedIn2:
+      "A secret shorter than the minimum for the token's algorithm no longer validates.",
   },
   {
     name: "WithSigningKeyFromOpenIdUrl",
-    summary:
-      "Adds the public signing keys from the Open-Id standard url to the JWTValidatorOptions model ready for validation",
+    summary: "Checks the signature with the provider's published keys.",
     signatures: [
-      "public IJWTValidatorOptionsBuilderFinisher WithSigningKeyFromOpenIdUrl(string openIdUrl)",
+      "public IJWTValidatorOptionsBuilderFinisher WithSigningKeyFromOpenIdUrl(String openIdUrl)",
     ],
     parameters: [
       {
         name: "openIdUrl",
         description:
-          "Takes only one parameter of type string containing the url of the public signing keys",
+          "The address of the provider's OpenID configuration, for example https://accounts.google.com/.well-known/openid-configuration.",
       },
     ],
-    returns:
-      "Returns a new instance of IJWTValidatorOptionsBuilderFinisher class",
-  },
-  {
-    name: "WithAudience",
-    summary: "Adds audience to model",
-    signatures: [
-      "public IJWTValidatorOptionsBuilderFinisher WithAudience(string audience)",
-    ],
-    parameters: [
-      {
-        name: "audience",
-        description:
-          "Takes only one parameter of type string containing the audience of the JWT",
-      },
-    ],
-    returns:
-      "Returns the current instance of IJWTValidatorOptionsBuilderFinisher class",
+    returns: "The builder, ready for checks or Build.",
+    failsWhen:
+      "Throws ArgumentNullException when the address is null or empty. The library downloads the configuration when it validates a token, so a wrong address fails then.",
   },
   {
     name: "WithIssuer",
-    summary: "Adds issuer to model",
+    summary: "Checks who issued the token.",
     signatures: [
-      "public IJWTValidatorOptionsBuilderFinisher WithIssuer(string issuer)",
+      "public IJWTValidatorOptionsBuilderFinisher WithIssuer(String issuer)",
     ],
     parameters: [
       {
         name: "issuer",
         description:
-          "Takes only one parameter of type string containing the isser of the JWT",
+          'The value that the token\'s "iss" claim must have. It takes one value.',
       },
     ],
-    returns:
-      "Returns the current instance of IJWTValidatorOptionsBuilderFinisher class",
+    returns: "The same builder.",
+    failsWhen: "Throws ArgumentNullException when the issuer is null or empty.",
+  },
+  {
+    name: "WithAudience",
+    summary: "Checks who the token is for.",
+    signatures: [
+      "public IJWTValidatorOptionsBuilderFinisher WithAudience(String audience)",
+    ],
+    parameters: [
+      {
+        name: "audience",
+        description:
+          'The value that the token\'s "aud" claim must have, usually your client ID.',
+      },
+    ],
+    returns: "The same builder.",
+    failsWhen:
+      "Throws ArgumentNullException when the audience is null or empty.",
   },
   {
     name: "WithExpiryDate",
-    summary:
-      "During the validation process the JWT expiry date will be validated",
+    summary: "Checks that the token has not expired and is already valid.",
     signatures: ["public IJWTValidatorOptionsBuilderFinisher WithExpiryDate()"],
     parameters: [],
-    returns:
-      "Returns the current instance of IJWTValidatorOptionsBuilderFinisher class",
+    returns: "The same builder.",
+    failsWhen:
+      'It does not fail. Validation then fails for a token that expired more than 5 minutes ago, that is not valid yet, or that has no "exp" claim.',
+    changedIn2:
+      "A token whose expiry is after 19 January 2038 now validates. Version 1.0.3 rejected it.",
   },
   {
     name: "Build",
-    summary:
-      "Once the developer is happy with which properties of a JWT are being validated the JWTValidatorOptions class can be returned",
+    summary: "Returns the finished options.",
     signatures: ["public JWTValidatorOptions Build()"],
     parameters: [],
-    returns: "Returns a complete JWTValidatorOptions model",
+    returns: "A JWTValidatorOptions object, for the validator.",
+    failsWhen: "It does not fail.",
+  },
+  {
+    name: "Print",
+    summary: "Returns the options as text, while you debug.",
+    signatures: ["public String Print()"],
+    parameters: [],
+    returns:
+      'One line for each option, with "None" for an option that is not set. The text shows the secret, so do not write it to a log.',
+    failsWhen: "It does not fail.",
   },
 ];

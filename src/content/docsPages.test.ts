@@ -10,6 +10,7 @@ describe("docsPages", () => {
       "migrating-from-1x",
       "validation-options",
       "validator",
+      "claims",
       "expiry-checker",
       "dictionary-extensions",
     ]);

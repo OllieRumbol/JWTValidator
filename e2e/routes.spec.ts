@@ -26,7 +26,7 @@ const addresses = [
     from: "#/documentation/builder",
     to: /#\/docs\/validation-options$/,
     title: "Validation options — JWT Validator",
-    heading: "Technical Details",
+    heading: "Choose a signing key",
   },
   {
     from: "#/documentation/validator",

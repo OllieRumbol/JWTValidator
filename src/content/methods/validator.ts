@@ -1,41 +1,45 @@
 import type { MethodReference } from "./types";
 
-// The validator's methods. The text is the 1.0.3 site's, unchanged. Each method's one
-// parameter sentence is kept whole, named by the signature's parameters. Release 3
-// rewrites it for 2.0.0 (plan section 3.2).
+// The validator's methods, for 2.0.0. The signatures are from the library source at tag
+// v2.0.0. What each method throws was checked with a probe against the 2.0.0 package
+// (T29).
 export const validatorMethods: MethodReference[] = [
   {
     name: "ValidateJWT",
     summary:
-      "This is the main method of this libaray and is actually used to validate a JWT. The method converts the JWTValidatorOptions model into C#s TokenValidationParameters class. The JwtSecurityTokenHandler class is actually used to validate the JWT. Finally the complicated ClaimsPrincipal class is converted into a dictionary of claims ready for extraction later on.",
+      "Validates the token and returns its claims. Throws when the token is not valid.",
     signatures: [
-      "public Dictionary<string, List<string>> ValidateJWT(string jwt, JWTValidatorOptions options)",
+      "public Dictionary<String, List<String>> ValidateJWT(String jwt, JWTValidatorOptions options)",
     ],
     parameters: [
-      {
-        name: "jwt, options",
-        description:
-          "This method takes two parameters, a string containing a JWT and a JWTValidatorOptions object",
-      },
+      { name: "jwt", description: "The token, as a string." },
+      { name: "options", description: "The options from the builder." },
     ],
     returns:
-      "To help make validation easier this method outputs a dictionary of claims. The key is a string and the value is a list of strings",
+      "The claims, as a dictionary of claim names and their values. Claims shows the shape.",
+    failsWhen:
+      "Throws ArgumentException when the token is null or empty, and ArgumentNullException when the options are null. Throws an IdentityModel exception when the token is not valid, and an AggregateException when the OpenID configuration cannot be downloaded.",
+    changedIn2:
+      "The exception messages no longer show personal data, because the library no longer turns it on.",
   },
   {
     name: "TryValidateJWT",
     summary:
-      "The .TryValidateJWT() method is very similar to the .ValidateJWT() method. However, it makes use of the TryGet pattern to help better deal with exceptions and create a better technical flow for developers.",
+      "Validates the token. Returns false, not an exception, when it fails.",
     signatures: [
-      "public bool TryValidateJWT(string jwt, JWTValidatorOptions options, out Dictionary<string, List<string>> result)",
+      "public Boolean TryValidateJWT(String jwt, JWTValidatorOptions options, out Dictionary<String, List<String>> result)",
     ],
     parameters: [
+      { name: "jwt", description: "The token, as a string." },
+      { name: "options", description: "The options from the builder." },
       {
-        name: "jwt, options, result",
+        name: "result",
         description:
-          "This method takes two parameters, a string containing a JWT and a JWTValidatorOptions object. There is an out parameter containing a dictionary of claims",
+          "The claims when the token is valid. An empty dictionary when it is not.",
       },
     ],
-    returns:
-      "The method returns a boolan identifying if the validation process of the JWT was successful or not",
+    returns: "True when the token is valid, otherwise false.",
+    failsWhen:
+      "Returns false in every case where ValidateJWT throws. It does not throw.",
   },
 ];

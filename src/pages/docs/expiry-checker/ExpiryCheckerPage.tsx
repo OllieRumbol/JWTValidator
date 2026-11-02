@@ -28,7 +28,7 @@ if(new JWTExpiryChecker().TryGetWhenDoesJWTExpire(jwt, "serguhvalhoier.....", ou
 
 const sections: DocsSection[] = [
   { id: "code-samples", title: "Code Samples", level: 2 },
-  { id: "methods", title: "Methods", level: 2 },
+  { id: "reference", title: "Reference", level: 2 },
 ];
 
 const ExpiryCheckerPage = () => {

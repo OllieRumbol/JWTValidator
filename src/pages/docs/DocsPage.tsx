@@ -1,6 +1,7 @@
 import type { ComponentType } from "react";
 import { useParams } from "react-router";
 import NotFoundPage from "@/pages/not-found/NotFoundPage";
+import ClaimsPage from "./claims/ClaimsPage";
 import DictionaryExtensionsPage from "./dictionary-extensions/DictionaryExtensionsPage";
 import ExpiryCheckerPage from "./expiry-checker/ExpiryCheckerPage";
 import GettingStartedPage from "./getting-started/GettingStartedPage";
@@ -14,6 +15,7 @@ const pages: Record<string, ComponentType> = {
   "migrating-from-1x": MigratingFrom1xPage,
   "validation-options": ValidationOptionsPage,
   validator: ValidatorPage,
+  claims: ClaimsPage,
   "expiry-checker": ExpiryCheckerPage,
   "dictionary-extensions": DictionaryExtensionsPage,
 };

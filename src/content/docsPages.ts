@@ -1,5 +1,5 @@
 // The docs pages, in reading order (plan section 3.4). Previous and next come from the
-// order. Release 3 adds Claims, Dependency injection, Debugging and Known limitations.
+// order. Release 3 adds Dependency injection, Debugging and Known limitations.
 
 export type DocsGroup = "Get started" | "Guides" | "More";
 
@@ -18,6 +18,7 @@ export const docsPages: DocsPage[] = [
   },
   { slug: "validation-options", title: "Validation options", group: "Guides" },
   { slug: "validator", title: "Validator", group: "Guides" },
+  { slug: "claims", title: "Claims", group: "Guides" },
   { slug: "expiry-checker", title: "Expiry checker", group: "Guides" },
   {
     slug: "dictionary-extensions",
