@@ -423,13 +423,17 @@ Goal: The site documents version 2.0.0, every example compiles against the packa
 
 Base branch: release/phase-3-content
 
-- [ ] **T25 — Create the phase 3 release branch (maintainer)**
+- [x] **T25 — Create the phase 3 release branch (maintainer)**
   - Refs: plan 8 (branches and releases)
   - Depends on: T24
   - Done when:
     - `release/phase-3-content` exists on origin, at the same commit as `main`.
   - Verify: `git ls-remote --heads origin release/phase-3-content`
-  - Notes: —
+  - Notes:
+    - The maintainer asked for it with `/do-task T25` on 2026-11-02. `git push origin origin/main:refs/heads/release/phase-3-content` created the branch at `27d539e`, the same commit as `main`.
+    - "Protect release branches" applies at once: no force-push, pull requests only, and the `build`, `e2e` and `examples` checks.
+    - 2.0.0 was already listed on nuget.org on 2026-11-02, so T26 and the release (spec 6.1.10, item 2) are not waiting for it.
+    - Evidence: pull request #49
 
 - [ ] **T26 — Compile the C# examples in the pipeline**
   - Refs: spec 6.1.3 items 6 to 8, spec 6.1.11 item 7, plan 3.5 (example compilation, ADRs), plan 8 (`examples` job), plan 7.2 test 15
@@ -571,4 +575,5 @@ None.
 - 2026-10-30 — T22
 - 2026-10-30 — T23
 - 2026-10-31 — T24
+- 2026-11-02 — T25
 
