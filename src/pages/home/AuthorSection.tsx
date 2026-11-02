@@ -2,8 +2,8 @@ import Box from "@mui/material/Box";
 import ExternalLink from "@/components/ExternalLink/ExternalLink";
 import { links } from "@/content/links";
 
-// The author card and the personal section (spec section 6.1.7, item 5). The text is the
-// current Back Story, unchanged. T27 drafts the new text from it.
+// The author card and the personal section (spec section 6.1.7, item 5), in the words of
+// home.html, drafted from the old Back Story.
 const AuthorSection = () => {
   return (
     <Box component="section" aria-labelledby="why-title">
@@ -83,7 +83,7 @@ const AuthorSection = () => {
             minWidth: 0,
             maxWidth: 680,
             color: theme.tokens.bodyText,
-            "& > p, & > ul": { margin: "0 0 14px" },
+            "& > p": { margin: "0 0 14px" },
             "& > :last-child": { marginBottom: 0 },
           })}
         >
@@ -101,30 +101,15 @@ const AuthorSection = () => {
             Why I built this
           </Box>
           <p>
-            The biggest use case of this library is to validate ID tokens after
-            a successful OAuth login, however, any JWT can be validated. Over
-            the years I have seen many developers trip up on the final hurdle of
-            an OAuth login integration and with the complexities of the
-            following objects in C#/.NET
-          </p>
-          <ul>
-            <li>TokenValidationParameters</li>
-            <li>JwtSecurityTokenHandler</li>
-            <li>ClaimsPrincipal</li>
-          </ul>
-          <p>
-            My library abstracts away from these complexities and allows a
-            simple flow to validate any part of a JWT as well as extracting its
-            claims. It was important for the JWT validator library to be able to
-            handle any JWT which is why it allows both symmetric key encryption
-            and asymmetric key encryption.
+            Over the years I have seen many developers trip up on the last step
+            of an OAuth sign-in: validating the ID token.
+            TokenValidationParameters, JwtSecurityTokenHandler and
+            ClaimsPrincipal are powerful, but there is a lot to get right.
           </p>
           <p>
-            Developers and code quality is at the heart of this project. Code is
-            continuously reviewed to make sure it meets the styling standards.
-            Try get versions of key methods exist to meet the programming styles
-            of different developers. This library is fully unit tested with new
-            tests being added as new features are developed
+            I built JWT Validator so that step takes a few readable lines,
+            whether the token is signed with a secret or by an OpenID Connect
+            provider.
           </p>
         </Box>
       </Box>

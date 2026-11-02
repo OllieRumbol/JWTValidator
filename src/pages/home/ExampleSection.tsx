@@ -1,24 +1,14 @@
 import Box from "@mui/material/Box";
-import CodeBlock from "@/components/CodeBlock/CodeBlock";
+import ExampleTabs from "@/components/ExampleTabs/ExampleTabs";
+import openIdConnectExample from "@examples/home-openid-connect.cs?raw";
+import secretExample from "@examples/home-secret.cs?raw";
 
-// The current Home example, unchanged. Release 3 replaces it with the compiled OpenID
-// Connect and secret examples in tabs (T27).
-const EXAMPLE = `string jwt = "eyJhbGciOi.....";
-
-JWTValidatorOptions jwtValidatorOptions = JWTValidatorOptionsBuilderCreator
-  .Create()
-  .WithSigningKeyFromSecret("serguhvalhoier.....")
-  .WithExpiryDate()
-  .Build();
-
-if (new JWTValidator().TryValidateJWT(jwt, jwtValidatorOptions, out Dictionary<string, List<string>> result) == false)
-{
-  Console.WriteLine("Invalid jwt");
-}
-
-bool hasMemberRole = result.DictionaryContainsKeyAndValue("role", "MEMBER");
-
-DateTime expiryDate = new JWTExpiryChecker().WhenDoesJWTExpire(jwt, "serguhvalhoier.....");`;
+// The two compiled examples, OpenID Connect first because it is the library's main use
+// (spec section 6.1.7, item 2).
+const examples = [
+  { id: "openid-connect", title: "OpenID Connect", code: openIdConnectExample },
+  { id: "secret", title: "Secret", code: secretExample },
+];
 
 const ExampleSection = () => {
   return (
@@ -44,7 +34,7 @@ const ExampleSection = () => {
             letterSpacing: "-0.02em",
           }}
         >
-          Validate a token
+          Validate a token in a console app
         </Box>
         <Box
           component="p"
@@ -53,10 +43,10 @@ const ExampleSection = () => {
             color: theme.tokens.mutedText,
           })}
         >
-          Check a token that is signed with a secret, then read its claims and
-          its expiry date.
+          Choose where the signing keys come from. The library&apos;s main use
+          is to validate an ID token from an OpenID Connect sign-in.
         </Box>
-        <CodeBlock code={EXAMPLE} />
+        <ExampleTabs label="Signing key source" examples={examples} />
       </Box>
     </Box>
   );

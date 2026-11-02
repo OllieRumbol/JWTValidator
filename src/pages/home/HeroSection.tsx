@@ -1,13 +1,13 @@
 import Box from "@mui/material/Box";
 import { Link as RouterLink } from "react-router";
 import { primaryLinkStyle } from "@/app/theme";
-import { docsPages } from "@/content/docsPages";
+import { docsPages, MIGRATION_GUIDE_PATH } from "@/content/docsPages";
 import { latestVersion } from "@/content/versions";
 import InstallCommand from "./InstallCommand";
 import TokenDiagram from "./TokenDiagram";
 
 // What the library does, how to install it, and a picture of a token (spec section
-// 6.1.7, items 1 and 2). Release 3 adds the "Migrating from 1.x" button (T27).
+// 6.1.7, items 1 and 2).
 const HeroSection = () => {
   return (
     <Box
@@ -44,7 +44,7 @@ const HeroSection = () => {
               backgroundColor: theme.tokens.selected.background,
             })}
           >
-            Version {latestVersion} · MIT licence
+            Version {latestVersion} · .NET 10 · MIT licence
           </Box>
           <Box
             component="h1"
@@ -77,6 +77,8 @@ const HeroSection = () => {
               display: "flex",
               // Full width on a phone.
               flexDirection: { xs: "column", sm: "row" },
+              flexWrap: "wrap",
+              gap: { xs: "10px", sm: "12px" },
               marginBottom: { xs: "16px", md: "26px" },
             }}
           >
@@ -89,6 +91,21 @@ const HeroSection = () => {
               })}
             >
               Get started
+            </Box>
+            <Box
+              component={RouterLink}
+              to={MIGRATION_GUIDE_PATH}
+              sx={(theme) => ({
+                ...primaryLinkStyle(theme),
+                textAlign: "center",
+                color: theme.tokens.primary,
+                backgroundColor: theme.tokens.background,
+                border: `1px solid ${theme.tokens.selected.border}`,
+                // The design shows no hover, so this uses the hover tint of the menu.
+                "&:hover": { backgroundColor: theme.tokens.hover.tint },
+              })}
+            >
+              Migrating from 1.x
             </Box>
           </Box>
           <InstallCommand />

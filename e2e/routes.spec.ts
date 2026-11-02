@@ -47,11 +47,11 @@ const addresses = [
     heading: "ContainsKeyAndValue",
   },
   {
-    // The first docs page in reading order (spec section 6.2.1). T27 adds Getting started before it.
+    // The first docs page in reading order (spec section 6.2.1).
     from: "#/docs",
-    to: /#\/docs\/migrating-from-1x$/,
-    title: "Migrating from 1.x — JWT Validator",
-    heading: "Summary of changes",
+    to: /#\/docs\/getting-started$/,
+    title: "Getting started — JWT Validator",
+    heading: "Requirements",
   },
   {
     from: "#/no-such-page",

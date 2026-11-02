@@ -4,9 +4,9 @@ import AuthorSection from "./AuthorSection";
 import ExampleSection from "./ExampleSection";
 import HeroSection from "./HeroSection";
 import PartsSection from "./PartsSection";
+import WhatsNewSection from "./WhatsNewSection";
 
-// Home, as home.html shows it (spec section 6.1.7). Until release 3, the example has no
-// tabs, and the migration button and the "New in 2.0.0" section are left out (T27).
+// Home, as home.html shows it (spec section 6.1.7).
 const HomePage = () => {
   return (
     <Box sx={{ fontSize: "17px", lineHeight: 1.6 }}>
@@ -14,6 +14,7 @@ const HomePage = () => {
       <HeroSection />
       <PartsSection />
       <ExampleSection />
+      <WhatsNewSection />
       <AuthorSection />
     </Box>
   );

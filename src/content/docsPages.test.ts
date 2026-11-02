@@ -6,6 +6,7 @@ describe("docsPages", () => {
   // Plan section 3.4. Release 3 adds the other pages as it writes them.
   test("has the pages written so far in reading order", () => {
     expect(docsPages.map((page) => page.slug)).toEqual([
+      "getting-started",
       "migrating-from-1x",
       "validation-options",
       "validator",
