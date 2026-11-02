@@ -454,7 +454,7 @@ Base branch: release/phase-3-content
     - `home-secret.cs` has no design text. It follows the OpenID Connect example and prints the claims, because a secret-signed token may have no `sub`. T27 puts both files on Home.
     - Evidence: pull request #50
 
-- [ ] **T27 — Write Getting started and Home**
+- [x] **T27 — Write Getting started and Home**
   - Refs: spec 6.1.3 (Getting started), spec 6.1.7, spec 6.1.8, plan 3.4 (docs pages), plan 7.2 tests 9, 10 and 11, `docs/design/home.png`
   - Depends on: T26, T28
   - Done when:
@@ -465,13 +465,11 @@ Base branch: release/phase-3-content
     - Every fact is checked against the library README.
   - Verify: `npm test && npm run build && npm run e2e`, and the `examples` job passes.
   - Notes:
-    - Started on 2026-11-02, at the maintainer's request, while T28's tick waited in pull request #55. T28's work was already merged in pull request #53.
-    - The personal section uses the text of `home.html`, drafted from the old Back Story. The maintainer approved it on 2026-11-02.
-    - Wording changes from `home.html`, approved by the maintainer on 2026-11-02: the example lead says "The library's main use is…", not "Most apps…"; "Logging stays off" is "Personal data stays hidden", with "Show it in your own app while you debug."; the IdentityModel row says "Use version 8…", not "Align…"; the four parts say "signing keys" and all start with a verb in the third person ("Sets", "Says", "Finds"). The migration guide's summary still names the row "Logging stays off" (T33 checks it).
-    - Getting started has one compiled example, `examples/getting-started-first-token.cs`: the README's OpenID Connect example, with its Google issuer comment, using `TryValidateJWT`. It shows no project file XML. The install command is a Shell block.
-    - Differences from the design: the code shows type and method names in the text colour, because the C# grammar does not mark them (since T19). On a phone the badge keeps "MIT licence" and the lead keeps its full text, as in T22. The "Migrating from 1.x" button has the hover tint, because the design shows no hover.
-    - Work outside the `Done when` list: the theme has a `whatsNew` token for the "New in 2.0.0" panel, as plan 3.6 allows. The old Home example, with `DictionaryContainsKeyAndValue` (spec 4.1, item 5), is removed.
-    - Carried forward: the version notice still says the site describes 1.0.3 (T34).
+    - The maintainer approved (2026-11-02) the personal section in the words of `home.html`, and five wording changes to Home, listed in the pull request. One name differs from the migration guide (T33).
+    - Getting started's example is `examples/getting-started-first-token.cs`, the README's OpenID Connect example. It shows no project file XML.
+    - Approved design differences: type and method names are not coloured (the C# grammar does not mark them); the phone badge keeps "MIT licence"; "Migrating from 1.x" has the hover tint.
+    - The theme has a `whatsNew` token. The old Home example, with `DictionaryContainsKeyAndValue`, is removed.
+    - Evidence: pull request #56
 
 - [x] **T28 — Write the migration guide and the 2.0.0 changelog entry**
   - Refs: spec 6.1.3 (Migration from 1.x), spec 6.1.3 item 6, spec 2 (the six changes and the two other changes), spec 6.1.6 item 4, plan 3.4, plan 7.2 tests 4, 10 and 11, `docs/design/migration-guide.png`
@@ -546,7 +544,8 @@ Base branch: release/phase-3-content
     - The maintainer has reviewed the changes.
     - No other change is merged into the release branch after this task.
   - Verify: The maintainer reads every page on `npm run preview`.
-  - Notes: —
+  - Notes:
+    - From T27: Home names the logging change "Personal data stays hidden". The migration guide's summary still says "Logging stays off". Choose one name for both.
 
 - [ ] **T34 — Release phase 3 (maintainer)**
   - Refs: spec 6.1.10 items 2 to 6, spec 6.1.12, spec 9, plan 5 (releases), plan 9 (TypeScript, Node)
@@ -596,4 +595,5 @@ None.
 - 2026-11-02 — T25
 - 2026-11-02 — T26
 - 2026-11-02 — T28
+- 2026-11-02 — T27
 
