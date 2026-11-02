@@ -89,7 +89,7 @@ export const validationOptionsMethods: MethodReference[] = [
     parameters: [],
     returns: "The same builder.",
     failsWhen:
-      'It does not fail. Validation then fails for a token that expired more than 5 minutes ago, that will not be valid for more than 5 minutes, or that has no "exp" claim.',
+      'It does not fail. Validation then fails for a token that expired more than 5 minutes ago, that only becomes valid more than 5 minutes from now, or that has no "exp" claim.',
     changedIn2:
       "A token whose expiry is after 19 January 2038 now validates. Version 1.0.3 rejected it.",
   },

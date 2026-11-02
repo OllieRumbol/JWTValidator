@@ -139,7 +139,7 @@ test("a reference block keeps its own spacing inside its section", async ({
 
   const summary = page
     .getByRole("region", { name: "TryValidateJWT" })
-    .getByText(/Returns false, not an exception/);
+    .getByText(/Returns false when the token is not valid/);
   const margin = await summary.evaluate((element) => {
     const style = getComputedStyle(element);
     return [style.marginTop, style.marginBottom];

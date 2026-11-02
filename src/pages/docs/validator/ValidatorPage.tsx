@@ -45,7 +45,7 @@ const exceptions: { name: string; when: string }[] = [
   },
   {
     name: "SecurityTokenNotYetValidException",
-    when: "The token will not be valid for more than 5 minutes.",
+    when: "The token only becomes valid more than 5 minutes from now.",
   },
   {
     name: "SecurityTokenNoExpirationException",

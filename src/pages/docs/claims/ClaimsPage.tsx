@@ -29,7 +29,7 @@ const values = [
     inToken: '"address": {"city": "London", "floor": 3}',
     inDictionary: '["{\\"city\\":\\"London\\",\\"floor\\":3}"]',
   },
-  { kind: "null", inToken: '"nickname": null', inDictionary: '[""]' },
+  { kind: "A null value", inToken: '"nickname": null', inDictionary: '[""]' },
   {
     kind: "A time",
     inToken: '"exp": 1793451600',

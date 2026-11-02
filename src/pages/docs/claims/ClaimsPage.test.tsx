@@ -24,7 +24,7 @@ describe("Claims", () => {
       "A number",
       "A boolean",
       "A nested object",
-      "null",
+      "A null value",
       "A time",
     ]);
   });

@@ -20,12 +20,11 @@ export const validatorMethods: MethodReference[] = [
     failsWhen:
       "Throws ArgumentException when the token is null or empty, or the options have no signing key, and ArgumentNullException when the options are null. Throws an IdentityModel exception when the token is not valid, and an AggregateException when the OpenID configuration cannot be downloaded.",
     changedIn2:
-      "The exception messages no longer show personal data, because the library no longer turns it on.",
+      "The exception messages no longer show personal data, because the library no longer turns on personal data in IdentityModel messages.",
   },
   {
     name: "TryValidateJWT",
-    summary:
-      "Validates the token. Returns false, not an exception, when it fails.",
+    summary: "Returns false when the token is not valid. It does not throw.",
     signatures: [
       "public Boolean TryValidateJWT(String jwt, JWTValidatorOptions options, out Dictionary<String, List<String>> result)",
     ],
