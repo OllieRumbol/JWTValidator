@@ -447,7 +447,11 @@ Base branch: release/phase-3-content
     - The README's "Updating the content" section explains how to add an example and how to move to a new library version.
     - The pull request shows the `examples` job passing.
   - Verify: `powershell -File examples/build-examples.ps1` passes locally. Break one example on purpose, see the script fail, and undo the change. `gh pr checks <number>` shows `examples` passing.
-  - Notes: —
+  - Notes:
+    - Deviation: `JWTValidatorVersion` is `2.0.0`, not `2.0.0-beta.1`. 2.0.0 has been listed on nuget.org since 2026-10-25, and spec 6.1.3 item 6 and plan 3.5 say the examples compile against 2.0.0 once it is released. The first `Done when` item was out of date.
+    - Example files are named `<page>-<name>.cs`, for example `home-secret.cs`. A file that uses dependency injection must start with `di-`, which adds `Microsoft.Extensions.DependencyInjection` (T31).
+    - The examples write `String`, as the approved design and the library README do, although the C# rules prefer `string`. T27 to T31 follow the same style, so the site matches the README.
+    - `home-openid-connect.cs` is the text of `docs/design/home.html`. The design has no code for the Secret tab, so `home-secret.cs` follows the same pattern, with the 39-byte secret from the library README. Home still shows the 1.0.3 example until T27 uses both files.
 
 - [ ] **T27 — Write Getting started and Home**
   - Refs: spec 6.1.3 (Getting started), spec 6.1.7, spec 6.1.8, plan 3.4 (docs pages), plan 7.2 tests 9, 10 and 11, `docs/design/home.png`

@@ -9,7 +9,56 @@ if ($examples.Count -eq 0) {
     exit 0
 }
 
-# T26 in docs/tasks.md adds the compile step. Until then, an example fails the run
-# rather than passing without being compiled.
-Write-Host "Found $($examples.Count) example(s), but compiling them is not set up yet (T26 in docs/tasks.md)."
-exit 1
+# Each example gets its own console project, the same as "dotnet new console", so it
+# compiles as it would in a reader's application. Directory.Build.props in this folder
+# sets the package versions.
+$projectTemplate = @"
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <OutputType>Exe</OutputType>
+    <TargetFramework>net10.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+  </PropertyGroup>
+  <ItemGroup>
+    <PackageReference Include="JWTValidator" Version="`$(JWTValidatorVersion)" />
+{0}  </ItemGroup>
+</Project>
+"@
+$dependencyInjectionReference = "    <PackageReference Include=""Microsoft.Extensions.DependencyInjection"" Version=""`$(DependencyInjectionVersion)"" />`n"
+
+$buildRoot = Join-Path $PSScriptRoot ".build"
+$failed = @()
+
+foreach ($example in $examples) {
+    $name = $example.BaseName
+    Write-Host "Compiling $($example.Name)"
+
+    # Start from an empty folder, so no file from an earlier run is compiled.
+    $projectFolder = Join-Path $buildRoot $name
+    if (Test-Path $projectFolder) {
+        Remove-Item -Path $projectFolder -Recurse -Force
+    }
+    New-Item -Path $projectFolder -ItemType Directory | Out-Null
+
+    $extraReferences = ""
+    if ($name.StartsWith("di-")) {
+        $extraReferences = $dependencyInjectionReference
+    }
+    $project = $projectTemplate -f $extraReferences
+    Set-Content -Path (Join-Path $projectFolder "$name.csproj") -Value $project -Encoding UTF8
+    Copy-Item -Path $example.FullName -Destination (Join-Path $projectFolder "Program.cs")
+
+    dotnet build $projectFolder --nologo --verbosity quiet
+    if ($LASTEXITCODE -ne 0) {
+        $failed += $example.Name
+    }
+}
+
+if ($failed.Count -gt 0) {
+    Write-Host "These examples do not compile: $($failed -join ', ')"
+    exit 1
+}
+
+Write-Host "All $($examples.Count) example(s) compile."
+exit 0
