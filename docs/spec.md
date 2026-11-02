@@ -3,7 +3,7 @@
 > **What this document is for:** It answers *what are we building, and why?* It is agreed before any design or code, and it is the source of truth for requirements.
 
 Status: Approved
-Last updated: 2026-10-29
+Last updated: 2026-11-02
 
 ---
 
@@ -209,7 +209,7 @@ This project brings the site up to date for version 2.0.0 of the library, and ma
 4. WHEN a method's behaviour changed in 2.0.0, its documentation SHALL include a "Changed in 2.0.0" note that links to the migration guide. This applies at least to `WhenDoesJWTExpire`, `HasJWTExpired`, `IsEmpty`, `Print`, `ContainsKeyAndValue`, `ContainsValueInList` and `WithSigningKeyFromSecret`.
 5. Every fact SHALL agree with the library README and the package release notes at tag `v2.0.0`. Where the site gives more detail, it SHALL NOT contradict them. Each topic is checked against them, one by one.
 6. Every C# example SHALL compile when placed in a .NET 10 console application with the package installed. Before 2.0.0 is released, the examples SHALL compile against a pre-release of 2.0.0. After the release, they SHALL compile against 2.0.0. Examples MAY use placeholder values, for example `"your-client-id"`. A dependency injection example MAY also reference `Microsoft.Extensions.DependencyInjection`, and no example may reference any other package.
-7. Every example that uses a secret SHALL use a secret long enough for its algorithm (section 2).
+7. Every example that uses a secret SHALL use a secret long enough for its algorithm (section 2). The one exception is the migration guide's 1.0.3 code for the minimum secret length, which shows a short secret that 2.0.0 no longer validates. It SHALL be labelled as 1.0.3 code.
 8. Snippets that are not C#, such as project file XML and shell commands, are not compiled. Each SHALL be labelled with its language.
 
 #### 6.1.4 Documentation layout
