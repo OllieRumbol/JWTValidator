@@ -489,7 +489,7 @@ Base branch: release/phase-3-content
     - `CodeBlock` has a `highlighted` option. `ArticleSection` styles inline code as `docs-page.html` does, so later pages get it too.
     - Evidence: pull request #53
 
-- [ ] **T29 — Write Validation options, Validator and Claims**
+- [x] **T29 — Write Validation options, Validator and Claims**
   - Refs: spec 6.1.3 items 2 to 7 (Validation options, Secret length, Validator, Claims), spec 6.2.3, plan 3.4 (`MethodReference`), plan 7.2 tests 10 and 11, spec 4.1 item 5, `docs/design/docs-page.png`
   - Depends on: T26
   - Done when:
@@ -500,11 +500,11 @@ Base branch: release/phase-3-content
     - Every fact is checked against the library README and release notes.
   - Verify: `npm test && npm run build && npm run e2e`, and the `examples` job passes.
   - Notes:
-    - The facts come from the README, the release notes and the source at tag `v2.0.0`. A probe against the 2.0.0 package confirmed the exception types, the claim values and the 5-minute clock skew. It also found two details that the README does not give, now on the pages: a wrong secret gives the same exception as a short one, and with `WithExpiryDate` a token without `exp` fails.
-    - The reference heading is "Reference", as `docs-page.html` shows, not the 1.0.3 "Methods". `MethodsSection` sets it, so Expiry checker and Dictionary extensions show it too (T30).
-    - Every method has a "Fails when" text (T32 can make `failsWhen` required). "Changed in 2.0.0" is on `WithSigningKeyFromSecret` (spec 6.1.3, item 4), and also on `WithExpiryDate` (the 2038 fix) and `ValidateJWT` (personal data in messages), because their behaviour changed too.
-    - Validation options documents `JWTValidatorOptions.Print`, a public method, and warns that it prints the secret.
-    - Differences from the design: a method has one summary (plan 3.4), so the table and the reference block share it; every method has a reference block; two sections cover the rest of the spec row ("The order of the methods" and "The JWTValidatorOptions class"); the example is a whole program that ends with `Print`; names in the "Returns" text are plain text, not code. On Validator, the exceptions are a list, because the long names broke mid-word in a table. On Claims, the table has a minimum width on a phone, so it scrolls sideways.
+    - Facts are from the README, the release notes and the source at `v2.0.0`, with a probe against the 2.0.0 package. The probe added: a wrong secret gives the same exception as a short one, a token without `exp` fails with `WithExpiryDate`, and the 5-minute skew applies to `nbf`.
+    - The reference heading is "Reference", as the design shows. "Changed in 2.0.0" is also on `WithExpiryDate` (2038) and `ValidateJWT` (personal data). `JWTValidatorOptions.Print` is documented.
+    - Approved design differences: one summary per method (plan 3.4); two extra sections; whole-program examples; Validator's exceptions are a list; the Claims table has a phone minimum width.
+    - The maintainer approved the wording of the new sections on 2026-11-02.
+    - Evidence: pull request #58
 
 - [ ] **T30 — Write Expiry checker and Dictionary extensions**
   - Refs: spec 6.1.3 items 2 to 7 (Expiry checker, Dictionary extensions), plan 3.4 (`MethodReference`), plan 7.2 tests 10 and 11
@@ -516,7 +516,8 @@ Base branch: release/phase-3-content
     - The two pages are in tests 10 and 11 with their 2.0.0 content.
     - Every fact is checked against the library README and release notes.
   - Verify: `npm test && npm run build && npm run e2e`, and the `examples` job passes.
-  - Notes: —
+  - Notes:
+    - From T29: `MethodsSection` already heads both pages' reference "Reference", as `docs-page.html` shows. Give every method a "Fails when" text, so T32 can make `failsWhen` required. Check exception types with a probe against the 2.0.0 package, as T29 did.
 
 - [ ] **T31 — Write Dependency injection, Debugging and Known limitations**
   - Refs: spec 6.1.3 items 2, 5, 6 and 8, plan 3.4 (docs pages), plan 3.5 (example compilation), plan 7.2 tests 10 and 11
@@ -552,6 +553,7 @@ Base branch: release/phase-3-content
   - Verify: The maintainer reads every page on `npm run preview`.
   - Notes:
     - From T27: Home names the logging change "Personal data stays hidden". The migration guide's summary still says "Logging stays off". Choose one name for both.
+    - From T29: the maintainer read and approved the new T29 sections on 2026-11-02 (Validation options, Validator and Claims). This check still covers them.
 
 - [ ] **T34 — Release phase 3 (maintainer)**
   - Refs: spec 6.1.10 items 2 to 6, spec 6.1.12, spec 9, plan 5 (releases), plan 9 (TypeScript, Node)
@@ -602,4 +604,5 @@ None.
 - 2026-11-02 — T26
 - 2026-11-02 — T28
 - 2026-11-02 — T27
+- 2026-11-02 — T29
 
