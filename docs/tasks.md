@@ -439,7 +439,7 @@ Base branch: release/phase-3-content
   - Refs: spec 6.1.3 items 6 to 8, spec 6.1.11 item 7, plan 3.5 (example compilation, ADRs), plan 8 (`examples` job), plan 7.2 test 15
   - Depends on: T25, and `2.0.0-beta.1` listed on nuget.org (library task T15)
   - Done when:
-    - `examples/Directory.Build.props` sets the `JWTValidator` version to `2.0.0-beta.1`, and the `Microsoft.Extensions.DependencyInjection` version to its latest stable version.
+    - `examples/Directory.Build.props` sets the `JWTValidator` version to `2.0.0`, and the `Microsoft.Extensions.DependencyInjection` version to its latest stable version.
     - `examples/build-examples.ps1` builds each `.cs` file in its own .NET 10 console project under `examples/.build/`, adds `Microsoft.Extensions.DependencyInjection` for files named `di-*.cs`, and fails when any file does not compile.
     - `CodeBlock` and `ExampleTabs` can show a file from `examples/` through a `?raw` import.
     - The two Home examples, OpenID Connect and secret, exist as files and compile.
@@ -448,10 +448,10 @@ Base branch: release/phase-3-content
     - The pull request shows the `examples` job passing.
   - Verify: `powershell -File examples/build-examples.ps1` passes locally. Break one example on purpose, see the script fail, and undo the change. `gh pr checks <number>` shows `examples` passing.
   - Notes:
-    - Deviation: `JWTValidatorVersion` is `2.0.0`, not `2.0.0-beta.1`. 2.0.0 has been listed on nuget.org since 2026-10-25, and spec 6.1.3 item 6 and plan 3.5 say the examples compile against 2.0.0 once it is released. The first `Done when` item was out of date.
-    - Example files are named `<page>-<name>.cs`, for example `home-secret.cs`. A file that uses dependency injection must start with `di-`, which adds `Microsoft.Extensions.DependencyInjection` (T31).
-    - The examples write `String`, as the approved design and the library README do, although the C# rules prefer `string`. T27 to T31 follow the same style, so the site matches the README.
-    - `home-openid-connect.cs` is the text of `docs/design/home.html`. The design has no code for the Secret tab, so `home-secret.cs` follows the same pattern, with the 39-byte secret from the library README. Home still shows the 1.0.3 example until T27 uses both files.
+    - Deviation, approved by the maintainer on 2026-11-02: `JWTValidatorVersion` is `2.0.0`, not `2.0.0-beta.1`. 2.0.0 has been listed on nuget.org since 2026-10-25, and spec 6.1.3 item 6 and plan 3.5 say the examples compile against 2.0.0 once it is released. The first `Done when` item now says `2.0.0`.
+    - Example files are named `<page>-<name>.cs`, and a dependency injection example starts with `di-` instead (T31). Pages import them as `@examples/<file>?raw`, through an alias added in `vite.config.ts`.
+    - The examples write `String`, as the approved design and the library README do. The maintainer approved this exception to the C# rules on 2026-11-02, for T27 to T31 too.
+    - `home-openid-connect.cs` is the text of `docs/design/home.html`. The design has no code for the Secret tab, so `home-secret.cs` follows the same pattern, with the 39-byte secret from the library README. It prints the claims with `Print()`, because a token signed with a secret may have no `sub` claim. Home still shows the 1.0.3 example until T27 uses both files.
 
 - [ ] **T27 — Write Getting started and Home**
   - Refs: spec 6.1.3 (Getting started), spec 6.1.7, spec 6.1.8, plan 3.4 (docs pages), plan 7.2 tests 9, 10 and 11, `docs/design/home.png`

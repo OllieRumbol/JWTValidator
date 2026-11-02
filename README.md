@@ -112,14 +112,14 @@ The site follows the library's README and release notes for the version it docum
 
 Every C# example on the site must be a file in `examples/`, so the `examples` check compiles the code that readers see. The 1.0.3 examples still in the pages move there when release 3 rewrites each page. `docs/adr/0002-compile-documentation-examples.md` explains why.
 
-1. Write the example as a complete console program in `examples/<name>.cs`, for example `examples/home-secret.cs`. Placeholder values, such as `"your-client-id"`, are allowed.
-2. An example may use only the `JWTValidator` package. An example that also uses `Microsoft.Extensions.DependencyInjection` must have a name that starts with `di-`, which adds that package.
+1. Write the example as a complete console program in `examples/<page>-<name>.cs`, where `<page>` is the page slug or `home`, for example `examples/home-secret.cs`. Placeholder values, such as `"your-client-id"`, are allowed.
+2. An example may use only the `JWTValidator` package. An example that also uses `Microsoft.Extensions.DependencyInjection` must have a name that starts with `di-` instead of the page slug, for example `examples/di-register.cs`. The `di-` start adds that package.
 3. A secret must be long enough for its algorithm. For example, HS256 needs at least 32 bytes.
 4. Run `powershell -File examples/build-examples.ps1`.
-5. Import the file text with `?raw`, and pass it to `CodeBlock` or `ExampleTabs`:
+5. Import the file text through the `@examples` alias with `?raw`, from any folder, and pass it to `CodeBlock` or `ExampleTabs`:
 
    ```tsx
-   import secretExample from "../../../examples/home-secret.cs?raw";
+   import secretExample from "@examples/home-secret.cs?raw";
 
    <CodeBlock code={secretExample} />;
    ```

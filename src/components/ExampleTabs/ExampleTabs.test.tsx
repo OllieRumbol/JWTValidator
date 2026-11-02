@@ -4,8 +4,8 @@ import userEvent from "@testing-library/user-event";
 import { renderOnDocsPage } from "@/test/renderOnDocsPage";
 import ExampleTabs from "./ExampleTabs";
 // The compiled Home examples, as the site imports them (plan section 3.5, "Example compilation").
-import openIdConnectExample from "../../../examples/home-openid-connect.cs?raw";
-import secretExample from "../../../examples/home-secret.cs?raw";
+import openIdConnectExample from "@examples/home-openid-connect.cs?raw";
+import secretExample from "@examples/home-secret.cs?raw";
 
 const examples = [
   { id: "openid", title: "OpenID Connect", code: "var openId = true;" },

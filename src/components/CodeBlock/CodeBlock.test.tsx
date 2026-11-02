@@ -4,7 +4,7 @@ import userEvent from "@testing-library/user-event";
 import { renderOnDocsPage } from "@/test/renderOnDocsPage";
 import CodeBlock from "./CodeBlock";
 // A compiled example, as the site imports it (plan section 3.5, "Example compilation").
-import secretExample from "../../../examples/home-secret.cs?raw";
+import secretExample from "@examples/home-secret.cs?raw";
 
 const csharp = `using JWTValidatorService.Validator;
 

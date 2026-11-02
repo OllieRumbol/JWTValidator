@@ -11,7 +11,8 @@ if ($examples.Count -eq 0) {
 
 # Each example gets its own console project, the same as "dotnet new console", so it
 # compiles as it would in a reader's application. Directory.Build.props in this folder
-# sets the package versions.
+# sets the package versions. The project compiles the example file where it is, so a
+# compile error names the file in this folder, not a copy.
 $projectTemplate = @"
 <Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
@@ -19,10 +20,12 @@ $projectTemplate = @"
     <TargetFramework>net10.0</TargetFramework>
     <ImplicitUsings>enable</ImplicitUsings>
     <Nullable>enable</Nullable>
+    <EnableDefaultCompileItems>false</EnableDefaultCompileItems>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Include="{0}" />
     <PackageReference Include="JWTValidator" Version="`$(JWTValidatorVersion)" />
-{0}  </ItemGroup>
+{1}  </ItemGroup>
 </Project>
 "@
 $dependencyInjectionReference = "    <PackageReference Include=""Microsoft.Extensions.DependencyInjection"" Version=""`$(DependencyInjectionVersion)"" />`n"
@@ -45,9 +48,8 @@ foreach ($example in $examples) {
     if ($name.StartsWith("di-")) {
         $extraReferences = $dependencyInjectionReference
     }
-    $project = $projectTemplate -f $extraReferences
+    $project = $projectTemplate -f $example.FullName, $extraReferences
     Set-Content -Path (Join-Path $projectFolder "$name.csproj") -Value $project -Encoding UTF8
-    Copy-Item -Path $example.FullName -Destination (Join-Path $projectFolder "Program.cs")
 
     dotnet build $projectFolder --nologo --verbosity quiet
     if ($LASTEXITCODE -ne 0) {

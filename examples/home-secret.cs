@@ -1,4 +1,5 @@
 using JWTValidatorService.Builder;
+using JWTValidatorService.Extensions;
 using JWTValidatorService.Validator;
 
 String jwt = Console.ReadLine() ?? "";
@@ -14,5 +15,5 @@ JWTValidatorOptions options = JWTValidatorOptionsBuilderCreator
 
 if (new JWTValidator().TryValidateJWT(jwt, options, out Dictionary<String, List<String>> claims))
 {
-    Console.WriteLine($"Signed in as {claims["sub"][0]}");
+    Console.WriteLine(claims.Print());
 }
