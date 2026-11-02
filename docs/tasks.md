@@ -499,7 +499,12 @@ Base branch: release/phase-3-content
     - `docsPages.ts` lists Claims. The three pages are in tests 10 and 11, and test 10 checks that the secret length table scrolls inside its box at 320 px (spec 6.2.3).
     - Every fact is checked against the library README and release notes.
   - Verify: `npm test && npm run build && npm run e2e`, and the `examples` job passes.
-  - Notes: —
+  - Notes:
+    - The facts come from the README, the release notes and the source at tag `v2.0.0`. A probe against the 2.0.0 package confirmed the exception types, the claim values and the 5-minute clock skew. It also found two details that the README does not give, now on the pages: a wrong secret gives the same exception as a short one, and with `WithExpiryDate` a token without `exp` fails.
+    - The reference heading is "Reference", as `docs-page.html` shows, not the 1.0.3 "Methods". `MethodsSection` sets it, so Expiry checker and Dictionary extensions show it too (T30).
+    - Every method has a "Fails when" text (T32 can make `failsWhen` required). "Changed in 2.0.0" is on `WithSigningKeyFromSecret` (spec 6.1.3, item 4), and also on `WithExpiryDate` (the 2038 fix) and `ValidateJWT` (personal data in messages), because their behaviour changed too.
+    - Validation options documents `JWTValidatorOptions.Print`, a public method, and warns that it prints the secret.
+    - Differences from the design: a method has one summary (plan 3.4), so the table and the reference block share it; every method has a reference block; two sections cover the rest of the spec row ("The order of the methods" and "The JWTValidatorOptions class"); the example is a whole program that ends with `Print`; names in the "Returns" text are plain text, not code. On Validator, the exceptions are a list, because the long names broke mid-word in a table. On Claims, the table has a minimum width on a phone, so it scrolls sideways.
 
 - [ ] **T30 — Write Expiry checker and Dictionary extensions**
   - Refs: spec 6.1.3 items 2 to 7 (Expiry checker, Dictionary extensions), plan 3.4 (`MethodReference`), plan 7.2 tests 10 and 11
@@ -525,6 +530,7 @@ Base branch: release/phase-3-content
   - Verify: `npm test && npm run build && npm run e2e`, and the `examples` job passes.
   - Notes:
     - From T28: in the migration guide's logging section, link "Debugging" to the Debugging page, as `migration-guide.html` shows.
+    - From T29: Claims says each key is the claim name as it is in the token. Link it to the Known limitations section on the claim type map, which explains why. The Validator page shows `ShowPII` in a sentence; Debugging gives the full steps.
 
 - [ ] **T32 — Check the content against 2.0.0**
   - Refs: spec 6.1.3 items 5 and 6, spec 9, plan 3.5 (example compilation)
