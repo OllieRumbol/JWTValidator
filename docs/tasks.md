@@ -523,7 +523,7 @@ Base branch: release/phase-3-content
     - The maintainer approved the wording on 2026-11-03. The links to Dependency injection and Known limitations are in T31's Notes.
     - Evidence: pull request #60
 
-- [ ] **T31 — Write Dependency injection, Debugging and Known limitations**
+- [x] **T31 — Write Dependency injection, Debugging and Known limitations**
   - Refs: spec 6.1.3 items 2, 5, 6 and 8, plan 3.4 (docs pages), plan 3.5 (example compilation), plan 7.2 tests 10 and 11
   - Depends on: T26
   - Done when:
@@ -534,13 +534,11 @@ Base branch: release/phase-3-content
     - Every example is a compiled file in `examples/`.
   - Verify: `npm test && npm run build && npm run e2e`, and the `examples` job passes.
   - Notes:
-    - From T28: in the migration guide's logging section, link "Debugging" to the Debugging page, as `migration-guide.html` shows.
-    - From T29: Claims says each key is the claim name as it is in the token. Link it to the Known limitations section on the claim type map, which explains why. The Validator page shows `ShowPII` in a sentence; Debugging gives the full steps.
-    - From T30: on the Expiry checker page, link `new JWTExpiryChecker()` to the Dependency injection page, and the sentence about downloading the configuration on each call to Known limitations.
-    - Done: all five carried links, each checked by a test in `DocsPage.test.tsx`.
-    - The facts come from the README, the release notes and the source at `v2.0.0`. A probe against the 2.0.0 package showed that a container uses the `JWTExpiryChecker(IJWTValidator)` constructor, and that a null validator throws `NullReferenceException`. It also showed that in IdentityModel 8 the common messages (issuer, audience, key, malformed token) read the same with `ShowPII` on or off, so the Debugging page keeps to the README's words and promises no particular message.
-    - The Debugging example uses `Microsoft.IdentityModel.Logging`, which comes with the package's own dependencies, so it references no other package (spec 6.1.3, item 6). The dependency injection example is `examples/di-register-services.cs`.
-    - Dependency injection shows the constructors with `MethodReference`, and `IJWTValidator`'s members as a signature block, with no method table: the page has no methods of its own.
+    - The five links carried from T28 to T30 are in place, each checked by a test in `DocsPage.test.tsx`.
+    - A probe against 2.0.0: a container uses `JWTExpiryChecker(IJWTValidator)` only when `IJWTValidator` is registered; a null validator throws `NullReferenceException`; in IdentityModel 8 the common messages read the same with `ShowPII` on or off, so Debugging keeps to the README's words.
+    - The Debugging example's `Microsoft.IdentityModel.Logging` comes with the package. The DI example reads the expiry from one validation, as Known limitations advises.
+    - Dependency injection has no method table: it shows the constructors with `MethodReference` and `IJWTValidator`'s members as a signature block. The maintainer approved the ticking on 2026-11-03.
+    - Evidence: pull request #62
 
 - [ ] **T32 — Check the content against 2.0.0**
   - Refs: spec 6.1.3 items 5 and 6, spec 9, plan 3.5 (example compilation)
@@ -615,4 +613,5 @@ None.
 - 2026-11-02 — T27
 - 2026-11-02 — T29
 - 2026-11-03 — T30
+- 2026-11-03 — T31
 
