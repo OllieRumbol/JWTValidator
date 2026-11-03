@@ -11,8 +11,16 @@ import registerExample from "@examples/di-register-services.cs?raw";
 
 const sections: DocsSection[] = [
   { id: "register-the-services", title: "Register the services", level: 2 },
-  { id: "the-validator-interface", title: "The IJWTValidator interface", level: 2 },
-  { id: "the-checker-constructors", title: "The expiry checker's constructors", level: 2 },
+  {
+    id: "the-validator-interface",
+    title: "The IJWTValidator interface",
+    level: 2,
+  },
+  {
+    id: "the-checker-constructors",
+    title: "The expiry checker's constructors",
+    level: 2,
+  },
 ];
 
 // The members of IJWTValidator, from the library source at tag v2.0.0.
@@ -35,9 +43,9 @@ const DependencyInjectionPage = () => {
           has no public interface.
         </p>
         <p>
-          The validator keeps no state between calls, so a singleton is fine.
-          With both registered, the container gives the expiry checker the same
-          validator.
+          The validator keeps no state between calls, so you can register it as
+          a singleton. With both registered, the container gives the expiry
+          checker the same validator.
         </p>
         <CodeBlock
           code={registerExample}

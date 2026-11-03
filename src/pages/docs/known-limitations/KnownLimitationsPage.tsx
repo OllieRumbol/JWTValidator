@@ -38,7 +38,10 @@ const KnownLimitationsPage = () => {
         </ul>
       </ArticleSection>
 
-      <ArticleSection id="openid-downloads" title="OpenID configuration downloads">
+      <ArticleSection
+        id="openid-downloads"
+        title="OpenID configuration downloads"
+      >
         <p>
           With an OpenID address, each call downloads the OpenID configuration
           again and waits for it. The library does not keep the configuration

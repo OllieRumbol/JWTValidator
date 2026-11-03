@@ -28,9 +28,10 @@ describe("docs page layout", () => {
     expect(
       prevNext.getByRole("link", { name: "Previous Validation options" }),
     ).toHaveAttribute("href", "/docs/validation-options");
-    expect(
-      prevNext.getByRole("link", { name: "Next Claims" }),
-    ).toHaveAttribute("href", "/docs/claims");
+    expect(prevNext.getByRole("link", { name: "Next Claims" })).toHaveAttribute(
+      "href",
+      "/docs/claims",
+    );
   });
 
   test("the first page has no previous link", async () => {
@@ -89,9 +90,9 @@ describe("docs page layout", () => {
       // The heading's wrapper, then the table, then the reference blocks.
       const table = methods.children[1] as HTMLElement;
       expect(table).toHaveAccessibleName("Method summary");
-      expect(
-        within(table).getAllByRole("link")[0],
-      ).toHaveAccessibleName(firstMethod);
+      expect(within(table).getAllByRole("link")[0]).toHaveAccessibleName(
+        firstMethod,
+      );
       expect(within(table).getAllByRole("link")[0]).toHaveAttribute(
         "href",
         `/docs/${slug}/${firstId}`,
@@ -129,21 +130,18 @@ describe("docs page layout", () => {
       "Known limitations",
       "/docs/known-limitations/openid-downloads",
     ],
-  ])(
-    "%s, section %s, links %s",
-    async (slug, sectionId, linkText, href) => {
-      renderRoute(`/docs/${slug}`);
+  ])("%s, section %s, links %s", async (slug, sectionId, linkText, href) => {
+    renderRoute(`/docs/${slug}`);
 
-      await screen.findByRole("heading", { level: 1 });
-      const section = within(
-        document.getElementById(sectionId)!.closest("section")!,
-      );
-      expect(section.getByRole("link", { name: linkText })).toHaveAttribute(
-        "href",
-        href,
-      );
-    },
-  );
+    await screen.findByRole("heading", { level: 1 });
+    const section = within(
+      document.getElementById(sectionId)!.closest("section")!,
+    );
+    expect(section.getByRole("link", { name: linkText })).toHaveAttribute(
+      "href",
+      href,
+    );
+  });
 });
 
 describe("section addresses", () => {

@@ -33,9 +33,9 @@ describe("Claims", () => {
     renderRoute("/docs/claims");
 
     const section = within(
-      (
-        await screen.findByRole("heading", { level: 2, name: "Times" })
-      ).closest("section")!,
+      (await screen.findByRole("heading", { level: 2, name: "Times" })).closest(
+        "section",
+      )!,
     );
 
     for (const name of ["exp", "nbf", "iat"]) {

@@ -555,18 +555,20 @@ Base branch: release/phase-3-content
     - The examples already used 2.0.0, and DI 10.0.14 is still the latest stable. nuget.org confirms 25 October 2026 for 2.0.0.
     - Evidence: pull request #63
 
-- [ ] **T33 — Check spelling, grammar and wording**
+- [x] **T33 — Check spelling, grammar and wording**
   - Refs: spec 6.1.8, spec 6.1.10 item 3, spec 3 goal 9
   - Depends on: T32
   - Done when:
     - Every page has been read for British English spelling, grammar, plain technical English, and the voice rules in spec 6.1.8.
     - The maintainer has reviewed the changes.
-    - No other change is merged into the release branch after this task.
+    - No other change is merged into the release branch after this task, except T34's removal of the version notice (spec 6.1.10, item 3).
   - Verify: The maintainer reads every page on `npm run preview`.
   - Notes:
-    - From T27: Home names the logging change "Personal data stays hidden". The migration guide's summary still says "Logging stays off". Choose one name for both.
-    - From T29: the maintainer read and approved the new T29 sections on 2026-11-02 (Validation options, Validator and Claims). This check still covers them.
-    - From T32: Home's "What's new" row "Expiry in UTC" says "Convert to local time yourself if you need it." The migration guide's row now says "Convert the expiry to local time if you need it. Remove any time zone workaround." Decide whether Home should match.
+    - The maintainer read the site on the preview and approved it, and every change, on 2026-11-03.
+    - The logging change is "Personal data stays hidden" on Home and in the migration guide, at the same address. "application" replaces "app", except "console app".
+    - The maintainer confirmed that "the library" alongside "JWT Validator" meets spec 6.1.8 item 1. The maintainer also approved T34's removal of the version notice after this task, so spec 6.1.10 item 3 and the third Done-when item now name that exception.
+    - `.prettierignore` now has `/docs`, because `docs` also skipped `src/pages/docs`. Those 19 files are formatted in this task, so `format:check` covers them from now on.
+    - Evidence: pull request #64
 
 - [ ] **T34 — Release phase 3 (maintainer)**
   - Refs: spec 6.1.10 items 2 to 6, spec 6.1.12, spec 9, plan 5 (releases), plan 9 (TypeScript, Node)
@@ -621,4 +623,5 @@ None.
 - 2026-11-03 — T30
 - 2026-11-03 — T31
 - 2026-11-03 — T32
+- 2026-11-03 — T33
 

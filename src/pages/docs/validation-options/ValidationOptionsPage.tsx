@@ -81,18 +81,18 @@ const ValidationOptionsPage = () => {
           </table>
         </ScrollTable>
         <p>
-          A shorter secret fails validation: <code>ValidateJWT</code> throws
-          and <code>TryValidateJWT</code> returns false. IdentityModel reports
-          it as <code>SecurityTokenSignatureKeyNotFoundException</code>, not as
-          an error about the length. A wrong secret gives the same exception,
-          so check both the length and the value of the secret.
+          A shorter secret fails validation: <code>ValidateJWT</code> throws and{" "}
+          <code>TryValidateJWT</code> returns false. IdentityModel reports it as{" "}
+          <code>SecurityTokenSignatureKeyNotFoundException</code>, not as an
+          error about the length. A wrong secret gives the same exception, so
+          check both the length and the value of the secret.
         </p>
       </ArticleSection>
 
       <ArticleSection id="add-checks-and-build" title="Add checks and build">
         <p>
-          Add only the checks you need. A check that you do not add is not
-          made.
+          Add only the checks you need. The library skips any check that you do
+          not add.
         </p>
         <ul>
           <li>
@@ -104,8 +104,8 @@ const ValidationOptionsPage = () => {
           <li>
             <code>WithExpiryDate()</code> checks that the token has not expired
             and is already valid. IdentityModel allows a clock skew of 5
-            minutes, so a token stays valid for up to 5 minutes after its
-            expiry time.
+            minutes, so a token stays valid for up to 5 minutes after its expiry
+            time.
           </li>
         </ul>
         <CodeBlock code={googleExample} caption="An ID token from Google" />
@@ -129,22 +129,21 @@ const ValidationOptionsPage = () => {
           </li>
         </ol>
         <p>
-          Each method returns a type that has only the methods allowed next.
-          So code in another order, or with two signing keys, does not compile.
+          Each method returns a type that has only the methods allowed next. So
+          code in another order, or with two signing keys, does not compile.
         </p>
       </ArticleSection>
 
       <ArticleSection id="the-options" title="The JWTValidatorOptions class">
         <p>
           <code>Build()</code> returns a <code>JWTValidatorOptions</code>{" "}
-          object. Pass it to the validator. Its properties,{" "}
-          <code>Secret</code>, <code>OpenIdUrl</code>, <code>Issuer</code>,{" "}
-          <code>Audience</code> and <code>ExpiryDate</code>, are read-only.
-          Only the builder sets them.
+          object. Pass it to the validator. Its properties, <code>Secret</code>,{" "}
+          <code>OpenIdUrl</code>, <code>Issuer</code>, <code>Audience</code> and{" "}
+          <code>ExpiryDate</code>, are read-only. Only the builder sets them.
         </p>
         <p>
-          <code>Print()</code> returns the options as text while you debug.
-          The text shows the secret, so do not write it to a log.
+          <code>Print()</code> returns the options as text while you debug. The
+          text shows the secret, so do not write it to a log.
         </p>
       </ArticleSection>
 

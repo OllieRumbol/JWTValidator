@@ -6,7 +6,7 @@ import type { MethodReference } from "./types";
 export const expiryCheckerConstructors: MethodReference = {
   name: "JWTExpiryChecker",
   summary:
-    "Creates an expiry checker. When IJWTValidator is registered, a dependency injection container uses the constructor that takes it. Otherwise it uses the constructor without parameters.",
+    "Creates an expiry checker. When IJWTValidator is registered, a dependency injection container uses the constructor that takes it. Otherwise the container uses the constructor without parameters.",
   signatures: [
     "public JWTExpiryChecker()",
     "public JWTExpiryChecker(IJWTValidator jwtValidator)",

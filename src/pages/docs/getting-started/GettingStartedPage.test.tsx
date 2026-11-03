@@ -58,7 +58,9 @@ describe("Getting started", () => {
   test("links each of the four parts to its docs page", async () => {
     renderRoute("/docs/getting-started");
 
-    const parts = within((await sectionOf("What the library does")).getByRole("list"));
+    const parts = within(
+      (await sectionOf("What the library does")).getByRole("list"),
+    );
     const targets = parts
       .getAllByRole("link")
       .map((link) => link.getAttribute("href"));

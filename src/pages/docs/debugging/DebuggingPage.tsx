@@ -30,15 +30,17 @@ const DebuggingPage = () => {
         </p>
         <p>
           The token itself stays hidden unless you also set{" "}
-          <code>IdentityModelEventSource.LogCompleteSecurityArtifact = true</code>
+          <code>
+            IdentityModelEventSource.LogCompleteSecurityArtifact = true
+          </code>
           . Both are in the <code>Microsoft.IdentityModel.Logging</code>{" "}
           namespace. Its package comes with JWT Validator, so you do not add it
           yourself.
         </p>
         <ChangedNote>
           The library no longer turns on personal data in IdentityModel
-          messages. Version 1.0.3 set <code>ShowPII</code> to true. An
-          application that wants it turns it on itself.
+          messages. Version 1.0.3 set <code>ShowPII</code> to true. To see it,
+          turn it on in your own application.
         </ChangedNote>
         <CodeBlock
           code={showPiiExample}

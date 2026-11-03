@@ -36,9 +36,9 @@ const DictionaryExtensionsPage = () => {
     >
       <ArticleSection id="use-the-extensions" title="Use the extensions">
         <p>
-          Add <code>using JWTValidatorService.Extensions;</code>. The methods
-          then work on any <code>Dictionary</code> whose values are lists, such
-          as the claims from the validator.
+          Add <code>using JWTValidatorService.Extensions;</code> at the top of
+          your file. Then the methods work on any <code>Dictionary</code> whose
+          values are lists, such as the claims from the validator.
         </p>
         <CodeBlock code={claimsExample} caption="Check and print the claims" />
       </ArticleSection>
@@ -84,7 +84,9 @@ const DictionaryExtensionsPage = () => {
       <ArticleSection id="matching" title="How values match">
         <p>
           Keys and values match exactly, so case matters. For example,{" "}
-          <code>ContainsKeyAndValue(&quot;roles&quot;, &quot;member&quot;)</code>{" "}
+          <code>
+            ContainsKeyAndValue(&quot;roles&quot;, &quot;member&quot;)
+          </code>{" "}
           does not find <code>&quot;MEMBER&quot;</code>.
         </p>
         <p>
