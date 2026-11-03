@@ -1,72 +1,97 @@
 import type { MethodReference } from "./types";
 
-// The expiry checker's methods. The text is the 1.0.3 site's, unchanged. Each method's
-// one parameter sentence is kept whole, named by the signature's parameters. Release 3
-// rewrites it for 2.0.0 (plan section 3.2).
+// The expiry checker's methods, for 2.0.0. The signatures are from the library source at
+// tag v2.0.0. What each method throws was checked with a probe against the 2.0.0 package
+// (T30).
+const tokenParameter = { name: "jwt", description: "The token, as a string." };
+
+const keyParameters = [
+  {
+    name: "signingKey",
+    description: "The secret that signed the token.",
+  },
+  {
+    name: "openIdUrl",
+    description:
+      "The address of the provider's OpenID configuration, as a Uri. Use one of signingKey or openIdUrl.",
+  },
+];
+
+const hasExpiredChange =
+  "The result is correct in every time zone. Version 1.0.3 compared a local time with UTC.";
+
+const whenExpiresChange = "The expiry is in UTC, not local time.";
+
 export const expiryCheckerMethods: MethodReference[] = [
   {
     name: "HasJWTExpired",
-    summary: "This method identifies if a JWT has expired or not",
+    summary: "Says whether the token has expired.",
     signatures: [
-      "bool HasJWTExpired(string jwt, string signingKey)",
-      "bool HasJWTExpired(string jwt, Uri openIdUrl)",
+      "public Boolean HasJWTExpired(String jwt, String signingKey)",
+      "public Boolean HasJWTExpired(String jwt, Uri openIdUrl)",
     ],
-    parameters: [
-      {
-        name: "jwt, signingKey or openIdUrl",
-        description:
-          "Takes two parameters, a string representing a jwt and either a string (private key) or a Uri (open id url)",
-      },
-    ],
+    parameters: [tokenParameter, ...keyParameters],
     returns:
-      "Returns true if the jwt has expired and false if it's still valid",
+      "True when the expiry is before the current UTC time, otherwise false. There is no clock skew.",
+    failsWhen:
+      'Throws ArgumentNullException when the token is null or empty, and ArgumentException when the secret is. Throws Exception "Unable to validate JWT" when the signature does not match or the download fails, and Exception "Jwt does not contain an expiry" when the token has no "exp" claim. A null openIdUrl throws NullReferenceException.',
+    changedIn2: hasExpiredChange,
   },
   {
     name: "TryHasJWTExpired",
-    summary: "The try-get version of the .HasJWTExpired() method",
+    summary: "Says whether the token has expired. Returns false when it fails.",
     signatures: [
-      "bool TryHasJWTExpired(string jwt, string signingKey, out bool isExpired)",
-      "bool TryHasJWTExpired(string jwt, Uri openIdUrl, out bool isExpired)",
+      "public Boolean TryHasJWTExpired(String jwt, String signingKey, out Boolean isExpired)",
+      "public Boolean TryHasJWTExpired(String jwt, Uri openIdUrl, out Boolean isExpired)",
     ],
     parameters: [
+      tokenParameter,
+      ...keyParameters,
       {
-        name: "jwt, signingKey or openIdUrl, isExpired",
+        name: "isExpired",
         description:
-          "As well as the parameters mentioned in .HasJWTExpired(), this method has an out parameter. True if the jwt has expired and false if it's still valid",
+          "True when the token has expired. False when the method fails.",
       },
     ],
-    returns: "Returns a boolean if the method was successful completed or not",
+    returns: "True when the check worked, otherwise false.",
+    failsWhen:
+      "Returns false in every case where HasJWTExpired throws. It does not throw.",
+    changedIn2: hasExpiredChange,
   },
   {
     name: "WhenDoesJWTExpire",
-    summary: "This method outputs the extract date and time a JWT expires",
+    summary: "Gives the time when the token expires, in UTC.",
     signatures: [
-      "DateTime WhenDoesJWTExpire(string jwt, string signingKey)",
-      "DateTime WhenDoesJWTExpire(string jwt, Uri openIdUrl)",
+      "public DateTime WhenDoesJWTExpire(String jwt, String signingKey)",
+      "public DateTime WhenDoesJWTExpire(String jwt, Uri openIdUrl)",
     ],
-    parameters: [
-      {
-        name: "jwt, signingKey or openIdUrl",
-        description:
-          "Takes two parameters, a string representing a jwt and either a string (private key) or a Uri (open id url)",
-      },
-    ],
-    returns: "Returns a DateTime object of when the JWT expires",
+    parameters: [tokenParameter, ...keyParameters],
+    returns:
+      'The "exp" time as a DateTime in UTC. An expired token still gives its expiry.',
+    failsWhen:
+      'Throws ArgumentException when the token or the secret is null or empty. Throws Exception "Unable to validate JWT" when the signature does not match or the download fails, and Exception "Jwt does not contain an expiry" when the token has no "exp" claim. A null openIdUrl throws NullReferenceException.',
+    changedIn2: whenExpiresChange,
   },
   {
     name: "TryGetWhenDoesJWTExpire",
-    summary: "The try-get version of the .WhenDoesJWTExpire() method",
+    summary:
+      "Gives the time when the token expires, in UTC. Returns false when it fails.",
     signatures: [
-      "bool TryGetWhenDoesJWTExpire(string jwt, string signingKey, out DateTime expiryDate)",
-      "bool TryGetWhenDoesJWTExpire(string jwt, Uri openIdUrl, out DateTime expiryDate)",
+      "public Boolean TryGetWhenDoesJWTExpire(String jwt, String signingKey, out DateTime expiryDate)",
+      "public Boolean TryGetWhenDoesJWTExpire(String jwt, Uri openIdUrl, out DateTime expiryDate)",
     ],
     parameters: [
+      tokenParameter,
+      ...keyParameters,
       {
-        name: "jwt, signingKey or openIdUrl, expiryDate",
+        name: "expiryDate",
         description:
-          "As well as the parameters mentioned in .WhenDoesJWTExpire(), this method has an out parameter. Expiry date is a DateTime object of when the JWT expires",
+          "The expiry in UTC. DateTime.MinValue when the method fails.",
       },
     ],
-    returns: "Returns a boolean if the method successful completed or not",
+    returns: "True when the expiry was found, otherwise false.",
+    failsWhen:
+      "Returns false in every case where WhenDoesJWTExpire throws. It does not throw.",
+    changedIn2: whenExpiresChange,
   },
 ];

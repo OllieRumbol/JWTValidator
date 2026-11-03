@@ -518,6 +518,10 @@ Base branch: release/phase-3-content
   - Verify: `npm test && npm run build && npm run e2e`, and the `examples` job passes.
   - Notes:
     - From T29: `MethodsSection` already heads both pages' reference "Reference", as `docs-page.html` shows. Give every method a "Fails when" text, so T32 can make `failsWhen` required. Check exception types with a probe against the 2.0.0 package, as T29 did.
+    - The facts come from the README, the release notes and the source at `v2.0.0`, and the 1.0.3 source (commit `0425b91`) for the "Changed in 2.0.0" notes. A probe against the 2.0.0 package checked every exception and every null or empty result. It found three things the README does not say, now on the page: the checker reports failures as a plain `Exception` ("Unable to validate JWT", "Jwt does not contain an expiry"); it checks only the signature, so an expired token still gives its expiry; and `HasJWTExpired` has no clock skew. A null `Uri` throws `NullReferenceException`.
+    - "Changed in 2.0.0" is on all eight methods. Spec 6.1.3, item 4 names six; `TryHasJWTExpired` and `TryGetWhenDoesJWTExpire` changed in the same way.
+    - Every method on all four reference pages now has a "Fails when" text, so T32 can make `failsWhen` required.
+    - Carried forward to T31: the Expiry checker page names `new JWTExpiryChecker()` only, and says each call downloads the OpenID configuration again. Link it to Dependency injection (the `IJWTValidator` constructor) and to Known limitations once they exist.
 
 - [ ] **T31 — Write Dependency injection, Debugging and Known limitations**
   - Refs: spec 6.1.3 items 2, 5, 6 and 8, plan 3.4 (docs pages), plan 3.5 (example compilation), plan 7.2 tests 10 and 11
@@ -532,6 +536,7 @@ Base branch: release/phase-3-content
   - Notes:
     - From T28: in the migration guide's logging section, link "Debugging" to the Debugging page, as `migration-guide.html` shows.
     - From T29: Claims says each key is the claim name as it is in the token. Link it to the Known limitations section on the claim type map, which explains why. The Validator page shows `ShowPII` in a sentence; Debugging gives the full steps.
+    - From T30: on the Expiry checker page, link `new JWTExpiryChecker()` to the Dependency injection page, and the sentence about downloading the configuration on each call to Known limitations.
 
 - [ ] **T32 — Check the content against 2.0.0**
   - Refs: spec 6.1.3 items 5 and 6, spec 9, plan 3.5 (example compilation)
