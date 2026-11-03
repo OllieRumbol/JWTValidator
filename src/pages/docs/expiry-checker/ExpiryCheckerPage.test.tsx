@@ -11,7 +11,10 @@ describe("Expiry checker", () => {
   // The examples are the compiled files (spec section 6.1.3, item 6).
   test.each([
     ["C# · The expiry, with a secret", secretExample],
-    ["C# · Has it expired, with an OpenID Connect provider", openIdConnectExample],
+    [
+      "C# · Has it expired, with an OpenID Connect provider",
+      openIdConnectExample,
+    ],
   ])("shows the compiled example %s", async (name, code) => {
     const user = userEvent.setup();
     renderRoute("/docs/expiry-checker");
@@ -27,11 +30,16 @@ describe("Expiry checker", () => {
 
     const section = within(
       (
-        await screen.findByRole("heading", { level: 2, name: "Check the expiry" })
+        await screen.findByRole("heading", {
+          level: 2,
+          name: "Check the expiry",
+        })
       ).closest("section")!,
     );
     expect(
-      within(section.getByRole("note")).getByText(/returns UTC, not local time/),
+      within(section.getByRole("note")).getByText(
+        /returns UTC, not local time/,
+      ),
     ).toBeVisible();
   });
 

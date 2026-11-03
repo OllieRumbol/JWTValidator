@@ -40,9 +40,9 @@ describe("Migrating from 1.x", () => {
     renderRoute("/docs/migrating-from-1x");
 
     await screen.findByRole("heading", { level: 1 });
-    expect(screen.getAllByText("Affects you if", { selector: "p" })).toHaveLength(
-      changeSections.length,
-    );
+    expect(
+      screen.getAllByText("Affects you if", { selector: "p" }),
+    ).toHaveLength(changeSections.length);
   });
 
   // Each panel must show its own compiled file, in the right order (spec section 6.1.3,

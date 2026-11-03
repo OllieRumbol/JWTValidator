@@ -19,7 +19,9 @@ describe("Debugging", () => {
     await user.click(example.getByRole("button", { name: "Copy code" }));
 
     expect(await navigator.clipboard.readText()).toBe(showPiiExample);
-    expect(showPiiExample).toContain("IdentityModelEventSource.ShowPII = true;");
+    expect(showPiiExample).toContain(
+      "IdentityModelEventSource.ShowPII = true;",
+    );
   });
 
   test("says that 2.0.0 no longer turns it on", async () => {

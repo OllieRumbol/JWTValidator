@@ -84,7 +84,9 @@ const DictionaryExtensionsPage = () => {
       <ArticleSection id="matching" title="How values match">
         <p>
           Keys and values match exactly, so case matters. For example,{" "}
-          <code>ContainsKeyAndValue(&quot;roles&quot;, &quot;member&quot;)</code>{" "}
+          <code>
+            ContainsKeyAndValue(&quot;roles&quot;, &quot;member&quot;)
+          </code>{" "}
           does not find <code>&quot;MEMBER&quot;</code>.
         </p>
         <p>

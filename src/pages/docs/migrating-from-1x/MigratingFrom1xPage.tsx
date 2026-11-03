@@ -236,8 +236,8 @@ const MigratingFrom1xPage = () => {
           You call it on a dictionary that can be empty or null.
         </AffectsYouIf>
         <p>
-          1.0.3 returned false for an empty dictionary and threw for null.
-          2.0.0 returns true for both.
+          1.0.3 returned false for an empty dictionary and threw for null. 2.0.0
+          returns true for both.
         </p>
       </ArticleSection>
 
@@ -248,7 +248,8 @@ const MigratingFrom1xPage = () => {
         <p>
           The library no longer turns on personal data in IdentityModel
           messages. To see it while you debug, set{" "}
-          <code>IdentityModelEventSource.ShowPII = true</code> in your own application.{" "}
+          <code>IdentityModelEventSource.ShowPII = true</code> in your own
+          application.{" "}
           <Link component={RouterLink} to="/docs/debugging">
             Debugging
           </Link>{" "}
@@ -258,7 +259,8 @@ const MigratingFrom1xPage = () => {
 
       <ArticleSection id="identitymodel-8" title="IdentityModel version 8">
         <AffectsYouIf>
-          Your application also uses the Microsoft IdentityModel packages directly.
+          Your application also uses the Microsoft IdentityModel packages
+          directly.
         </AffectsYouIf>
         <p>
           The package now depends on version 8, not version 6. Move your own

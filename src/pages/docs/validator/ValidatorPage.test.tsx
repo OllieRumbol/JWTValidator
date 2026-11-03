@@ -44,7 +44,10 @@ describe("Validator", () => {
 
     const section = within(
       (
-        await screen.findByRole("heading", { level: 2, name: "Choose a method" })
+        await screen.findByRole("heading", {
+          level: 2,
+          name: "Choose a method",
+        })
       ).closest("section")!,
     );
     expect(section.getByRole("link", { name: "Claims" })).toHaveAttribute(

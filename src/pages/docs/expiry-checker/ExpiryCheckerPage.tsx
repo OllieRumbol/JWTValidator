@@ -78,9 +78,12 @@ const ExpiryCheckerPage = () => {
           <code>WithExpiryDate</code>.
         </p>
         <p>
-          Each call validates the token again. With an OpenID address, each
-          call also downloads the OpenID configuration again.{" "}
-          <Link component={RouterLink} to="/docs/known-limitations/openid-downloads">
+          Each call validates the token again. With an OpenID address, each call
+          also downloads the OpenID configuration again.{" "}
+          <Link
+            component={RouterLink}
+            to="/docs/known-limitations/openid-downloads"
+          >
             Known limitations
           </Link>{" "}
           explains why this matters.
@@ -90,10 +93,13 @@ const ExpiryCheckerPage = () => {
       <ArticleSection id="when-it-fails" title="When it fails">
         <ul>
           <li>
-            The signature does not match, the secret is too short, or the
-            OpenID configuration cannot be downloaded: an <code>Exception</code>{" "}
-            with the message &quot;Unable to validate JWT&quot;.{" "}
-            <Link component={RouterLink} to="/docs/validation-options/minimum-secret-length">
+            The signature does not match, the secret is too short, or the OpenID
+            configuration cannot be downloaded: an <code>Exception</code> with
+            the message &quot;Unable to validate JWT&quot;.{" "}
+            <Link
+              component={RouterLink}
+              to="/docs/validation-options/minimum-secret-length"
+            >
               Minimum secret length
             </Link>{" "}
             gives the length for each algorithm.
@@ -109,12 +115,11 @@ const ExpiryCheckerPage = () => {
           <li>
             The token or the secret is null or empty: an{" "}
             <code>ArgumentException</code>. For the token,{" "}
-            <code>HasJWTExpired</code> throws{" "}
-            <code>ArgumentNullException</code> instead.
+            <code>HasJWTExpired</code> throws <code>ArgumentNullException</code>{" "}
+            instead.
           </li>
           <li>
-            The OpenID address is null: a{" "}
-            <code>NullReferenceException</code>.
+            The OpenID address is null: a <code>NullReferenceException</code>.
           </li>
         </ul>
         <p>

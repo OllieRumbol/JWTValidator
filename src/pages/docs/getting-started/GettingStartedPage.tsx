@@ -23,7 +23,13 @@ const sections: DocsSection[] = [
 ];
 
 // A link to another docs page, in the text.
-const DocsLink = ({ slug, children }: { slug: string; children: ReactNode }) => (
+const DocsLink = ({
+  slug,
+  children,
+}: {
+  slug: string;
+  children: ReactNode;
+}) => (
   <Link component={RouterLink} to={`/docs/${slug}`}>
     {children}
   </Link>
@@ -86,8 +92,8 @@ const GettingStartedPage = () => {
           </li>
           <li>
             Version 8 of the Microsoft IdentityModel packages. The package
-            depends on them. If your application also uses IdentityModel packages
-            directly, use version 8 for them too.
+            depends on them. If your application also uses IdentityModel
+            packages directly, use version 8 for them too.
           </li>
         </ul>
         <p>

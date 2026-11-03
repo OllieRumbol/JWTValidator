@@ -60,7 +60,9 @@ describe("Validation options", () => {
     renderRoute("/docs/validation-options");
 
     const example = within(
-      await screen.findByRole("figure", { name: "C# · An ID token from Google" }),
+      await screen.findByRole("figure", {
+        name: "C# · An ID token from Google",
+      }),
     );
     await user.click(example.getByRole("button", { name: "Copy code" }));
 

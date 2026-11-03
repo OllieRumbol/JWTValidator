@@ -53,14 +53,17 @@ const ClaimsPage = () => {
           <li>
             The key is the claim name as it is in the token, for example{" "}
             <code>sub</code> or <code>email</code>.{" "}
-            <Link component={RouterLink} to="/docs/known-limitations/claim-type-map">
+            <Link
+              component={RouterLink}
+              to="/docs/known-limitations/claim-type-map"
+            >
               Known limitations
             </Link>{" "}
             explains how the library keeps these names.
           </li>
           <li>
-            The value is a list of strings. Most claims have one string. A
-            claim with an array has one string for each item.
+            The value is a list of strings. Most claims have one string. A claim
+            with an array has one string for each item.
           </li>
           <li>
             A claim that is not in the token is not in the dictionary. Use{" "}
@@ -108,7 +111,10 @@ const ClaimsPage = () => {
       </ArticleSection>
 
       <ArticleSection id="read-the-claims" title="Read the claims">
-        <CodeBlock code={readExample} caption="Read a claim, an array and a time" />
+        <CodeBlock
+          code={readExample}
+          caption="Read a claim, an array and a time"
+        />
       </ArticleSection>
     </DocsLayout>
   );

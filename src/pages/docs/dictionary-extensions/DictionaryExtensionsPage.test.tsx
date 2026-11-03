@@ -36,7 +36,10 @@ describe("Dictionary extensions", () => {
 
     const section = within(
       (
-        await screen.findByRole("heading", { level: 2, name: "How values match" })
+        await screen.findByRole("heading", {
+          level: 2,
+          name: "How values match",
+        })
       ).closest("section")!,
     );
     expect(section.getByText(/match exactly, so case matters/)).toBeVisible();
