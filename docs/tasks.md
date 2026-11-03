@@ -521,6 +521,8 @@ Base branch: release/phase-3-content
     - The facts come from the README, the release notes and the source at `v2.0.0`, and the 1.0.3 source (commit `0425b91`) for the "Changed in 2.0.0" notes. A probe against the 2.0.0 package checked every exception and every null or empty result. It found three things the README does not say, now on the page: the checker reports failures as a plain `Exception` ("Unable to validate JWT", "Jwt does not contain an expiry"); it checks only the signature, so an expired token still gives its expiry; and `HasJWTExpired` has no clock skew. A null `Uri` throws `NullReferenceException`.
     - "Changed in 2.0.0" is on all eight methods. Spec 6.1.3, item 4 names six; `TryHasJWTExpired` and `TryGetWhenDoesJWTExpire` changed in the same way.
     - Every method on all four reference pages now has a "Fails when" text, so T32 can make `failsWhen` required.
+    - Maintainer decision on 2026-11-03: examples may write `Boolean` as well as `String`, as the library README does. This widens the T26 exception to the C# keyword rule.
+    - After review: the checker's secret overloads also carry the 2.0.0 minimum secret length (a probe with a hand-signed token showed "Unable to validate JWT"). "Fails when" also names an `exp` after the year 9999 (`ArgumentOutOfRangeException`), and a null list in `Print` and `ContainsValueInList` (`ArgumentNullException`).
     - Carried forward to T31: the Expiry checker page names `new JWTExpiryChecker()` only, and says each call downloads the OpenID configuration again. Link it to Dependency injection (the `IJWTValidator` constructor) and to Known limitations once they exist.
 
 - [ ] **T31 — Write Dependency injection, Debugging and Known limitations**

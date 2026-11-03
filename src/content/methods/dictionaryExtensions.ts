@@ -9,6 +9,11 @@ const dictionaryParameter = {
     "The dictionary the method is called on, for example the claims. It can be null.",
 };
 
+// Print and ContainsValueInList read every list. A dictionary that the reader builds can
+// hold a null list; the validator's claims never do.
+const nullListFailure =
+  "Throws ArgumentNullException when a key's list is null. The validator's claims never have a null list.";
+
 const containsChange =
   "Returns false for a null dictionary, and no longer throws for a null value in a list. Version 1.0.3 threw for both.";
 
@@ -22,7 +27,7 @@ export const dictionaryExtensionMethods: MethodReference[] = [
     parameters: [dictionaryParameter],
     returns:
       "One line for each key: the key, a colon, then its values separated by commas. An empty string for an empty or null dictionary.",
-    failsWhen: "It does not fail.",
+    failsWhen: nullListFailure,
     changedIn2:
       "Returns an empty string for a null dictionary. Version 1.0.3 threw.",
   },
@@ -61,8 +66,7 @@ export const dictionaryExtensionMethods: MethodReference[] = [
     ],
     returns:
       "True when any list holds the value. The match is exact, so case matters.",
-    failsWhen:
-      "It does not fail. It returns false for an empty or null dictionary.",
+    failsWhen: `It returns false for an empty or null dictionary. ${nullListFailure}`,
     changedIn2: containsChange,
   },
   {

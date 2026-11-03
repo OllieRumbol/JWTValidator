@@ -1,3 +1,5 @@
+import Link from "@mui/material/Link";
+import { Link as RouterLink } from "react-router";
 import ArticleSection from "@/components/ArticleSection/ArticleSection";
 import ChangedNote from "@/components/ChangedNote/ChangedNote";
 import CodeBlock from "@/components/CodeBlock/CodeBlock";
@@ -47,7 +49,8 @@ const ExpiryCheckerPage = () => {
         <ChangedNote>
           <code>WhenDoesJWTExpire</code> returns UTC, not local time.{" "}
           <code>HasJWTExpired</code> gives the correct result in every time
-          zone.
+          zone. With a secret, a secret shorter than the minimum for the
+          token&apos;s algorithm now fails.
         </ChangedNote>
         <CodeBlock code={secretExample} caption="The expiry, with a secret" />
         <CodeBlock
@@ -79,13 +82,21 @@ const ExpiryCheckerPage = () => {
       <ArticleSection id="when-it-fails" title="When it fails">
         <ul>
           <li>
-            The signature does not match, or the OpenID configuration cannot be
-            downloaded: an <code>Exception</code> with the message &quot;Unable
-            to validate JWT&quot;.
+            The signature does not match, the secret is too short, or the
+            OpenID configuration cannot be downloaded: an <code>Exception</code>{" "}
+            with the message &quot;Unable to validate JWT&quot;.{" "}
+            <Link component={RouterLink} to="/docs/validation-options/minimum-secret-length">
+              Minimum secret length
+            </Link>{" "}
+            gives the length for each algorithm.
           </li>
           <li>
             The token has no <code>exp</code> claim: an <code>Exception</code>{" "}
             with the message &quot;Jwt does not contain an expiry&quot;.
+          </li>
+          <li>
+            The token&apos;s <code>exp</code> is after the year 9999: an{" "}
+            <code>ArgumentOutOfRangeException</code>.
           </li>
           <li>
             The token or the secret is null or empty: an{" "}

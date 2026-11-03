@@ -56,21 +56,22 @@ const DictionaryExtensionsPage = () => {
                 <th scope="col">Result</th>
               </tr>
             </thead>
-            <tbody>
+            {/* Code type, as the design's secret length table has it. A method name
+                stays on one line; on a narrow screen the table scrolls instead. */}
+            <Box
+              component="tbody"
+              sx={(theme) => ({
+                fontFamily: theme.tokens.fontMono,
+                "& td:first-of-type": { whiteSpace: "nowrap" },
+              })}
+            >
               {emptyResults.map((row) => (
                 <tr key={row.method}>
-                  <td>
-                    <code>{row.method}</code>
-                  </td>
-                  <Box
-                    component="td"
-                    sx={(theme) => ({ fontFamily: theme.tokens.fontMono })}
-                  >
-                    {row.result}
-                  </Box>
+                  <td>{row.method}</td>
+                  <td>{row.result}</td>
                 </tr>
               ))}
-            </tbody>
+            </Box>
           </table>
         </ScrollTable>
         <ChangedNote>

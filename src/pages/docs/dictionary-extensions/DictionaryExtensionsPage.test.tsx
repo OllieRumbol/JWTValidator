@@ -31,6 +31,17 @@ describe("Dictionary extensions", () => {
     ]);
   });
 
+  test("says that keys and values match exactly", async () => {
+    renderRoute("/docs/dictionary-extensions");
+
+    const section = within(
+      (
+        await screen.findByRole("heading", { level: 2, name: "How values match" })
+      ).closest("section")!,
+    );
+    expect(section.getByText(/match exactly, so case matters/)).toBeVisible();
+  });
+
   // The example is the compiled file (spec section 6.1.3, item 6).
   test("shows the compiled example", async () => {
     const user = userEvent.setup();

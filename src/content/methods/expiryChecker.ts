@@ -17,10 +17,18 @@ const keyParameters = [
   },
 ];
 
-const hasExpiredChange =
-  "The result is correct in every time zone. Version 1.0.3 compared a local time with UTC.";
+// The secret overloads validate the token with WithSigningKeyFromSecret, so the minimum
+// secret length of 2.0.0 applies to them too.
+const shortSecretChange =
+  "With a secret, a secret shorter than the minimum for the token's algorithm now fails.";
 
-const whenExpiresChange = "The expiry is in UTC, not local time.";
+const hasExpiredChange = `The result is correct in every time zone. Version 1.0.3 compared a local time with UTC. ${shortSecretChange}`;
+
+const whenExpiresChange = `The expiry is in UTC, not local time. ${shortSecretChange}`;
+
+// The causes of "Unable to validate JWT", and the failures that both throwing methods share.
+const sharedFailures =
+  'Throws Exception "Unable to validate JWT" when the signature does not match, the secret is too short, or the download fails. Throws Exception "Jwt does not contain an expiry" when the token has no "exp" claim, and ArgumentOutOfRangeException when its "exp" is after the year 9999. A null openIdUrl throws NullReferenceException.';
 
 export const expiryCheckerMethods: MethodReference[] = [
   {
@@ -33,8 +41,7 @@ export const expiryCheckerMethods: MethodReference[] = [
     parameters: [tokenParameter, ...keyParameters],
     returns:
       "True when the expiry is before the current UTC time, otherwise false. There is no clock skew.",
-    failsWhen:
-      'Throws ArgumentNullException when the token is null or empty, and ArgumentException when the secret is. Throws Exception "Unable to validate JWT" when the signature does not match or the download fails, and Exception "Jwt does not contain an expiry" when the token has no "exp" claim. A null openIdUrl throws NullReferenceException.',
+    failsWhen: `Throws ArgumentNullException when the token is null or empty, and ArgumentException when the secret is null or empty. ${sharedFailures}`,
     changedIn2: hasExpiredChange,
   },
   {
@@ -68,8 +75,7 @@ export const expiryCheckerMethods: MethodReference[] = [
     parameters: [tokenParameter, ...keyParameters],
     returns:
       'The "exp" time as a DateTime in UTC. An expired token still gives its expiry.',
-    failsWhen:
-      'Throws ArgumentException when the token or the secret is null or empty. Throws Exception "Unable to validate JWT" when the signature does not match or the download fails, and Exception "Jwt does not contain an expiry" when the token has no "exp" claim. A null openIdUrl throws NullReferenceException.',
+    failsWhen: `Throws ArgumentException when the token or the secret is null or empty. ${sharedFailures}`,
     changedIn2: whenExpiresChange,
   },
   {
