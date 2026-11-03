@@ -48,7 +48,7 @@ describe("routes", () => {
     });
   });
 
-  test.each(["/no-such-page", "/docs/no-such-page", "/docs/debugging"])(
+  test.each(["/no-such-page", "/docs/no-such-page", "/docs/reference"])(
     '%s shows "Page not found"',
     async (path) => {
       renderRoute(path);

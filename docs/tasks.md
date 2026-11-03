@@ -537,6 +537,10 @@ Base branch: release/phase-3-content
     - From T28: in the migration guide's logging section, link "Debugging" to the Debugging page, as `migration-guide.html` shows.
     - From T29: Claims says each key is the claim name as it is in the token. Link it to the Known limitations section on the claim type map, which explains why. The Validator page shows `ShowPII` in a sentence; Debugging gives the full steps.
     - From T30: on the Expiry checker page, link `new JWTExpiryChecker()` to the Dependency injection page, and the sentence about downloading the configuration on each call to Known limitations.
+    - Done: all five carried links, each checked by a test in `DocsPage.test.tsx`.
+    - The facts come from the README, the release notes and the source at `v2.0.0`. A probe against the 2.0.0 package showed that a container uses the `JWTExpiryChecker(IJWTValidator)` constructor, and that a null validator throws `NullReferenceException`. It also showed that in IdentityModel 8 the common messages (issuer, audience, key, malformed token) read the same with `ShowPII` on or off, so the Debugging page keeps to the README's words and promises no particular message.
+    - The Debugging example uses `Microsoft.IdentityModel.Logging`, which comes with the package's own dependencies, so it references no other package (spec 6.1.3, item 6). The dependency injection example is `examples/di-register-services.cs`.
+    - Dependency injection shows the constructors with `MethodReference`, and `IJWTValidator`'s members as a signature block, with no method table: the page has no methods of its own.
 
 - [ ] **T32 — Check the content against 2.0.0**
   - Refs: spec 6.1.3 items 5 and 6, spec 9, plan 3.5 (example compilation)

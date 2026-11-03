@@ -106,6 +106,44 @@ describe("docs page layout", () => {
       await screen.findByRole("heading", { level: 1, name: "Page not found" }),
     ).toBeVisible();
   });
+
+  // Links that earlier pages waited for until T31 added the pages they point to.
+  test.each([
+    ["migrating-from-1x", "logging", "Debugging", "/docs/debugging"],
+    ["validator", "what-validatejwt-throws", "Debugging", "/docs/debugging"],
+    [
+      "claims",
+      "the-dictionary",
+      "Known limitations",
+      "/docs/known-limitations/claim-type-map",
+    ],
+    [
+      "expiry-checker",
+      "check-the-expiry",
+      "Dependency injection",
+      "/docs/dependency-injection",
+    ],
+    [
+      "expiry-checker",
+      "what-it-checks",
+      "Known limitations",
+      "/docs/known-limitations/openid-downloads",
+    ],
+  ])(
+    "%s, section %s, links %s",
+    async (slug, sectionId, linkText, href) => {
+      renderRoute(`/docs/${slug}`);
+
+      await screen.findByRole("heading", { level: 1 });
+      const section = within(
+        document.getElementById(sectionId)!.closest("section")!,
+      );
+      expect(section.getByRole("link", { name: linkText })).toHaveAttribute(
+        "href",
+        href,
+      );
+    },
+  );
 });
 
 describe("section addresses", () => {

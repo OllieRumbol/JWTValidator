@@ -244,13 +244,14 @@ const MigratingFrom1xPage = () => {
         <AffectsYouIf>
           You read IdentityModel messages while you debug.
         </AffectsYouIf>
-        {/* T31 links "Debugging" to its page, as migration-guide.html shows. The page
-            does not exist yet. */}
         <p>
           The library no longer turns on personal data in IdentityModel
           messages. To see it while you debug, set{" "}
-          <code>IdentityModelEventSource.ShowPII = true</code> in your own app.
-          Debugging has the details.
+          <code>IdentityModelEventSource.ShowPII = true</code> in your own app.{" "}
+          <Link component={RouterLink} to="/docs/debugging">
+            Debugging
+          </Link>{" "}
+          has the details.
         </p>
       </ArticleSection>
 

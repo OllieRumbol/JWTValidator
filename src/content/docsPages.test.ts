@@ -3,8 +3,8 @@ import { describe, expect, test } from "vitest";
 import { docsPages, getAdjacentPages } from "./docsPages";
 
 describe("docsPages", () => {
-  // Plan section 3.4. Release 3 adds the other pages as it writes them.
-  test("has the pages written so far in reading order", () => {
+  // Plan section 3.4: all 10 pages.
+  test("has every page in reading order", () => {
     expect(docsPages.map((page) => page.slug)).toEqual([
       "getting-started",
       "migrating-from-1x",
@@ -13,6 +13,9 @@ describe("docsPages", () => {
       "claims",
       "expiry-checker",
       "dictionary-extensions",
+      "dependency-injection",
+      "debugging",
+      "known-limitations",
     ]);
   });
 

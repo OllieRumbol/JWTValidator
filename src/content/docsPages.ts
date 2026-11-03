@@ -1,5 +1,5 @@
 // The docs pages, in reading order (plan section 3.4). Previous and next come from the
-// order. Release 3 adds Dependency injection, Debugging and Known limitations.
+// order.
 
 export type DocsGroup = "Get started" | "Guides" | "More";
 
@@ -25,6 +25,13 @@ export const docsPages: DocsPage[] = [
     title: "Dictionary extensions",
     group: "Guides",
   },
+  {
+    slug: "dependency-injection",
+    title: "Dependency injection",
+    group: "More",
+  },
+  { slug: "debugging", title: "Debugging", group: "More" },
+  { slug: "known-limitations", title: "Known limitations", group: "More" },
 ];
 
 // A section of a docs page, for "On this page". The id is also the SectionHeading's id,

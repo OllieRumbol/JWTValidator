@@ -1,4 +1,6 @@
 import Box from "@mui/material/Box";
+import Link from "@mui/material/Link";
+import { Link as RouterLink } from "react-router";
 import ArticleSection from "@/components/ArticleSection/ArticleSection";
 import CodeBlock from "@/components/CodeBlock/CodeBlock";
 import DocsLayout from "@/components/DocsLayout/DocsLayout";
@@ -50,7 +52,11 @@ const ClaimsPage = () => {
         <ul>
           <li>
             The key is the claim name as it is in the token, for example{" "}
-            <code>sub</code> or <code>email</code>.
+            <code>sub</code> or <code>email</code>.{" "}
+            <Link component={RouterLink} to="/docs/known-limitations/claim-type-map">
+              Known limitations
+            </Link>{" "}
+            explains how the library keeps these names.
           </li>
           <li>
             The value is a list of strings. Most claims have one string. A

@@ -28,8 +28,13 @@ const ExpiryCheckerPage = () => {
     >
       <ArticleSection id="check-the-expiry" title="Check the expiry">
         <p>
-          Create the checker with <code>new JWTExpiryChecker()</code>. It has
-          two pairs of methods, one that throws and one that returns false:
+          Create the checker with <code>new JWTExpiryChecker()</code>, or get it
+          from a container, as{" "}
+          <Link component={RouterLink} to="/docs/dependency-injection">
+            Dependency injection
+          </Link>{" "}
+          shows. It has two pairs of methods, one that throws and one that
+          returns false:
         </p>
         <ul>
           <li>
@@ -74,7 +79,11 @@ const ExpiryCheckerPage = () => {
         </p>
         <p>
           Each call validates the token again. With an OpenID address, each
-          call also downloads the OpenID configuration again.
+          call also downloads the OpenID configuration again.{" "}
+          <Link component={RouterLink} to="/docs/known-limitations/openid-downloads">
+            Known limitations
+          </Link>{" "}
+          explains why this matters.
         </p>
       </ArticleSection>
 
