@@ -64,7 +64,8 @@ const changes: Change[] = [
         You use <code>WhenDoesJWTExpire</code> or <code>HasJWTExpired</code>.
       </>
     ),
-    whatToDo: "Convert to local time yourself if you need it.",
+    whatToDo:
+      "Convert the expiry to local time if you need it. Remove any time zone workaround.",
   },
   {
     id: "isempty",

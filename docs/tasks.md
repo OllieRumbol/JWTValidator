@@ -550,7 +550,7 @@ Base branch: release/phase-3-content
   - Verify: `gh pr checks <number>` shows every job passing. The fact check is listed topic by topic in the pull request.
   - Notes:
     - Each of the 11 topics was checked against the README and the release notes at `v2.0.0`, and each method against the source at `v2.0.0`. No page contradicts them. The check is in the pull request, topic by topic.
-    - One difference fixed: the migration guide's summary row for "Expiry in UTC" named only `WhenDoesJWTExpire`. Release notes item 3 and the section below it also name `HasJWTExpired`, so the row now names both. The design's summary row names only the first.
+    - One difference fixed: the migration guide's summary row for "Expiry in UTC" named only `WhenDoesJWTExpire`. Release notes item 3 and the section below it also name `HasJWTExpired`, so the row now names both, and its "What to do" also says to remove any time zone workaround. The maintainer approved this design difference on 2026-11-03.
     - `failsWhen` is required in `MethodReference` (plan 3.4), and "Fails when" always shows. Every method already had the text.
     - `examples/Directory.Build.props` already used `2.0.0` (T26). `Microsoft.Extensions.DependencyInjection` 10.0.14 is still its latest stable version. nuget.org gives 25 October 2026 for 2.0.0, the date on the Versions page.
 
