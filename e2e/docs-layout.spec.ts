@@ -165,6 +165,37 @@ test.describe("layout at each width", () => {
     ).toBeVisible();
   });
 
+  // docs-page.html: the sidebar has 240 px of content and 56 px of padding, and On this
+  // page is 180 to 220 px wide. A wider sidebar left empty space beside the docs list.
+  // The article has 32 px on each side, not the design's 48 px (maintainer's choice).
+  test("the sidebar, the article and On this page have their set widths", async ({
+    page,
+  }) => {
+    await page.setViewportSize(DESKTOP);
+    await page.goto("#/docs/validator");
+
+    const sidebar = await page
+      .getByRole("navigation", { name: "Documentation" })
+      .boundingBox();
+    const article = await page.locator("article").boundingBox();
+    const onThisPage = await page
+      .getByRole("navigation", { name: "On this page" })
+      .boundingBox();
+    // 240 + 32 + 24 px, and the 1 px border.
+    expect(sidebar!.width).toBe(297);
+    expect(article!.x - (sidebar!.x + sidebar!.width)).toBe(32);
+    expect(onThisPage!.x - (article!.x + article!.width)).toBe(32);
+    expect(onThisPage!.width).toBeGreaterThanOrEqual(180);
+    expect(onThisPage!.width).toBeLessThanOrEqual(220);
+
+    // At the narrowest width that shows the column, it shrinks, but not below 180 px.
+    await page.setViewportSize({ width: 1200, height: 720 });
+    const narrowest = await page
+      .getByRole("navigation", { name: "On this page" })
+      .boundingBox();
+    expect(narrowest!.width).toBeGreaterThanOrEqual(180);
+  });
+
   test("below 1200 px, On this page is a box at the top of the article", async ({
     page,
   }) => {
