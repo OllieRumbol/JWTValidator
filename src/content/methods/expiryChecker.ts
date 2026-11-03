@@ -8,19 +8,20 @@ const tokenParameter = { name: "jwt", description: "The token, as a string." };
 const keyParameters = [
   {
     name: "signingKey",
-    description: "The secret that signed the token.",
+    description:
+      "The secret that signed the token. Used by the String overload.",
   },
   {
     name: "openIdUrl",
     description:
-      "The address of the provider's OpenID configuration, as a Uri. Use one of signingKey or openIdUrl.",
+      "The address of the provider's OpenID configuration. Used by the Uri overload.",
   },
 ];
 
 // The secret overloads validate the token with WithSigningKeyFromSecret, so the minimum
 // secret length of 2.0.0 applies to them too.
 const shortSecretChange =
-  "With a secret, a secret shorter than the minimum for the token's algorithm now fails.";
+  "With the String overloads, a secret shorter than the minimum for the token's algorithm now fails.";
 
 const hasExpiredChange = `The result is correct in every time zone. Version 1.0.3 compared a local time with UTC. ${shortSecretChange}`;
 

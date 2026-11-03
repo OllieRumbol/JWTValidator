@@ -49,8 +49,8 @@ const ExpiryCheckerPage = () => {
         <ChangedNote>
           <code>WhenDoesJWTExpire</code> returns UTC, not local time.{" "}
           <code>HasJWTExpired</code> gives the correct result in every time
-          zone. With a secret, a secret shorter than the minimum for the
-          token&apos;s algorithm now fails.
+          zone. With the <code>String</code> overloads, a secret shorter than
+          the minimum for the token&apos;s algorithm now fails.
         </ChangedNote>
         <CodeBlock code={secretExample} caption="The expiry, with a secret" />
         <CodeBlock
@@ -63,8 +63,7 @@ const ExpiryCheckerPage = () => {
         <p>
           The checker validates the token&apos;s signature, then reads its{" "}
           <code>exp</code> claim. It does not check the issuer or the audience.
-          It does not reject an expired token, so an expired token still gives
-          its expiry time.
+          It accepts an expired token, so it can still give the expiry time.
         </p>
         <p>
           <code>HasJWTExpired</code> compares the expiry with the current time
@@ -100,9 +99,9 @@ const ExpiryCheckerPage = () => {
           </li>
           <li>
             The token or the secret is null or empty: an{" "}
-            <code>ArgumentException</code>, or an{" "}
-            <code>ArgumentNullException</code> from <code>HasJWTExpired</code>{" "}
-            for the token.
+            <code>ArgumentException</code>. For the token,{" "}
+            <code>HasJWTExpired</code> throws{" "}
+            <code>ArgumentNullException</code> instead.
           </li>
           <li>
             The OpenID address is null: a{" "}

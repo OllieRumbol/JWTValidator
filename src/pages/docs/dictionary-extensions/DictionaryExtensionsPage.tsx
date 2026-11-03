@@ -31,7 +31,7 @@ const DictionaryExtensionsPage = () => {
   return (
     <DocsLayout
       slug="dictionary-extensions"
-      description="Extension methods for the claims dictionary. Find a claim or a value, check for an empty result, or print the claims while you debug."
+      description="These extension methods work on the claims dictionary. Find a claim or a value, check for an empty result, or print the claims while you debug."
       sections={sections}
     >
       <ArticleSection id="use-the-extensions" title="Use the extensions">
@@ -46,7 +46,7 @@ const DictionaryExtensionsPage = () => {
       <ArticleSection id="null-and-empty" title="Empty and null dictionaries">
         <p>
           You can call each method on an empty or a null dictionary. None of
-          them throws.
+          them throws for either.
         </p>
         <ScrollTable label="Results for an empty or null dictionary">
           <table>
