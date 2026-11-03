@@ -540,7 +540,7 @@ Base branch: release/phase-3-content
     - Dependency injection has no method table: it shows the constructors with `MethodReference` and `IJWTValidator`'s members as a signature block. The maintainer approved the ticking on 2026-11-03.
     - Evidence: pull request #62
 
-- [ ] **T32 — Check the content against 2.0.0**
+- [x] **T32 — Check the content against 2.0.0**
   - Refs: spec 6.1.3 items 5 and 6, spec 9, plan 3.5 (example compilation)
   - Depends on: T27 to T31, and 2.0.0 listed on nuget.org (library task T16)
   - Done when:
@@ -549,10 +549,11 @@ Base branch: release/phase-3-content
     - The 2.0.0 changelog date is the real publish date.
   - Verify: `gh pr checks <number>` shows every job passing. The fact check is listed topic by topic in the pull request.
   - Notes:
-    - Each of the 11 topics was checked against the README and the release notes at `v2.0.0`, and each method against the source at `v2.0.0`. No page contradicts them. The check is in the pull request, topic by topic.
-    - One difference fixed: the migration guide's summary row for "Expiry in UTC" named only `WhenDoesJWTExpire`. Release notes item 3 and the section below it also name `HasJWTExpired`, so the row now names both, and its "What to do" also says to remove any time zone workaround. The maintainer approved this design difference on 2026-11-03.
-    - `failsWhen` is required in `MethodReference` (plan 3.4), and "Fails when" always shows. Every method already had the text.
-    - `examples/Directory.Build.props` already used `2.0.0` (T26). `Microsoft.Extensions.DependencyInjection` 10.0.14 is still its latest stable version. nuget.org gives 25 October 2026 for 2.0.0, the date on the Versions page.
+    - All 11 topics were checked against the README and release notes at `v2.0.0`, and each method against the source. No page contradicts them.
+    - Approved design difference (2026-11-03): the migration summary row "Expiry in UTC" also names `HasJWTExpired`, as release notes item 3 does, and says to remove any time zone workaround.
+    - `failsWhen` is required (plan 3.4), so "Fails when" always shows. Home's "What's new" row keeps its old "What to do" text for T33.
+    - The examples already used 2.0.0, and DI 10.0.14 is still the latest stable. nuget.org confirms 25 October 2026 for 2.0.0.
+    - Evidence: pull request #63
 
 - [ ] **T33 — Check spelling, grammar and wording**
   - Refs: spec 6.1.8, spec 6.1.10 item 3, spec 3 goal 9
@@ -565,6 +566,7 @@ Base branch: release/phase-3-content
   - Notes:
     - From T27: Home names the logging change "Personal data stays hidden". The migration guide's summary still says "Logging stays off". Choose one name for both.
     - From T29: the maintainer read and approved the new T29 sections on 2026-11-02 (Validation options, Validator and Claims). This check still covers them.
+    - From T32: Home's "What's new" row "Expiry in UTC" says "Convert to local time yourself if you need it." The migration guide's row now says "Convert the expiry to local time if you need it. Remove any time zone workaround." Decide whether Home should match.
 
 - [ ] **T34 — Release phase 3 (maintainer)**
   - Refs: spec 6.1.10 items 2 to 6, spec 6.1.12, spec 9, plan 5 (releases), plan 9 (TypeScript, Node)
@@ -618,4 +620,5 @@ None.
 - 2026-11-02 — T29
 - 2026-11-03 — T30
 - 2026-11-03 — T31
+- 2026-11-03 — T32
 
