@@ -555,7 +555,7 @@ Base branch: release/phase-3-content
     - The examples already used 2.0.0, and DI 10.0.14 is still the latest stable. nuget.org confirms 25 October 2026 for 2.0.0.
     - Evidence: pull request #63
 
-- [ ] **T33 — Check spelling, grammar and wording**
+- [x] **T33 — Check spelling, grammar and wording**
   - Refs: spec 6.1.8, spec 6.1.10 item 3, spec 3 goal 9
   - Depends on: T32
   - Done when:
@@ -564,11 +564,11 @@ Base branch: release/phase-3-content
     - No other change is merged into the release branch after this task.
   - Verify: The maintainer reads every page on `npm run preview`.
   - Notes:
-    - Checkpoint (2026-11-03): every page, the reference data and the example comments were read. The maintainer approved the changes on 2026-11-03, and they are in this task's pull request. The maintainer's read of every page on `npm run preview` is still to do, so T33 is not ticked.
-    - The logging change is "Personal data stays hidden" on Home and in the migration guide. The address `/docs/migrating-from-1x/logging` does not change. The migration summary's "What to do" now uses Home's words, to fit that name.
-    - Home's "Expiry in UTC" row now has the migration guide's text. "application" replaces "app", except "console app".
-    - The maintainer approved on 2026-11-03: the migration summary row's text; "the library" alongside "JWT Validator" meets spec 6.1.8 item 1; and T34 may remove the version notice after this task, as the one exception to spec 6.1.10 item 3.
-    - `.prettierignore` now has `/docs`, because `docs` also skipped `src/pages/docs`. This task's pull request formats those 19 files, in its own commit, so no format change follows the wording check.
+    - The maintainer read the site on the preview and approved it, and every change, on 2026-11-03.
+    - The logging change is "Personal data stays hidden" on Home and in the migration guide, at the same address. "application" replaces "app", except "console app".
+    - The maintainer confirmed that "the library" alongside "JWT Validator" meets spec 6.1.8 item 1. T34 may remove the version notice after this task, as the one approved exception to spec 6.1.10 item 3.
+    - `.prettierignore` now has `/docs`, because `docs` also skipped `src/pages/docs`. Those 19 files are formatted in this task, so `format:check` covers them from now on.
+    - Evidence: pull request #64
 
 - [ ] **T34 — Release phase 3 (maintainer)**
   - Refs: spec 6.1.10 items 2 to 6, spec 6.1.12, spec 9, plan 5 (releases), plan 9 (TypeScript, Node)
@@ -623,4 +623,5 @@ None.
 - 2026-11-03 — T30
 - 2026-11-03 — T31
 - 2026-11-03 — T32
+- 2026-11-03 — T33
 
