@@ -114,7 +114,11 @@ const ValidatorPage = () => {
         <p>
           IdentityModel hides personal data in its messages. To see it while
           you debug, set <code>IdentityModelEventSource.ShowPII = true</code>{" "}
-          in your own application. The library does not turn it on.
+          in your own application. The library does not turn it on.{" "}
+          <Link component={RouterLink} to="/docs/debugging">
+            Debugging
+          </Link>{" "}
+          has the details.
         </p>
       </ArticleSection>
 

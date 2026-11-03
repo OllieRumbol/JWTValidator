@@ -2,14 +2,17 @@ import type { ComponentType } from "react";
 import { useParams } from "react-router";
 import NotFoundPage from "@/pages/not-found/NotFoundPage";
 import ClaimsPage from "./claims/ClaimsPage";
+import DebuggingPage from "./debugging/DebuggingPage";
+import DependencyInjectionPage from "./dependency-injection/DependencyInjectionPage";
 import DictionaryExtensionsPage from "./dictionary-extensions/DictionaryExtensionsPage";
 import ExpiryCheckerPage from "./expiry-checker/ExpiryCheckerPage";
 import GettingStartedPage from "./getting-started/GettingStartedPage";
+import KnownLimitationsPage from "./known-limitations/KnownLimitationsPage";
 import MigratingFrom1xPage from "./migrating-from-1x/MigratingFrom1xPage";
 import ValidationOptionsPage from "./validation-options/ValidationOptionsPage";
 import ValidatorPage from "./validator/ValidatorPage";
 
-// The page for each slug in docsPages (plan section 3.4). Release 3 adds the rest.
+// The page for each slug in docsPages (plan section 3.4).
 const pages: Record<string, ComponentType> = {
   "getting-started": GettingStartedPage,
   "migrating-from-1x": MigratingFrom1xPage,
@@ -18,6 +21,9 @@ const pages: Record<string, ComponentType> = {
   claims: ClaimsPage,
   "expiry-checker": ExpiryCheckerPage,
   "dictionary-extensions": DictionaryExtensionsPage,
+  "dependency-injection": DependencyInjectionPage,
+  debugging: DebuggingPage,
+  "known-limitations": KnownLimitationsPage,
 };
 
 // The docs page for the slug in the address, or "Page not found" for an unknown slug
