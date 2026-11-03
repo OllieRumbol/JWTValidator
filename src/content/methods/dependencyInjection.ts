@@ -20,5 +20,5 @@ export const expiryCheckerConstructors: MethodReference = {
   ],
   returns: "A new expiry checker.",
   failsWhen:
-    "It does not fail. A null jwtValidator is not checked: WhenDoesJWTExpire and HasJWTExpired then throw NullReferenceException, and the Try methods return false.",
+    "It does not fail, and it does not check for a null jwtValidator. With null, WhenDoesJWTExpire and HasJWTExpired throw NullReferenceException, and the Try methods return false.",
 };

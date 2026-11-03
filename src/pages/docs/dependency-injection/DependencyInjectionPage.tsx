@@ -36,7 +36,8 @@ const DependencyInjectionPage = () => {
         </p>
         <p>
           The validator keeps no state between calls, so a singleton is fine.
-          The container then gives the expiry checker the same validator.
+          With both registered, the container gives the expiry checker the same
+          validator.
         </p>
         <CodeBlock
           code={registerExample}

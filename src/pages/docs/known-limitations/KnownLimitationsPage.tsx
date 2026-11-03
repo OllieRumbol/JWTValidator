@@ -27,13 +27,13 @@ const KnownLimitationsPage = () => {
         </p>
         <ul>
           <li>
-            The map is shared by the whole process. So it also changes the claim
-            names for other code in your application that uses{" "}
+            The map is shared by the whole process. So clearing it also changes
+            the claim names for other code in your application that uses{" "}
             <code>JwtSecurityTokenHandler</code>.
           </li>
           <li>
-            The clear is not thread-safe. Other code can fail if it reads the
-            map at the same moment.
+            Clearing the map is not thread-safe. Other code can fail if it reads
+            the map at the same moment.
           </li>
         </ul>
       </ArticleSection>
@@ -48,7 +48,7 @@ const KnownLimitationsPage = () => {
           The expiry checker validates the token again, so it downloads the
           configuration again too. If you need the claims and the expiry, take
           the expiry from the <code>exp</code> claim of one validation, rather
-          than call the validator and the expiry checker.{" "}
+          than calling both the validator and the expiry checker.{" "}
           <Link component={RouterLink} to="/docs/claims/times">
             Claims
           </Link>{" "}
