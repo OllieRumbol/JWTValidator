@@ -1,6 +1,7 @@
 import { describe, expect, test } from "vitest";
 import { screen, within } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
+import { expiryCheckerConstructors } from "@/content/methods/dependencyInjection";
 import { renderRoute } from "@/test/renderRoute";
 import registerExample from "@examples/di-register-services.cs?raw";
 
@@ -39,6 +40,11 @@ describe("Dependency injection", () => {
     expect(
       screen.getByRole("region", { name: "JWTExpiryChecker" }),
     ).toHaveTextContent("public JWTExpiryChecker(IJWTValidator jwtValidator)");
+  });
+
+  // Spec section 6.1.3, item 3: when each method throws or returns false.
+  test("documents when the constructors fail", () => {
+    expect(expiryCheckerConstructors.failsWhen).toBeTruthy();
   });
 
   // IJWTExpiryChecker is internal to the library (spec section 6.1.3).

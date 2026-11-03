@@ -61,10 +61,11 @@ const changes: Change[] = [
     name: "Expiry in UTC",
     affectsYouIf: (
       <>
-        You use <code>WhenDoesJWTExpire</code>.
+        You use <code>WhenDoesJWTExpire</code> or <code>HasJWTExpired</code>.
       </>
     ),
-    whatToDo: "Convert to local time yourself if you need it.",
+    whatToDo:
+      "Convert the expiry to local time if you need it. Remove any time zone workaround.",
   },
   {
     id: "isempty",

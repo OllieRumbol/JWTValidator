@@ -47,14 +47,15 @@ describe("MethodReference", () => {
     expect(returns.nextElementSibling).toHaveTextContent("The builder.");
   });
 
-  // The 1.0.3 text has no failures, until release 3 writes them.
-  test('leaves out "Fails when" for a method without that text', async () => {
-    renderOnDocsPage(
-      <MethodReference method={{ ...method, failsWhen: undefined }} />,
-    );
+  // Spec section 6.1.3, item 3: when each method throws or returns false.
+  test('labels the failures "Fails when"', async () => {
+    renderOnDocsPage(<MethodReference method={method} />);
 
-    expect(await screen.findByText("Returns")).toBeVisible();
-    expect(screen.queryByText("Fails when")).toBeNull();
+    const failsWhen = await screen.findByText("Fails when");
+    expect(failsWhen.tagName).toBe("DT");
+    expect(failsWhen.nextElementSibling).toHaveTextContent(
+      "The secret is empty.",
+    );
   });
 
   test('says "None" for a method with no parameters', async () => {
