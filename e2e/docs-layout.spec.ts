@@ -183,6 +183,13 @@ test.describe("layout at each width", () => {
     expect(sidebar!.width).toBe(297);
     expect(onThisPage!.width).toBeGreaterThanOrEqual(180);
     expect(onThisPage!.width).toBeLessThanOrEqual(220);
+
+    // At the narrowest width that shows the column, it shrinks, but not below 180 px.
+    await page.setViewportSize({ width: 1200, height: 720 });
+    const narrowest = await page
+      .getByRole("navigation", { name: "On this page" })
+      .boundingBox();
+    expect(narrowest!.width).toBeGreaterThanOrEqual(180);
   });
 
   test("below 1200 px, On this page is a box at the top of the article", async ({
