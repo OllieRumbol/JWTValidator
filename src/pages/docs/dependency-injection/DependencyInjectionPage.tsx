@@ -35,7 +35,7 @@ const DependencyInjectionPage = () => {
           has no public interface.
         </p>
         <p>
-          The validator keeps no state between calls, so a singleton is fine.
+          The validator keeps no state between calls, so you can register it as a singleton.
           With both registered, the container gives the expiry checker the same
           validator.
         </p>

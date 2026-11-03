@@ -36,9 +36,9 @@ const DictionaryExtensionsPage = () => {
     >
       <ArticleSection id="use-the-extensions" title="Use the extensions">
         <p>
-          Add <code>using JWTValidatorService.Extensions;</code>. The methods
-          then work on any <code>Dictionary</code> whose values are lists, such
-          as the claims from the validator.
+          Add <code>using JWTValidatorService.Extensions;</code> at the top of
+          your file. Then the methods work on any <code>Dictionary</code> whose
+          values are lists, such as the claims from the validator.
         </p>
         <CodeBlock code={claimsExample} caption="Check and print the claims" />
       </ArticleSection>

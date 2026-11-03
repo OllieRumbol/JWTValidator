@@ -13,7 +13,7 @@ const changeSections = [
   ["minimum-secret-length", "Minimum secret length"],
   ["expiry-in-utc", "Expiry in UTC"],
   ["isempty", "IsEmpty on null"],
-  ["logging", "Logging stays off"],
+  ["logging", "Personal data stays hidden"],
   ["identitymodel-8", "IdentityModel 8"],
 ];
 

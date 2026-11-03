@@ -91,8 +91,8 @@ const ValidationOptionsPage = () => {
 
       <ArticleSection id="add-checks-and-build" title="Add checks and build">
         <p>
-          Add only the checks you need. A check that you do not add is not
-          made.
+          Add only the checks you need. The library skips any check that you
+          do not add.
         </p>
         <ul>
           <li>

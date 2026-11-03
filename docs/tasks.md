@@ -564,9 +564,10 @@ Base branch: release/phase-3-content
     - No other change is merged into the release branch after this task.
   - Verify: The maintainer reads every page on `npm run preview`.
   - Notes:
-    - From T27: Home names the logging change "Personal data stays hidden". The migration guide's summary still says "Logging stays off". Choose one name for both.
-    - From T29: the maintainer read and approved the new T29 sections on 2026-11-02 (Validation options, Validator and Claims). This check still covers them.
-    - From T32: Home's "What's new" row "Expiry in UTC" says "Convert to local time yourself if you need it." The migration guide's row now says "Convert the expiry to local time if you need it. Remove any time zone workaround." Decide whether Home should match.
+    - Checkpoint (2026-11-03): every page, the reference data and the example comments were read. The maintainer approved the changes on 2026-11-03, and they are in this task's pull request. The maintainer's read of every page on `npm run preview` is still to do, so T33 is not ticked.
+    - The logging change is "Personal data stays hidden" on Home and in the migration guide. The address `/docs/migrating-from-1x/logging` does not change. The migration summary's "What to do" now uses Home's words, to fit that name.
+    - Home's "Expiry in UTC" row now has the migration guide's text. "application" replaces "app", except "console app".
+    - T34 removes the version notice, so T34 still changes the release branch after this task (spec 6.1.10, item 3).
 
 - [ ] **T34 — Release phase 3 (maintainer)**
   - Refs: spec 6.1.10 items 2 to 6, spec 6.1.12, spec 9, plan 5 (releases), plan 9 (TypeScript, Node)

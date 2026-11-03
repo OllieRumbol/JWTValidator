@@ -26,7 +26,7 @@ const sections: DocsSection[] = [
     title: "IsEmpty on an empty or null dictionary",
     level: 2,
   },
-  { id: "logging", title: "Personal-data logging stays off", level: 2 },
+  { id: "logging", title: "Personal data stays hidden", level: 2 },
   { id: "identitymodel-8", title: "IdentityModel version 8", level: 2 },
   { id: "other-changes", title: "Other changes", level: 2 },
 ];
@@ -79,14 +79,14 @@ const changes: Change[] = [
   },
   {
     id: "logging",
-    name: "Logging stays off",
+    name: "Personal data stays hidden",
     affectsYouIf: "You read IdentityModel messages while you debug.",
-    whatToDo: "Turn it on in your own app.",
+    whatToDo: "Show it in your own application while you debug.",
   },
   {
     id: "identitymodel-8",
     name: "IdentityModel 8",
-    affectsYouIf: "Your app also uses IdentityModel packages directly.",
+    affectsYouIf: "Your application also uses IdentityModel packages directly.",
     whatToDo: "Move them to version 8 too.",
   },
 ];
@@ -241,14 +241,14 @@ const MigratingFrom1xPage = () => {
         </p>
       </ArticleSection>
 
-      <ArticleSection id="logging" title="Personal-data logging stays off">
+      <ArticleSection id="logging" title="Personal data stays hidden">
         <AffectsYouIf>
           You read IdentityModel messages while you debug.
         </AffectsYouIf>
         <p>
           The library no longer turns on personal data in IdentityModel
           messages. To see it while you debug, set{" "}
-          <code>IdentityModelEventSource.ShowPII = true</code> in your own app.{" "}
+          <code>IdentityModelEventSource.ShowPII = true</code> in your own application.{" "}
           <Link component={RouterLink} to="/docs/debugging">
             Debugging
           </Link>{" "}
@@ -258,7 +258,7 @@ const MigratingFrom1xPage = () => {
 
       <ArticleSection id="identitymodel-8" title="IdentityModel version 8">
         <AffectsYouIf>
-          Your app also uses the Microsoft IdentityModel packages directly.
+          Your application also uses the Microsoft IdentityModel packages directly.
         </AffectsYouIf>
         <p>
           The package now depends on version 8, not version 6. Move your own

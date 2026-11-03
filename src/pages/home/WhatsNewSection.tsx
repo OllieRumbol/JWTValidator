@@ -5,7 +5,7 @@ import { primaryLinkStyle } from "@/app/theme";
 import { MIGRATION_GUIDE_PATH } from "@/content/docsPages";
 
 // The six changes in spec section 2, as home.html words them, with the maintainer's
-// changes of 2026-11-02. The migration guide's table has a column for who each change
+// changes of 2026-11-02 and 2026-11-03. The migration guide's table has a column for who each change
 // affects, so its "What to do" text can be shorter. These rows have no such column.
 const changes: { name: ReactNode; whatToDo: string }[] = [
   { name: ".NET 10 only", whatToDo: "Move to .NET 10, or stay on 1.0.3." },
@@ -15,7 +15,8 @@ const changes: { name: ReactNode; whatToDo: string }[] = [
   },
   {
     name: "Expiry in UTC",
-    whatToDo: "Convert to local time yourself if you need it.",
+    whatToDo:
+      "Convert the expiry to local time if you need it. Remove any time zone workaround.",
   },
   {
     name: (
@@ -27,7 +28,7 @@ const changes: { name: ReactNode; whatToDo: string }[] = [
   },
   {
     name: "Personal data stays hidden",
-    whatToDo: "Show it in your own app while you debug.",
+    whatToDo: "Show it in your own application while you debug.",
   },
   {
     name: "IdentityModel 8",

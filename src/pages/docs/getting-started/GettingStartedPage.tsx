@@ -86,7 +86,7 @@ const GettingStartedPage = () => {
           </li>
           <li>
             Version 8 of the Microsoft IdentityModel packages. The package
-            depends on them. If your app also uses IdentityModel packages
+            depends on them. If your application also uses IdentityModel packages
             directly, use version 8 for them too.
           </li>
         </ul>
