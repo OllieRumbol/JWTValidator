@@ -6,7 +6,7 @@ ServiceCollection services = new ServiceCollection();
 
 // The validator keeps no state between calls, so one instance can serve the whole app.
 services.AddSingleton<IJWTValidator, JWTValidator>();
-// The container uses the constructor that takes an IJWTValidator.
+// IJWTValidator is registered, so the container uses the constructor that takes it.
 services.AddSingleton<JWTExpiryChecker>();
 services.AddSingleton<TokenService>();
 
@@ -21,6 +21,7 @@ public class TokenService(IJWTValidator validator, JWTExpiryChecker expiryChecke
     // Read the secret from configuration in a real application. HS256 needs at least 32 bytes.
     private const String Secret = "a-secret-of-at-least-32-bytes-for-hs256";
 
+    // Needs the claims and the expiry, so it validates once and reads the "exp" claim.
     public String Describe(String jwt)
     {
         JWTValidatorOptions options = JWTValidatorOptionsBuilderCreator
@@ -34,7 +35,13 @@ public class TokenService(IJWTValidator validator, JWTExpiryChecker expiryChecke
             return "The token is not valid";
         }
 
-        expiryChecker.TryGetWhenDoesJWTExpire(jwt, Secret, out DateTime expiry);
+        DateTimeOffset expiry = DateTimeOffset.FromUnixTimeSeconds(long.Parse(claims["exp"][0]));
         return $"The token has {claims.Count} claims and expires at {expiry:u}";
+    }
+
+    // Needs only to know whether the token has expired.
+    public Boolean HasExpired(String jwt)
+    {
+        return expiryChecker.TryHasJWTExpired(jwt, Secret, out Boolean isExpired) && isExpired;
     }
 }

@@ -43,8 +43,8 @@ const DependencyInjectionPage = () => {
           caption="Register the services and use them in a class"
         />
         <p>
-          The example uses the <code>Microsoft.Extensions.DependencyInjection</code>{" "}
-          package, as well as JWT Validator.
+          The example also needs the{" "}
+          <code>Microsoft.Extensions.DependencyInjection</code> package.
         </p>
       </ArticleSection>
 

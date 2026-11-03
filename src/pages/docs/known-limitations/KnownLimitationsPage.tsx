@@ -1,3 +1,5 @@
+import Link from "@mui/material/Link";
+import { Link as RouterLink } from "react-router";
 import ArticleSection from "@/components/ArticleSection/ArticleSection";
 import DocsLayout from "@/components/DocsLayout/DocsLayout";
 import type { DocsSection } from "@/content/docsPages";
@@ -46,7 +48,11 @@ const KnownLimitationsPage = () => {
           The expiry checker validates the token again, so it downloads the
           configuration again too. If you need the claims and the expiry, take
           the expiry from the <code>exp</code> claim of one validation, rather
-          than call the validator and the expiry checker.
+          than call the validator and the expiry checker.{" "}
+          <Link component={RouterLink} to="/docs/claims/times">
+            Claims
+          </Link>{" "}
+          shows how to read the time.
         </p>
       </ArticleSection>
     </DocsLayout>

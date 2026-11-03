@@ -24,12 +24,17 @@ describe("Dependency injection", () => {
   test("documents IJWTValidator and the JWTExpiryChecker(IJWTValidator) constructor", async () => {
     renderRoute("/docs/dependency-injection");
 
-    expect(
-      await screen.findByRole("heading", {
-        level: 2,
-        name: "The IJWTValidator interface",
-      }),
-    ).toBeVisible();
+    const interfaceHeading = await screen.findByRole("heading", {
+      level: 2,
+      name: "The IJWTValidator interface",
+    });
+    // Its two members, as the library source has them.
+    expect(interfaceHeading.closest("section")).toHaveTextContent(
+      "Boolean TryValidateJWT(String jwt, JWTValidatorOptions options, out Dictionary<String, List<String>> result);",
+    );
+    expect(interfaceHeading.closest("section")).toHaveTextContent(
+      "Dictionary<String, List<String>> ValidateJWT(String jwt, JWTValidatorOptions options);",
+    );
     // The signature is split across highlighting spans, so this reads the block's text.
     expect(
       screen.getByRole("region", { name: "JWTExpiryChecker" }),

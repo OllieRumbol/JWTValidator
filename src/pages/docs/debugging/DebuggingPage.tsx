@@ -32,7 +32,8 @@ const DebuggingPage = () => {
           The token itself stays hidden unless you also set{" "}
           <code>IdentityModelEventSource.LogCompleteSecurityArtifact = true</code>
           . Both are in the <code>Microsoft.IdentityModel.Logging</code>{" "}
-          namespace, which the package brings in.
+          namespace. Its package comes with JWT Validator, so you do not add it
+          yourself.
         </p>
         <ChangedNote>
           The library no longer turns on personal data in IdentityModel
