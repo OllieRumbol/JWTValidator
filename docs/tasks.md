@@ -567,7 +567,8 @@ Base branch: release/phase-3-content
     - Checkpoint (2026-11-03): every page, the reference data and the example comments were read. The maintainer approved the changes on 2026-11-03, and they are in this task's pull request. The maintainer's read of every page on `npm run preview` is still to do, so T33 is not ticked.
     - The logging change is "Personal data stays hidden" on Home and in the migration guide. The address `/docs/migrating-from-1x/logging` does not change. The migration summary's "What to do" now uses Home's words, to fit that name.
     - Home's "Expiry in UTC" row now has the migration guide's text. "application" replaces "app", except "console app".
-    - T34 removes the version notice, so T34 still changes the release branch after this task (spec 6.1.10, item 3).
+    - The maintainer approved on 2026-11-03: the migration summary row's text; "the library" alongside "JWT Validator" meets spec 6.1.8 item 1; and T34 may remove the version notice after this task, as the one exception to spec 6.1.10 item 3.
+    - `.prettierignore` now has `/docs`, because `docs` also skipped `src/pages/docs`. This task's pull request formats those 19 files, in its own commit, so no format change follows the wording check.
 
 - [ ] **T34 — Release phase 3 (maintainer)**
   - Refs: spec 6.1.10 items 2 to 6, spec 6.1.12, spec 9, plan 5 (releases), plan 9 (TypeScript, Node)
