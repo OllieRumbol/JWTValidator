@@ -165,6 +165,26 @@ test.describe("layout at each width", () => {
     ).toBeVisible();
   });
 
+  // docs-page.html: the sidebar has 240 px of content and 56 px of padding, and On this
+  // page is 180 to 220 px wide. A wider sidebar left empty space beside the docs list.
+  test("the sidebar and On this page have the widths of the design", async ({
+    page,
+  }) => {
+    await page.setViewportSize(DESKTOP);
+    await page.goto("#/docs/validator");
+
+    const sidebar = await page
+      .getByRole("navigation", { name: "Documentation" })
+      .boundingBox();
+    const onThisPage = await page
+      .getByRole("navigation", { name: "On this page" })
+      .boundingBox();
+    // 240 + 32 + 24 px, and the 1 px border.
+    expect(sidebar!.width).toBe(297);
+    expect(onThisPage!.width).toBeGreaterThanOrEqual(180);
+    expect(onThisPage!.width).toBeLessThanOrEqual(220);
+  });
+
   test("below 1200 px, On this page is a box at the top of the article", async ({
     page,
   }) => {

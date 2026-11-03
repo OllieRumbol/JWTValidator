@@ -50,7 +50,8 @@ const DocsLayout = ({
         aria-label="Documentation"
         sx={(theme) => ({
           display: { xs: "none", md: "block" },
-          flex: "0 0 280px",
+          // 240 px of content, plus the padding, as docs-page.html shows it.
+          flex: "0 0 240px",
           padding: "36px 24px 36px 32px",
           borderRight: `1px solid ${theme.tokens.border}`,
           backgroundColor: theme.tokens.sidebar,
@@ -133,7 +134,9 @@ const DocsLayout = ({
           <Box
             sx={{
               display: { xs: "none", lg: "block" },
-              flex: "0 0 220px",
+              // 220 px, shrinking to 180 px when space is short, as docs-page.html shows.
+              flex: "0 1 220px",
+              minWidth: 180,
               alignSelf: "flex-start",
               // Stays in view while the reader scrolls the article.
               position: "sticky",
