@@ -506,7 +506,7 @@ Base branch: release/phase-3-content
     - The maintainer approved the wording of the new sections on 2026-11-02.
     - Evidence: pull request #58
 
-- [ ] **T30 — Write Expiry checker and Dictionary extensions**
+- [x] **T30 — Write Expiry checker and Dictionary extensions**
   - Refs: spec 6.1.3 items 2 to 7 (Expiry checker, Dictionary extensions), plan 3.4 (`MethodReference`), plan 7.2 tests 10 and 11
   - Depends on: T26
   - Done when:
@@ -517,13 +517,11 @@ Base branch: release/phase-3-content
     - Every fact is checked against the library README and release notes.
   - Verify: `npm test && npm run build && npm run e2e`, and the `examples` job passes.
   - Notes:
-    - From T29: `MethodsSection` already heads both pages' reference "Reference", as `docs-page.html` shows. Give every method a "Fails when" text, so T32 can make `failsWhen` required. Check exception types with a probe against the 2.0.0 package, as T29 did.
-    - The facts come from the README, the release notes and the source at `v2.0.0`, and the 1.0.3 source (commit `0425b91`) for the "Changed in 2.0.0" notes. A probe against the 2.0.0 package checked every exception and every null or empty result. It found three things the README does not say, now on the page: the checker reports failures as a plain `Exception` ("Unable to validate JWT", "Jwt does not contain an expiry"); it checks only the signature, so an expired token still gives its expiry; and `HasJWTExpired` has no clock skew. A null `Uri` throws `NullReferenceException`.
-    - "Changed in 2.0.0" is on all eight methods. Spec 6.1.3, item 4 names six; `TryHasJWTExpired` and `TryGetWhenDoesJWTExpire` changed in the same way.
-    - Every method on all four reference pages now has a "Fails when" text, so T32 can make `failsWhen` required.
-    - Maintainer decision on 2026-11-03: examples may write `Boolean` as well as `String`, as the library README does. This widens the T26 exception to the C# keyword rule.
-    - After review: the checker's secret overloads also carry the 2.0.0 minimum secret length (a probe with a hand-signed token showed "Unable to validate JWT"). "Fails when" also names an `exp` after the year 9999 (`ArgumentOutOfRangeException`), and a null list in `Print` and `ContainsValueInList` (`ArgumentNullException`).
-    - Carried forward to T31: the Expiry checker page names `new JWTExpiryChecker()` only, and says each call downloads the OpenID configuration again. Link it to Dependency injection (the `IJWTValidator` constructor) and to Known limitations once they exist.
+    - Facts are from the README, the release notes, the source at `v2.0.0`, the 1.0.3 source (`0425b91`) and a probe against 2.0.0. The probe added: the checker throws a plain `Exception`, checks only the signature, and has no clock skew; the 2.0.0 minimum secret length applies to its `String` overloads.
+    - "Changed in 2.0.0" is on all eight methods. Every method on the four reference pages now has "Fails when" (T32 can make it required).
+    - Maintainer decision on 2026-11-03: examples may write `Boolean` as well as `String`, as the README does. This widens the T26 exception.
+    - The maintainer approved the wording on 2026-11-03. The links to Dependency injection and Known limitations are in T31's Notes.
+    - Evidence: pull request #60
 
 - [ ] **T31 — Write Dependency injection, Debugging and Known limitations**
   - Refs: spec 6.1.3 items 2, 5, 6 and 8, plan 3.4 (docs pages), plan 3.5 (example compilation), plan 7.2 tests 10 and 11
@@ -612,4 +610,5 @@ None.
 - 2026-11-02 — T28
 - 2026-11-02 — T27
 - 2026-11-02 — T29
+- 2026-11-03 — T30
 
