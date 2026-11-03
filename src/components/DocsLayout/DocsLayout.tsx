@@ -66,9 +66,11 @@ const DocsLayout = ({
         sx={{
           flex: "1 1 auto",
           minWidth: 0,
-          padding: { xs: "20px 16px 48px", md: "36px 48px 72px" },
+          // 32 px beside the article, not the design's 48 px, so it has more room on a
+          // laptop screen (maintainer's choice, 2026-11-03).
+          padding: { xs: "20px 16px 48px", md: "36px 32px 72px" },
           display: "flex",
-          gap: "48px",
+          gap: "32px",
         }}
       >
         <Box
