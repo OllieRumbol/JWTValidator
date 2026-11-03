@@ -268,7 +268,7 @@ This project brings the site up to date for version 2.0.0 of the library, and ma
    | 3. Version 2.0.0 content | The documentation for 2.0.0 (section 6.1.3). The Home content (section 6.1.7). The 2.0.0 changelog entry. The spelling, grammar and wording check of every page. |
 
 2. Release 3 SHALL NOT go live before version 2.0.0 is listed on nuget.org.
-3. The spelling, grammar and wording check SHALL be the last change in release 3.
+3. The spelling, grammar and wording check SHALL be the last change in release 3. The one exception is the removal of the notice that says the site still describes version 1.0.3, which comes after the check.
 4. Each release SHALL go live only when the maintainer approves it.
 5. Work for a release SHALL NOT go live before that release.
 6. The performance requirements (section 6.6.2) SHALL apply from release 1. The accessibility requirements (section 6.6.1) SHALL apply from release 2, which holds the accessibility fixes.

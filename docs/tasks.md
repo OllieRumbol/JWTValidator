@@ -561,12 +561,12 @@ Base branch: release/phase-3-content
   - Done when:
     - Every page has been read for British English spelling, grammar, plain technical English, and the voice rules in spec 6.1.8.
     - The maintainer has reviewed the changes.
-    - No other change is merged into the release branch after this task.
+    - No other change is merged into the release branch after this task, except T34's removal of the version notice (spec 6.1.10, item 3).
   - Verify: The maintainer reads every page on `npm run preview`.
   - Notes:
     - The maintainer read the site on the preview and approved it, and every change, on 2026-11-03.
     - The logging change is "Personal data stays hidden" on Home and in the migration guide, at the same address. "application" replaces "app", except "console app".
-    - The maintainer confirmed that "the library" alongside "JWT Validator" meets spec 6.1.8 item 1. T34 may remove the version notice after this task, as the one approved exception to spec 6.1.10 item 3.
+    - The maintainer confirmed that "the library" alongside "JWT Validator" meets spec 6.1.8 item 1. The maintainer also approved T34's removal of the version notice after this task, so spec 6.1.10 item 3 and the third Done-when item now name that exception.
     - `.prettierignore` now has `/docs`, because `docs` also skipped `src/pages/docs`. Those 19 files are formatted in this task, so `format:check` covers them from now on.
     - Evidence: pull request #64
 
