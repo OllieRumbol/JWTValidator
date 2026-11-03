@@ -548,7 +548,11 @@ Base branch: release/phase-3-content
     - Each docs topic is checked against the README and release notes at tag `v2.0.0`. Differences are fixed.
     - The 2.0.0 changelog date is the real publish date.
   - Verify: `gh pr checks <number>` shows every job passing. The fact check is listed topic by topic in the pull request.
-  - Notes: From T21: make `failsWhen` required again in `src/content/methods/types.ts` (plan 3.4), once T29 to T31 give every method a "Fails when" text (spec 6.1.3, item 3).
+  - Notes:
+    - Each of the 11 topics was checked against the README and the release notes at `v2.0.0`, and each method against the source at `v2.0.0`. No page contradicts them. The check is in the pull request, topic by topic.
+    - One difference fixed: the migration guide's summary row for "Expiry in UTC" named only `WhenDoesJWTExpire`. Release notes item 3 and the section below it also name `HasJWTExpired`, so the row now names both. The design's summary row names only the first.
+    - `failsWhen` is required in `MethodReference` (plan 3.4), and "Fails when" always shows. Every method already had the text.
+    - `examples/Directory.Build.props` already used `2.0.0` (T26). `Microsoft.Extensions.DependencyInjection` 10.0.14 is still its latest stable version. nuget.org gives 25 October 2026 for 2.0.0, the date on the Versions page.
 
 - [ ] **T33 — Check spelling, grammar and wording**
   - Refs: spec 6.1.8, spec 6.1.10 item 3, spec 3 goal 9
