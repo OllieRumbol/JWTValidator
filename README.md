@@ -33,7 +33,7 @@ The package page on nuget.org links to the live site, so the site address must n
 
 ## Run it locally
 
-You need Node.js 24, the version in `.nvmrc`.
+You need Node.js 26, the version in `.nvmrc`.
 
 1. Install the packages:
 

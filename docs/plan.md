@@ -54,7 +54,7 @@ The site has no secrets and no environment-specific settings.
 | Site address | `https://ollierumbol.github.io/JWTValidator/` | `index.html` | Used in the Open Graph tags, which need absolute addresses. |
 | Library and repository links | nuget.org package page, library repository, site repository, licence | `src/content/links.ts` | One place for every external link. |
 | Latest library version | From the newest entry in `src/content/versions.ts` | Computed | The footer reads it (spec section 6.1.2, item 6). It is never typed twice. |
-| Node version | 24, the current LTS ("Krypton") | `.nvmrc` only. `package.json` `engines` says `>=24`, and the workflows read `.nvmrc` with `node-version-file`. | One place for the version. Node 26 is expected to become LTS at about the end of October 2026; moving to it is a one-line change, checked at each release. |
+| Node version | 26, the current LTS ("Lithium") | `.nvmrc`. The workflows read it with `node-version-file`. `package.json` `engines` says `>=26`, and `@types/node` follows the same major version. | One place that the pipeline reads. A move to a new LTS is a small change, checked at each release. |
 | Package version for the examples | A pre-release of 2.0.0 (`2.0.0-beta.1`), then `2.0.0` | `examples/Directory.Build.props` | Section 3.5, "Example compilation". |
 | Size limits | As spec section 6.6.2 sets them | `scripts/check-size.mjs` and the end-to-end tests | How each is measured: section 7.1, "Sizes". |
 | Build manifest | `build.manifest: true` | `vite.config.ts` | `scripts/check-size.mjs` reads it to find the files each route loads. |
@@ -460,7 +460,7 @@ Until then, pull requests into `main`, such as planning changes, merge without c
 | React Router 8 or MUI 9 changed an API this plan relies on, for example the hash router in data mode or `ScrollRestoration`. | Medium | Release 1's router and MUI upgrades confirm each API before release 2 builds on it. A change goes back into this plan for approval. |
 | The React plugin for Vite 8 needs extra packages for the React Compiler. | Medium | Install what the plugin's documentation lists at the time. The README lists them. |
 | The Lighthouse mobile score of 90 is hard to reach for a site drawn in the browser, with up to 300 KB of script. | Medium | Run Lighthouse as soon as the size limits are met in release 1, not only at the release. If it falls short, split pages (section 3.5), and keep the hero free of large images, as the design already is. |
-| Node 26 becomes the LTS during the project. | Medium | The version is in `.nvmrc` only. Check at each release, and move in a small change when the packages support it. |
+| A new Node version becomes the LTS. | Certain | The pipeline reads the version from `.nvmrc`. Check at each release, and move in a small change when the packages support it. |
 | 2.0.0 or its beta is released later than planned. | Medium | Releases 1 and 2 do not depend on it. Release 3's examples build against `2.0.0-beta.1` until 2.0.0 exists. Release 3 waits (spec section 6.1.10, item 2). |
 | Playwright's browser download makes the pipeline slow. | Low | Install Chromium only. Cache it between runs. |
 | Switching the Pages source causes a short outage. | Low | Switch just before the first `deploy.yml` run, and check the live site straight after. |
