@@ -26,6 +26,8 @@ examples/.build/
 .env.test.local
 .env.production.local
 
+tsconfig.tsbuildinfo
+
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
