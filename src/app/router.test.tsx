@@ -24,6 +24,17 @@ describe("tab titles", () => {
   });
 });
 
+// Spec section 6.1.3, item 1: the documentation describes version 2.0.0 only.
+describe("the layout", () => {
+  test("does not say that the site still describes version 1.0.3", async () => {
+    renderRoute("/");
+
+    await screen.findByRole("heading", { level: 1 });
+    expect(screen.queryByRole("region", { name: "Version notice" })).toBeNull();
+    expect(document.body.textContent).not.toContain("still describes");
+  });
+});
+
 describe("routes", () => {
   test.each([
     ["/docs", `/docs/${docsPages[0].slug}`],
