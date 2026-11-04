@@ -268,7 +268,7 @@ This project brings the site up to date for version 2.0.0 of the library, and ma
    | 3. Version 2.0.0 content | The documentation for 2.0.0 (section 6.1.3). The Home content (section 6.1.7). The 2.0.0 changelog entry. The spelling, grammar and wording check of every page. |
 
 2. Release 3 SHALL NOT go live before version 2.0.0 is listed on nuget.org.
-3. The spelling, grammar and wording check SHALL be the last change in release 3.
+3. The spelling, grammar and wording check SHALL be the last change in release 3. The one exception is the removal of the notice that says the site still describes version 1.0.3, which comes after the check.
 4. Each release SHALL go live only when the maintainer approves it.
 5. Work for a release SHALL NOT go live before that release.
 6. The performance requirements (section 6.6.2) SHALL apply from release 1. The accessibility requirements (section 6.6.1) SHALL apply from release 2, which holds the accessibility fixes.
@@ -387,7 +387,7 @@ The visual design comes from mockups that the maintainer approves (section 3, go
 
 #### 6.6.2 Performance
 
-1. Lighthouse SHALL give Home and the longest documentation page a mobile performance score of at least 90.
+1. Lighthouse SHALL give Home and the longest documentation page a mobile performance score of at least 90. The score is the median of at least 5 runs on the same build, because the score of a single run varies with no code change. Every run is recorded.
 2. The JavaScript that the first load of any page downloads SHALL be at most 300 KB in total, compressed with gzip. When the script is split into several files, the files that page loads count together.
 3. Each image SHALL be at most 200 KB.
 4. The first load of any page SHALL transfer at most 500 KB in total, counted as the bytes sent over the network, after compression.
@@ -462,7 +462,7 @@ On 2026-10-24, after the planning review, the maintainer approved these changes:
 * Every fact agrees with the library README and the release notes at tag `v2.0.0`.
 * The Versions page matches section 6.2.4, and lists no unreleased version.
 * The automated accessibility check finds no violations on any page. Lighthouse gives the four pages in section 6.6.1, item 3 an accessibility score of 100. The keyboard check passes.
-* Home and the longest documentation page have a Lighthouse mobile performance score of at least 90.
+* Home and the longest documentation page have a Lighthouse mobile performance score of at least 90, as section 6.6.2, item 1 measures it.
 * The JavaScript that the first load of any page downloads is at most 300 KB in total, gzipped. Each image is at most 200 KB. The first load of any page transfers at most 500 KB.
 * No page scrolls sideways at 320 pixels. Wide code examples and tables scroll inside their own box.
 * Every section of a documentation page can be opened from its own address.

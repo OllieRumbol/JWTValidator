@@ -26,7 +26,7 @@ const addresses = [
     from: "#/documentation/builder",
     to: /#\/docs\/validation-options$/,
     title: "Validation options — JWT Validator",
-    heading: "Technical Details",
+    heading: "Choose a signing key",
   },
   {
     from: "#/documentation/validator",
@@ -47,10 +47,11 @@ const addresses = [
     heading: "ContainsKeyAndValue",
   },
   {
+    // The first docs page in reading order (spec section 6.2.1).
     from: "#/docs",
-    to: /#\/docs\/validation-options$/,
-    title: "Validation options — JWT Validator",
-    heading: "Technical Details",
+    to: /#\/docs\/getting-started$/,
+    title: "Getting started — JWT Validator",
+    heading: "Requirements",
   },
   {
     from: "#/no-such-page",

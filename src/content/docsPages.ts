@@ -1,6 +1,5 @@
 // The docs pages, in reading order (plan section 3.4). Previous and next come from the
-// order. Release 3 adds Getting started, Migrating from 1.x, Claims, Dependency
-// injection, Debugging and Known limitations.
+// order.
 
 export type DocsGroup = "Get started" | "Guides" | "More";
 
@@ -11,14 +10,28 @@ export type DocsPage = {
 };
 
 export const docsPages: DocsPage[] = [
+  { slug: "getting-started", title: "Getting started", group: "Get started" },
+  {
+    slug: "migrating-from-1x",
+    title: "Migrating from 1.x",
+    group: "Get started",
+  },
   { slug: "validation-options", title: "Validation options", group: "Guides" },
   { slug: "validator", title: "Validator", group: "Guides" },
+  { slug: "claims", title: "Claims", group: "Guides" },
   { slug: "expiry-checker", title: "Expiry checker", group: "Guides" },
   {
     slug: "dictionary-extensions",
     title: "Dictionary extensions",
     group: "Guides",
   },
+  {
+    slug: "dependency-injection",
+    title: "Dependency injection",
+    group: "More",
+  },
+  { slug: "debugging", title: "Debugging", group: "More" },
+  { slug: "known-limitations", title: "Known limitations", group: "More" },
 ];
 
 // A section of a docs page, for "On this page". The id is also the SectionHeading's id,
@@ -29,7 +42,7 @@ export type DocsSection = {
   level: 2 | 3;
 };
 
-// The migration guide's address (plan section 3.4). Release 3 adds the page.
+// The migration guide's address (plan section 3.4).
 export const MIGRATION_GUIDE_PATH = "/docs/migrating-from-1x";
 
 export type AdjacentPages = {

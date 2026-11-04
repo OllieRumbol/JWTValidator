@@ -1,5 +1,5 @@
 // The changelog: released versions only, newest first (spec sections 6.1.6 and 6.2.4).
-// The text is the current Versions page's text. Release 3 rewrites it and adds 2.0.0.
+// The text is versions.html's. Text in backticks shows as code.
 
 export type VersionStatus = "Latest" | "Previous" | "Unlisted";
 
@@ -8,44 +8,60 @@ export type Version = {
   published: string; // A date, or "2022" for 1.0.0 (spec section 6.1.6, item 2)
   status: VersionStatus;
   summary: string;
-  changes: string[];
+  changes: string[]; // The other changes, when a version has breaking changes
   breakingChanges?: string[]; // 2.0.0 only, with a link to the migration guide
 };
 
 export const versions: Version[] = [
   {
-    version: "1.0.3",
-    published: "8 November 2022",
+    version: "2.0.0",
+    published: "25 October 2026",
     status: "Latest",
     summary:
-      "The project now has proper restrictions in terms of what properties can be validated in a JWT. The main goal of version 1.0.3 is to identify if and when a JWT has expired. This is important as this should trigger a refresh process.",
+      "Brings the library up to date for .NET 10. No class or method names changed, but six changes can affect your code.",
+    breakingChanges: [
+      ".NET 10 only. .NET 6, 7, 8 and 9 are no longer supported.",
+      "A secret shorter than the minimum for the token's algorithm no longer validates: 32 bytes for HS256, 48 for HS384 and 64 for HS512.",
+      "`WhenDoesJWTExpire` returns UTC, not local time. `HasJWTExpired` is correct in every time zone.",
+      "`IsEmpty` returns true for an empty or null dictionary.",
+      "The library no longer turns on personal-data logging.",
+      "Depends on version 8 of the Microsoft IdentityModel packages, not version 6.",
+    ],
     changes: [
-      "Create a new class with methods that returns if a JWT has expired and when the JWT expires",
-      "Add parameter validation across project",
-      "Refactor/ clean up",
-      "Unit tests",
+      "With lifetime validation on, a token whose expiry is after 19 January 2038 now validates.",
+      "The dictionary extension methods no longer throw for a null dictionary, or a null value inside a list.",
+    ],
+  },
+  {
+    version: "1.0.3",
+    published: "8 November 2022",
+    status: "Previous",
+    summary:
+      "Added the expiry checker: find out whether a token has expired, and when it expires.",
+    changes: [
+      "New `JWTExpiryChecker` class, with `HasJWTExpired` and `WhenDoesJWTExpire` and their `Try` versions.",
+      "Parameter checks across the library.",
     ],
   },
   {
     version: "1.0.2",
     published: "19 September 2022",
     status: "Previous",
-    summary:
-      "Now we have a stable platform for releasing the library, we can develop new features. I want to improve the builder design pattern used for configuring what needs validating in the JWT so that the end users (developers) have to give either a url or secret an not both as well as other restrctions.",
+    summary: "Made the options builder strict and nested.",
     changes: [
-      "Create a strict builder so methods have to be used in a specfic order.",
-      "Create a nested builder so that models can only be made using the builder",
-      "Project clean up and refactor",
-      "Unit tests",
+      "The builder's methods must be called in a set order.",
+      "You give either a secret or an OpenID URL, not both.",
+      "`JWTValidatorOptions` can only be made by the builder.",
     ],
   },
   {
     version: "1.0.1",
     published: "10 September 2022",
     status: "Previous",
-    summary:
-      "After the deployment of my first version of the JWT Validator library to the NuGet store, some of the external dependences were not building correctly. Getting the project to be installed correctly on any device is the goal of this version.",
-    changes: ["Combined models project into service project"],
+    summary: "Fixed the package so it installs correctly.",
+    changes: [
+      "Moved the models into the main project, so the package's dependencies resolve on every machine.",
+    ],
   },
   {
     version: "1.0.0",
@@ -53,13 +69,11 @@ export const versions: Version[] = [
     published: "2022",
     status: "Unlisted",
     summary:
-      "This is the first version of the JWT Validator library. The main goal I need to achieve with this library is to simplify the process of validating any JWT. I want this libaray to be available on NuGet for other developers to use.",
+      "The first version. Replaced by 1.0.1 the next day, because its dependencies did not install correctly.",
     changes: [
-      "Builder design pattern to config what parts of the JWT need to be validated",
-      "Try get method to validate a JWT and return a dictionary of claims",
-      "Dictionary extension methods",
-      "Unit tests",
-      "Deploy and release library to NuGet",
+      "The options builder, to choose what to validate.",
+      "`TryValidateJWT`, which returns the claims as a dictionary.",
+      "Extension methods for the claims dictionary.",
     ],
   },
 ];

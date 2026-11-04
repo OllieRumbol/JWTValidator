@@ -21,7 +21,7 @@ describe("Versions", () => {
     const numbers = list
       .getAllByRole("heading", { level: 2 })
       .map((heading) => heading.textContent);
-    expect(numbers).toEqual(["1.0.3", "1.0.2", "1.0.1", "1.0.0"]);
+    expect(numbers).toEqual(["2.0.0", "1.0.3", "1.0.2", "1.0.1", "1.0.0"]);
     expect(list.queryByText("1.0.4")).toBeNull();
     expect(list.queryByText("1.0.5")).toBeNull();
   });
@@ -36,7 +36,7 @@ describe("Versions", () => {
       expect(entry.getByText(version.published)).toBeVisible();
       expect(entry.getByText(version.status)).toBeVisible();
       expect(entry.getAllByRole("listitem")).toHaveLength(
-        version.changes.length,
+        version.changes.length + (version.breakingChanges?.length ?? 0),
       );
     }
   });
@@ -47,6 +47,41 @@ describe("Versions", () => {
     const entry = within(list.getByRole("article", { name: "1.0.0" }));
     expect(entry.getByText("2022")).toBeVisible();
     expect(entry.getByText("Unlisted")).toBeVisible();
+  });
+
+  // Spec section 6.1.6, item 4.
+  test("shows the breaking changes of 2.0.0 first, then its other changes, and links to the migration guide", async () => {
+    const list = await renderVersions();
+    const entry = within(list.getByRole("article", { name: "2.0.0" }));
+
+    const headings = entry
+      .getAllByRole("heading", { level: 3 })
+      .map((heading) => heading.textContent);
+    expect(headings).toEqual(["Breaking changes", "Other changes"]);
+    const [breakingChanges, otherChanges] = entry.getAllByRole("list");
+    expect(within(breakingChanges).getAllByRole("listitem")).toHaveLength(6);
+    expect(within(otherChanges).getAllByRole("listitem")).toHaveLength(2);
+    expect(
+      entry.getByRole("link", { name: "Read the migration guide" }),
+    ).toHaveAttribute("href", "/docs/migrating-from-1x");
+  });
+
+  test("gives no other version breaking changes or a migration guide link", async () => {
+    const list = await renderVersions();
+
+    for (const version of ["1.0.3", "1.0.2", "1.0.1", "1.0.0"]) {
+      const entry = within(list.getByRole("article", { name: version }));
+      expect(entry.queryByRole("heading", { level: 3 })).toBeNull();
+      expect(entry.queryByRole("link")).toBeNull();
+    }
+  });
+
+  test("shows the text in backticks as code", async () => {
+    const list = await renderVersions();
+    const entry = within(list.getByRole("article", { name: "1.0.3" }));
+
+    expect(entry.getByText("JWTExpiryChecker").tagName).toBe("CODE");
+    expect(entry.queryByText(/`/)).toBeNull();
   });
 
   // Spec section 4.1, item 11: the old page showed features as disabled checkboxes.

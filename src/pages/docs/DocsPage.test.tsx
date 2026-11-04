@@ -28,9 +28,10 @@ describe("docs page layout", () => {
     expect(
       prevNext.getByRole("link", { name: "Previous Validation options" }),
     ).toHaveAttribute("href", "/docs/validation-options");
-    expect(
-      prevNext.getByRole("link", { name: "Next Expiry checker" }),
-    ).toHaveAttribute("href", "/docs/expiry-checker");
+    expect(prevNext.getByRole("link", { name: "Next Claims" })).toHaveAttribute(
+      "href",
+      "/docs/claims",
+    );
   });
 
   test("the first page has no previous link", async () => {
@@ -85,13 +86,13 @@ describe("docs page layout", () => {
     async (slug, firstMethod, firstId) => {
       renderRoute(`/docs/${slug}`);
 
-      const methods = await screen.findByRole("region", { name: "Methods" });
+      const methods = await screen.findByRole("region", { name: "Reference" });
       // The heading's wrapper, then the table, then the reference blocks.
       const table = methods.children[1] as HTMLElement;
       expect(table).toHaveAccessibleName("Method summary");
-      expect(
-        within(table).getAllByRole("link")[0],
-      ).toHaveAccessibleName(firstMethod);
+      expect(within(table).getAllByRole("link")[0]).toHaveAccessibleName(
+        firstMethod,
+      );
       expect(within(table).getAllByRole("link")[0]).toHaveAttribute(
         "href",
         `/docs/${slug}/${firstId}`,
@@ -106,17 +107,52 @@ describe("docs page layout", () => {
       await screen.findByRole("heading", { level: 1, name: "Page not found" }),
     ).toBeVisible();
   });
+
+  // Links that earlier pages waited for until T31 added the pages they point to.
+  test.each([
+    ["migrating-from-1x", "logging", "Debugging", "/docs/debugging"],
+    ["validator", "what-validatejwt-throws", "Debugging", "/docs/debugging"],
+    [
+      "claims",
+      "the-dictionary",
+      "Known limitations",
+      "/docs/known-limitations/claim-type-map",
+    ],
+    [
+      "expiry-checker",
+      "check-the-expiry",
+      "Dependency injection",
+      "/docs/dependency-injection",
+    ],
+    [
+      "expiry-checker",
+      "what-it-checks",
+      "Known limitations",
+      "/docs/known-limitations/openid-downloads",
+    ],
+  ])("%s, section %s, links %s", async (slug, sectionId, linkText, href) => {
+    renderRoute(`/docs/${slug}`);
+
+    await screen.findByRole("heading", { level: 1 });
+    const section = within(
+      document.getElementById(sectionId)!.closest("section")!,
+    );
+    expect(section.getByRole("link", { name: linkText })).toHaveAttribute(
+      "href",
+      href,
+    );
+  });
 });
 
 describe("section addresses", () => {
   test("opening a section address scrolls to that section", async () => {
     const scroll = vi.spyOn(Element.prototype, "scrollIntoView");
-    renderRoute("/docs/validator/methods");
+    renderRoute("/docs/validator/reference");
 
     await waitFor(() => {
       expect(scroll).toHaveBeenCalled();
     });
-    expect(scroll.mock.contexts[0]).toHaveAttribute("id", "methods");
+    expect(scroll.mock.contexts[0]).toHaveAttribute("id", "reference");
   });
 
   test("On this page links to each section, replacing the history entry", async () => {
@@ -128,12 +164,12 @@ describe("section addresses", () => {
     const onThisPage = within(
       (await screen.findAllByRole("navigation", { name: "On this page" }))[0],
     );
-    await user.click(onThisPage.getByRole("link", { name: "Methods" }));
+    await user.click(onThisPage.getByRole("link", { name: "Reference" }));
 
-    expect(router.state.location.pathname).toBe("/docs/validator/methods");
+    expect(router.state.location.pathname).toBe("/docs/validator/reference");
     expect(router.state.historyAction).toBe("REPLACE");
     await waitFor(() => {
-      expect(scroll.mock.contexts.at(-1)).toHaveAttribute("id", "methods");
+      expect(scroll.mock.contexts.at(-1)).toHaveAttribute("id", "reference");
     });
   });
 });

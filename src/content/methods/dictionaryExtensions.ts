@@ -1,71 +1,84 @@
 import type { MethodReference } from "./types";
 
-// The dictionary extension methods. The text is the 1.0.3 site's, unchanged. Each
-// method's one parameter sentence is kept whole, named by the signature's parameters.
-// Release 3 rewrites it for 2.0.0 (plan section 3.2).
+// The dictionary extension methods, for 2.0.0. The signatures are from the library
+// source at tag v2.0.0. Each result for a null or empty dictionary was checked with a
+// probe against the 2.0.0 package (T30).
+const dictionaryParameter = {
+  name: "dictionary",
+  description:
+    "The dictionary the method is called on, for example the claims. It can be null.",
+};
+
+// Print and ContainsValueInList read every list. A dictionary that the reader builds can
+// hold a null list; the validator's claims never do.
+const nullListFailure =
+  "Throws ArgumentNullException when a key's list is null. The validator's claims never have a null list.";
+
+const containsChange =
+  "Returns false for a null dictionary, and no longer throws for a null value in a list. Version 1.0.3 threw for both.";
+
 export const dictionaryExtensionMethods: MethodReference[] = [
   {
     name: "Print",
-    summary:
-      "This method converts a dictionary into a string. It allows developers clear visability of what is contained in a dictionary.",
+    summary: "Returns the dictionary as text, while you debug.",
     signatures: [
-      "public static string Print<TKey, TValue>(this Dictionary<TKey, List<TValue>> dictionary)",
+      "public static String Print<TKey, TValue>(this Dictionary<TKey, List<TValue>>? dictionary) where TKey : notnull",
     ],
-    parameters: [
-      {
-        name: "dictionary",
-        description:
-          "This method can only be called from a dictonary that contains a list as its value.",
-      },
-    ],
-    returns: "This method returns a multi line string.",
+    parameters: [dictionaryParameter],
+    returns:
+      "One line for each key: the key, a colon, then its values separated by commas. An empty string for an empty or null dictionary.",
+    failsWhen: nullListFailure,
+    changedIn2:
+      "Returns an empty string for a null dictionary. Version 1.0.3 threw.",
   },
   {
     name: "ContainsKeyAndValue",
-    summary:
-      "This method can be used to see if there is a key value pair that contains both a matching key and value in the dictionary.",
+    summary: "Says whether a key holds a value.",
     signatures: [
-      "public static bool ContainsKeyAndValue<TKey, TValue, T>(this Dictionary<TKey, List<TValue>> dictionary, T key, T value)",
+      "public static Boolean ContainsKeyAndValue<TKey, TValue, T>(this Dictionary<TKey, List<TValue>>? dictionary, T key, T value) where TKey : notnull",
     ],
     parameters: [
+      dictionaryParameter,
       {
-        name: "dictionary, key, value",
-        description:
-          "This method can only be called from a dictonary that contains a list as its value.",
+        name: "key",
+        description: "The key to look for, such as a claim name.",
+      },
+      {
+        name: "value",
+        description: "The value to look for in that key's list.",
       },
     ],
-    returns: "Method returns a boolean",
+    returns:
+      "True when the key exists and its list holds the value. The match is exact, so case matters.",
+    failsWhen:
+      "It does not fail. It returns false for an empty or null dictionary.",
+    changedIn2: containsChange,
   },
   {
     name: "ContainsValueInList",
-    summary:
-      "The method is used to see whether a dictionary that has a list as a value contains a specfic value",
+    summary: "Says whether any key holds a value.",
     signatures: [
-      "public static bool ContainsValueInList<TKey, TValue, T>(this Dictionary<TKey, List<TValue>> dictionary, T value)",
+      "public static Boolean ContainsValueInList<TKey, TValue, T>(this Dictionary<TKey, List<TValue>>? dictionary, T value) where TKey : notnull",
     ],
     parameters: [
-      {
-        name: "dictionary, value",
-        description:
-          "This method can only be called from a dictonary that contains a list as its value.",
-      },
+      dictionaryParameter,
+      { name: "value", description: "The value to look for in every list." },
     ],
-    returns: "Method returns a boolean",
+    returns:
+      "True when any list holds the value. The match is exact, so case matters.",
+    failsWhen: `It returns false for an empty or null dictionary. ${nullListFailure}`,
+    changedIn2: containsChange,
   },
   {
     name: "IsEmpty",
-    summary:
-      "An extension method to validate if a dictionary contains any values.",
+    summary: "Says whether the dictionary is empty or null.",
     signatures: [
-      "public static bool IsEmpty<TKey, TValue>(this Dictionary<TKey, List<TValue>> dictionary)",
+      "public static Boolean IsEmpty<TKey, TValue>(this Dictionary<TKey, List<TValue>>? dictionary) where TKey : notnull",
     ],
-    parameters: [
-      {
-        name: "dictionary",
-        description:
-          "This method can only be called from a dictonary that contains a list as its value.",
-      },
-    ],
-    returns: "Method returns a boolean",
+    parameters: [dictionaryParameter],
+    returns: "True when the dictionary is empty or null, otherwise false.",
+    failsWhen: "It does not fail.",
+    changedIn2:
+      "Returns true for an empty or null dictionary. Version 1.0.3 returned false for an empty dictionary, and threw for null.",
   },
 ];

@@ -3,6 +3,8 @@ import { screen, within } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import { renderOnDocsPage } from "@/test/renderOnDocsPage";
 import CodeBlock from "./CodeBlock";
+// A compiled example, as the site imports it (plan section 3.5, "Example compilation").
+import secretExample from "@examples/home-secret.cs?raw";
 
 const csharp = `using JWTValidatorService.Validator;
 
@@ -58,5 +60,16 @@ describe("CodeBlock", () => {
     await user.tab();
 
     expect(document.activeElement?.tagName).toBe("PRE");
+  });
+
+  test("shows and copies an example file from examples/", async () => {
+    const user = userEvent.setup();
+    renderOnDocsPage(<CodeBlock code={secretExample} />);
+
+    const figure = await screen.findByRole("figure");
+    expect(figure).toHaveTextContent(".WithSigningKeyFromSecret(secret)");
+    await user.click(within(figure).getByRole("button", { name: "Copy code" }));
+
+    expect(await navigator.clipboard.readText()).toBe(secretExample);
   });
 });

@@ -34,6 +34,8 @@ const tokens = {
   bodyText: "#3B3848",
   // The docs sidebar's background, as docs-page.html shows it.
   sidebar: "#FBFAFD",
+  // The "New in 2.0.0" panel on Home.
+  whatsNew: { background: "#F3ECFC", text: "#4A4660" },
   // The "Previous" status badge on the Versions page.
   neutralBadge: "#EEEDF2",
   // The raised cards on Home and the latest version on the Versions page.

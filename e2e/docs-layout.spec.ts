@@ -27,30 +27,30 @@ test.describe("section addresses (test 9)", () => {
 
     await page
       .getByRole("navigation", { name: "On this page" })
-      .getByRole("link", { name: "Technical Details" })
+      .getByRole("link", { name: "Add checks and build" })
       .click();
 
     await expect(page).toHaveURL(
-      /#\/docs\/validation-options\/technical-details$/,
+      /#\/docs\/validation-options\/add-checks-and-build$/,
     );
     // The scroll follows the address change, so wait for it.
     await expect
       .poll(() => page.evaluate(() => window.scrollY))
       .toBeGreaterThan(0);
-    await expectInView(page, "technical-details");
+    await expectInView(page, "add-checks-and-build");
   });
 
   test("a shared section link opens the page scrolled to that section", async ({
     page,
   }) => {
-    await page.goto("#/docs/validation-options/technical-details", {
+    await page.goto("#/docs/validation-options/minimum-secret-length", {
       waitUntil: "networkidle",
     });
 
     await expect(
       page.getByRole("heading", { level: 1, name: "Validation options" }),
     ).toBeVisible();
-    await expectInView(page, "technical-details");
+    await expectInView(page, "minimum-secret-length");
   });
 
   test("an unknown section opens the page at the top", async ({ page }) => {
@@ -71,9 +71,9 @@ test.describe("section addresses (test 9)", () => {
     await page.goto("#/docs/validator");
     await page
       .getByRole("navigation", { name: "On this page" })
-      .getByRole("link", { name: "Methods" })
+      .getByRole("link", { name: "Reference" })
       .click();
-    await expect(page).toHaveURL(/#\/docs\/validator\/methods$/);
+    await expect(page).toHaveURL(/#\/docs\/validator\/reference$/);
 
     await page.goBack();
 
@@ -83,7 +83,7 @@ test.describe("section addresses (test 9)", () => {
   test("Back to a section address returns to where the reader was, not to the section", async ({
     page,
   }) => {
-    await page.goto("#/docs/validation-options/code-example", {
+    await page.goto("#/docs/validation-options/choose-a-signing-key", {
       waitUntil: "networkidle",
     });
     // The reader scrolls on, below the section, then follows Next.
@@ -98,7 +98,9 @@ test.describe("section addresses (test 9)", () => {
 
     await page.goBack();
 
-    await expect(page).toHaveURL(/#\/docs\/validation-options\/code-example$/);
+    await expect(page).toHaveURL(
+      /#\/docs\/validation-options\/choose-a-signing-key$/,
+    );
     await expect.poll(() => page.evaluate(() => window.scrollY)).toBe(position);
   });
 
@@ -110,15 +112,15 @@ test.describe("section addresses (test 9)", () => {
     await context.grantPermissions(["clipboard-read", "clipboard-write"]);
     await page.goto("#/docs/validator", { waitUntil: "networkidle" });
 
-    await page.getByRole("heading", { name: "Code Samples" }).hover();
+    await page.getByRole("heading", { name: "Choose a method" }).hover();
     await page
       .getByRole("link", {
-        name: "Link to this section: Code Samples",
+        name: "Link to this section: Choose a method",
       })
       .click();
 
     expect(await page.evaluate(() => navigator.clipboard.readText())).toBe(
-      `${baseURL}#/docs/validator/code-samples`,
+      `${baseURL}#/docs/validator/choose-a-method`,
     );
     // The pill on screen, not the hidden live region with the same words, which
     // Playwright also counts as visible.
@@ -137,7 +139,7 @@ test("a reference block keeps its own spacing inside its section", async ({
 
   const summary = page
     .getByRole("region", { name: "TryValidateJWT" })
-    .getByText(/is very similar to the \.ValidateJWT\(\) method/);
+    .getByText(/Returns false when the token is not valid/);
   const margin = await summary.evaluate((element) => {
     const style = getComputedStyle(element);
     return [style.marginTop, style.marginBottom];
@@ -161,6 +163,37 @@ test.describe("layout at each width", () => {
     await expect(
       page.getByRole("navigation", { name: "On this page" }),
     ).toBeVisible();
+  });
+
+  // docs-page.html: the sidebar has 240 px of content and 56 px of padding, and On this
+  // page is 180 to 220 px wide. A wider sidebar left empty space beside the docs list.
+  // The article has 32 px on each side, not the design's 48 px (maintainer's choice).
+  test("the sidebar, the article and On this page have their set widths", async ({
+    page,
+  }) => {
+    await page.setViewportSize(DESKTOP);
+    await page.goto("#/docs/validator");
+
+    const sidebar = await page
+      .getByRole("navigation", { name: "Documentation" })
+      .boundingBox();
+    const article = await page.locator("article").boundingBox();
+    const onThisPage = await page
+      .getByRole("navigation", { name: "On this page" })
+      .boundingBox();
+    // 240 + 32 + 24 px, and the 1 px border.
+    expect(sidebar!.width).toBe(297);
+    expect(article!.x - (sidebar!.x + sidebar!.width)).toBe(32);
+    expect(onThisPage!.x - (article!.x + article!.width)).toBe(32);
+    expect(onThisPage!.width).toBeGreaterThanOrEqual(180);
+    expect(onThisPage!.width).toBeLessThanOrEqual(220);
+
+    // At the narrowest width that shows the column, it shrinks, but not below 180 px.
+    await page.setViewportSize({ width: 1200, height: 720 });
+    const narrowest = await page
+      .getByRole("navigation", { name: "On this page" })
+      .boundingBox();
+    expect(narrowest!.width).toBeGreaterThanOrEqual(180);
   });
 
   test("below 1200 px, On this page is a box at the top of the article", async ({
@@ -190,4 +223,25 @@ test.describe("layout at each width", () => {
       page.getByRole("navigation", { name: "Documentation" }),
     ).toBeHidden();
   });
+});
+
+// Test 10, the secret length row of spec section 6.2.3: at 320 px the table scrolls
+// inside its box, if it is wider than the box, and the page does not scroll sideways.
+test("at 320 px the secret length table stays inside its box", async ({
+  page,
+}) => {
+  await page.setViewportSize({ width: 320, height: 640 });
+  await page.goto("#/docs/validation-options/minimum-secret-length", {
+    waitUntil: "networkidle",
+  });
+
+  const box = page.getByRole("region", { name: "Minimum secret length" });
+  const layout = await box.evaluate((element) => ({
+    overflowX: getComputedStyle(element).overflowX,
+    right: element.getBoundingClientRect().right,
+    pageWidth: document.documentElement.scrollWidth,
+  }));
+  expect(layout.overflowX).toBe("auto");
+  expect(layout.right).toBeLessThanOrEqual(320);
+  expect(layout.pageWidth).toBeLessThanOrEqual(320);
 });

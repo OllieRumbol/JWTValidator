@@ -24,6 +24,16 @@ describe("tab titles", () => {
   });
 });
 
+// Spec section 6.1.3, item 1: the documentation describes version 2.0.0 only.
+describe("the layout", () => {
+  test("does not say that the site still describes version 1.0.3", async () => {
+    renderRoute("/");
+
+    await screen.findByRole("heading", { level: 1 });
+    expect(document.body.textContent).not.toContain("still describes");
+  });
+});
+
 describe("routes", () => {
   test.each([
     ["/docs", `/docs/${docsPages[0].slug}`],
@@ -48,7 +58,7 @@ describe("routes", () => {
     });
   });
 
-  test.each(["/no-such-page", "/docs/no-such-page", "/docs/claims"])(
+  test.each(["/no-such-page", "/docs/no-such-page", "/docs/reference"])(
     '%s shows "Page not found"',
     async (path) => {
       renderRoute(path);

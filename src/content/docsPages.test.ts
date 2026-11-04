@@ -3,12 +3,19 @@ import { describe, expect, test } from "vitest";
 import { docsPages, getAdjacentPages } from "./docsPages";
 
 describe("docsPages", () => {
-  test("has the release 2 pages in reading order", () => {
+  // Plan section 3.4: all 10 pages.
+  test("has every page in reading order", () => {
     expect(docsPages.map((page) => page.slug)).toEqual([
+      "getting-started",
+      "migrating-from-1x",
       "validation-options",
       "validator",
+      "claims",
       "expiry-checker",
       "dictionary-extensions",
+      "dependency-injection",
+      "debugging",
+      "known-limitations",
     ]);
   });
 

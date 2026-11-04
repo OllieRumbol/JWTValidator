@@ -423,19 +423,23 @@ Goal: The site documents version 2.0.0, every example compiles against the packa
 
 Base branch: release/phase-3-content
 
-- [ ] **T25 — Create the phase 3 release branch (maintainer)**
+- [x] **T25 — Create the phase 3 release branch (maintainer)**
   - Refs: plan 8 (branches and releases)
   - Depends on: T24
   - Done when:
     - `release/phase-3-content` exists on origin, at the same commit as `main`.
   - Verify: `git ls-remote --heads origin release/phase-3-content`
-  - Notes: —
+  - Notes:
+    - The maintainer asked for it with `/do-task T25` on 2026-11-02. `git push origin origin/main:refs/heads/release/phase-3-content` created the branch at `27d539e`, the same commit as `main`.
+    - "Protect release branches" applies at once: no force-push, pull requests only, and the `build`, `e2e` and `examples` checks.
+    - 2.0.0 was already listed on nuget.org on 2026-11-02, so T26 and the release (spec 6.1.10, item 2) are not waiting for it.
+    - Evidence: pull request #49
 
-- [ ] **T26 — Compile the C# examples in the pipeline**
+- [x] **T26 — Compile the C# examples in the pipeline**
   - Refs: spec 6.1.3 items 6 to 8, spec 6.1.11 item 7, plan 3.5 (example compilation, ADRs), plan 8 (`examples` job), plan 7.2 test 15
   - Depends on: T25, and `2.0.0-beta.1` listed on nuget.org (library task T15)
   - Done when:
-    - `examples/Directory.Build.props` sets the `JWTValidator` version to `2.0.0-beta.1`, and the `Microsoft.Extensions.DependencyInjection` version to its latest stable version.
+    - `examples/Directory.Build.props` sets the `JWTValidator` version to `2.0.0`, and the `Microsoft.Extensions.DependencyInjection` version to its latest stable version.
     - `examples/build-examples.ps1` builds each `.cs` file in its own .NET 10 console project under `examples/.build/`, adds `Microsoft.Extensions.DependencyInjection` for files named `di-*.cs`, and fails when any file does not compile.
     - `CodeBlock` and `ExampleTabs` can show a file from `examples/` through a `?raw` import.
     - The two Home examples, OpenID Connect and secret, exist as files and compile.
@@ -443,9 +447,14 @@ Base branch: release/phase-3-content
     - The README's "Updating the content" section explains how to add an example and how to move to a new library version.
     - The pull request shows the `examples` job passing.
   - Verify: `powershell -File examples/build-examples.ps1` passes locally. Break one example on purpose, see the script fail, and undo the change. `gh pr checks <number>` shows `examples` passing.
-  - Notes: —
+  - Notes:
+    - Version `2.0.0`, not `2.0.0-beta.1`: 2.0.0 was already released, as spec 6.1.3 item 6 requires (maintainer approved, 2026-11-02).
+    - Example files are `examples/<page>-<name>.cs`, and a dependency injection example starts with `di-` (T31). Pages import them as `@examples/<file>?raw`.
+    - The examples write `String`, as the design and the library README do: an exception to the C# rules, approved by the maintainer on 2026-11-02 for T27 to T31.
+    - `home-secret.cs` has no design text. It follows the OpenID Connect example and prints the claims, because a secret-signed token may have no `sub`. T27 puts both files on Home.
+    - Evidence: pull request #50
 
-- [ ] **T27 — Write Getting started and Home**
+- [x] **T27 — Write Getting started and Home**
   - Refs: spec 6.1.3 (Getting started), spec 6.1.7, spec 6.1.8, plan 3.4 (docs pages), plan 7.2 tests 9, 10 and 11, `docs/design/home.png`
   - Depends on: T26, T28
   - Done when:
@@ -455,9 +464,14 @@ Base branch: release/phase-3-content
     - `docsPages.ts` lists Getting started first, so `/docs` now opens it. Getting started is in tests 10 and 11, and the tabs row of test 9 passes.
     - Every fact is checked against the library README.
   - Verify: `npm test && npm run build && npm run e2e`, and the `examples` job passes.
-  - Notes: Draft the personal section from the current Back Story and `docs/design/home.html`. T28 comes first because Home links to the migration guide.
+  - Notes:
+    - The maintainer approved (2026-11-02) the personal section in the words of `home.html`, and five wording changes to Home, listed in the pull request. One name differs from the migration guide (T33).
+    - Getting started's example is `examples/getting-started-first-token.cs`, the README's OpenID Connect example. It shows no project file XML.
+    - Approved design differences: type and method names are not coloured (the C# grammar does not mark them); the phone badge keeps "MIT licence"; "Migrating from 1.x" has the hover tint.
+    - The theme has a `whatsNew` token. The old Home example, with `DictionaryContainsKeyAndValue`, is removed.
+    - Evidence: pull request #56
 
-- [ ] **T28 — Write the migration guide and the 2.0.0 changelog entry**
+- [x] **T28 — Write the migration guide and the 2.0.0 changelog entry**
   - Refs: spec 6.1.3 (Migration from 1.x), spec 6.1.3 item 6, spec 2 (the six changes and the two other changes), spec 6.1.6 item 4, plan 3.4, plan 7.2 tests 4, 10 and 11, `docs/design/migration-guide.png`
   - Depends on: T26
   - Done when:
@@ -468,9 +482,14 @@ Base branch: release/phase-3-content
     - Plan 7.2 test 4 covers 2.0.0.
     - The publish date of 2.0.0 is a placeholder marked in Notes until 2.0.0 is released.
   - Verify: `npm test && npm run build && npm run e2e`, and the `examples` job passes.
-  - Notes: From T21: `VersionsPage` shows no breaking changes yet. Add them, the "Other changes" heading above the other changes, and the "Read the migration guide" button, as `versions.html` shows, with a test.
+  - Notes:
+    - Each 1.0.3 and 2.0.0 panel is a whole compiled program. The 1.0.3 secret program uses the 19-byte `"my-short-secret-key"`, under the spec 6.1.3 item 7 exception: 1.0.3 rejected secrets under 16 bytes.
+    - Approved design differences: the panels stack below about 1,400 px; "On this page" uses the full headings; the "What to do" column has a minimum width on narrow screens; the captions read "C# · 1.0.3" and "C# · 2.0.0".
+    - 2.0.0 was released on 25 October 2026, so its date is real. `latestVersion` is 2.0.0, and the 1.0.0 to 1.0.3 entries use the words of `versions.html`.
+    - `CodeBlock` has a `highlighted` option. `ArticleSection` styles inline code as `docs-page.html` does, so later pages get it too.
+    - Evidence: pull request #53
 
-- [ ] **T29 — Write Validation options, Validator and Claims**
+- [x] **T29 — Write Validation options, Validator and Claims**
   - Refs: spec 6.1.3 items 2 to 7 (Validation options, Secret length, Validator, Claims), spec 6.2.3, plan 3.4 (`MethodReference`), plan 7.2 tests 10 and 11, spec 4.1 item 5, `docs/design/docs-page.png`
   - Depends on: T26
   - Done when:
@@ -480,9 +499,14 @@ Base branch: release/phase-3-content
     - `docsPages.ts` lists Claims. The three pages are in tests 10 and 11, and test 10 checks that the secret length table scrolls inside its box at 320 px (spec 6.2.3).
     - Every fact is checked against the library README and release notes.
   - Verify: `npm test && npm run build && npm run e2e`, and the `examples` job passes.
-  - Notes: —
+  - Notes:
+    - Facts are from the README, the release notes and the source at `v2.0.0`, with a probe against the 2.0.0 package. The probe added: a wrong secret gives the same exception as a short one, a token without `exp` fails with `WithExpiryDate`, and the 5-minute skew applies to `nbf`.
+    - The reference heading is "Reference", as the design shows. "Changed in 2.0.0" is also on `WithExpiryDate` (2038) and `ValidateJWT` (personal data). `JWTValidatorOptions.Print` is documented.
+    - Approved design differences: one summary per method (plan 3.4); two extra sections; whole-program examples; Validator's exceptions are a list; the Claims table has a phone minimum width.
+    - The maintainer approved the wording of the new sections on 2026-11-02.
+    - Evidence: pull request #58
 
-- [ ] **T30 — Write Expiry checker and Dictionary extensions**
+- [x] **T30 — Write Expiry checker and Dictionary extensions**
   - Refs: spec 6.1.3 items 2 to 7 (Expiry checker, Dictionary extensions), plan 3.4 (`MethodReference`), plan 7.2 tests 10 and 11
   - Depends on: T26
   - Done when:
@@ -492,9 +516,14 @@ Base branch: release/phase-3-content
     - The two pages are in tests 10 and 11 with their 2.0.0 content.
     - Every fact is checked against the library README and release notes.
   - Verify: `npm test && npm run build && npm run e2e`, and the `examples` job passes.
-  - Notes: —
+  - Notes:
+    - Facts are from the README, the release notes, the source at `v2.0.0`, the 1.0.3 source (`0425b91`) and a probe against 2.0.0. The probe added: the checker throws a plain `Exception`, checks only the signature, and has no clock skew; the 2.0.0 minimum secret length applies to its `String` overloads.
+    - "Changed in 2.0.0" is on all eight methods. Every method on the four reference pages now has "Fails when" (T32 can make it required).
+    - Maintainer decision on 2026-11-03: examples may write `Boolean` as well as `String`, as the README does. This widens the T26 exception.
+    - The maintainer approved the wording on 2026-11-03. The links to Dependency injection and Known limitations are in T31's Notes.
+    - Evidence: pull request #60
 
-- [ ] **T31 — Write Dependency injection, Debugging and Known limitations**
+- [x] **T31 — Write Dependency injection, Debugging and Known limitations**
   - Refs: spec 6.1.3 items 2, 5, 6 and 8, plan 3.4 (docs pages), plan 3.5 (example compilation), plan 7.2 tests 10 and 11
   - Depends on: T26
   - Done when:
@@ -504,9 +533,14 @@ Base branch: release/phase-3-content
     - The three pages are in tests 10 and 11.
     - Every example is a compiled file in `examples/`.
   - Verify: `npm test && npm run build && npm run e2e`, and the `examples` job passes.
-  - Notes: —
+  - Notes:
+    - The five links carried from T28 to T30 are in place, each checked by a test in `DocsPage.test.tsx`.
+    - A probe against 2.0.0: a container uses `JWTExpiryChecker(IJWTValidator)` only when `IJWTValidator` is registered; a null validator throws `NullReferenceException`; in IdentityModel 8 the common messages read the same with `ShowPII` on or off, so Debugging keeps to the README's words.
+    - The Debugging example's `Microsoft.IdentityModel.Logging` comes with the package. The DI example reads the expiry from one validation, as Known limitations advises.
+    - Dependency injection has no method table: it shows the constructors with `MethodReference` and `IJWTValidator`'s members as a signature block. The maintainer approved the ticking on 2026-11-03.
+    - Evidence: pull request #62
 
-- [ ] **T32 — Check the content against 2.0.0**
+- [x] **T32 — Check the content against 2.0.0**
   - Refs: spec 6.1.3 items 5 and 6, spec 9, plan 3.5 (example compilation)
   - Depends on: T27 to T31, and 2.0.0 listed on nuget.org (library task T16)
   - Done when:
@@ -514,17 +548,27 @@ Base branch: release/phase-3-content
     - Each docs topic is checked against the README and release notes at tag `v2.0.0`. Differences are fixed.
     - The 2.0.0 changelog date is the real publish date.
   - Verify: `gh pr checks <number>` shows every job passing. The fact check is listed topic by topic in the pull request.
-  - Notes: From T21: make `failsWhen` required again in `src/content/methods/types.ts` (plan 3.4), once T29 to T31 give every method a "Fails when" text (spec 6.1.3, item 3).
+  - Notes:
+    - All 11 topics were checked against the README and release notes at `v2.0.0`, and each method against the source. No page contradicts them.
+    - Approved design difference (2026-11-03): the migration summary row "Expiry in UTC" also names `HasJWTExpired`, as release notes item 3 does, and says to remove any time zone workaround.
+    - `failsWhen` is required (plan 3.4), so "Fails when" always shows. Home's "What's new" row keeps its old "What to do" text for T33.
+    - The examples already used 2.0.0, and DI 10.0.14 is still the latest stable. nuget.org confirms 25 October 2026 for 2.0.0.
+    - Evidence: pull request #63
 
-- [ ] **T33 — Check spelling, grammar and wording**
+- [x] **T33 — Check spelling, grammar and wording**
   - Refs: spec 6.1.8, spec 6.1.10 item 3, spec 3 goal 9
   - Depends on: T32
   - Done when:
     - Every page has been read for British English spelling, grammar, plain technical English, and the voice rules in spec 6.1.8.
     - The maintainer has reviewed the changes.
-    - No other change is merged into the release branch after this task.
+    - No other change is merged into the release branch after this task, except T34's removal of the version notice (spec 6.1.10, item 3).
   - Verify: The maintainer reads every page on `npm run preview`.
-  - Notes: —
+  - Notes:
+    - The maintainer read the site on the preview and approved it, and every change, on 2026-11-03.
+    - The logging change is "Personal data stays hidden" on Home and in the migration guide, at the same address. "application" replaces "app", except "console app".
+    - The maintainer confirmed that "the library" alongside "JWT Validator" meets spec 6.1.8 item 1. The maintainer also approved T34's removal of the version notice after this task, so spec 6.1.10 item 3 and the third Done-when item now name that exception.
+    - `.prettierignore` now has `/docs`, because `docs` also skipped `src/pages/docs`. Those 19 files are formatted in this task, so `format:check` covers them from now on.
+    - Evidence: pull request #64
 
 - [ ] **T34 — Release phase 3 (maintainer)**
   - Refs: spec 6.1.10 items 2 to 6, spec 6.1.12, spec 9, plan 5 (releases), plan 9 (TypeScript, Node)
@@ -536,6 +580,8 @@ Base branch: release/phase-3-content
     - The maintainer approves and merges it, and the deploy passes.
   - Verify: `gh run list --workflow deploy.yml --limit 1` shows success. Every item in spec 9 is true on the live site.
   - Notes:
+    - Checkpoint (2026-11-04): the version notice is removed in its own pull request into the release branch, at the maintainer's request. The release pull request and the deploy are still to do, so T34 is not ticked.
+    - The maintainer decided on 2026-11-04 that the mobile performance score is a median of at least 5 runs (spec 6.6.2, item 1), because single runs on the two longest docs pages fell below 90. Measure the live site after the deploy. If a median there is below 90, propose splitting the pages (plan 9) as its own change.
     - Remind the maintainer to do two things in the library repository from the library's own session, because this project does not change that repository (spec 3, non-goals): tick task T17, and remove the README note that says the documentation site still describes 1.0.3. When every task is ticked, suggest `/retrospective`.
     - `package.json` overrides `minimatch` to `^11.0.3`, for advisory GHSA-g3hv-75wg-m249, because ESLint 10.14 and typescript-eslint 8.72 still require `minimatch` 10. When both allow 11, remove the override and check that `npm audit` stays clean.
 
@@ -571,4 +617,13 @@ None.
 - 2026-10-30 — T22
 - 2026-10-30 — T23
 - 2026-10-31 — T24
+- 2026-11-02 — T25
+- 2026-11-02 — T26
+- 2026-11-02 — T28
+- 2026-11-02 — T27
+- 2026-11-02 — T29
+- 2026-11-03 — T30
+- 2026-11-03 — T31
+- 2026-11-03 — T32
+- 2026-11-03 — T33
 
