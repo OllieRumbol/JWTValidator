@@ -110,7 +110,7 @@ The site follows the library's README and release notes for the version it docum
 
 ### Adding a C# example
 
-Every C# example on the site must be a file in `examples/`, so the `examples` check compiles the code that readers see. The 1.0.3 examples still in the pages move there when release 3 rewrites each page. `docs/adr/0002-compile-documentation-examples.md` explains why.
+Every C# example on the site must be a file in `examples/`, so the `examples` check compiles the code that readers see. `docs/adr/0002-compile-documentation-examples.md` explains why.
 
 1. Write the example as a complete console program in `examples/<page>-<name>.cs`, where `<page>` is the page slug or `home`, for example `examples/home-secret.cs`. Placeholder values, such as `"your-client-id"`, are allowed.
 2. An example may use only the `JWTValidator` package. An example that also uses `Microsoft.Extensions.DependencyInjection` must have a name that starts with `di-` instead of the page slug, for example `examples/di-register.cs`. The `di-` start adds that package.

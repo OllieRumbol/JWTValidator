@@ -10,11 +10,7 @@ const DESKTOP = { width: 1280, height: 600 };
 
 // The parts that every page shares. The pages themselves are in tests 10 and 11 in
 // pages.spec.ts.
-const LAYOUT_PARTS = [
-  "header",
-  'section[aria-label="Version notice"]',
-  "footer",
-];
+const LAYOUT_PARTS = ["header", "footer"];
 
 async function openMenu(page: Page) {
   await page.getByRole("button", { name: "Open menu" }).click();
@@ -182,9 +178,7 @@ test.describe("with reduced motion asked for", () => {
 test.describe("at 320 px", () => {
   test.use({ viewport: NARROWEST });
 
-  test("the header, the version notice and the footer fit the screen", async ({
-    page,
-  }) => {
+  test("the header and the footer fit the screen", async ({ page }) => {
     await page.goto("#/");
 
     for (const selector of LAYOUT_PARTS) {
@@ -217,7 +211,7 @@ test.describe("at 320 px", () => {
 // Test 11 (spec section 6.6.1, item 2).
 test.describe("accessibility", () => {
   for (const viewport of [NARROWEST, DESKTOP]) {
-    test(`the header, the version notice and the footer have no violations at ${viewport.width} px`, async ({
+    test(`the header and the footer have no violations at ${viewport.width} px`, async ({
       page,
     }) => {
       await page.setViewportSize(viewport);
