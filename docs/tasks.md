@@ -581,6 +581,7 @@ Base branch: release/phase-3-content
   - Verify: `gh run list --workflow deploy.yml --limit 1` shows success. Every item in spec 9 is true on the live site.
   - Notes:
     - Checkpoint (2026-11-04): the version notice is removed in its own pull request into the release branch, at the maintainer's request. The release pull request and the deploy are still to do, so T34 is not ticked.
+    - The maintainer decided on 2026-11-04 that the mobile performance score is a median of at least 5 runs (spec 6.6.2, item 1), because single runs on the two longest docs pages fell below 90. Measure the live site after the deploy. If a median there is below 90, propose splitting the pages (plan 9) as its own change.
     - Remind the maintainer to do two things in the library repository from the library's own session, because this project does not change that repository (spec 3, non-goals): tick task T17, and remove the README note that says the documentation site still describes 1.0.3. When every task is ticked, suggest `/retrospective`.
     - `package.json` overrides `minimatch` to `^11.0.3`, for advisory GHSA-g3hv-75wg-m249, because ESLint 10.14 and typescript-eslint 8.72 still require `minimatch` 10. When both allow 11, remove the override and check that `npm audit` stays clean.
 
