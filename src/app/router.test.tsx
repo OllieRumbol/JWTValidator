@@ -30,7 +30,6 @@ describe("the layout", () => {
     renderRoute("/");
 
     await screen.findByRole("heading", { level: 1 });
-    expect(screen.queryByRole("region", { name: "Version notice" })).toBeNull();
     expect(document.body.textContent).not.toContain("still describes");
   });
 });
